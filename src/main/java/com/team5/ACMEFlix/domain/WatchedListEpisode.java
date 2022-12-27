@@ -4,6 +4,8 @@ import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import java.util.Date;
 import java.util.List;
 
 @Data
@@ -25,7 +27,11 @@ public class WatchedListEpisode extends BaseModel {
 //    @JoinColumn(name = "episode_id", referencedColumnName = "id")
 //    private Episode episode;
 
+    @NotNull(message = "Episode's watched date cannot be null")
+    private Date watchedEpisodeDate;
+
     @ManyToMany(cascade=CascadeType.ALL)
     @JoinTable(name="watchedListEpisodes_contents", joinColumns=@JoinColumn(name="content_id"), inverseJoinColumns=@JoinColumn(name="watchedListEpisode_id"))
     private List<Content> contents;
+
 }

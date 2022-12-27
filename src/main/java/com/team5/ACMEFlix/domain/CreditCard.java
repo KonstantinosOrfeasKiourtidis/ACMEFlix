@@ -27,7 +27,7 @@ public class CreditCard extends BaseModel{
     private String cardNo;
 
     @NotNull(message = "Credit card name cannot be null")
-    @Column(length = 20, nullable = false, unique = true)
+    @Column(length = 20, nullable = false, unique = false)
     private String cardName;
 
     @NotNull(message = "Credit card cvc cannot be null")

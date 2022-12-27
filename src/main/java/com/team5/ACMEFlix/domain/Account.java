@@ -8,6 +8,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 @Data
 @SuperBuilder
@@ -46,6 +47,8 @@ public class Account extends BaseModel{
     @Column(length = 20, nullable = false)
     private SubscriptionType subscriptionType;
 
+    @NotNull(message = "Account's creation date cannot be null")
+    @Column(nullable = false)
     private Date creationDate;
     private Date subscriptionDate;
 
@@ -56,11 +59,12 @@ public class Account extends BaseModel{
 
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "id", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "account", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CreditCard> creditCards;
 
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "id", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "account", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Profile> profiles;
+
 }

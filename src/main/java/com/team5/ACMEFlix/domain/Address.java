@@ -42,7 +42,7 @@ public class Address extends BaseModel{
     @JsonIgnore
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "account_id", referencedColumnName = "id")
+    @ManyToOne(targetEntity=Account.class, fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name="account_id")
     private Account account;
 }

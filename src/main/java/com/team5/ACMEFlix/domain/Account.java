@@ -1,5 +1,6 @@
 package com.team5.ACMEFlix.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.team5.ACMEFlix.domain.enumeration.SubscriptionType;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
@@ -37,7 +38,7 @@ public class Account extends BaseModel{
     private String lastname;
 
     @NotNull(message = "Account's password cannot be null")
-    @Column(length = 50, nullable = false, unique = false)
+    @Column(length = 50, nullable = false)
     private String password;
 
     private String phoneNo;
@@ -47,24 +48,23 @@ public class Account extends BaseModel{
     @Column(length = 20, nullable = false)
     private SubscriptionType subscriptionType;
 
-    @NotNull(message = "Account's creation date cannot be null")
-    @Column(nullable = false)
     private Date creationDate;
     private Date subscriptionDate;
 
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "account", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Address address;
+    @OneToMany(targetEntity=Address.class, fetch = FetchType.LAZY, mappedBy = "account", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Address> address;
 
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "account", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(targetEntity=CreditCard.class, fetch = FetchType.LAZY, mappedBy = "account", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CreditCard> creditCards;
 
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "account", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(targetEntity=Profile.class, fetch = FetchType.LAZY, mappedBy = "account", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Profile> profiles;
+
 
 }

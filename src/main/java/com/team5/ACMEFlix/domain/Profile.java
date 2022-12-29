@@ -27,7 +27,8 @@ public class Profile extends BaseModel{
     @JsonIgnore
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(targetEntity=Account.class, fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name="account_id")
     private Account account;
 
 

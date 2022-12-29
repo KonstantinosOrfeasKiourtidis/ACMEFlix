@@ -30,6 +30,9 @@ public class WatchedListMovie extends BaseModel {
     @NotNull(message = "Movie's watched date cannot be null")
     private Date watchedMovieDate;
 
+
+    private int timeWatched;
+
     @ManyToMany(cascade=CascadeType.ALL)
     @JoinTable(name="watchedListMovies_contents", joinColumns=@JoinColumn(name="content_id"), inverseJoinColumns=@JoinColumn(name="watchedListMovie_id"))
     private List<Content> contents;

@@ -27,6 +27,8 @@ public class WatchedListEpisode extends BaseModel {
 //    @JoinColumn(name = "episode_id", referencedColumnName = "id")
 //    private Episode episode;
 
+    private int timeWatched;
+
     @NotNull(message = "Episode's watched date cannot be null")
     private Date watchedEpisodeDate;
 

@@ -28,15 +28,26 @@ public class AccountController {
         return accountService.getAllAccounts();
     }
 
-    @GetMapping("{id}")
+    @GetMapping("findById/{id}")
     public Optional<Account> getAccountById(@PathVariable("id") Long id){
         return accountService.getAccountById(id);
+    }
+
+    @GetMapping("findByEmail/{email}")
+    public Optional<Account> getAccountByEmail(@PathVariable("email") String email){
+        return accountService.getAccountByEmail(email);
     }
 
     @PostMapping(path = "addAccount")
     public void addAccount(@RequestBody Account account){
 
         accountService.addAccount(account);
+    }
+
+    @PostMapping(path = "addAccounts")
+    public void addAccounts(@RequestBody Account... accounts){
+
+        accountService.addAccounts(accounts);
     }
 
     @PutMapping(path = "addProfile/{id}")
@@ -60,6 +71,11 @@ public class AccountController {
     @DeleteMapping(path = "deleteAccount/{id}")
     public void deleteAccountById(@PathVariable("id") Long id){
         accountService.deleteAccountById(id);
+    }
+
+    @DeleteMapping(path = "deleteAccounts/{ids}")
+    public void deleteAccounts(@PathVariable("ids") Long[] ids){
+        accountService.deleteAccounts(ids);
     }
 
     @DeleteMapping(path = "deleteProfile/{id}")
@@ -97,4 +113,55 @@ public class AccountController {
     ){
         accountService.updateAccountByIdPatch(account, id);
     }
+
+    @PutMapping(path = "updateProfile/{id}")
+    public void updateProfileByIdPut(
+            @PathVariable("id") Long id,
+            @RequestParam(required = false) String firstname,
+            @RequestParam(required = false) Boolean ageRestricted,
+            @RequestParam(required = false) String imageUrl
+    ){
+        accountService.updateProfileByIdPut(id, firstname, ageRestricted, imageUrl);
+    }
+
+    @PatchMapping(path = "updateProfile/{id}")
+    public void updateProfileByIdPatch(
+            @RequestBody Profile profile,
+            @PathVariable("id") Long id
+    ){
+        accountService.updateProfileByIdPatch(profile, id);
+    }
+
+    @PatchMapping(path = "updateCreditCard/{id}")
+    public void updateCreditCardByIdPatch(
+            @RequestBody CreditCard creditCard,
+            @PathVariable("id") Long id
+    ){
+        accountService.updateCreditCardByIdPatch(creditCard, id);
+    }
+
+    @PatchMapping(path = "updateAddress/{id}")
+    public void updateAddressByIdPatch(
+            @RequestBody Address address,
+            @PathVariable("id") Long id
+    ){
+        accountService.updateAddressByIdPatch(address, id);
+    }
+
+    @PostMapping(path = "login")
+    public void login(@RequestBody Account account){
+        accountService.login(account);
+    }
+
+    @PostMapping(path = "register")
+    public void register(@RequestBody Account account){
+        accountService.register(account);
+    }
+
+    @PatchMapping(path = "subscribe/{id}")
+    public void subscribe(@PathVariable Long id,
+                          @RequestBody Account account){
+        accountService.subscribe(id, account);
+    }
+
 }

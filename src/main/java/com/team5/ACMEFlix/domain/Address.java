@@ -1,5 +1,6 @@
 package com.team5.ACMEFlix.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
@@ -39,7 +40,7 @@ public class Address extends BaseModel{
     @Column(length = 50, nullable = false)
     private String province;
 
-    @JsonIgnore
+    @JsonBackReference
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @ManyToOne(targetEntity=Account.class, fetch = FetchType.LAZY, optional = false)

@@ -1,5 +1,6 @@
 package com.team5.ACMEFlix.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.team5.ACMEFlix.domain.enumeration.CardType;
 import lombok.AllArgsConstructor;
@@ -23,7 +24,7 @@ import javax.validation.constraints.NotNull;
 public class CreditCard extends BaseModel{
 
     @NotNull(message = "Credit card number cannot be null")
-    @Column(length = 16, nullable = false, unique = true)
+    @Column(length = 16, nullable = false, unique = false)
     private String cardNo;
 
     @NotNull(message = "Credit card name cannot be null")
@@ -39,7 +40,7 @@ public class CreditCard extends BaseModel{
     @Column(length = 20, nullable = false)
     private CardType cardType;
 
-    @JsonIgnore
+    @JsonBackReference
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @ManyToOne(targetEntity=Account.class, fetch = FetchType.LAZY, optional = false)

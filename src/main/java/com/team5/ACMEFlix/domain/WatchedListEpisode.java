@@ -23,17 +23,16 @@ public class WatchedListEpisode extends BaseModel {
     @JoinColumn(name = "profile_id", referencedColumnName = "id")
     private Profile profile;
 
-//    @OneToOne
-//    @JoinColumn(name = "episode_id", referencedColumnName = "id")
-//    private Episode episode;
-
-    private int timeWatched;
+    @NotNull(message = "Episode's time watched cannot be null")
+    private Integer timeWatched;
 
     @NotNull(message = "Episode's watched date cannot be null")
     private Date watchedEpisodeDate;
 
-    @ManyToMany(cascade=CascadeType.ALL)
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @ManyToMany(cascade=CascadeType.ALL, targetEntity=Episode.class, fetch = FetchType.LAZY)
     @JoinTable(name="watchedListEpisodes_contents", joinColumns=@JoinColumn(name="content_id"), inverseJoinColumns=@JoinColumn(name="watchedListEpisode_id"))
-    private List<Content> contents;
+    private List<Episode> episodes;
 
 }

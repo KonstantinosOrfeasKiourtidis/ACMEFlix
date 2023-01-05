@@ -125,6 +125,8 @@ public class ContentService {
     public List<Content> findAllContentsByTitle(String search) {
         return contentRepository.findContentByName(search);
     }
+
+
     @Transactional(readOnly = true)
     public List<ContentFactory> findAllContentsByTitleAlternative(String search) {
         List<Content> contents = contentRepository.findContentByName(search);

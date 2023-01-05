@@ -19,22 +19,20 @@ import java.util.List;
 @SequenceGenerator(name = "idGenerator", sequenceName = "WATCHED_LIST_MOVIE_SEQ", initialValue = 1, allocationSize = 1)
 public class WatchedListMovie extends BaseModel {
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "profile_id", referencedColumnName = "id")
     private Profile profile;
 
-//    @OneToOne
-//    @JoinColumn(name = "movie_id", referencedColumnName = "id")
-//    private Movie movie;
+    @NotNull(message = "Movie's time watched cannot be null")
+    private Integer timeWatched;
 
     @NotNull(message = "Movie's watched date cannot be null")
     private Date watchedMovieDate;
 
-
-    private int timeWatched;
-
-    @ManyToMany(cascade=CascadeType.ALL)
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @ManyToMany(cascade=CascadeType.ALL, targetEntity=Movie.class, fetch = FetchType.LAZY)
     @JoinTable(name="watchedListMovies_contents", joinColumns=@JoinColumn(name="content_id"), inverseJoinColumns=@JoinColumn(name="watchedListMovie_id"))
-    private List<Content> contents;
+    private List<Movie> movies;
 
 }

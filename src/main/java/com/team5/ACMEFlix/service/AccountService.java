@@ -1,16 +1,18 @@
 package com.team5.ACMEFlix.service;
 
 import com.team5.ACMEFlix.domain.*;
+import com.team5.ACMEFlix.domain.enumeration.CardType;
 import com.team5.ACMEFlix.domain.enumeration.SubscriptionType;
+import com.team5.ACMEFlix.helpers.LoginForm;
+import com.team5.ACMEFlix.helpers.RegisterForm;
+import com.team5.ACMEFlix.helpers.SubscribeForm;
 import com.team5.ACMEFlix.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class AccountService {
@@ -26,25 +28,26 @@ public class AccountService {
     private PaymentRepository paymentRepository;
 
 
-    //region Read
-    public List<Account> getAllAccounts() {
+    @Transactional(readOnly = true)
+    public List<Account> findAllAccounts() {
         return accountRepository.findAll();
     }
 
-    public Optional<Account> getAccountById(Long id) {
-        return accountRepository.findById(id);
+    @Transactional(readOnly = true)
+    public ResponseEntity<Account> findAccountById(Long id) {
+        return accountRepository.findById(id).map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    public Optional<Account> getAccountByEmail(String email) {
+    @Transactional(readOnly = true)
+    public ResponseEntity<Account> findAccountByEmail(String email) {
         Optional<Account> accountExists = accountRepository.findAccountByEmail(email);
         if(!accountExists.isPresent()){
             throw new IllegalStateException("Account does not exist");
         }
-        return accountExists;
+        return accountExists.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
-    //endregion
 
-    //region Create
+    @Transactional
     public void addAccount(Account account) {
         account.getAddress()
                 .forEach(a -> a.setAccount(account));
@@ -55,6 +58,7 @@ public class AccountService {
        accountRepository.save(account);
     }
 
+    @Transactional
     public void addAccounts(Account... accounts) {
         for(Account account : accounts){
             account.getAddress()
@@ -67,42 +71,8 @@ public class AccountService {
         }
     }
 
-    public void addProfileByAccountId(Profile profile, Long id) {
-        Optional<Account> accountExists = accountRepository.findById(id);
-        if(!accountExists.isPresent()){
-            throw new IllegalStateException("Account does not exist");
-        }
-        else{
-            profile.setAccount(accountExists.get());
-            profileRepository.save(profile);
-        }
-    }
 
-
-    public void addCreditByAccountId(CreditCard creditCard, Long id) {
-        Optional<Account> accountExists = accountRepository.findById(id);
-        if(!accountExists.isPresent()){
-            throw new IllegalStateException("Account does not exist");
-        }
-        else{
-            creditCard.setAccount(accountExists.get());
-            creditCardRepository.save(creditCard);
-        }
-    }
-
-    public void addAddressByAccountId(Address address, Long id) {
-        Optional<Account> accountExists = accountRepository.findById(id);
-        if(!accountExists.isPresent()){
-            throw new IllegalStateException("Account does not exist");
-        }
-        else{
-            address.setAccount(accountExists.get());
-            addressRepository.save(address);
-        }
-    }
-    //endregion
-
-    //region Delete
+    @Transactional
     public void deleteAccountById(Long id) {
         boolean exists = accountRepository.existsById(id);
         if(!exists){
@@ -113,7 +83,8 @@ public class AccountService {
         }
     }
 
-    public void deleteAccounts(Long[] ids) {
+    @Transactional
+    public void deleteAccountsByIds(Long[] ids) {
         for(Long id : ids){
             boolean exists = accountRepository.existsById(id);
             if(!exists){
@@ -125,38 +96,6 @@ public class AccountService {
         }
     }
 
-    public void deleteProfileById(Long id) {
-        boolean exists = profileRepository.existsById(id);
-        if(!exists){
-            throw new IllegalStateException("Profile does not exist");
-        }
-        else{
-            profileRepository.deleteById(id);
-        }
-    }
-
-    public void deleteCreditCardById(Long id) {
-        boolean exists = creditCardRepository.existsById(id);
-        if(!exists){
-            throw new IllegalStateException("Credit card does not exist");
-        }
-        else{
-            creditCardRepository.deleteById(id);
-        }
-    }
-
-    public void deleteAddressById(Long id) {
-        boolean exists = addressRepository.existsById(id);
-        if(!exists){
-            throw new IllegalStateException("Address does not exist");
-        }
-        else{
-            addressRepository.deleteById(id);
-        }
-    }
-    //endregion
-
-    //region Update
     @Transactional
     public void updateAccountByIdPut(Long id, String email, String firstname, String lastname, String phoneNo, String username, String password) {
         Account account = accountRepository.findById(id).orElseThrow(() -> new IllegalStateException(
@@ -240,194 +179,187 @@ public class AccountService {
             foundAccount.setPassword(account.getPassword());
         }
 
+
         if(account.getAddress() !=null &&
                 !Objects.equals(foundAccount.getAddress(), account.getAddress())){
             List<Address> addresses = addressRepository.findAddressesByAccountId(id);
             if(!addresses.isEmpty()){
-                for(Address address : addresses) {
-                    addressRepository.deleteById(address.getId());
+                for (int i = 0; i < addresses.size()-1; i++) {
+                    if (account.getAddress().get(i).getProvince() != null &&
+                            account.getAddress().get(i).getProvince().length() >0 &&
+                            !Objects.equals(addresses.get(i).getProvince(), account.getAddress().get(i).getProvince())) {
+                        addresses.get(i).setProvince(account.getAddress().get(i).getProvince());
+                    }
+
+                    if (account.getAddress().get(i).getCountry() != null &&
+                            account.getAddress().get(i).getCountry().length() >0 &&
+                            !Objects.equals(addresses.get(i).getCountry(), account.getAddress().get(i).getCountry())) {
+                        addresses.get(i).setCountry(account.getAddress().get(i).getCountry());
+                    }
+
+                    if (account.getAddress().get(i).getPostalCode() != null &&
+                            account.getAddress().get(i).getPostalCode().length() >0 &&
+                            !Objects.equals(addresses.get(i).getPostalCode(), account.getAddress().get(i).getPostalCode())) {
+                        addresses.get(i).setPostalCode(account.getAddress().get(i).getPostalCode());
+                    }
+
+                    if (account.getAddress().get(i).getStreetNo() != null &&
+                            account.getAddress().get(i).getStreetNo().length() >0 &&
+                            !Objects.equals(addresses.get(i).getStreetNo(), account.getAddress().get(i).getStreetNo())) {
+                        addresses.get(i).setStreetNo(account.getAddress().get(i).getStreetNo());
+                    }
+
+                    if (account.getAddress().get(i).getStreetName() != null &&
+                            account.getAddress().get(i).getStreetName().length() >0 &&
+                            !Objects.equals(addresses.get(i).getStreetName(), account.getAddress().get(i).getStreetName())) {
+                        addresses.get(i).setStreetName(account.getAddress().get(i).getStreetName());
+                    }
+
                 }
             }
-
-            List<Address> newAddresses = account.getAddress();
-            for(Address address : newAddresses) {
-
-                address.setAccount(foundAccount);
-               addressRepository.save(address);
-            }
-
         }
+
 
         if(account.getCreditCards() !=null &&
                 !Objects.equals(foundAccount.getCreditCards(), account.getCreditCards())){
             List<CreditCard> creditCards = creditCardRepository.findCreditCardByAccountId(id);
             if(!creditCards.isEmpty()){
+                for (int i = 0; i < creditCards.size()-1; i++) {
+                    if (account.getCreditCards().get(i).getCardNo() != null &&
+                            account.getCreditCards().get(i).getCardNo().length() >0 &&
+                            !Objects.equals(creditCards.get(i).getCardNo(), account.getCreditCards().get(i).getCardNo())) {
+                        creditCards.get(i).setCardNo(account.getCreditCards().get(i).getCardNo());
+                    }
 
-                for(CreditCard creditCard : creditCards) {
-                    creditCardRepository.deleteById(creditCard.getId());
+                    if (account.getCreditCards().get(i).getCardCvc() != null &&
+                            account.getCreditCards().get(i).getCardCvc().length() >0 &&
+                            !Objects.equals(creditCards.get(i).getCardCvc(), account.getCreditCards().get(i).getCardCvc())) {
+                        creditCards.get(i).setCardCvc(account.getCreditCards().get(i).getCardCvc());
+                    }
+
+                    if (account.getCreditCards().get(i).getCardName() != null &&
+                            account.getCreditCards().get(i).getCardName().length() >0 &&
+                            !Objects.equals(creditCards.get(i).getCardName(), account.getCreditCards().get(i).getCardName())) {
+                        creditCards.get(i).setCardName(account.getCreditCards().get(i).getCardName());
+                    }
+
+                    if (account.getCreditCards().get(i).getCardType() != null &&
+                          (account.getCreditCards().get(i).getCardType().equals(CardType.MASTERCARD) ||
+                                  account.getCreditCards().get(i).getCardType().equals(CardType.VISA) ||
+                                          account.getCreditCards().get(i).getCardType().equals(CardType.AMERICAN_EXPRESS) ||
+                                  account.getCreditCards().get(i).getCardType().equals(CardType.PAYPAL)) &&
+                            !Objects.equals(creditCards.get(i).getCardType(), account.getCreditCards().get(i).getCardType())) {
+                        creditCards.get(i).setCardType(account.getCreditCards().get(i).getCardType());
+                    }
+
                 }
             }
-
-            List<CreditCard> newCreditCards = account.getCreditCards();
-            for(CreditCard creditCard : newCreditCards) {
-
-                creditCard.setAccount(foundAccount);
-                creditCardRepository.save(creditCard);
-            }
-
-
         }
 
         if(account.getProfiles() !=null &&
                 !Objects.equals(foundAccount.getProfiles(), account.getProfiles())){
             List<Profile> profiles = profileRepository.findProfileByByAccountId(id);
             if(!profiles.isEmpty()){
+                for (int i = 0; i < profiles.size()-1; i++) {
+                    if (account.getProfiles().get(i).getFirstname() != null &&
+                            account.getProfiles().get(i).getFirstname().length() >0 &&
+                            !Objects.equals(profiles.get(i).getFirstname(), account.getProfiles().get(i).getFirstname())) {
+                        profiles.get(i).setFirstname(account.getProfiles().get(i).getFirstname());
+                    }
 
-                for(Profile profile : profiles) {
-                    profileRepository.deleteById(profile.getId());
+                    if (account.getProfiles().get(i).getImageUrl() != null &&
+                            account.getProfiles().get(i).getImageUrl().length() >0 &&
+                            !Objects.equals(profiles.get(i).getImageUrl(), account.getProfiles().get(i).getImageUrl())) {
+                        profiles.get(i).setImageUrl(account.getProfiles().get(i).getImageUrl());
+                    }
+
+                    if (account.getProfiles().get(i).getAgeRestricted() != null &&
+                            !Objects.equals(profiles.get(i).getAgeRestricted(), account.getProfiles().get(i).getAgeRestricted())) {
+                        profiles.get(i).setAgeRestricted(account.getProfiles().get(i).getAgeRestricted());
+                    }
+
                 }
             }
-
-            List<Profile> newProfiles = account.getProfiles();
-            for(Profile profile : newProfiles) {
-                profile.setAccount(foundAccount);
-                profileRepository.save(profile);
-            }
-
-
         }
-
 
     }
 
     @Transactional
-    public void updateProfileByIdPut(Long id, String firstname, Boolean ageRestricted, String imageUrl) {
-        Profile profile = profileRepository.findById(id).orElseThrow(() -> new IllegalStateException(
-                "Profile doesnt not exists"
-        ));
+    public void login(LoginForm loginForm) {
 
-
-        if(firstname !=null && firstname.length() >0 &&
-                !Objects.equals(profile.getFirstname(), firstname)){
-            profile.setFirstname(firstname);
-        }
-
-        if(ageRestricted !=null &&
-                !Objects.equals(profile.getAgeRestricted(), ageRestricted)){
-            profile.setAgeRestricted(ageRestricted);
-        }
-
-        if(imageUrl !=null && imageUrl.length() >0 &&
-                !Objects.equals(profile.getImageUrl(), imageUrl)){
-            profile.setImageUrl(imageUrl);
-        }
-
-    }
-    @Transactional
-    public void updateProfileByIdPatch(Profile profile, Long id) {
-        Profile foundProfile = profileRepository.findById(id).orElseThrow(() -> new IllegalStateException(
-                "Profile doesnt not exists"
-        ));
-
-
-        if(profile.getFirstname() !=null && profile.getFirstname().length() >0 &&
-                !Objects.equals(foundProfile.getFirstname(), profile.getFirstname())){
-            foundProfile.setFirstname(profile.getFirstname());
-        }
-
-        if(profile.getAgeRestricted() !=null &&
-                !Objects.equals(foundProfile.getAgeRestricted(), profile.getAgeRestricted())){
-            foundProfile.setAgeRestricted(profile.getAgeRestricted());
-        }
-
-        if(profile.getImageUrl() !=null && profile.getImageUrl().length() >0 &&
-                !Objects.equals(foundProfile.getImageUrl(), profile.getImageUrl())){
-            foundProfile.setImageUrl(profile.getImageUrl());
-        }
-    }
-
-    @Transactional
-    public void updateCreditCardByIdPatch(CreditCard creditCard, Long id) {
-        CreditCard foundCreditCard = creditCardRepository.findById(id).orElseThrow(() -> new IllegalStateException(
-                "Credit card doesnt not exists"
-        ));
-
-        if(creditCard.getCardNo() !=null && creditCard.getCardNo().length() >0 &&
-                !Objects.equals(foundCreditCard.getCardNo(), creditCard.getCardNo())){
-            foundCreditCard.setCardNo(creditCard.getCardNo());
-        }
-
-        if(creditCard.getCardName() !=null && creditCard.getCardName().length() >0 &&
-                !Objects.equals(foundCreditCard.getCardName(), creditCard.getCardName())){
-            foundCreditCard.setCardName(creditCard.getCardName());
-        }
-
-        if(creditCard.getCardCvc() !=null && creditCard.getCardCvc().length() >0 &&
-                !Objects.equals(foundCreditCard.getCardCvc(), creditCard.getCardCvc())){
-            foundCreditCard.setCardCvc(creditCard.getCardCvc());
-        }
-
-        if(creditCard.getCardType() !=null &&
-                !Objects.equals(foundCreditCard.getCardType(), creditCard.getCardType())){
-            foundCreditCard.setCardType(creditCard.getCardType());
-        }
-    }
-
-    @Transactional
-    public void updateAddressByIdPatch(Address address, Long id) {
-        Address foundAddress = addressRepository.findById(id).orElseThrow(() -> new IllegalStateException(
-                "Address doesnt not exists"
-        ));
-
-        if(address.getStreetName() !=null && address.getStreetName().length() >0 &&
-                !Objects.equals(foundAddress.getStreetName(), address.getStreetName())){
-            foundAddress.setStreetName(address.getStreetName());
-        }
-
-        if(address.getStreetNo() !=null && address.getStreetNo().length() >0 &&
-                !Objects.equals(foundAddress.getStreetNo(), address.getStreetNo())){
-            foundAddress.setStreetNo(address.getStreetNo());
-        }
-
-        if(address.getPostalCode() !=null && address.getPostalCode().length() >0 &&
-                !Objects.equals(foundAddress.getPostalCode(), address.getPostalCode())){
-            foundAddress.setPostalCode(address.getPostalCode());
-        }
-
-        if(address.getCountry() !=null && address.getCountry().length() >0 &&
-                !Objects.equals(foundAddress.getCountry(), address.getCountry())){
-            foundAddress.setCountry(address.getCountry());
-        }
-
-        if(address.getProvince() !=null && address.getProvince().length() >0 &&
-                !Objects.equals(foundAddress.getProvince(), address.getProvince())){
-            foundAddress.setProvince(address.getProvince());
-        }
-
-
-    }
-
-    public void login(Account account) {
-
-        Optional<Account> accountExists = accountRepository.findAccountByEmail(account.getEmail());
+        Optional<Account> accountExists = accountRepository.findAccountByEmail(loginForm.getEmail());
         if(!accountExists.isPresent()){
             throw new IllegalStateException("The email or the password are incorrect");
         }
 
-        if(!accountExists.get().getPassword().equals(account.getPassword())){
+        if(!accountExists.get().getPassword().equals(loginForm.getPassword())){
             throw new IllegalStateException("The email or the password are incorrect");
         }
-    }
 
-    public void register(Account account) {
-        Optional<Account> accountExists = accountRepository.findAccountByEmail(account.getEmail());
+
+    }
+    @Transactional
+    public void register(RegisterForm registerForm) {
+        if(!(registerForm.getEmail()!=null || registerForm.getEmail().length() > 0)){
+            throw new IllegalStateException("Email is a required field");
+        }
+
+        if(!(registerForm.getFirstname()!=null || registerForm.getFirstname().length() > 0)){
+            throw new IllegalStateException("First name is a required field");
+        }
+        if(!(registerForm.getLastname()!=null || registerForm.getLastname().length() > 0)){
+            throw new IllegalStateException("Last name is a required field");
+        }
+        if(!(registerForm.getUsername()!=null || registerForm.getUsername().length() > 0)){
+            throw new IllegalStateException("Username is a required field");
+        }
+        if(!(registerForm.getPassword()!=null || registerForm.getPassword().length() > 0)){
+            throw new IllegalStateException("Password is a required field");
+        }
+
+        if(!(registerForm.getConfirmPassword()!=null || registerForm.getConfirmPassword().length() > 0)){
+            throw new IllegalStateException("Repeat password is a required field");
+        }
+
+        if(!(registerForm.getPhoneNo()!=null || registerForm.getPhoneNo().length() > 0)){
+            throw new IllegalStateException("Phone number is a required field");
+        }
+
+
+        Optional<Account> accountExists = accountRepository.findAccountByEmail(registerForm.getEmail());
         if(accountExists.isPresent()){
             throw new IllegalStateException("The email is in use");
         }
 
-        account.getAddress()
+        if(!registerForm.getPassword().equals(registerForm.getConfirmPassword())){
+            throw new IllegalStateException("The passwords are not the same");
+        }
+
+        Account account = new Account();
+
+
+
+
+        account.setEmail(registerForm.getEmail());
+        account.setUsername(registerForm.getUsername());
+        account.setFirstname(registerForm.getFirstname());
+        account.setLastname(registerForm.getLastname());
+        account.setLastname(registerForm.getLastname());
+        account.setPhoneNo(registerForm.getPhoneNo());
+
+        account.setPassword(registerForm.getPassword());
+        //account.setPassword(passwordEncoder.encode(registerForm.getPassword()));
+
+
+        account.setAddress(registerForm.getAddress());
+        account.setCreditCards(registerForm.getCreditCards());
+
+        //account.setCreationDate();
+
+        registerForm.getAddress()
                 .forEach(a -> a.setAccount(account));
-        account.getCreditCards()
+
+        registerForm.getCreditCards()
                 .forEach(c -> c.setAccount(account));
 
         Account emptyAccount = account;
@@ -436,16 +368,13 @@ public class AccountService {
         emptyAccount.getProfiles().
                 forEach(p -> p.setAccount(emptyAccount));
 
-
-        //account.setCreationDate();
-        //account.setSubscriptionDate(null);
         account.setSubscriptionType(SubscriptionType.NO_SUBSCRIPTION);
         accountRepository.save(account);
     }
 
 
     @Transactional
-    public void subscribe(Long id, Account account) {
+    public void subscribe(Long id, SubscribeForm subscribeForm) {
         Account foundAccount = accountRepository.findById(id).orElseThrow(() -> new IllegalStateException(
                 "Account doesnt not exists"
         ));
@@ -458,15 +387,15 @@ public class AccountService {
             throw new IllegalStateException("The account does not have any valid billing addresses");
         }
 
-        if(!account.getSubscriptionType().equals(SubscriptionType.NO_SUBSCRIPTION) &&
-                !account.getSubscriptionType().equals(SubscriptionType.BASIC) &&
-                !account.getSubscriptionType().equals(SubscriptionType.STANDARD)&&
-                !account.getSubscriptionType().equals(SubscriptionType.PREMIUM)
+        if(!subscribeForm.getSubscriptionType().equals(SubscriptionType.NO_SUBSCRIPTION) &&
+                !subscribeForm.getSubscriptionType().equals(SubscriptionType.BASIC) &&
+                !subscribeForm.getSubscriptionType().equals(SubscriptionType.STANDARD)&&
+                !subscribeForm.getSubscriptionType().equals(SubscriptionType.PREMIUM)
         ){
             throw new IllegalStateException("Not a valid plan");
         }
 
-        foundAccount.setSubscriptionType(account.getSubscriptionType());
+        foundAccount.setSubscriptionType(subscribeForm.getSubscriptionType());
 
         if(!foundAccount.getProfiles().isEmpty()){
 
@@ -488,8 +417,8 @@ public class AccountService {
         }
 
         Payment payment = new Payment();
-        payment.setAmount(account.getSubscriptionType().getPrice());
-        payment.setSubscriptionType(account.getSubscriptionType());
+        payment.setAmount(subscribeForm.getSubscriptionType().getPrice());
+        payment.setSubscriptionType(subscribeForm.getSubscriptionType());
         payment.setAccount(foundAccount);
         payment.setCreditCard(foundAccount.getCreditCards().get(0));
         payment.setAddress(foundAccount.getAddress().get(0));
@@ -497,5 +426,4 @@ public class AccountService {
         paymentRepository.save(payment);
     }
 
-    //endregion
 }

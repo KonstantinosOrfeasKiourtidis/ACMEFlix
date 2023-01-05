@@ -1,5 +1,6 @@
 package com.team5.ACMEFlix.domain;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.team5.ACMEFlix.domain.enumeration.ContentType;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
@@ -42,14 +43,16 @@ public class Content extends BaseModel {
     @NotNull(message = "Content's age restriction cannot be null")
     private Boolean isAgeRestricted;
 
+    @JsonManagedReference
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "content", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(targetEntity=Genre.class, fetch = FetchType.LAZY, mappedBy = "content", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Genre> genres;
 
+    @JsonManagedReference
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "content", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(targetEntity=Actor.class, fetch = FetchType.LAZY, mappedBy = "content", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Actor> actors;
 
     @NotNull(message = "Content's type cannot be null")

@@ -1,5 +1,6 @@
 package com.team5.ACMEFlix.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 import javax.persistence.*;
@@ -21,6 +22,10 @@ public class Creator extends BaseModel{
 
     private String imageUrl;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JsonBackReference
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @ManyToOne(targetEntity=TVSeries.class, fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name="tvSeries_id")
     private TVSeries tvSeries;
 }

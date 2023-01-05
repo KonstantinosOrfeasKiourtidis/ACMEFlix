@@ -1,5 +1,6 @@
 package com.team5.ACMEFlix.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
@@ -23,6 +24,10 @@ public class Director extends BaseModel{
 
     private String imageUrl;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JsonBackReference
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @ManyToOne(targetEntity=Movie.class, fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name="movie_id")
     private Movie movie;
 }

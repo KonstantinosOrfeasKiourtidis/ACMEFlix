@@ -1,11 +1,13 @@
 package com.team5.ACMEFlix.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-
+@JsonInclude(JsonInclude.Include.ALWAYS)
 @Data
 @SuperBuilder
 @NoArgsConstructor
@@ -35,7 +37,11 @@ public class Episode extends BaseModel{
     @Column(length = 20, nullable = false, unique = false)
     private String releaseDate;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JsonBackReference
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @ManyToOne(targetEntity=Season.class, fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name="season_id")
     private Season season;
 
 }

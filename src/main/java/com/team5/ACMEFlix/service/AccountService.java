@@ -376,7 +376,7 @@ public class AccountService {
     @Transactional
     public void subscribe(Long id, SubscribeForm subscribeForm) {
         Account foundAccount = accountRepository.findById(id).orElseThrow(() -> new IllegalStateException(
-                "Account doesnt not exists"
+                "Account does not exist"
         ));
 
         if(foundAccount.getCreditCards()==null || foundAccount.getCreditCards().isEmpty()){

@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -31,14 +32,14 @@ public class WriterService {
         return writerRepository.findAll();
     }
     @Transactional(readOnly = true)
-    public ResponseEntity<Writer> findWriterById(Long id) {
-        return writerRepository.findById(id).map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    public Optional<Writer> findWriterById(Long id) {
+        return writerRepository.findById(id);
     }
     @Transactional(readOnly = true)
     public List<Writer> findAllWritersByContentId(Long id) {
         Optional<Movie> movie = movieRepository.findMovieByContentId(id);
         if(!movie.isPresent()){
-            throw new IllegalStateException("Movie does not exist");
+            throw new NoSuchElementException("Movie does not exist");
         }
         else {
             return writerRepository.findWriterByByMovieId(movie.get().getId());
@@ -46,10 +47,10 @@ public class WriterService {
     }
 
     @Transactional
-    public void addWriterByContentId(Writer writer, Long id) {
+    public Writer addWriterByContentId(Long id, Writer writer) {
         Optional<Content> contentExists = contentRepository.findById(id);
         if(!contentExists.isPresent()){
-            throw new IllegalStateException("Content does not exist");
+            throw new NoSuchElementException("Content does not exist");
         }
         else if(!contentExists.get().getContentType().equals(ContentType.MOVIE)){
             throw new IllegalStateException("Content is not a movie");
@@ -57,7 +58,7 @@ public class WriterService {
         else{
             Optional<Movie> movieExists = movieRepository.findMovieByContentId(id);
             if(!movieExists.isPresent()){
-                throw new IllegalStateException("Movie does not exist");
+                throw new NoSuchElementException("Movie does not exist");
             }
             else {
                 writer.setMovie(movieExists.get());
@@ -65,13 +66,14 @@ public class WriterService {
             }
 
         }
+        return writer;
     }
     @Transactional
-    public void addWritersByContentId(Writer[] writers, Long id) {
+    public List<Writer> addWritersByContentId(Long id, List<Writer> writers) {
 
         Optional<Content> contentExists = contentRepository.findById(id);
         if(!contentExists.isPresent()){
-            throw new IllegalStateException("Content does not exist");
+            throw new NoSuchElementException("Content does not exist");
         }
         else if(!contentExists.get().getContentType().equals(ContentType.MOVIE)){
             throw new IllegalStateException("Content is not a movie");
@@ -79,7 +81,7 @@ public class WriterService {
         else {
             Optional<Movie> movieExists = movieRepository.findMovieByContentId(id);
             if(!movieExists.isPresent()){
-                throw new IllegalStateException("Movie does not exist");
+                throw new NoSuchElementException("Movie does not exist");
             } else {
                 for (Writer writer : writers) {
                     writer.setMovie(movieExists.get());
@@ -90,23 +92,25 @@ public class WriterService {
 
 
         }
+        return writers;
     }
     @Transactional
-    public void addWriterByMovieId(Writer writer, Long id) {
+    public Writer addWriterByMovieId(Long id, Writer writer) {
         Optional<Movie> movieExists = movieRepository.findById(id);
         if(!movieExists.isPresent()){
-            throw new IllegalStateException("Movie does not exist");
+            throw new NoSuchElementException("Movie does not exist");
         }
         else{
             writer.setMovie(movieExists.get());
             writerRepository.save(writer);
         }
+        return writer;
     }
     @Transactional
-    public void addWritersByMovieId(Writer[] writers, Long id) {
+    public List<Writer> addWritersByMovieId(Long id, List<Writer> writers) {
         Optional<Movie> movieExists = movieRepository.findById(id);
         if(!movieExists.isPresent()){
-            throw new IllegalStateException("Movie does not exist");
+            throw new NoSuchElementException("Movie does not exist");
         }
         else{
             for (Writer writer : writers) {
@@ -114,14 +118,14 @@ public class WriterService {
                 writerRepository.save(writer);
             }
         }
-
+        return writers;
     }
 
     @Transactional
     public void deleteWriterById(Long id) {
         boolean exists = writerRepository.existsById(id);
         if(!exists){
-            throw new IllegalStateException("Writer does not exist");
+            throw new NoSuchElementException("Writer does not exist");
         }
         else{
 
@@ -130,11 +134,11 @@ public class WriterService {
         }
     }
     @Transactional
-    public void deleteWritersByIds(Long[] ids) {
+    public void deleteWritersByIds(List<Long> ids) {
         for(Long id : ids){
             boolean exists = writerRepository.existsById(id);
             if(!exists){
-                throw new IllegalStateException("Writer does not exist");
+                throw new NoSuchElementException("Writer does not exist");
             }
             else{
 
@@ -145,10 +149,10 @@ public class WriterService {
     }
 
     @Transactional
-    public void updateWriterById(Writer writer, Long id) {
+    public void updateWriterById(Long id, Writer writer) {
         Optional<Writer> writerFound = writerRepository.findById(id);
         if(!writerFound.isPresent()){
-            throw new IllegalStateException("Writer does not exist");
+            throw new NoSuchElementException("Writer does not exist");
         }
         else{
             if(writer.getFullname() !=null &&

@@ -5,6 +5,7 @@ import lombok.*;
 import lombok.experimental.SuperBuilder;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 @Data
 @SuperBuilder
@@ -17,7 +18,8 @@ import javax.validation.constraints.NotNull;
 @SequenceGenerator(name = "idGenerator", sequenceName = "CREATORS_SEQ", initialValue = 1, allocationSize = 1)
 public class Creator extends BaseModel{
     @NotNull(message = "Creator's name cannot be null")
-    @Column(length = 150, nullable = false, unique = false)
+    @Column(length = 150, nullable = false)
+    @Pattern(regexp = "^[A-Za-z\\. ]+$", message="Creator's fullname can only contain alphabetical symbols")
     private String fullname;
 
     private String imageUrl;

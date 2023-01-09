@@ -1,14 +1,19 @@
 package com.team5.ACMEFlix.controller;
 
+import com.team5.ACMEFlix.domain.Account;
 import com.team5.ACMEFlix.domain.TVSeries;
+import com.team5.ACMEFlix.mapper.TVSeriesMapper;
 import com.team5.ACMEFlix.service.GenreService;
 import com.team5.ACMEFlix.service.TVSeriesService;
+import com.team5.ACMEFlix.transfer.ApiResponse;
+import com.team5.ACMEFlix.transfer.resource.TVSeriesResource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,61 +22,61 @@ import java.util.Optional;
 public class TVSeriesController {
 
     private final TVSeriesService tvSeriesService;
+    private final TVSeriesMapper tvSeriesMapper;
     @Autowired
-    private TVSeriesController(TVSeriesService tvSeriesService) {
+    private TVSeriesController(TVSeriesService tvSeriesService, TVSeriesMapper tvSeriesMapper) {
         this.tvSeriesService = tvSeriesService;
+        this.tvSeriesMapper = tvSeriesMapper;
     }
 
     @GetMapping
-    public ResponseEntity<List<TVSeries>> findAllTVSeries(){
-        return new ResponseEntity<>(tvSeriesService.findAllTVSeries(), HttpStatus.OK);
+    public ResponseEntity<ApiResponse<List<TVSeriesResource>>> findAllTVSeries(){
+        return  new ResponseEntity<>(ApiResponse.<List<TVSeriesResource>>builder().data(tvSeriesMapper.toResources(tvSeriesService.findAllTVSeries())).build(), HttpStatus.OK);
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<TVSeries> findTVSeriesById(@PathVariable("id") Long id){
-        return tvSeriesService.findTVSeriesById(id);
+    public ResponseEntity<ApiResponse<TVSeriesResource>> findTVSeriesById(@PathVariable("id") Long id){
+        return  new ResponseEntity<>(ApiResponse.<TVSeriesResource>builder().data(tvSeriesMapper.toResource(tvSeriesService.findTVSeriesById(id).get())).build(), HttpStatus.OK);
     }
 
     @GetMapping("findAllTVSeriesFamilyFriendly")
-    public ResponseEntity<List<TVSeries>> findAllTVSeriesFamilyFriendly(){
-        return new ResponseEntity<>(tvSeriesService.findAllTVSeriesFamilyFriendly(), HttpStatus.OK);
+    public ResponseEntity<ApiResponse<List<TVSeriesResource>>> findAllTVSeriesFamilyFriendly(){
+        return  new ResponseEntity<>(ApiResponse.<List<TVSeriesResource>>builder().data(tvSeriesMapper.toResources(tvSeriesService.findAllTVSeriesFamilyFriendly())).build(), HttpStatus.OK);
     }
 
 
 
     @GetMapping("findAllTVSeriesByTitle")
-    public ResponseEntity<List<TVSeries>> findAllTVSeriesByTitle(@Param("search") String search){
-        return new ResponseEntity<>(tvSeriesService.findAllTVSeriesByTitle(search), HttpStatus.OK);
+    public ResponseEntity<ApiResponse<List<TVSeriesResource>>> findAllTVSeriesByTitle(@Param("search") String search){
+        return  new ResponseEntity<>(ApiResponse.<List<TVSeriesResource>>builder().data(tvSeriesMapper.toResources(tvSeriesService.findAllTVSeriesByTitle(search))).build(), HttpStatus.OK);
     }
 
     @GetMapping("findAllTVSeriesByCreators")
-    public ResponseEntity<List<TVSeries>> findAllTVSeriesByCreators(@Param("creator") String[] creator){
-        return new ResponseEntity<>(tvSeriesService.getAllTVSeriesByCreators(creator), HttpStatus.OK);
+    public ResponseEntity<ApiResponse<List<TVSeriesResource>>> findAllTVSeriesByCreators(@Param("creator") String[] creator){
+        return  new ResponseEntity<>(ApiResponse.<List<TVSeriesResource>>builder().data(tvSeriesMapper.toResources(tvSeriesService.getAllTVSeriesByCreators(creator))).build(), HttpStatus.OK);
     }
 
     @GetMapping("findAllTVSeriesByTVSeriesStatusType")
-    public ResponseEntity<List<TVSeries>> findAllTVSeriesByTVSeriesStatusType(@Param("status_type") String status_type){
-        return new ResponseEntity<>(tvSeriesService.findAllTVSeriesByTVSeriesStatusType(status_type), HttpStatus.OK);
+    public ResponseEntity<ApiResponse<List<TVSeriesResource>>> findAllTVSeriesByTVSeriesStatusType(@Param("status_type") String status_type){
+        return  new ResponseEntity<>(ApiResponse.<List<TVSeriesResource>>builder().data(tvSeriesMapper.toResources(tvSeriesService.findAllTVSeriesByTVSeriesStatusType(status_type))).build(), HttpStatus.OK);
     }
-    @ResponseStatus(code = HttpStatus.CREATED)
+
     @PostMapping(path = "addTVSerie")
-    public void addTVSerie(@RequestBody TVSeries tvSerie){
-
-        tvSeriesService.addTVSerie(tvSerie);
+    public ResponseEntity<ApiResponse<TVSeriesResource>> addTVSerie(@Valid @RequestBody TVSeriesResource tvSerie){
+        return  new ResponseEntity<>(ApiResponse.<TVSeriesResource>builder().data(tvSeriesMapper.toResource(tvSeriesService.addTVSerie(tvSeriesMapper.toDomain(tvSerie)))).build(), HttpStatus.CREATED);
     }
-    @ResponseStatus(code = HttpStatus.CREATED)
-    @PostMapping(path = "addTVSeries")
-    public void addTVSeries(@RequestBody TVSeries... tvSeries){
 
-        tvSeriesService.addTVSeries(tvSeries);
+    @PostMapping(path = "addTVSeries")
+    public ResponseEntity<ApiResponse<List<TVSeriesResource>>> addTVSeries(@Valid @RequestBody List<TVSeriesResource> tvSeries){
+        return  new ResponseEntity<>(ApiResponse.<List<TVSeriesResource>>builder().data(tvSeriesMapper.toResources(tvSeriesService.addTVSeries(tvSeriesMapper.toDomains(tvSeries)))).build(), HttpStatus.CREATED);
     }
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     @PatchMapping(path = "updateTVSeriesById/{id}")
     public void updateTVSeriesById(
-            @RequestBody TVSeries tvSeries,
-            @PathVariable("id") Long id
+            @PathVariable("id") Long id,
+            @Valid @RequestBody TVSeriesResource tvSeries
     ){
-        tvSeriesService.updateTVSeriesById(tvSeries, id);
+        tvSeriesService.updateTVSeriesById(id, tvSeriesMapper.toDomain(tvSeries));
     }
 
 }

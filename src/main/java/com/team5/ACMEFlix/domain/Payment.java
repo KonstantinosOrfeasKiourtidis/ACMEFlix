@@ -1,5 +1,6 @@
 package com.team5.ACMEFlix.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.team5.ACMEFlix.domain.enumeration.SubscriptionType;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
@@ -21,11 +22,10 @@ public class Payment extends BaseModel{
 
     @NotNull(message = "Payment's amount cannot be null")
     @Column(nullable = false)
-    private float amount;
+    private Float amount;
 
-//    @NotNull(message = "Payment's date cannot be null")
-//    @Column(nullable = false)
-    private Date paymentDate;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm:ss.SSS")
+    private Date paymentDate = new Date();
 
     @NotNull(message = "Payment subscription type cannot be null")
     @Enumerated(EnumType.STRING)

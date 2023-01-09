@@ -1,22 +1,18 @@
 package com.team5.ACMEFlix.helpers;
 
 import com.team5.ACMEFlix.domain.enumeration.SubscriptionType;
+import lombok.Getter;
 
+import javax.persistence.Column;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.validation.constraints.NotNull;
+
+@Getter
 public class SubscribeForm {
+    @NotNull(message = "Subscription type cannot be null")
+    @Enumerated(EnumType.STRING)
+    @Column(length = 20, nullable = false)
     private SubscriptionType subscriptionType;
 
-    public SubscribeForm() {
-    }
-
-    public SubscribeForm(SubscriptionType subscriptionType) {
-        this.subscriptionType = subscriptionType;
-    }
-
-    public SubscriptionType getSubscriptionType() {
-        return subscriptionType;
-    }
-
-    public void setSubscriptionType(SubscriptionType subscriptionType) {
-        this.subscriptionType = subscriptionType;
-    }
 }

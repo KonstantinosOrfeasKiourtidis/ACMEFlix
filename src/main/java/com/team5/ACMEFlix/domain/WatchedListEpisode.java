@@ -1,9 +1,11 @@
 package com.team5.ACMEFlix.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.List;
@@ -24,10 +26,12 @@ public class WatchedListEpisode extends BaseModel {
     private Profile profile;
 
     @NotNull(message = "Episode's time watched cannot be null")
-    private Integer timeWatched;
+    @Min(1)
+    private Integer timeWatchedInSeconds;
 
     @NotNull(message = "Episode's watched date cannot be null")
-    private Date watchedEpisodeDate;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm:ss.SSS")
+    private Date watchedEpisodeDate = new Date();
 
     @ToString.Exclude
     @EqualsAndHashCode.Exclude

@@ -8,10 +8,10 @@ import com.team5.ACMEFlix.helpers.RegisterForm;
 import com.team5.ACMEFlix.helpers.SubscribeForm;
 import com.team5.ACMEFlix.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.validation.Valid;
 import java.util.*;
 
 @Service
@@ -34,21 +34,21 @@ public class AccountService {
     }
 
     @Transactional(readOnly = true)
-    public ResponseEntity<Account> findAccountById(Long id) {
-        return accountRepository.findById(id).map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    public Optional<Account> findAccountById(Long id) {
+        return accountRepository.findById(id);
     }
 
     @Transactional(readOnly = true)
-    public ResponseEntity<Account> findAccountByEmail(String email) {
+    public Optional<Account> findAccountByEmail(String email) {
         Optional<Account> accountExists = accountRepository.findAccountByEmail(email);
         if(!accountExists.isPresent()){
-            throw new IllegalStateException("Account does not exist");
+            throw new NoSuchElementException("Account does not exist");
         }
-        return accountExists.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+        return accountExists;
     }
 
     @Transactional
-    public void addAccount(Account account) {
+    public Account addAccount(Account account) {
         account.getAddress()
                 .forEach(a -> a.setAccount(account));
         account.getCreditCards()
@@ -56,10 +56,11 @@ public class AccountService {
         account.getProfiles()
                 .forEach(p -> p.setAccount(account));
        accountRepository.save(account);
+       return account;
     }
 
     @Transactional
-    public void addAccounts(Account... accounts) {
+    public List<Account> addAccounts(List<Account> accounts) {
         for(Account account : accounts){
             account.getAddress()
                     .forEach(a -> a.setAccount(account));
@@ -69,6 +70,7 @@ public class AccountService {
                     .forEach(p -> p.setAccount(account));
             accountRepository.save(account);
         }
+        return accounts;
     }
 
 
@@ -76,7 +78,7 @@ public class AccountService {
     public void deleteAccountById(Long id) {
         boolean exists = accountRepository.existsById(id);
         if(!exists){
-            throw new IllegalStateException("Account does not exist");
+            throw new NoSuchElementException("Account does not exist");
         }
         else{
             accountRepository.deleteById(id);
@@ -84,11 +86,11 @@ public class AccountService {
     }
 
     @Transactional
-    public void deleteAccountsByIds(Long[] ids) {
+    public void deleteAccountsByIds(List<Long> ids) {
         for(Long id : ids){
             boolean exists = accountRepository.existsById(id);
             if(!exists){
-                throw new IllegalStateException("Account does not exist");
+                throw new NoSuchElementException("Account does not exist");
             }
             else{
                 accountRepository.deleteById(id);
@@ -98,7 +100,7 @@ public class AccountService {
 
     @Transactional
     public void updateAccountByIdPut(Long id, String email, String firstname, String lastname, String phoneNo, String username, String password) {
-        Account account = accountRepository.findById(id).orElseThrow(() -> new IllegalStateException(
+        Account account = accountRepository.findById(id).orElseThrow(() -> new NoSuchElementException(
                 "Account doesnt not exists"
         ));
 
@@ -140,8 +142,8 @@ public class AccountService {
     }
 
     @Transactional
-    public void updateAccountByIdPatch(Account account, Long id) {
-        Account foundAccount = accountRepository.findById(id).orElseThrow(() -> new IllegalStateException(
+    public void updateAccountByIdPatch(Long id, Account account) {
+        Account foundAccount = accountRepository.findById(id).orElseThrow(() -> new NoSuchElementException(
                 "Account doesnt not exists"
         ));
 
@@ -284,8 +286,8 @@ public class AccountService {
 
     }
 
-    @Transactional
-    public void login(LoginForm loginForm) {
+    @Transactional(readOnly = true)
+    public Optional<Account> login(LoginForm loginForm) {
 
         Optional<Account> accountExists = accountRepository.findAccountByEmail(loginForm.getEmail());
         if(!accountExists.isPresent()){
@@ -296,10 +298,11 @@ public class AccountService {
             throw new IllegalStateException("The email or the password are incorrect");
         }
 
+        return accountExists;
 
     }
     @Transactional
-    public void register(RegisterForm registerForm) {
+    public Account register(RegisterForm registerForm) {
         if(!(registerForm.getEmail()!=null || registerForm.getEmail().length() > 0)){
             throw new IllegalStateException("Email is a required field");
         }
@@ -354,7 +357,7 @@ public class AccountService {
         account.setAddress(registerForm.getAddress());
         account.setCreditCards(registerForm.getCreditCards());
 
-        //account.setCreationDate();
+
 
         registerForm.getAddress()
                 .forEach(a -> a.setAccount(account));
@@ -368,15 +371,18 @@ public class AccountService {
         emptyAccount.getProfiles().
                 forEach(p -> p.setAccount(emptyAccount));
 
+        account.setSubscriptionDate(null);
         account.setSubscriptionType(SubscriptionType.NO_SUBSCRIPTION);
         accountRepository.save(account);
+
+        return account;
     }
 
 
     @Transactional
     public void subscribe(Long id, SubscribeForm subscribeForm) {
-        Account foundAccount = accountRepository.findById(id).orElseThrow(() -> new IllegalStateException(
-                "Account doesnt not exists"
+        Account foundAccount = accountRepository.findById(id).orElseThrow(() -> new NoSuchElementException(
+                "Account does not exists"
         ));
 
         if(foundAccount.getCreditCards()==null || foundAccount.getCreditCards().isEmpty()){
@@ -396,6 +402,7 @@ public class AccountService {
         }
 
         foundAccount.setSubscriptionType(subscribeForm.getSubscriptionType());
+        foundAccount.setSubscriptionDate(new Date());
 
         if(!foundAccount.getProfiles().isEmpty()){
 
@@ -420,6 +427,7 @@ public class AccountService {
         payment.setAmount(subscribeForm.getSubscriptionType().getPrice());
         payment.setSubscriptionType(subscribeForm.getSubscriptionType());
         payment.setAccount(foundAccount);
+        payment.setPaymentDate(new Date());
         payment.setCreditCard(foundAccount.getCreditCards().get(0));
         payment.setAddress(foundAccount.getAddress().get(0));
 

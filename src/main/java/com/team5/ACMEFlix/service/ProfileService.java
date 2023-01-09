@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -26,12 +27,12 @@ public class ProfileService {
         return profileRepository.findAll();
     }
     @Transactional(readOnly = true)
-    public ResponseEntity<Profile> findProfileById(Long id) {
-        return profileRepository.findById(id).map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    public Optional<Profile> findProfileById(Long id) {
+        return profileRepository.findById(id);
     }
     @Transactional(readOnly = true)
-    public ResponseEntity<Profile> findProfileByAccountId(Long id) {
-        return profileRepository.findById(id).map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    public Optional<Profile> findProfileByAccountId(Long id) {
+        return profileRepository.findById(id);
     }
 
     @Transactional(readOnly = true)
@@ -40,22 +41,23 @@ public class ProfileService {
     }
 
     @Transactional
-    public void addProfileByAccountId(Profile profile, Long id) {
+    public Profile addProfileByAccountId(Long id, Profile profile) {
         Optional<Account> accountExists = accountRepository.findById(id);
         if(!accountExists.isPresent()){
-            throw new IllegalStateException("Account does not exist");
+            throw new NoSuchElementException("Account does not exist");
         }
         else{
             profile.setAccount(accountExists.get());
             profileRepository.save(profile);
         }
+        return profile;
     }
 
     @Transactional
-    public void addProfilesByAccountId(Profile[] profiles, Long id) {
+    public List<Profile> addProfilesByAccountId(Long id, List<Profile> profiles) {
         Optional<Account> accountExists = accountRepository.findById(id);
         if(!accountExists.isPresent()){
-            throw new IllegalStateException("Account does not exist");
+            throw new NoSuchElementException("Account does not exist");
         }
         else {
             for (Profile profile : profiles){
@@ -63,13 +65,14 @@ public class ProfileService {
                 profileRepository.save(profile);
             }
         }
+        return profiles;
     }
 
     @Transactional
     public void deleteProfileById(Long id) {
         boolean exists = profileRepository.existsById(id);
         if(!exists){
-            throw new IllegalStateException("Profile does not exist");
+            throw new NoSuchElementException("Profile does not exist");
         }
         else{
             profileRepository.deleteById(id);
@@ -77,11 +80,11 @@ public class ProfileService {
     }
 
     @Transactional
-    public void deleteProfilesByIds(Long[] ids) {
+    public void deleteProfilesByIds(List<Long> ids) {
         for(Long id : ids) {
             boolean exists = profileRepository.existsById(id);
             if (!exists) {
-                throw new IllegalStateException("Profile does not exist");
+                throw new NoSuchElementException("Profile does not exist");
             } else {
                 profileRepository.deleteById(id);
             }
@@ -89,7 +92,7 @@ public class ProfileService {
     }
     @Transactional
     public void updateProfileByIdPut(Long id, String firstname, Boolean ageRestricted, String imageUrl) {
-        Profile profile = profileRepository.findById(id).orElseThrow(() -> new IllegalStateException(
+        Profile profile = profileRepository.findById(id).orElseThrow(() -> new NoSuchElementException(
                 "Profile doesnt not exists"
         ));
 
@@ -111,8 +114,8 @@ public class ProfileService {
 
     }
     @Transactional
-    public void updateProfileByIdPatch(Profile profile, Long id) {
-        Profile foundProfile = profileRepository.findById(id).orElseThrow(() -> new IllegalStateException(
+    public void updateProfileByIdPatch(Long id, Profile profile) {
+        Profile foundProfile = profileRepository.findById(id).orElseThrow(() -> new NoSuchElementException(
                 "Profile doesnt not exists"
         ));
 

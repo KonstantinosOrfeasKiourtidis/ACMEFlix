@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -27,8 +28,8 @@ public class CreditCardService {
 
 
     @Transactional(readOnly = true)
-    public ResponseEntity<CreditCard> findCreditCardById(Long id) {
-        return creditCardRepository.findById(id).map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    public Optional<CreditCard> findCreditCardById(Long id) {
+        return creditCardRepository.findById(id);
     }
 
     @Transactional(readOnly = true)
@@ -37,22 +38,23 @@ public class CreditCardService {
     }
 
     @Transactional
-    public void addCreditCardByAccountId(CreditCard creditCard, Long id) {
+    public CreditCard addCreditCardByAccountId(Long id, CreditCard creditCard) {
         Optional<Account> accountExists = accountRepository.findById(id);
         if(!accountExists.isPresent()){
-            throw new IllegalStateException("Account does not exist");
+            throw new NoSuchElementException("Account does not exist");
         }
         else{
             creditCard.setAccount(accountExists.get());
             creditCardRepository.save(creditCard);
         }
+        return creditCard;
     }
 
     @Transactional
-    public void addCreditCardsByAccountId(CreditCard[] creditCards, Long id) {
+    public List<CreditCard> addCreditCardsByAccountId(Long id, List<CreditCard> creditCards) {
         Optional<Account> accountExists = accountRepository.findById(id);
         if(!accountExists.isPresent()){
-            throw new IllegalStateException("Account does not exist");
+            throw new NoSuchElementException("Account does not exist");
         }
         else{
             for(CreditCard creditCard : creditCards) {
@@ -60,13 +62,14 @@ public class CreditCardService {
                 creditCardRepository.save(creditCard);
             }
         }
+        return creditCards;
     }
 
     @Transactional
     public void deleteCreditCardById(Long id) {
         boolean exists = creditCardRepository.existsById(id);
         if(!exists){
-            throw new IllegalStateException("Credit card does not exist");
+            throw new NoSuchElementException("Credit card does not exist");
         }
         else{
             creditCardRepository.deleteById(id);
@@ -74,11 +77,11 @@ public class CreditCardService {
     }
 
     @Transactional
-    public void deleteCreditCardsByIds(Long[] ids) {
+    public void deleteCreditCardsByIds(List<Long> ids) {
         for(Long id : ids) {
             boolean exists = creditCardRepository.existsById(id);
             if (!exists) {
-                throw new IllegalStateException("Credit card does not exist");
+                throw new NoSuchElementException("Credit card does not exist");
             } else {
                 creditCardRepository.deleteById(id);
             }
@@ -88,8 +91,8 @@ public class CreditCardService {
 
 
     @Transactional
-    public void updateCreditCardById(CreditCard creditCard, Long id) {
-        CreditCard foundCreditCard = creditCardRepository.findById(id).orElseThrow(() -> new IllegalStateException(
+    public void updateCreditCardById(Long id, CreditCard creditCard) {
+        CreditCard foundCreditCard = creditCardRepository.findById(id).orElseThrow(() -> new NoSuchElementException(
                 "Credit card doesnt not exists"
         ));
 

@@ -1,14 +1,20 @@
 package com.team5.ACMEFlix.controller;
 
+import com.team5.ACMEFlix.domain.Account;
 import com.team5.ACMEFlix.domain.Actor;
+import com.team5.ACMEFlix.mapper.ActorMapper;
+import com.team5.ACMEFlix.repository.ActorRepository;
 import com.team5.ACMEFlix.service.AccountService;
 import com.team5.ACMEFlix.service.ActorService;
 import com.team5.ACMEFlix.service.GenreService;
+import com.team5.ACMEFlix.transfer.ApiResponse;
+import com.team5.ACMEFlix.transfer.resource.ActorResource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,59 +23,59 @@ import java.util.Optional;
 public class ActorController {
 
     private final ActorService actorService;
+    private final ActorMapper actorMapper;
+    private final ActorRepository actorRepository;
+
     @Autowired
-    private ActorController(ActorService actorService) {
+    private ActorController(ActorService actorService, ActorMapper actorMapper,
+                            ActorRepository actorRepository) {
         this.actorService = actorService;
+        this.actorMapper = actorMapper;
+        this.actorRepository = actorRepository;
     }
     @GetMapping
-    public ResponseEntity<List<Actor>> findAllActors(){
-        return new ResponseEntity<>(actorService.findAllActors(), HttpStatus.OK);
+    public ResponseEntity<ApiResponse<List<ActorResource>>> findAllActors(){
+        return  new ResponseEntity<>(ApiResponse.<List<ActorResource>>builder().data(actorMapper.toResources(actorService.findAllActors())).build(), HttpStatus.OK);
+
     }
     @GetMapping("{id}")
-    public ResponseEntity<Actor> findActorById(@PathVariable("id") Long id){
-        return actorService.findActorById(id);
+    public ResponseEntity<ApiResponse<ActorResource>> findActorById(@PathVariable("id") Long id){
+        return new ResponseEntity<>(ApiResponse.<ActorResource>builder().data(actorMapper.toResource(actorService.findActorById(id).get())).build(), HttpStatus.OK);
     }
 
     @GetMapping("findAllActorsByContentId/{id}")
-    public ResponseEntity<List<Actor>> findAllActorsByContentId(@PathVariable("id") Long id){
-        return new ResponseEntity<>(actorService.findAllActorsByContentId(id), HttpStatus.OK);
+    public ResponseEntity<ApiResponse<List<ActorResource>>> findAllActorsByContentId(@PathVariable("id") Long id){
+        return  new ResponseEntity<>(ApiResponse.<List<ActorResource>>builder().data(actorMapper.toResources(actorService.findAllActorsByContentId(id))).build(), HttpStatus.OK);
     }
-    @ResponseStatus(code = HttpStatus.CREATED)
+
     @PostMapping(path = "addActorByContentId/{id}")
-    public void addActorByContentId(@RequestBody Actor actor, @PathVariable("id") Long id){
-
-        actorService.addActorByContentId(actor, id);
+    public ResponseEntity<ApiResponse<ActorResource>> addActorByContentId(@PathVariable("id") Long id, @Valid @RequestBody ActorResource actor){
+        return new ResponseEntity<>(ApiResponse.<ActorResource>builder().data(actorMapper.toResource(actorService.addActorByContentId(id, actorMapper.toDomain(actor)))).build(), HttpStatus.CREATED);
     }
-    @ResponseStatus(code = HttpStatus.CREATED)
+
     @PostMapping(path = "addActorsByContentId/{id}")
-    public void addActorsByContentId(@RequestBody Actor[] actors, @PathVariable("id") Long id){
-
-        actorService.addActorsByContentId(actors, id);
+    public ResponseEntity<ApiResponse<List<ActorResource>>> addActorsByContentId(@PathVariable("id") Long id, @Valid @RequestBody List<ActorResource> actors){
+        return  new ResponseEntity<>(ApiResponse.<List<ActorResource>>builder().data(actorMapper.toResources(actorService.addActorsByContentId(id, actorMapper.toDomains(actors)))).build(), HttpStatus.CREATED);
     }
-    @ResponseStatus(code = HttpStatus.CREATED)
+
     @PostMapping(path = "addActorByMovieId/{id}")
-    public void addActorByMovieId(@RequestBody Actor actor, @PathVariable("id") Long id){
-
-        actorService.addActorByMovieId(actor, id);
+    public ResponseEntity<ApiResponse<ActorResource>> addActorByMovieId(@PathVariable("id") Long id, @Valid @RequestBody ActorResource actor){
+        return new ResponseEntity<>(ApiResponse.<ActorResource>builder().data(actorMapper.toResource(actorService.addActorByMovieId(id, actorMapper.toDomain(actor)))).build(), HttpStatus.CREATED);
     }
-    @ResponseStatus(code = HttpStatus.CREATED)
+
     @PostMapping(path = "addActorsByMovieId/{id}")
-    public void addActorsByMovieId(@RequestBody Actor[] actors, @PathVariable("id") Long id){
-
-        actorService.addActorsByMovieId(actors, id);
+    public ResponseEntity<ApiResponse<List<ActorResource>>> addActorsByMovieId(@PathVariable("id") Long id, @Valid @RequestBody List<ActorResource> actors){
+        return  new ResponseEntity<>(ApiResponse.<List<ActorResource>>builder().data(actorMapper.toResources(actorService.addActorsByMovieId(id, actorMapper.toDomains(actors)))).build(), HttpStatus.CREATED);
     }
-    @ResponseStatus(code = HttpStatus.CREATED)
+
     @PostMapping(path = "addActorByTVSeriesId/{id}")
-    public void addActorByTVSeriesId(@RequestBody Actor actor, @PathVariable("id") Long id){
-
-        actorService.addActorByTVSeriesId(actor, id);
+    public ResponseEntity<ApiResponse<ActorResource>> addActorByTVSeriesId(@PathVariable("id") Long id, @Valid @RequestBody ActorResource actor){
+        return new ResponseEntity<>(ApiResponse.<ActorResource>builder().data(actorMapper.toResource(actorService.addActorByTVSeriesId(id, actorMapper.toDomain(actor)))).build(), HttpStatus.CREATED);
     }
 
-    @ResponseStatus(code = HttpStatus.CREATED)
     @PostMapping(path = "addActorsByTVSeriesId/{id}")
-    public void addActorsByTVSeriesId(@RequestBody Actor[] actors, @PathVariable("id") Long id){
-
-        actorService.addActorsByTVSeriesId(actors, id);
+    public ResponseEntity<ApiResponse<List<ActorResource>>> addActorsByTVSeriesId(@PathVariable("id") Long id, @Valid @RequestBody List<ActorResource> actors){
+        return  new ResponseEntity<>(ApiResponse.<List<ActorResource>>builder().data(actorMapper.toResources(actorService.addActorsByTVSeriesId(id, actorMapper.toDomains(actors)))).build(), HttpStatus.CREATED);
     }
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     @DeleteMapping(path = "deleteActorById/{id}")
@@ -78,15 +84,15 @@ public class ActorController {
     }
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     @DeleteMapping(path = "deleteActorsByIds/{ids}")
-    public void deleteActorsByIds(@PathVariable("ids") Long[] ids){
+    public void deleteActorsByIds(@PathVariable("ids") List<Long> ids){
         actorService.deleteActorsByIds(ids);
     }
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     @PatchMapping(path = "updateActorById/{id}")
     public void updateActorById(
-            @RequestBody Actor actor,
-            @PathVariable("id") Long id
+            @PathVariable("id") Long id,
+            @Valid @RequestBody ActorResource actor
     ){
-        actorService.updateActorById(actor, id);
+        actorService.updateActorById(id, actorMapper.toDomain(actor));
     }
 }

@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -34,8 +35,8 @@ public class GenreService {
         return genreRepository.findAll();
     }
     @Transactional(readOnly = true)
-    public ResponseEntity<Genre> findGenreById(Long id) {
-        return genreRepository.findById(id).map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    public Optional<Genre> findGenreById(Long id) {
+        return genreRepository.findById(id);
     }
     @Transactional(readOnly = true)
     public List<Genre> findAllGenresByContentId(Long id) {
@@ -43,92 +44,96 @@ public class GenreService {
     }
 
     @Transactional
-    public void addGenreByContentId(Genre genre, Long id) {
+    public Genre addGenreByContentId(Long id, Genre genre) {
 
         Optional<Content> contentExists = contentRepository.findById(id);
         if(!contentExists.isPresent()){
-            throw new IllegalStateException("Content does not exist");
+            throw new NoSuchElementException("Content does not exist");
         }
         else{
             genre.setContent(contentExists.get());
             genreRepository.save(genre);
         }
-
+        return genre;
     }
 
     @Transactional
-    public void addGenresByContentId(Genre[] genres, Long id) {
+    public List<Genre> addGenresByContentId(Long id, List<Genre> genres) {
         for(Genre genre : genres){
             Optional<Content> contentExists = contentRepository.findById(id);
             if(!contentExists.isPresent()){
-                throw new IllegalStateException("Content does not exist");
+                throw new NoSuchElementException("Content does not exist");
             }
             else{
                 genre.setContent(contentExists.get());
                 genreRepository.save(genre);
             }
         }
+        return genres;
     }
 
     @Transactional
-    public void addGenreByMovieId(Genre genre, Long id) {
+    public Genre addGenreByMovieId(Long id, Genre genre) {
 
         Optional<Movie> movieExists = movieRepository.findById(id);
         if(!movieExists.isPresent()){
-            throw new IllegalStateException("Movie does not exist");
+            throw new NoSuchElementException("Movie does not exist");
         }
         else{
             genre.setContent(movieExists.get().getContent());
             genreRepository.save(genre);
         }
-
+        return genre;
     }
 
     @Transactional
-    public void addGenresByMovieId(Genre[] genres, Long id) {
+    public List<Genre> addGenresByMovieId(Long id, List<Genre> genres) {
         for(Genre genre : genres){
             Optional<Movie> movieExists = movieRepository.findById(id);
             if(!movieExists.isPresent()){
-                throw new IllegalStateException("Movie does not exist");
+                throw new NoSuchElementException("Movie does not exist");
             }
             else{
                 genre.setContent(movieExists.get().getContent());
                 genreRepository.save(genre);
             }
         }
+        return genres;
     }
 
     @Transactional
-    public void addGenreByTVSeriesId(Genre genre, Long id) {
+    public Genre addGenreByTVSeriesId(Long id, Genre genre) {
         Optional<TVSeries> tvSeriesExists = tVSeriesRepository.findById(id);
         if(!tvSeriesExists.isPresent()){
-            throw new IllegalStateException("TV Series does not exist");
+            throw new NoSuchElementException("TV Series does not exist");
         }
         else{
             genre.setContent(tvSeriesExists.get().getContent());
             genreRepository.save(genre);
         }
+        return genre;
     }
 
     @Transactional
-    public void addGenresByTVSeriesId(Genre[] genres, Long id) {
+    public List<Genre> addGenresByTVSeriesId(Long id, List<Genre> genres) {
         for(Genre genre : genres){
             Optional<TVSeries> tvSeriesExists = tVSeriesRepository.findById(id);
             if(!tvSeriesExists.isPresent()){
-                throw new IllegalStateException("TV Series does not exist");
+                throw new NoSuchElementException("TV Series does not exist");
             }
             else{
                 genre.setContent(tvSeriesExists.get().getContent());
                 genreRepository.save(genre);
             }
         }
+        return genres;
     }
 
     @Transactional
     public void deleteGenreById(Long id) {
         boolean exists = genreRepository.existsById(id);
         if(!exists){
-            throw new IllegalStateException("Genre does not exist");
+            throw new NoSuchElementException("Genre does not exist");
         }
         else{
 
@@ -137,11 +142,11 @@ public class GenreService {
         }
     }
     @Transactional
-    public void deleteGenresByIds(Long[] ids) {
+    public void deleteGenresByIds(List<Long> ids) {
         for(Long id : ids){
             boolean exists = genreRepository.existsById(id);
             if(!exists){
-                throw new IllegalStateException("Genre does not exist");
+                throw new NoSuchElementException("Genre does not exist");
             }
             else{
 
@@ -152,10 +157,10 @@ public class GenreService {
     }
 
     @Transactional
-    public void updateGenreById(Genre genre, Long id) {
+    public void updateGenreById(Long id, Genre genre) {
         Optional<Genre> genreFound = genreRepository.findById(id);
         if(!genreFound.isPresent()){
-            throw new IllegalStateException("Genre does not exist");
+            throw new NoSuchElementException("Genre does not exist");
         }
         else{
             if(genre.getName() !=null &&

@@ -9,9 +9,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import javax.persistence.EntityManager;
+import java.math.BigInteger;
+import java.util.*;
 
 @Service
 public class TVSeriesService {
@@ -28,7 +28,10 @@ public class TVSeriesService {
     private CreatorRepository creatorRepository;
     @Autowired
     private EpisodeRepository episodeRepository;
-
+    @Autowired
+    private EntityManager entityManager;
+    @Autowired
+    private ContentRepository contentRepository;
 
     @Transactional(readOnly = true)
     public List<TVSeries> findAllTVSeries() {
@@ -36,23 +39,49 @@ public class TVSeriesService {
     }
 
     @Transactional(readOnly = true)
-    public ResponseEntity<TVSeries> findTVSeriesById(Long id) {
-        return tVSeriesRepository.findById(id).map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    public Optional<TVSeries> findTVSeriesById(Long id) {
+        return tVSeriesRepository.findById(id);
     }
 
     @Transactional(readOnly = true)
     public List<TVSeries> findAllTVSeriesFamilyFriendly() {
-        return tVSeriesRepository.findTVSeriesByFamilyFriendly();
+        List<Content> contents= contentRepository.findAllContentsByFamilyFriendly();
+        List<Long> contentIds = new ArrayList<>();
+        for (Content content : contents) {
+            contentIds.add(content.getId());
+        }
+        List<TVSeries> tvSeries = tVSeriesRepository.findAllTVSeriesByContentId(contentIds);
+        return tvSeries;
     }
 
     @Transactional(readOnly = true)
     public List<TVSeries> findAllTVSeriesByTitle(String search) {
-        return tVSeriesRepository.findTVSeriesByName(search);
+        List<Long> contentIds = tVSeriesRepository.findTVSeriesByName(search);
+        List<TVSeries> tvSeries = tVSeriesRepository.findAllTVSeriesByContentId(contentIds);
+        return tvSeries;
     }
 
     @Transactional(readOnly = true)
     public List<TVSeries> getAllTVSeriesByCreators(String[] creator) {
-        return tVSeriesRepository.findTVSeriesByCreator(creator);
+        String query;
+        query = "SELECT CREATORS.TV_SERIES_ID FROM CREATORS GROUP BY CREATORS.TV_SERIES_ID ";
+
+        for (int i = 0; i < creator.length; i++) {
+            if(i == 0){
+                query += "HAVING ";
+            }
+
+            query+= "GROUP_CONCAT(CREATORS.FULLNAME) LIKE '%"+ creator[i] + "%'";
+            if(i != creator.length-1){
+                query += " AND ";
+            }
+        }
+
+        List<BigInteger> movieIds = entityManager.createNativeQuery(query).getResultList();
+
+        List<TVSeries> tvSeries = tVSeriesRepository.findAllTVSeriesById(movieIds);
+
+        return tvSeries;
     }
 
     @Transactional(readOnly = true)
@@ -61,28 +90,33 @@ public class TVSeriesService {
     }
 
     @Transactional
-    public void addTVSerie(TVSeries tvSerie) {
+    public TVSeries addTVSerie(TVSeries tvSerie) {
         tvSerie.getCreators()
                 .forEach(c -> c.setTvSeries(tvSerie));
         tvSerie.getSeasons()
                 .forEach(s -> s.setTvSeries(tvSerie));
-
+        tvSerie.getSeasons()
+                .forEach(s -> s.getEpisodes()
+                        .forEach(e -> e.setSeason(s)));
         tvSerie.getContent().getActors()
                 .forEach(a -> a.setContent(tvSerie.getContent()));
         tvSerie.getContent().getGenres()
                 .forEach(g -> g.setContent(tvSerie.getContent()));
 
         tVSeriesRepository.save(tvSerie);
+        return tvSerie;
     }
 
     @Transactional
-    public void addTVSeries(TVSeries[] tvSeries) {
+    public List<TVSeries> addTVSeries(List<TVSeries> tvSeries) {
         for(TVSeries tvSerie : tvSeries){
             tvSerie.getCreators()
                     .forEach(c -> c.setTvSeries(tvSerie));
             tvSerie.getSeasons()
                     .forEach(s -> s.setTvSeries(tvSerie));
-
+            tvSerie.getSeasons()
+                    .forEach(s -> s.getEpisodes()
+                            .forEach(e -> e.setSeason(s)));
             tvSerie.getContent().getActors()
                     .forEach(a -> a.setContent(tvSerie.getContent()));
             tvSerie.getContent().getGenres()
@@ -90,13 +124,14 @@ public class TVSeriesService {
 
             tVSeriesRepository.save(tvSerie);
         }
+        return tvSeries;
     }
 
     @Transactional
-    public void updateTVSeriesById(TVSeries tvSeries, Long id) {
+    public void updateTVSeriesById(Long id, TVSeries tvSeries) {
         Optional<TVSeries> tvSeriesFound = tVSeriesRepository.findById(id);
         if(!tvSeriesFound.isPresent()){
-            throw new IllegalStateException("TV Series does not exist");
+            throw new NoSuchElementException("TV Series does not exist");
         }
         else{
 
@@ -224,7 +259,7 @@ public class TVSeriesService {
                     !Objects.equals(tvSeriesFound.get().getSeasons(), tvSeries.getSeasons())) {
                 List<Season> seasons = seasonRepository.findSeasonByTVSeriesId(id);
                 if (!seasons.isEmpty()) {
-                    for (int i = 0; i < seasons.size(); i++) {
+                    for (int i = 0; i < seasons.size()-1; i++) {
                         if (tvSeries.getSeasons().get(i).getSeasonNo() != null &&
                                 tvSeries.getSeasons().get(i).getSeasonNo() >0 &&
                                 !Objects.equals(seasons.get(i).getSeasonNo(), tvSeries.getSeasons().get(i).getSeasonNo())) {

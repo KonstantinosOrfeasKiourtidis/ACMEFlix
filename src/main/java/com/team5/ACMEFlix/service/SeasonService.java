@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -35,15 +36,15 @@ public class SeasonService {
         return seasonRepository.findAll();
     }
     @Transactional(readOnly = true)
-    public ResponseEntity<Season> findSeasonById(Long id) {
-        return seasonRepository.findById(id).map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    public Optional<Season> findSeasonById(Long id) {
+        return seasonRepository.findById(id);
     }
 
     @Transactional(readOnly = true)
     public List<Season> findAllSeasonsByContentId(Long id) {
         Optional<TVSeries> tvSeries = tVSeriesRepository.findTVSeriesByContentId(id);
         if(!tvSeries.isPresent()){
-            throw new IllegalStateException("TV Series does not exist");
+            throw new NoSuchElementException("TV Series does not exist");
         }
         else {
             return seasonRepository.findSeasonByTVSeriesId(tvSeries.get().getId());
@@ -51,36 +52,43 @@ public class SeasonService {
     }
 
     @Transactional
-    public void addSeasonByTVSeriesId(Season season, Long id) {
+    public Season addSeasonByTVSeriesId(Long id, Season season) {
         Optional<TVSeries> tvSeriesExists = tVSeriesRepository.findById(id);
         if(!tvSeriesExists.isPresent()){
-            throw new IllegalStateException("TV Series does not exist");
+            throw new NoSuchElementException("TV Series does not exist");
         }
         else{
+            System.out.println(tvSeriesExists.get() + "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
             season.setTvSeries(tvSeriesExists.get());
+            season.getEpisodes()
+                    .forEach(e -> e.setSeason(season));
             seasonRepository.save(season);
         }
+        return season;
     }
 
     @Transactional
-    public void addSeasonsByTVSeriesId(Season[] seasons, Long id) {
+    public List<Season> addSeasonsByTVSeriesId(Long id, List<Season> seasons) {
         for(Season season : seasons){
             Optional<TVSeries> tvSeriesExists = tVSeriesRepository.findById(id);
             if(!tvSeriesExists.isPresent()){
-                throw new IllegalStateException("TV Series does not exist");
+                throw new NoSuchElementException("TV Series does not exist");
             }
             else{
                 season.setTvSeries(tvSeriesExists.get());
+                season.getEpisodes()
+                        .forEach(e -> e.setSeason(season));
                 seasonRepository.save(season);
             }
         }
+        return seasons;
     }
 
     @Transactional
-    public void addSeasonByContentId(Season season, Long id) {
+    public Season addSeasonByContentId(Long id, Season season) {
         Optional<Content> contentExists = contentRepository.findById(id);
         if(!contentExists.isPresent()){
-            throw new IllegalStateException("Content does not exist");
+            throw new NoSuchElementException("Content does not exist");
         }
         else if(!contentExists.get().getContentType().equals(ContentType.TV_SERIES)){
             throw new IllegalStateException("Content is not a tv series");
@@ -88,20 +96,23 @@ public class SeasonService {
         else{
             Optional<TVSeries> tvSeriesExists = tVSeriesRepository.findTVSeriesByContentId(id);
             if(!tvSeriesExists.isPresent()){
-                throw new IllegalStateException("TV Series does not exist");
+                throw new NoSuchElementException("TV Series does not exist");
             }
             else {
                 season.setTvSeries(tvSeriesExists.get());
+                season.getEpisodes()
+                        .forEach(e -> e.setSeason(season));
                 seasonRepository.save(season);
             }
 
         }
+        return season;
     }
     @Transactional
-    public void addSeasonsByContentId(Season[] seasons, Long id) {
+    public List<Season> addSeasonsByContentId(Long id, List<Season> seasons) {
         Optional<Content> contentExists = contentRepository.findById(id);
         if(!contentExists.isPresent()){
-            throw new IllegalStateException("Content does not exist");
+            throw new NoSuchElementException("Content does not exist");
         }
         else if(!contentExists.get().getContentType().equals(ContentType.TV_SERIES)){
             throw new IllegalStateException("Content is not a tv series");
@@ -109,10 +120,12 @@ public class SeasonService {
         else {
             Optional<TVSeries> tvSeriesExists = tVSeriesRepository.findTVSeriesByContentId(id);
             if (!tvSeriesExists.isPresent()) {
-                throw new IllegalStateException("TV Series does not exist");
+                throw new NoSuchElementException("TV Series does not exist");
             } else {
                 for (Season season : seasons) {
                     season.setTvSeries(tvSeriesExists.get());
+                    season.getEpisodes()
+                            .forEach(e -> e.setSeason(season));
                     seasonRepository.save(season);
                 }
 
@@ -120,13 +133,14 @@ public class SeasonService {
 
 
         }
+        return seasons;
     }
 
     @Transactional
     public void deleteSeasonById(Long id) {
         boolean exists = seasonRepository.existsById(id);
         if(!exists){
-            throw new IllegalStateException("Season does not exist");
+            throw new NoSuchElementException("Season does not exist");
         }
         else{
 
@@ -136,11 +150,11 @@ public class SeasonService {
     }
 
     @Transactional
-    public void deleteSeasonsByIds(Long[] ids) {
+    public void deleteSeasonsByIds(List<Long> ids) {
         for(Long id : ids){
             boolean exists = seasonRepository.existsById(id);
             if(!exists){
-                throw new IllegalStateException("Season does not exist");
+                throw new NoSuchElementException("Season does not exist");
             }
             else{
 
@@ -151,10 +165,10 @@ public class SeasonService {
     }
 
     @Transactional
-    public void updateSeasonById(Season season, Long id) {
+    public void updateSeasonById(Long id, Season season) {
         Optional<Season> seasonFound = seasonRepository.findById(id);
         if(!seasonFound.isPresent()){
-            throw new IllegalStateException("Season does not exist");
+            throw new NoSuchElementException("Season does not exist");
         }
         else{
 

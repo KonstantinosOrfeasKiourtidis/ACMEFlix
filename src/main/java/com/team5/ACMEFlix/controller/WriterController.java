@@ -1,12 +1,17 @@
 package com.team5.ACMEFlix.controller;
 
+import com.team5.ACMEFlix.domain.TVSeries;
 import com.team5.ACMEFlix.domain.Writer;
+import com.team5.ACMEFlix.mapper.WriterMapper;
 import com.team5.ACMEFlix.service.WriterService;
+import com.team5.ACMEFlix.transfer.ApiResponse;
+import com.team5.ACMEFlix.transfer.resource.WriterResource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,56 +20,46 @@ import java.util.Optional;
 public class WriterController {
 
     private final WriterService writerService;
+    private final WriterMapper writerMapper;
     @Autowired
-    private WriterController(WriterService writerService) {
+    private WriterController(WriterService writerService, WriterMapper writerMapper) {
         this.writerService = writerService;
+        this.writerMapper = writerMapper;
     }
 
     @GetMapping
-    public ResponseEntity<List<Writer> > findAllWriters(){
-        return new ResponseEntity<>(writerService.findAllWriters(), HttpStatus.OK);
+    public ResponseEntity<ApiResponse<List<WriterResource>>> findAllWriters(){
+        return  new ResponseEntity<>(ApiResponse.<List<WriterResource>>builder().data(writerMapper.toResources(writerService.findAllWriters())).build(), HttpStatus.OK);
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<Writer> findWriterById(@PathVariable("id") Long id){
-        return writerService.findWriterById(id);
+    public ResponseEntity<ApiResponse<WriterResource>> findWriterById(@PathVariable("id") Long id){
+        return  new ResponseEntity<>(ApiResponse.<WriterResource>builder().data(writerMapper.toResource(writerService.findWriterById(id).get())).build(), HttpStatus.OK);
     }
 
     @GetMapping("findAllWritersByContentId/{id}")
-    public ResponseEntity<List<Writer>> findAllWritersByContentId(@PathVariable("id") Long id){
-        return new ResponseEntity<>(writerService.findAllWritersByContentId(id), HttpStatus.OK);
+    public ResponseEntity<ApiResponse<List<WriterResource>>> findAllWritersByContentId(@PathVariable("id") Long id){
+        return  new ResponseEntity<>(ApiResponse.<List<WriterResource>>builder().data(writerMapper.toResources(writerService.findAllWritersByContentId(id))).build(), HttpStatus.OK);
     }
-    @ResponseStatus(code = HttpStatus.CREATED)
+
     @PostMapping(path = "addWriterByContentId/{id}")
-    public void addWriterByContentId(@RequestBody Writer writer, @PathVariable("id") Long id){
-
-
-
-        writerService.addWriterByContentId(writer, id);
+    public ResponseEntity<ApiResponse<WriterResource>> addWriterByContentId(@PathVariable("id") Long id, @Valid @RequestBody WriterResource writer){
+        return  new ResponseEntity<>(ApiResponse.<WriterResource>builder().data(writerMapper.toResource(writerService.addWriterByContentId(id, writerMapper.toDomain(writer)))).build(), HttpStatus.CREATED);
     }
-    @ResponseStatus(code = HttpStatus.CREATED)
+
     @PostMapping(path = "addWritersByContentId/{id}")
-    public void addWritersByContentId(@RequestBody Writer[] writers, @PathVariable("id") Long id){
-
-
-
-        writerService.addWritersByContentId(writers, id);
+    public ResponseEntity<ApiResponse<List<WriterResource>>> addWritersByContentId(@PathVariable("id") Long id, @Valid @RequestBody List<WriterResource> writers){
+        return  new ResponseEntity<>(ApiResponse.<List<WriterResource>>builder().data(writerMapper.toResources(writerService.addWritersByContentId(id, writerMapper.toDomains(writers)))).build(), HttpStatus.CREATED);
     }
-    @ResponseStatus(code = HttpStatus.CREATED)
+
     @PostMapping(path = "addWriterByMovieId/{id}")
-    public void addWriterByMovieId(@RequestBody Writer writer, @PathVariable("id") Long id){
-
-
-
-        writerService.addWriterByMovieId(writer, id);
+    public ResponseEntity<ApiResponse<WriterResource>> addWriterByMovieId(@PathVariable("id") Long id, @Valid @RequestBody WriterResource writer){
+        return  new ResponseEntity<>(ApiResponse.<WriterResource>builder().data(writerMapper.toResource(writerService.addWriterByMovieId(id, writerMapper.toDomain(writer)))).build(), HttpStatus.CREATED);
     }
-    @ResponseStatus(code = HttpStatus.CREATED)
+
     @PostMapping(path = "addWritersByMovieId/{id}")
-    public void addWritersByMovieId(@RequestBody Writer[] writers, @PathVariable("id") Long id){
-
-
-
-        writerService.addWritersByMovieId(writers, id);
+    public ResponseEntity<ApiResponse<List<WriterResource>>> addWritersByMovieId(@PathVariable("id") Long id, @Valid @RequestBody List<WriterResource> writers ){
+        return  new ResponseEntity<>(ApiResponse.<List<WriterResource>>builder().data(writerMapper.toResources(writerService.addWritersByMovieId(id, writerMapper.toDomains(writers)))).build(), HttpStatus.CREATED);
     }
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     @DeleteMapping(path = "deleteWriterById/{id}")
@@ -73,15 +68,15 @@ public class WriterController {
     }
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     @DeleteMapping(path = "deleteWritersByIds/{ids}")
-    public void deleteWritersByIds(@PathVariable("ids") Long[] ids){
+    public void deleteWritersByIds(@PathVariable("ids") List<Long> ids){
         writerService.deleteWritersByIds(ids);
     }
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     @PatchMapping(path = "updateWriterById/{id}")
     public void updateWriterById(
-            @RequestBody Writer writer,
-            @PathVariable("id") Long id
+            @PathVariable("id") Long id,
+            @Valid @RequestBody WriterResource writer
     ){
-        writerService.updateWriterById(writer, id);
+        writerService.updateWriterById(id, writerMapper.toDomain(writer));
     }
 }

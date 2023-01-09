@@ -4,13 +4,12 @@ import com.team5.ACMEFlix.domain.*;
 import com.team5.ACMEFlix.domain.enumeration.ContentType;
 import com.team5.ACMEFlix.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import javax.persistence.EntityManager;
+import java.math.BigInteger;
+import java.util.*;
 
 @Service
 public class MovieService {
@@ -25,15 +24,16 @@ public class MovieService {
     private DirectorRepository directorRepository;
     @Autowired
     private WriterRepository writerRepository;
-
+    @Autowired
+    private EntityManager entityManager;
     @Transactional(readOnly = true)
     public List<Movie> findAllMovies() {
         return movieRepository.findAll();
     }
 
     @Transactional(readOnly = true)
-    public ResponseEntity<Movie> findMovieById(Long id) {
-        return movieRepository.findById(id).map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    public Optional<Movie> findMovieById(Long id) {
+        return movieRepository.findById(id);
     }
 
     @Transactional(readOnly = true)
@@ -48,15 +48,51 @@ public class MovieService {
 
     @Transactional(readOnly = true)
     public List<Movie> findAllMoviesByDirectors(String[] director) {
-        return movieRepository.findMoviesByDirector(director);
+        String query;
+        query = "SELECT DIRECTORS.MOVIE_ID FROM DIRECTORS GROUP BY DIRECTORS.MOVIE_ID ";
+
+        for (int i = 0; i < director.length; i++) {
+            if(i == 0){
+                query += "HAVING ";
+            }
+
+            query+= "GROUP_CONCAT(DIRECTORS.FULLNAME) LIKE '%"+ director[i] + "%'";
+            if(i != director.length-1){
+                query += " AND ";
+            }
+        }
+
+        List<BigInteger> movieIds = entityManager.createNativeQuery(query).getResultList();
+
+        List<Movie> movies = movieRepository.findAllMoviesById(movieIds);
+
+        return movies;
     }
     @Transactional(readOnly = true)
     public List<Movie> findAllMoviesByWriters(String[] writer) {
-        return movieRepository.findMoviesByWriter(writer);
+        String query;
+        query = "SELECT WRITERS.MOVIE_ID FROM WRITERS GROUP BY WRITERS.MOVIE_ID ";
+
+        for (int i = 0; i < writer.length; i++) {
+            if(i == 0){
+                query += "HAVING ";
+            }
+
+            query+= "GROUP_CONCAT(WRITERS.FULLNAME) LIKE '%"+ writer[i] + "%'";
+            if(i != writer.length-1){
+                query += " AND ";
+            }
+        }
+
+        List<BigInteger> movieIds = entityManager.createNativeQuery(query).getResultList();
+
+        List<Movie> movies = movieRepository.findAllMoviesById(movieIds);
+
+        return movies;
     }
 
     @Transactional
-    public void addMovie(Movie movie) {
+    public Movie addMovie(Movie movie) {
 
         movie.getDirectors()
                 .forEach(d -> d.setMovie(movie));
@@ -69,10 +105,11 @@ public class MovieService {
                 .forEach(g -> g.setContent(movie.getContent()));
 
         movieRepository.save(movie);
+        return movie;
     }
 
     @Transactional
-    public void addMovies(Movie[] movies) {
+    public List<Movie> addMovies(List<Movie> movies) {
         for(Movie movie : movies){
             movie.getDirectors()
                     .forEach(d -> d.setMovie(movie));
@@ -86,13 +123,14 @@ public class MovieService {
 
             movieRepository.save(movie);
         }
+        return movies;
     }
 
     @Transactional
-    public void updateMovieById(Movie movie, Long id) {
+    public void updateMovieById(Long id, Movie movie) {
         Optional<Movie> movieFound = movieRepository.findById(id);
         if(!movieFound.isPresent()){
-            throw new IllegalStateException("Movie does not exist");
+            throw new NoSuchElementException("Movie does not exist");
         }
         else{
 

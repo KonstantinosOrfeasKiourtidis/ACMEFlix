@@ -33,10 +33,8 @@ public class WatchedListEpisode extends BaseModel {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm:ss.SSS")
     private Date watchedEpisodeDate = new Date();
 
-    @ToString.Exclude
-    @EqualsAndHashCode.Exclude
-    @ManyToMany(cascade=CascadeType.ALL, targetEntity=Episode.class, fetch = FetchType.LAZY)
-    @JoinTable(name="watchedListEpisodes_contents", joinColumns=@JoinColumn(name="content_id"), inverseJoinColumns=@JoinColumn(name="watchedListEpisode_id"))
-    private List<Episode> episodes;
+    @OneToOne
+    @JoinColumn(name = "episode_id", referencedColumnName = "id")
+    private Episode episode;
 
 }

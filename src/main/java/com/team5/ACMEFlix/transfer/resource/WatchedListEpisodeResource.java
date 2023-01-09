@@ -18,7 +18,7 @@ import java.util.List;
 @ToString(callSuper = true)
 public class WatchedListEpisodeResource extends BaseResource {
 
-    private Profile profile;
+    private ProfileResource profile;
 
     @NotNull(message = "Episode's time watched cannot be null")
     @Min(1)
@@ -28,7 +28,6 @@ public class WatchedListEpisodeResource extends BaseResource {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm:ss.SSS")
     private Date watchedEpisodeDate = new Date();
 
-    @ToString.Exclude
-    @EqualsAndHashCode.Exclude
-    private List<EpisodeResource> episodes;
+
+    private EpisodeResource episode;
 }

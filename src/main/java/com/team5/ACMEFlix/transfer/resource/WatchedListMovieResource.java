@@ -12,7 +12,7 @@ import lombok.ToString;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
-import java.util.List;
+
 
 @Getter
 @Setter
@@ -29,7 +29,5 @@ public class WatchedListMovieResource extends BaseResource {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm:ss.SSS")
     private Date watchedMovieDate = new Date();
 
-    @ToString.Exclude
-    @EqualsAndHashCode.Exclude
-    private List<MovieResource> movies;
+    private MovieResource movie;
 }

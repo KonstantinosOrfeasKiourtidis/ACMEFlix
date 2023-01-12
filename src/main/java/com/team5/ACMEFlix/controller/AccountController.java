@@ -5,9 +5,13 @@ import com.team5.ACMEFlix.helpers.LoginForm;
 import com.team5.ACMEFlix.helpers.RegisterForm;
 import com.team5.ACMEFlix.helpers.SubscribeForm;
 import com.team5.ACMEFlix.mapper.AccountMapper;
+import com.team5.ACMEFlix.mapper.AccountMapper2;
+import com.team5.ACMEFlix.mapper.AddressMapper;
+import com.team5.ACMEFlix.mapper.CreditCardMapper;
 import com.team5.ACMEFlix.service.AccountService;
 import com.team5.ACMEFlix.transfer.ApiResponse;
 import com.team5.ACMEFlix.transfer.resource.AccountResource;
+import com.team5.ACMEFlix.transfer.resource.AccountResource2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,11 +28,17 @@ public class AccountController {
 
     private final AccountService accountService;
     private final AccountMapper accountMapper;
+    private final CreditCardMapper creditCardMapper;
+    private final AddressMapper addressMapper;
+    private final AccountMapper2 accountMapper2;
 
     @Autowired
-    private AccountController(AccountService accountService, AccountMapper accountMapper) {
+    private AccountController(AccountService accountService, AccountMapper accountMapper, CreditCardMapper creditCardMapper, AddressMapper addressMapper, AccountMapper2 accountMapper2) {
         this.accountService = accountService;
         this.accountMapper = accountMapper;
+        this.creditCardMapper = creditCardMapper;
+        this.addressMapper = addressMapper;
+        this.accountMapper2 = accountMapper2;
     }
 
     @GetMapping
@@ -47,14 +57,14 @@ public class AccountController {
     }
 
     @PostMapping(path = "addAccount")
-    public ResponseEntity<ApiResponse<AccountResource>> addAccount(@Valid @RequestBody AccountResource account){
-        return new ResponseEntity<>(ApiResponse.<AccountResource>builder().data(accountMapper.toResource(accountService.addAccount(accountMapper.toDomain(account)))).build(), HttpStatus.CREATED);
+    public ResponseEntity<ApiResponse<AccountResource2>> addAccount(@Valid @RequestBody AccountResource2 account){
+        return new ResponseEntity<>(ApiResponse.<AccountResource2>builder().data(accountMapper2.toResource(accountService.addAccount(accountMapper2.toDomain(account)))).build(), HttpStatus.CREATED);
     }
 
     @PostMapping(path = "addAccounts")
-    public ResponseEntity<ApiResponse<List<AccountResource>>> addAccounts(@Valid @RequestBody List<AccountResource> accounts){
+    public ResponseEntity<ApiResponse<List<AccountResource2>>> addAccounts(@Valid @RequestBody List<AccountResource2> accounts){
 
-        return new ResponseEntity<>(ApiResponse.<List<AccountResource>>builder().data(accountMapper.toResources(accountService.addAccounts(accountMapper.toDomains(accounts)))).build(), HttpStatus.CREATED);
+        return new ResponseEntity<>(ApiResponse.<List<AccountResource2>>builder().data(accountMapper2.toResources(accountService.addAccounts(accountMapper2.toDomains(accounts)))).build(), HttpStatus.CREATED);
     }
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     @DeleteMapping(path = "deleteAccountById/{id}")
@@ -91,18 +101,22 @@ public class AccountController {
 
     @PostMapping(path = "login")
     public ResponseEntity<ApiResponse<Account>> login(@Valid @RequestBody LoginForm loginForm){
-        return new ResponseEntity<>(ApiResponse.<Account>builder().data( accountService.login(loginForm).get()).build(), HttpStatus.OK);
+        return new ResponseEntity<>(ApiResponse.<Account>builder().data( accountService.login(loginForm.getEmail(), loginForm.getPassword()).get()).build(), HttpStatus.OK);
     }
 
     @PostMapping(path = "register")
     public ResponseEntity<ApiResponse<Account>> register(@Valid @RequestBody RegisterForm registerForm){
-        return new ResponseEntity<>(ApiResponse.<Account>builder().data( accountService.register(registerForm)).build(), HttpStatus.CREATED);
+        return new ResponseEntity<>(ApiResponse.<Account>builder().data( accountService.register(
+                registerForm.getEmail(), registerForm.getPassword(), registerForm.getConfirmPassword(),
+                registerForm.getFirstname(), registerForm.getLastname(), registerForm.getUsername(),
+                registerForm.getPhoneNo(), creditCardMapper.toDomains(registerForm.getCreditCards()), addressMapper.toDomains(registerForm.getAddress())
+        )).build(), HttpStatus.CREATED);
     }
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     @PatchMapping(path = "subscribe/{id}")
     public void subscribe(@PathVariable Long id,
                          @Valid @RequestBody SubscribeForm subscribeForm){
-        accountService.subscribe(id, subscribeForm);
+        accountService.subscribe(id, subscribeForm.getSubscriptionType());
     }
 
 

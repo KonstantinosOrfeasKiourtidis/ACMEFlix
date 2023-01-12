@@ -70,6 +70,11 @@ public class RatingService {
     }
 
     @Transactional
+    public List<Rating> findRatings(Long id) {
+         return ratingRepository.findRatingByContentId(id);
+    }
+
+    @Transactional
     public List<Rating> addRatings(List<Rating> ratings) {
         for(Rating rating: ratings){
             if(!(rating.getRating() > 0 && rating.getRating() <= 10)){

@@ -2,6 +2,8 @@ package com.team5.ACMEFlix.helpers;
 
 import com.team5.ACMEFlix.domain.Address;
 import com.team5.ACMEFlix.domain.CreditCard;
+import com.team5.ACMEFlix.transfer.resource.AddressResource;
+import com.team5.ACMEFlix.transfer.resource.CreditCardResource;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -38,7 +40,7 @@ public class RegisterForm {
     @Column(length = 14)
     @Pattern(regexp = "^[0-9]*$", message="Account's phone Number can only contain numeric symbols")
     private String phoneNo;
-    private List<Address> address;
-    private List<CreditCard> creditCards;
+    private List<AddressResource> address;
+    private List<CreditCardResource> creditCards;
 
 }

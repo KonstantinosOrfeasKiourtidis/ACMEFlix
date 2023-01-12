@@ -19,13 +19,10 @@ public class AccountService {
     @Autowired
     private  AccountRepository accountRepository;
     @Autowired
-    private ProfileRepository profileRepository;
+    private  ProfileRepository profileRepository;
     @Autowired
-    private CreditCardRepository creditCardRepository;
-    @Autowired
-    private AddressRepository addressRepository;
-    @Autowired
-    private PaymentRepository paymentRepository;
+    private  PaymentRepository paymentRepository;
+
 
 
     @Transactional(readOnly = true)
@@ -184,7 +181,7 @@ public class AccountService {
 
         if(account.getAddress() !=null &&
                 !Objects.equals(foundAccount.getAddress(), account.getAddress())){
-            List<Address> addresses = addressRepository.findAddressesByAccountId(id);
+            List<Address> addresses = account.getAddress();
             if(!addresses.isEmpty()){
                 for (int i = 0; i < addresses.size()-1; i++) {
                     if (account.getAddress().get(i).getProvince() != null &&
@@ -224,7 +221,7 @@ public class AccountService {
 
         if(account.getCreditCards() !=null &&
                 !Objects.equals(foundAccount.getCreditCards(), account.getCreditCards())){
-            List<CreditCard> creditCards = creditCardRepository.findCreditCardByAccountId(id);
+            List<CreditCard> creditCards = account.getCreditCards();
             if(!creditCards.isEmpty()){
                 for (int i = 0; i < creditCards.size()-1; i++) {
                     if (account.getCreditCards().get(i).getCardNo() != null &&
@@ -260,7 +257,7 @@ public class AccountService {
 
         if(account.getProfiles() !=null &&
                 !Objects.equals(foundAccount.getProfiles(), account.getProfiles())){
-            List<Profile> profiles = profileRepository.findProfileByByAccountId(id);
+            List<Profile> profiles = account.getProfiles();
             if(!profiles.isEmpty()){
                 for (int i = 0; i < profiles.size()-1; i++) {
                     if (account.getProfiles().get(i).getFirstname() != null &&
@@ -287,14 +284,14 @@ public class AccountService {
     }
 
     @Transactional(readOnly = true)
-    public Optional<Account> login(LoginForm loginForm) {
+    public Optional<Account> login(String email, String password) {
 
-        Optional<Account> accountExists = accountRepository.findAccountByEmail(loginForm.getEmail());
+        Optional<Account> accountExists = accountRepository.findAccountByEmail(email);
         if(!accountExists.isPresent()){
             throw new IllegalStateException("The email or the password are incorrect");
         }
 
-        if(!accountExists.get().getPassword().equals(loginForm.getPassword())){
+        if(!accountExists.get().getPassword().equals(password)){
             throw new IllegalStateException("The email or the password are incorrect");
         }
 
@@ -302,39 +299,40 @@ public class AccountService {
 
     }
     @Transactional
-    public Account register(RegisterForm registerForm) {
-        if(!(registerForm.getEmail()!=null || registerForm.getEmail().length() > 0)){
+    public Account register(String email, String password, String confirmPassword, String firstname, String lastname, String usermane, String phoneNo,
+                            List<CreditCard> creditCards, List<Address> addresses) {
+        if(!(email!=null || email.length() > 0)){
             throw new IllegalStateException("Email is a required field");
         }
 
-        if(!(registerForm.getFirstname()!=null || registerForm.getFirstname().length() > 0)){
+        if(!(firstname!=null || firstname.length() > 0)){
             throw new IllegalStateException("First name is a required field");
         }
-        if(!(registerForm.getLastname()!=null || registerForm.getLastname().length() > 0)){
+        if(!(lastname!=null || lastname.length() > 0)){
             throw new IllegalStateException("Last name is a required field");
         }
-        if(!(registerForm.getUsername()!=null || registerForm.getUsername().length() > 0)){
+        if(!(usermane!=null ||usermane.length() > 0)){
             throw new IllegalStateException("Username is a required field");
         }
-        if(!(registerForm.getPassword()!=null || registerForm.getPassword().length() > 0)){
+        if(!(password!=null || password.length() > 0)){
             throw new IllegalStateException("Password is a required field");
         }
 
-        if(!(registerForm.getConfirmPassword()!=null || registerForm.getConfirmPassword().length() > 0)){
+        if(!(confirmPassword!=null || confirmPassword.length() > 0)){
             throw new IllegalStateException("Repeat password is a required field");
         }
 
-        if(!(registerForm.getPhoneNo()!=null || registerForm.getPhoneNo().length() > 0)){
+        if(!(phoneNo!=null || phoneNo.length() > 0)){
             throw new IllegalStateException("Phone number is a required field");
         }
 
 
-        Optional<Account> accountExists = accountRepository.findAccountByEmail(registerForm.getEmail());
+        Optional<Account> accountExists = accountRepository.findAccountByEmail(email);
         if(accountExists.isPresent()){
             throw new IllegalStateException("The email is in use");
         }
 
-        if(!registerForm.getPassword().equals(registerForm.getConfirmPassword())){
+        if(!password.equals(confirmPassword)){
             throw new IllegalStateException("The passwords are not the same");
         }
 
@@ -343,26 +341,25 @@ public class AccountService {
 
 
 
-        account.setEmail(registerForm.getEmail());
-        account.setUsername(registerForm.getUsername());
-        account.setFirstname(registerForm.getFirstname());
-        account.setLastname(registerForm.getLastname());
-        account.setLastname(registerForm.getLastname());
-        account.setPhoneNo(registerForm.getPhoneNo());
+        account.setEmail(email);
+        account.setUsername(usermane);
+        account.setFirstname(firstname);
+        account.setLastname(lastname);
+        account.setPhoneNo(phoneNo);
 
-        account.setPassword(registerForm.getPassword());
+        account.setPassword(password);
         //account.setPassword(passwordEncoder.encode(registerForm.getPassword()));
 
 
-        account.setAddress(registerForm.getAddress());
-        account.setCreditCards(registerForm.getCreditCards());
+        account.setAddress(addresses);
+        account.setCreditCards(creditCards);
 
 
 
-        registerForm.getAddress()
+        addresses
                 .forEach(a -> a.setAccount(account));
 
-        registerForm.getCreditCards()
+        creditCards
                 .forEach(c -> c.setAccount(account));
 
         Account emptyAccount = account;
@@ -380,7 +377,7 @@ public class AccountService {
 
 
     @Transactional
-    public void subscribe(Long id, SubscribeForm subscribeForm) {
+    public void subscribe(Long id, SubscriptionType subscriptionType) {
         Account foundAccount = accountRepository.findById(id).orElseThrow(() -> new NoSuchElementException(
                 "Account does not exists"
         ));
@@ -393,15 +390,15 @@ public class AccountService {
             throw new IllegalStateException("The account does not have any valid billing addresses");
         }
 
-        if(!subscribeForm.getSubscriptionType().equals(SubscriptionType.NO_SUBSCRIPTION) &&
-                !subscribeForm.getSubscriptionType().equals(SubscriptionType.BASIC) &&
-                !subscribeForm.getSubscriptionType().equals(SubscriptionType.STANDARD)&&
-                !subscribeForm.getSubscriptionType().equals(SubscriptionType.PREMIUM)
+        if(!subscriptionType.equals(SubscriptionType.NO_SUBSCRIPTION) &&
+                !subscriptionType.equals(SubscriptionType.BASIC) &&
+                !subscriptionType.equals(SubscriptionType.STANDARD)&&
+                !subscriptionType.equals(SubscriptionType.PREMIUM)
         ){
             throw new IllegalStateException("Not a valid plan");
         }
 
-        foundAccount.setSubscriptionType(subscribeForm.getSubscriptionType());
+        foundAccount.setSubscriptionType(subscriptionType);
         foundAccount.setSubscriptionDate(new Date());
 
         if(!foundAccount.getProfiles().isEmpty()){
@@ -418,14 +415,15 @@ public class AccountService {
                 profileKids.setAccount(foundAccount);
                 profileKids.setAgeRestricted(true);
                 profileKids.setAccount(foundAccount);
+                
                 profileRepository.save(profile);
-                profileRepository.save(profile);
+                profileRepository.save(profileKids);
 
         }
 
         Payment payment = new Payment();
-        payment.setAmount(subscribeForm.getSubscriptionType().getPrice());
-        payment.setSubscriptionType(subscribeForm.getSubscriptionType());
+        payment.setAmount(subscriptionType.getPrice());
+        payment.setSubscriptionType(subscriptionType);
         payment.setAccount(foundAccount);
         payment.setPaymentDate(new Date());
         payment.setCreditCard(foundAccount.getCreditCards().get(0));

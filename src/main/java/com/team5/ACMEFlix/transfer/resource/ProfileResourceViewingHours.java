@@ -1,9 +1,8 @@
 package com.team5.ACMEFlix.transfer.resource;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.team5.ACMEFlix.domain.Account;
+
 import com.team5.ACMEFlix.transfer.BaseResource;
-import lombok.EqualsAndHashCode;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -15,7 +14,7 @@ import javax.validation.constraints.Pattern;
 @Getter
 @Setter
 @ToString(callSuper = true)
-public class ProfileResource extends BaseResource {
+public class ProfileResourceViewingHours extends BaseResource {
 
     @NotNull(message = "Profile's firstname cannot be null")
     @Column(length = 20, nullable = false)
@@ -28,5 +27,6 @@ public class ProfileResource extends BaseResource {
     @Column(nullable = false)
     private Boolean ageRestricted;
 
+    private Float viewingHours;
 
 }

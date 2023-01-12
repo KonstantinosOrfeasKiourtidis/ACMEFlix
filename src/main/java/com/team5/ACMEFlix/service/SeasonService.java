@@ -47,7 +47,7 @@ public class SeasonService {
             throw new NoSuchElementException("TV Series does not exist");
         }
         else {
-            return seasonRepository.findSeasonByTVSeriesId(tvSeries.get().getId());
+            return seasonRepository.findSeasonsByTvSeriesId(tvSeries.get().getId());
         }
     }
 
@@ -176,7 +176,7 @@ public class SeasonService {
 
             if (season.getEpisodes() != null &&
                     !Objects.equals(seasonFound.get().getEpisodes(), season.getEpisodes())) {
-                List<Episode> episodes = episodeRepository.findEpisodeBySeasonId(id);
+                List<Episode> episodes = episodeRepository.findEpisodesBySeason_Id(id);
                 if (!episodes.isEmpty()) {
                     for (int i = 0; i < episodes.size(); i++) {
                         if (season.getEpisodes().get(i).getTitle() != null &&

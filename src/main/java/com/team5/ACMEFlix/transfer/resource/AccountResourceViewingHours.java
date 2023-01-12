@@ -1,9 +1,6 @@
 package com.team5.ACMEFlix.transfer.resource;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.team5.ACMEFlix.domain.Address;
-import com.team5.ACMEFlix.domain.CreditCard;
-import com.team5.ACMEFlix.domain.Profile;
 import com.team5.ACMEFlix.domain.enumeration.SubscriptionType;
 import com.team5.ACMEFlix.transfer.BaseResource;
 import lombok.Getter;
@@ -20,7 +17,7 @@ import java.util.List;
 @Getter
 @Setter
 @ToString(callSuper = true)
-public class AccountResource extends BaseResource {
+public class AccountResourceViewingHours extends BaseResource {
     @NotNull(message = "Account's email cannot be null")
     @Column(length = 50, nullable = false, unique = true)
     @Email
@@ -56,13 +53,9 @@ public class AccountResource extends BaseResource {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm:ss.SSS")
     private Date subscriptionDate;
 
-    @ToString.Exclude
-    private List<AddressResource> address;
 
     @ToString.Exclude
-    private List<CreditCardResource> creditCards;
-
-    @ToString.Exclude
-    private List<ProfileResource> profiles;
+    private List<ProfileResourceViewingHours> profiles;
 
 }
+

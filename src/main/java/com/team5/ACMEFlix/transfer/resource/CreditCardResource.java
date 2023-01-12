@@ -24,7 +24,7 @@ public class CreditCardResource extends BaseResource {
 
     @NotNull(message = "Credit card name cannot be null")
     @Column(length = 20, nullable = false)
-    @Pattern(regexp = "^[A-Za-z ]+$", message="Credit card's name can only contain alphabetical symbols")
+    @Pattern(regexp = "^[A-Za-z\\. ]+$", message="Credit card's name can only contain alphabetical symbols")
     private String cardName;
 
     @NotNull(message = "Credit card cvc cannot be null")

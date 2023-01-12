@@ -11,6 +11,5 @@ import java.util.List;
 
 @Repository
 public interface WriterRepository extends JpaRepository<Writer, Long> {
-    @Query(value = "SELECT * FROM WRITERS WHERE MOVIE_ID = ?", nativeQuery = true)
-    List<Writer> findWriterByByMovieId(Long id);
+    List<Writer> findWritersByMovieId(Long id);
 }

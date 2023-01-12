@@ -32,4 +32,5 @@ public class Movie extends BaseModel {
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "content_id", referencedColumnName = "id")
     private Content content;
+
 }

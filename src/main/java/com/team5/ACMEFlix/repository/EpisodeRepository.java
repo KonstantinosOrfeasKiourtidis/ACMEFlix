@@ -9,8 +9,7 @@ import java.util.List;
 
 @Repository
 public interface EpisodeRepository extends JpaRepository<Episode, Long> {
-    @Query(value = "SELECT * FROM EPISODES WHERE SEASON_ID = ?", nativeQuery = true)
-    List<Episode> findEpisodeBySeasonId(Long id);
+    List<Episode> findEpisodesBySeason_Id(Long id);
 
     @Query(value = "SELECT * FROM EPISODES WHERE UPPER(EPISODES.TITLE) LIKE %?1% OR LOWER(EPISODES.TITLE) LIKE %?1% OR EPISODES.TITLE LIKE %?1%", nativeQuery = true)
     List<Episode> findEpisodesByName(String search);

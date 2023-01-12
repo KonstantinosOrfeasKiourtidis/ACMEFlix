@@ -24,14 +24,11 @@ public class ActorController {
 
     private final ActorService actorService;
     private final ActorMapper actorMapper;
-    private final ActorRepository actorRepository;
 
     @Autowired
-    private ActorController(ActorService actorService, ActorMapper actorMapper,
-                            ActorRepository actorRepository) {
+    private ActorController(ActorService actorService, ActorMapper actorMapper) {
         this.actorService = actorService;
         this.actorMapper = actorMapper;
-        this.actorRepository = actorRepository;
     }
     @GetMapping
     public ResponseEntity<ApiResponse<List<ActorResource>>> findAllActors(){

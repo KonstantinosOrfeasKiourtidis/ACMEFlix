@@ -22,7 +22,7 @@ public class Address extends BaseModel{
 
     @NotNull(message = "Address's street name cannot be null")
     @Column(length = 50, nullable = false)
-    @Pattern(regexp = "^[A-Za-z ]+$", message="Address's street name can only contain alphabetical symbols")
+    @Pattern(regexp = "^[A-Za-z\\. ]+$", message="Address's street name can only contain alphabetical symbols")
     private String streetName;
 
     @NotNull(message = "Address's street number cannot be null")

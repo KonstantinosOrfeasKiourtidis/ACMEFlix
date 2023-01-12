@@ -1,9 +1,6 @@
 package com.team5.ACMEFlix.transfer.resource;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.team5.ACMEFlix.domain.Address;
-import com.team5.ACMEFlix.domain.CreditCard;
-import com.team5.ACMEFlix.domain.Profile;
 import com.team5.ACMEFlix.domain.enumeration.SubscriptionType;
 import com.team5.ACMEFlix.transfer.BaseResource;
 import lombok.Getter;
@@ -20,7 +17,7 @@ import java.util.List;
 @Getter
 @Setter
 @ToString(callSuper = true)
-public class AccountResource extends BaseResource {
+public class AccountResource2 extends BaseResource {
     @NotNull(message = "Account's email cannot be null")
     @Column(length = 50, nullable = false, unique = true)
     @Email
@@ -30,6 +27,10 @@ public class AccountResource extends BaseResource {
     @Column(length = 50, nullable = false, unique = false)
     @Pattern(regexp = "^[A-Za-z0-9]*$", message="Account's username can only contain alphanumeric symbols")
     private String username;
+
+    @NotNull(message = "Account's password cannot be null")
+    @Column(length = 50, nullable = false)
+    private String password;
 
     @NotNull(message = "Account's firstname cannot be null")
     @Column(length = 30, nullable = false)
@@ -66,3 +67,4 @@ public class AccountResource extends BaseResource {
     private List<ProfileResource> profiles;
 
 }
+

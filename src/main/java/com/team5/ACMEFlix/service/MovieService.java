@@ -17,14 +17,6 @@ public class MovieService {
     @Autowired
     private MovieRepository movieRepository;
     @Autowired
-    private ActorRepository actorRepository;
-    @Autowired
-    private GenreRepository genreRepository;
-    @Autowired
-    private DirectorRepository directorRepository;
-    @Autowired
-    private WriterRepository writerRepository;
-    @Autowired
     private EntityManager entityManager;
     @Transactional(readOnly = true)
     public List<Movie> findAllMovies() {
@@ -34,6 +26,9 @@ public class MovieService {
     @Transactional(readOnly = true)
     public Optional<Movie> findMovieById(Long id) {
         return movieRepository.findById(id);
+    }
+    public Optional<Movie> findMovieByContentId(Long id) {
+        return movieRepository.findMovieByContentId(id);
     }
 
     @Transactional(readOnly = true)
@@ -93,7 +88,6 @@ public class MovieService {
 
     @Transactional
     public Movie addMovie(Movie movie) {
-
         movie.getDirectors()
                 .forEach(d -> d.setMovie(movie));
         movie.getWriters()
@@ -190,7 +184,7 @@ public class MovieService {
 
             if (movie.getContent().getActors() != null &&
                     !Objects.equals(movieFound.get().getContent().getActors(), movie.getContent().getActors())) {
-                List<Actor> actors = actorRepository.findActorByContentId(movieFound.get().getContent().getId());
+                List<Actor> actors = movieFound.get().getContent().getActors();
                 if (!actors.isEmpty()) {
                     for (int i = 0; i < actors.size(); i++) {
                         if (movie.getContent().getActors().get(i).getFullname() != null &&
@@ -210,7 +204,7 @@ public class MovieService {
 
             if (movie.getContent().getGenres() != null &&
                     !Objects.equals(movieFound.get().getContent().getGenres(), movie.getContent().getGenres())) {
-                List<Genre> genres = genreRepository.findGenreByContentId(movieFound.get().getContent().getId());
+                List<Genre> genres = movieFound.get().getContent().getGenres();
                 if (!genres.isEmpty()) {
                     for (int i = 0; i < genres.size(); i++) {
                         if (movie.getContent().getGenres().get(i).getName() != null &&
@@ -227,7 +221,7 @@ public class MovieService {
 
             if (movie.getWriters() != null &&
                     !Objects.equals(movieFound.get().getWriters(), movie.getWriters())) {
-                List<Writer> writers = writerRepository.findWriterByByMovieId(id);
+                List<Writer> writers = movieFound.get().getWriters();
                 if (!writers.isEmpty()) {
 
 
@@ -254,7 +248,7 @@ public class MovieService {
 
             if (movie.getDirectors() != null &&
                     !Objects.equals(movieFound.get().getDirectors(), movie.getDirectors())) {
-                List<Director> directors = directorRepository.findDirectorByByMovieId(id);
+                List<Director> directors = movieFound.get().getDirectors();
                 if (!directors.isEmpty()) {
                     for (int i = 0; i < directors.size(); i++) {
                         if (movie.getDirectors().get(i).getFullname() != null &&

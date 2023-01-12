@@ -11,6 +11,5 @@ import java.util.List;
 
 @Repository
 public interface CreatorRepository extends JpaRepository<Creator, Long> {
-    @Query(value = "SELECT * FROM CREATORS WHERE TV_SERIES_ID = ?", nativeQuery = true)
-    List<Creator> findCreatorByByTVSeriesId(Long id);
+    List<Creator> findCreatorsByTvSeriesId(Long id);
 }

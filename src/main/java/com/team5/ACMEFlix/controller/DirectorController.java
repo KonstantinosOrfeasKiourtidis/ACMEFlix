@@ -21,14 +21,11 @@ public class DirectorController {
 
     private final DirectorService directorService;
     private final DirectorMapper directorMapper;
-    private final DirectorRepository directorRepository;
 
     @Autowired
-    private DirectorController(DirectorService directorService, DirectorMapper directorMapper,
-                               DirectorRepository directorRepository) {
+    private DirectorController(DirectorService directorService, DirectorMapper directorMapper) {
         this.directorService = directorService;
         this.directorMapper = directorMapper;
-        this.directorRepository = directorRepository;
     }
 
     @GetMapping

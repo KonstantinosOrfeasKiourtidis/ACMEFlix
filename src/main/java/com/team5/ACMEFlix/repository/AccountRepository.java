@@ -10,6 +10,6 @@ import java.util.Optional;
 @Repository
 public interface AccountRepository extends JpaRepository<Account, Long>{
 
-    @Query(value = "SELECT * FROM ACCOUNTS WHERE EMAIL = ?", nativeQuery = true)
+
     Optional<Account> findAccountByEmail(String email);
 }

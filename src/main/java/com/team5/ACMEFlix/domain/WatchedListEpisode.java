@@ -22,16 +22,8 @@ import java.util.List;
 public class WatchedListEpisode extends BaseModel {
 
     @OneToOne
-    @JoinColumn(name = "profile_id", referencedColumnName = "id")
-    private Profile profile;
-
-    @NotNull(message = "Episode's time watched cannot be null")
-    @Min(1)
-    private Integer timeWatchedInSeconds;
-
-    @NotNull(message = "Episode's watched date cannot be null")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm:ss.SSS")
-    private Date watchedEpisodeDate = new Date();
+    @JoinColumn(name = "view_id", referencedColumnName = "id")
+    private View view;
 
     @OneToOne
     @JoinColumn(name = "episode_id", referencedColumnName = "id")

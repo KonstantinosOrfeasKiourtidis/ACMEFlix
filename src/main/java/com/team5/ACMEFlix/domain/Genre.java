@@ -19,7 +19,6 @@ import javax.validation.constraints.Pattern;
 public class Genre extends BaseModel{
     @NotNull(message = "Genre's name cannot be null")
     @Column(length = 20, nullable = false)
-    @Pattern(regexp = "^[A-Za-z0-9\\. ]+$", message="Genre's name can only contain alphanumeric symbols")
     private String name;
 
 

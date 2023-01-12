@@ -42,7 +42,7 @@ public class WriterService {
             throw new NoSuchElementException("Movie does not exist");
         }
         else {
-            return writerRepository.findWriterByByMovieId(movie.get().getId());
+            return writerRepository.findWritersByMovieId(movie.get().getId());
         }
     }
 

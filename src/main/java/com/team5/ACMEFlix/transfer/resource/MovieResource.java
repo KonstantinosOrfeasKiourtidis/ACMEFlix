@@ -26,4 +26,5 @@ public class MovieResource extends BaseResource {
     private List<DirectorResource> directors;
 
     private ContentResource content;
+
 }

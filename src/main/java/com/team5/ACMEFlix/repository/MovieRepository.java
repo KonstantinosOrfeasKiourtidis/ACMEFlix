@@ -12,7 +12,7 @@ import java.util.Optional;
 
 @Repository
 public interface MovieRepository extends JpaRepository<Movie, Long> {
-    @Query(value = "SELECT * FROM MOVIES WHERE CONTENT_ID = ?", nativeQuery = true)
+    @Query(value = "SELECT * FROM MOVIES WHERE MOVIES.CONTENT_ID = ?", nativeQuery = true)
     Optional<Movie> findMovieByContentId(Long id);
 
     @Query(value = "SELECT * FROM CONTENTS INNER JOIN MOVIES ON CONTENTS.ID=MOVIES.CONTENT_ID WHERE CONTENTS.IS_AGE_RESTRICTED = FALSE", nativeQuery = true)

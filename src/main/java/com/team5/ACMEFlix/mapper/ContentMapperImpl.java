@@ -2,7 +2,7 @@ package com.team5.ACMEFlix.mapper;
 
 
 import com.team5.ACMEFlix.domain.*;
-import com.team5.ACMEFlix.repository.RatingRepository;
+import com.team5.ACMEFlix.service.RatingService;
 import com.team5.ACMEFlix.transfer.resource.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -14,7 +14,7 @@ import java.util.List;
 public class ContentMapperImpl implements ContentMapper{
 
     @Autowired
-    private RatingRepository ratingRepository;
+    private RatingService ratingService;
     
     @Override
     public Content resourceToDomain(ContentResource contentResource) {
@@ -269,7 +269,7 @@ public class ContentMapperImpl implements ContentMapper{
         contentResource.setWriters( writerListToWriterResourceList (movieDomain.getWriters() ));
 
 
-        List<Rating> ratings = ratingRepository.findRatingByContentId(movieDomain.getContent().getId());
+        List<Rating> ratings = ratingService.findRatings(movieDomain.getContent().getId());
         float rating = 0;
         for (Rating onlyRating: ratings){
             rating += onlyRating.getRating();
@@ -528,7 +528,7 @@ public class ContentMapperImpl implements ContentMapper{
         contentResource.setSeasons( seasonListToSeasonResourceList (tvSeriesDomains.getSeasons() ));
 
 
-        List<Rating> ratings = ratingRepository.findRatingByContentId(tvSeriesDomains.getContent().getId());
+        List<Rating> ratings = ratingService.findRatings(tvSeriesDomains.getContent().getId());
         float rating = 0;
         for (Rating onlyRating: ratings){
             rating += onlyRating.getRating();

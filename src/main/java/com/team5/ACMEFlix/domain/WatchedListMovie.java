@@ -21,17 +21,9 @@ import java.util.List;
 @SequenceGenerator(name = "idGenerator", sequenceName = "WATCHED_LIST_MOVIE_SEQ", initialValue = 1, allocationSize = 1)
 public class WatchedListMovie extends BaseModel {
 
-    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "profile_id", referencedColumnName = "id")
-    private Profile profile;
-
-    @NotNull(message = "Movie's time watched cannot be null")
-    @Min(1)
-    private Integer timeWatchedInSeconds;
-
-    @NotNull(message = "Movie's watched date cannot be null")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm:ss.SSS")
-    private Date watchedMovieDate = new Date();
+    @OneToOne
+    @JoinColumn(name = "view_id", referencedColumnName = "id")
+    private View view;
 
     @OneToOne
     @JoinColumn(name = "movie_id", referencedColumnName = "id")

@@ -21,7 +21,7 @@ public class Director extends BaseModel{
 
     @NotNull(message = "Director's fullname cannot be null")
     @Column(length = 150, nullable = false)
-    @Pattern(regexp = "^[A-Za-z\\. ]+$", message="Director's fullname can only contain alphabetical symbols")
+    @Pattern(regexp = "^[A-Za-z0-9\\. ]+$", message="Director's fullname can only contain alphabetical symbols")
     private String fullname;
 
     private String imageUrl;

@@ -28,4 +28,5 @@ public class ProfileResource extends BaseResource {
     @Column(nullable = false)
     private Boolean ageRestricted;
 
+
 }

@@ -19,13 +19,10 @@ public class AccountService {
     @Autowired
     private  AccountRepository accountRepository;
     @Autowired
-    private ProfileRepository profileRepository;
+    private  ProfileRepository profileRepository;
     @Autowired
-    private CreditCardRepository creditCardRepository;
-    @Autowired
-    private AddressRepository addressRepository;
-    @Autowired
-    private PaymentRepository paymentRepository;
+    private  PaymentRepository paymentRepository;
+
 
 
     @Transactional(readOnly = true)
@@ -184,7 +181,7 @@ public class AccountService {
 
         if(account.getAddress() !=null &&
                 !Objects.equals(foundAccount.getAddress(), account.getAddress())){
-            List<Address> addresses = addressRepository.findAddressesByAccountId(id);
+            List<Address> addresses = account.getAddress();
             if(!addresses.isEmpty()){
                 for (int i = 0; i < addresses.size()-1; i++) {
                     if (account.getAddress().get(i).getProvince() != null &&
@@ -224,7 +221,7 @@ public class AccountService {
 
         if(account.getCreditCards() !=null &&
                 !Objects.equals(foundAccount.getCreditCards(), account.getCreditCards())){
-            List<CreditCard> creditCards = creditCardRepository.findCreditCardByAccountId(id);
+            List<CreditCard> creditCards = account.getCreditCards();
             if(!creditCards.isEmpty()){
                 for (int i = 0; i < creditCards.size()-1; i++) {
                     if (account.getCreditCards().get(i).getCardNo() != null &&
@@ -260,7 +257,7 @@ public class AccountService {
 
         if(account.getProfiles() !=null &&
                 !Objects.equals(foundAccount.getProfiles(), account.getProfiles())){
-            List<Profile> profiles = profileRepository.findProfileByByAccountId(id);
+            List<Profile> profiles = account.getProfiles();
             if(!profiles.isEmpty()){
                 for (int i = 0; i < profiles.size()-1; i++) {
                     if (account.getProfiles().get(i).getFirstname() != null &&
@@ -418,8 +415,9 @@ public class AccountService {
                 profileKids.setAccount(foundAccount);
                 profileKids.setAgeRestricted(true);
                 profileKids.setAccount(foundAccount);
+                
                 profileRepository.save(profile);
-                profileRepository.save(profile);
+                profileRepository.save(profileKids);
 
         }
 

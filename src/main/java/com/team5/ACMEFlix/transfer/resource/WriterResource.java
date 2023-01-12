@@ -22,5 +22,4 @@ public class WriterResource extends BaseResource {
     private String fullname;
 
     private String imageUrl;
-
 }

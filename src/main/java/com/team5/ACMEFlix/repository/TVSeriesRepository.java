@@ -28,4 +28,7 @@ public interface TVSeriesRepository extends JpaRepository<TVSeries, Long> {
 
     @Query(value = "SELECT * FROM TV_SERIES WHERE TV_SERIES.CONTENT_ID IN (:ids)", nativeQuery = true)
     List<TVSeries> findAllTVSeriesByContentId(List<Long> ids);
+
+    @Query(value = "SELECT * FROM CONTENTS INNER JOIN TV_SERIES ON CONTENTS.ID=TV_SERIES.CONTENT_ID WHERE CONTENTS.IS_AGE_RESTRICTED = FALSE", nativeQuery = true)
+    List<TVSeries> findTVSeriesByFamilyFriendly();
 }

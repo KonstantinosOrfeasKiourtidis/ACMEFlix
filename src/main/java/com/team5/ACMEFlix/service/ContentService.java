@@ -4,9 +4,8 @@ import com.team5.ACMEFlix.domain.*;
 import com.team5.ACMEFlix.domain.enumeration.ContentType;
 import com.team5.ACMEFlix.domain.enumeration.TVSeriesStatusType;
 import com.team5.ACMEFlix.mapper.ContentMapper;
-import com.team5.ACMEFlix.mapper.MovieMapper;
-import com.team5.ACMEFlix.mapper.TVSeriesMapper;
 import com.team5.ACMEFlix.repository.*;
+
 import com.team5.ACMEFlix.transfer.resource.ContentResource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,24 +26,10 @@ public class ContentService {
     @Autowired
     private EpisodeRepository episodeRepository;
     @Autowired
-    private SeasonRepository seasonRepository;
-    @Autowired
-    private GenreRepository genreRepository;
-    @Autowired
-    private ActorRepository actorRepository;
-    @Autowired
-    private WriterRepository writerRepository;
-    @Autowired
-    private DirectorRepository directorRepository;
-    @Autowired
-    private CreatorRepository creatorRepository;
-    @Autowired
     private RatingRepository ratingRepository;
     @Autowired
     private EntityManager entityManager;
 
-    @Autowired
-    private ContentMapper contentMapper;
 
     @Transactional(readOnly = true)
     public List<Content> findAllContents() {
@@ -52,73 +37,10 @@ public class ContentService {
     }
 
     @Transactional(readOnly = true)
-    public List<ContentResource> findAllContentsAlternative() {
-        List<TVSeries> tvSeries = tVSeriesRepository.findAll();
-        List<Movie> movies = movieRepository.findAll();
-        List<ContentResource> contentResourceTVSeries = contentMapper.tvSeriesToContentResources(tvSeries);
-        List<ContentResource> contentResourceMovies = contentMapper.moviesToContentResources(movies);
-
-        List<ContentResource> contentResources = new ArrayList<>();
-        contentResources.addAll(contentResourceTVSeries);
-        contentResources.addAll(contentResourceMovies);
-        Collections.shuffle(contentResources);
-        return contentResources;
-    }
-
-    @Transactional(readOnly = true)
     public Optional<Content> findContentById(Long id) {
         return contentRepository.findById(id);
     }
 
-    @Transactional(readOnly = true)
-    public ContentResource findContentByIdAlternative(Long id) {
-        Optional<Content> content = contentRepository.findById(id);
-        ContentResource contentResource = new ContentResource();
-        if(!content.isPresent()){
-            throw new NoSuchElementException("Content does not exist");
-        }
-        else{
-            if(content.get().getContentType().equals(ContentType.MOVIE)){
-                Optional<Movie> movie = movieRepository.findMovieByContentId(id);
-                if(!movie.isPresent()){
-                    throw new NoSuchElementException("Movie does not exist");
-                }
-                else{
-                    contentResource = contentMapper.movieToContentResource(movie.get());
-                }
-
-            }
-            else if(content.get().getContentType().equals(ContentType.TV_SERIES)){
-                Optional<TVSeries> tvSeries = tVSeriesRepository.findTVSeriesByContentId(id);
-                if(!tvSeries.isPresent()){
-                    throw new NoSuchElementException("TV Series does not exist");
-                }
-                else{
-                    contentResource = contentMapper.tvSerieToContentResource(tvSeries.get());
-                }
-            }
-
-        }
-        return contentResource;
-    }
-
-
-    @Transactional(readOnly = true)
-    public List<ContentResource> findAllContentsByFamilyFriendly() {
-        List<Long> moviesIDs = contentRepository.findMoviesIDsByFamilyFriendly();
-        List<Movie> movies = movieRepository.findAllById(moviesIDs);
-        List<Long> tvSeriesIDs = contentRepository.findTVSeriesIDsByFamilyFriendly();
-        List<TVSeries> tvSeries = tVSeriesRepository.findAllById(tvSeriesIDs);
-
-        List<ContentResource> contentResources = new ArrayList<>();
-        List<ContentResource> contentFactoriesTVSeries = contentMapper.tvSeriesToContentResources(tvSeries);
-        List<ContentResource> contentFactoriesMovies = contentMapper.moviesToContentResources(movies);
-
-        contentResources.addAll(contentFactoriesTVSeries);
-        contentResources.addAll(contentFactoriesMovies);
-        Collections.shuffle(contentResources);
-        return contentResources;
-    }
 
     @Transactional(readOnly = true)
     public List<Content> findAllContentsByFamilyFriendlyAlternative() {
@@ -133,87 +55,13 @@ public class ContentService {
 
 
     @Transactional(readOnly = true)
-    public List<ContentResource> findAllContentsByTitleAlternative(String search) {
-        List<Content> contents = contentRepository.findContentByName(search);
-        List<Movie> movies = new ArrayList<>();
-        List<TVSeries> tvSeries = new ArrayList<>();
-        for (Content content: contents){
-            if(content.getContentType().equals(ContentType.MOVIE)){
-                movies.add(movieRepository.findMovieByContentId(content.getId()).get());
-            }
-            else if(content.getContentType().equals(ContentType.TV_SERIES)){
-                tvSeries.add(tVSeriesRepository.findTVSeriesByContentId(content.getId()).get());
-            }
-            else{
-
-            }
-        }
-        List<ContentResource> moviesContentResource = contentMapper.moviesToContentResources(movies);
-        List<ContentResource> tvSeriesContentResource = contentMapper.tvSeriesToContentResources(tvSeries);
-        List<ContentResource> contentResources = new ArrayList<>();
-        contentResources.addAll(moviesContentResource);
-        contentResources.addAll(tvSeriesContentResource);
-        return contentResources;
+    public List<Content> findAllContentsByTitleAlternative(String search) {
+        return contentRepository.findContentByName(search);
     }
 
-    @Transactional(readOnly = true)
-    public List<ContentResource> findAllContentsByNameOrByEpisodeName(String search) {
-        List<Content> contents = contentRepository.findContentByName(search);
-        List<Movie> movies = new ArrayList<>();
-        List<TVSeries> tvSeries = new ArrayList<>();
-        for (Content content: contents){
-            if(content.getContentType().equals(ContentType.MOVIE)){
-                movies.add(movieRepository.findMovieByContentId(content.getId()).get());
-            }
-            else if(content.getContentType().equals(ContentType.TV_SERIES)){
-                tvSeries.add(tVSeriesRepository.findTVSeriesByContentId(content.getId()).get());
-            }
-            else{
-
-            }
-        }
-
-
-
-        List<Episode> episodes = episodeRepository.findEpisodesByName(search);
-        List<Long> contentIds = new ArrayList<>();
-        for (Episode episode : episodes){
-            if(!contentIds.contains(episode.getSeason().getTvSeries().getContent().getId())) {
-                contentIds.add(episode.getSeason().getTvSeries().getContent().getId());
-
-            }
-        }
-
-        List<TVSeries> tvSeriesToAdd = new ArrayList<>();
-        if(!tvSeries.isEmpty()) {
-            for (TVSeries tvSerie : tvSeries) {
-
-                if (!contentIds.contains(tvSerie.getContent().getId()) && !contentIds.isEmpty()) {
-                    tvSeriesToAdd.add(tVSeriesRepository.findTVSeriesByContentId(tvSerie.getContent().getId()).get());
-                }
-
-
-            }
-        }
-        else{
-            for (Long id: contentIds) {
-                tvSeriesToAdd.add(tVSeriesRepository.findTVSeriesByContentId(id).get());
-            }
-        }
-
-        tvSeries.addAll(tvSeriesToAdd);
-
-        List<ContentResource> moviesContentResource = contentMapper.moviesToContentResources(movies);
-        List<ContentResource> tvSeriesContentResource = contentMapper.tvSeriesToContentResources(tvSeries);
-        List<ContentResource> contentResources = new ArrayList<>();
-        contentResources.addAll(moviesContentResource);
-        contentResources.addAll(tvSeriesContentResource);
-
-        return contentResources;
-    }
 
     @Transactional(readOnly = true)
-    public List<ContentResource> findAllContentByGenres(String[] genre) {
+    public List<BigInteger> findAllContentByGenres(String[] genre) {
 
         String query;
         query = "SELECT GENRES.CONTENT_ID FROM GENRES GROUP BY GENRES.CONTENT_ID ";
@@ -231,34 +79,18 @@ public class ContentService {
 
         List<BigInteger> contentIds = entityManager.createNativeQuery(query).getResultList();
 
-        List<Content> contents = contentRepository.findAllContentsById(contentIds);
-        List<Movie> movies = new ArrayList<>();
-        List<TVSeries> tvSeries = new ArrayList<>();
-        for (Content content: contents){
 
-
-            if(content.getContentType().equals(ContentType.MOVIE)){
-                movies.add(movieRepository.findMovieByContentId(content.getId()).get());
-            }
-            else if(content.getContentType().equals(ContentType.TV_SERIES)){
-                tvSeries.add(tVSeriesRepository.findTVSeriesByContentId(content.getId()).get());
-            }
-            else{
-
-            }
-        }
-
-        List<ContentResource> moviesContentResource = contentMapper.moviesToContentResources(movies);
-        List<ContentResource> tvSeriesContentResource = contentMapper.tvSeriesToContentResources(tvSeries);
-        List<ContentResource> contentResources = new ArrayList<>();
-        contentResources.addAll(moviesContentResource);
-        contentResources.addAll(tvSeriesContentResource);
-
-
-        return contentResources;
+        return contentIds;
     }
+
     @Transactional(readOnly = true)
-    public List<ContentResource> findAllContentByActors(String[] actor) {
+    public List<Content> findAllContentsById(List<BigInteger> contentIds) {
+        return contentRepository.findAllContentsById(contentIds);
+    }
+
+
+    @Transactional(readOnly = true)
+    public List<BigInteger> findAllContentByActors(String[] actor) {
         String query;
         query = "SELECT ACTORS.CONTENT_ID FROM ACTORS GROUP BY ACTORS.CONTENT_ID ";
 
@@ -275,218 +107,33 @@ public class ContentService {
 
         List<BigInteger> contentIds = entityManager.createNativeQuery(query).getResultList();
 
-        List<Content> contents = contentRepository.findAllContentsById(contentIds);
-        List<Movie> movies = new ArrayList<>();
-        List<TVSeries> tvSeries = new ArrayList<>();
-        for (Content content: contents){
-
-
-            if(content.getContentType().equals(ContentType.MOVIE)){
-                movies.add(movieRepository.findMovieByContentId(content.getId()).get());
-            }
-            else if(content.getContentType().equals(ContentType.TV_SERIES)){
-                tvSeries.add(tVSeriesRepository.findTVSeriesByContentId(content.getId()).get());
-            }
-            else{
-
-            }
-        }
-
-        List<ContentResource> moviesContentResource = contentMapper.moviesToContentResources(movies);
-        List<ContentResource> tvSeriesContentResource = contentMapper.tvSeriesToContentResources(tvSeries);
-        List<ContentResource> contentResources = new ArrayList<>();
-        contentResources.addAll(moviesContentResource);
-        contentResources.addAll(tvSeriesContentResource);
-
-
-        return contentResources;
+        return contentIds;
     }
 
     @Transactional(readOnly = true)
-    public List<ContentResource> findAllContentByLanguage(String language) {
-        List<Content> contents = contentRepository.findContentByLanguage(language);
-
-
-
-        List<Movie> movies = new ArrayList<>();
-        List<TVSeries> tvSeries = new ArrayList<>();
-        for (Content content: contents){
-            if(content.getContentType().equals(ContentType.MOVIE)){
-                movies.add(movieRepository.findMovieByContentId(content.getId()).get());
-            }
-            else if(content.getContentType().equals(ContentType.TV_SERIES)){
-                tvSeries.add(tVSeriesRepository.findTVSeriesByContentId(content.getId()).get());
-            }
-            else{
-
-            }
-        }
-
-        List<ContentResource> moviesContentResource = contentMapper.moviesToContentResources(movies);
-        List<ContentResource> tvSeriesContentResource = contentMapper.tvSeriesToContentResources(tvSeries);
-        List<ContentResource> contentResources = new ArrayList<>();
-        contentResources.addAll(moviesContentResource);
-        contentResources.addAll(tvSeriesContentResource);
-
-
-        return contentResources;
+    public List<Content> findAllContentByLanguage(String language) {
+        return contentRepository.findContentByLanguage(language);
     }
     @Transactional(readOnly = true)
-    public List<ContentResource> findAllContentByYear(String year) {
-        List<Content> contents = contentRepository.findContentByYear(year);
+    public List<Content> findAllContentByYear(String year) {
 
-
-
-        List<Movie> movies = new ArrayList<>();
-        List<TVSeries> tvSeries = new ArrayList<>();
-        for (Content content: contents){
-            if(content.getContentType().equals(ContentType.MOVIE)){
-                movies.add(movieRepository.findMovieByContentId(content.getId()).get());
-            }
-            else if(content.getContentType().equals(ContentType.TV_SERIES)){
-                tvSeries.add(tVSeriesRepository.findTVSeriesByContentId(content.getId()).get());
-            }
-            else{
-
-            }
-        }
-
-        List<ContentResource> moviesContentResource = contentMapper.moviesToContentResources(movies);
-        List<ContentResource> tvSeriesContentResource = contentMapper.tvSeriesToContentResources(tvSeries);
-        List<ContentResource> contentResources = new ArrayList<>();
-        contentResources.addAll(moviesContentResource);
-        contentResources.addAll(tvSeriesContentResource);
-
-
-        return contentResources;
+        return contentRepository.findContentByYear(year);
     }
 
     @Transactional (readOnly = true)
-    public List<ContentResource> findTop10HighestRatedContent() {
-
-        List<Long> contentIds = ratingRepository.findContent10HighestRated();
+    public List<Long> findTop10HighestRatedContent() {
 
 
 
-
-        List<Content> contents = contentRepository.findAllById(contentIds);
-
-        List<Movie> movies = new ArrayList<>();
-        List<TVSeries> tvSeries = new ArrayList<>();
-        for (Content content: contents){
-            if(content.getContentType().equals(ContentType.MOVIE)){
-                movies.add(movieRepository.findMovieByContentId(content.getId()).get());
-            }
-            else if(content.getContentType().equals(ContentType.TV_SERIES)){
-                tvSeries.add(tVSeriesRepository.findTVSeriesByContentId(content.getId()).get());
-            }
-            else{
-
-            }
-        }
-
-        List<ContentResource> moviesContentResource = contentMapper.moviesToContentResources(movies);
-        List<ContentResource> tvSeriesContentResource = contentMapper.tvSeriesToContentResources(tvSeries);
-
-
-
-        List<ContentResource> contentResources = new ArrayList<>();
-        contentResources.addAll(moviesContentResource);
-        contentResources.addAll(tvSeriesContentResource);
-
-        Collections.sort(contentResources, new Comparator<ContentResource>() {
-            public int compare(ContentResource cr1, ContentResource cr2) {
-
-                int result = Float.compare(cr2.getRating(), cr1.getRating());
-                return result;
-            }
-        });
-
-
-        return contentResources;
+        return ratingRepository.findContent10HighestRated();
     }
 
+    @Transactional (readOnly = true)
+    public List<Content> findAllById(List<Long> ids) {
 
-    @Transactional
-    public ContentResource addContent(ContentResource contentResource) {
-
-        if(contentResource.getContentType().equals(ContentType.TV_SERIES)){
-            TVSeries tvSerie = contentMapper.contentResourceToTVSerie(contentResource);
-            tvSerie.getCreators()
-                    .forEach(c -> c.setTvSeries(tvSerie));
-            tvSerie.getSeasons()
-                    .forEach(s -> s.setTvSeries(tvSerie));
-            tvSerie.getSeasons()
-                    .forEach(s -> s.getEpisodes()
-                            .forEach(e -> e.setSeason(s)));
-            tvSerie.getContent().getActors()
-                    .forEach(a -> a.setContent(tvSerie.getContent()));
-            tvSerie.getContent().getGenres()
-                    .forEach(g -> g.setContent(tvSerie.getContent()));
-
-            tVSeriesRepository.save(tvSerie);
-        }
-        else if(contentResource.getContentType().equals(ContentType.MOVIE)){
-            Movie movie = contentMapper.contentResourceToMovie(contentResource);
-            movie.getDirectors()
-                    .forEach(d -> d.setMovie(movie));
-            movie.getWriters()
-                    .forEach(w -> w.setMovie(movie));
-
-            movie.getContent().getActors()
-                    .forEach(a -> a.setContent(movie.getContent()));
-            movie.getContent().getGenres()
-                    .forEach(g -> g.setContent(movie.getContent()));
-
-            movieRepository.save(movie);
-        }
-        else{
-            throw new IllegalStateException("Not a Movie or a TV Series");
-        }
-        return contentResource;
+        return contentRepository.findAllById(ids);
     }
 
-    @Transactional
-    public List<ContentResource> addContents(List<ContentResource> contentResources) {
-        for(ContentResource contentResource : contentResources){
-            if(contentResource.getContentType().equals(ContentType.TV_SERIES)){
-                TVSeries tvSerie = contentMapper.contentResourceToTVSerie(contentResource);
-
-                tvSerie.getCreators()
-                        .forEach(c -> c.setTvSeries(tvSerie));
-                tvSerie.getSeasons()
-                        .forEach(s -> s.setTvSeries(tvSerie));
-                tvSerie.getSeasons()
-                        .forEach(s -> s.getEpisodes()
-                                .forEach(e -> e.setSeason(s)));
-                tvSerie.getContent().getActors()
-                        .forEach(a -> a.setContent(tvSerie.getContent()));
-                tvSerie.getContent().getGenres()
-                        .forEach(g -> g.setContent(tvSerie.getContent()));
-
-                tVSeriesRepository.save(tvSerie);
-            }
-            else if(contentResource.getContentType().equals(ContentType.MOVIE)){
-                Movie movie = contentMapper.contentResourceToMovie(contentResource);
-                movie.getDirectors()
-                        .forEach(d -> d.setMovie(movie));
-                movie.getWriters()
-                        .forEach(w -> w.setMovie(movie));
-
-                movie.getContent().getActors()
-                        .forEach(a -> a.setContent(movie.getContent()));
-                movie.getContent().getGenres()
-                        .forEach(g -> g.setContent(movie.getContent()));
-
-                movieRepository.save(movie);
-            }
-            else{
-                throw new IllegalStateException("Not a Movie or a TV Series");
-            }
-
-        }
-        return contentResources;
-    }
 
     @Transactional
     public void deleteContentById(Long id) {
@@ -624,7 +271,7 @@ public class ContentService {
 
             if (content.getActors() != null &&
                     !Objects.equals(contentFound.get().getActors(), content.getActors())) {
-                List<Actor> actors = actorRepository.findActorByContentId(id);
+                List<Actor> actors = contentFound.get().getActors();
                 if (!actors.isEmpty()) {
                     for (int i = 0; i < actors.size(); i++) {
                         if (content.getActors().get(i).getFullname() != null &&
@@ -644,7 +291,7 @@ public class ContentService {
 
             if (content.getGenres() != null &&
                     !Objects.equals(contentFound.get().getGenres(), content.getGenres())) {
-                List<Genre> genres = genreRepository.findGenreByContentId(id);
+                List<Genre> genres = contentFound.get().getGenres();
                 if (!genres.isEmpty()) {
                     for (int i = 0; i < genres.size(); i++) {
                         if (content.getGenres().get(i).getName() != null &&
@@ -716,7 +363,7 @@ public class ContentService {
 
             if (contentResource.getGenres() != null &&
                     !Objects.equals(contentFound.get().getGenres(), contentResource.getGenres())) {
-                List<Genre> genres = genreRepository.findGenreByContentId(id);
+                List<Genre> genres = contentFound.get().getGenres();
                 if (!genres.isEmpty()) {
                     for (int i = 0; i < genres.size(); i++) {
                         if (contentResource.getGenres().get(i).getName() != null &&
@@ -731,7 +378,7 @@ public class ContentService {
 
             if (contentResource.getActors() != null &&
                     !Objects.equals(contentFound.get().getActors(), contentResource.getActors())) {
-                List<Actor> actors = actorRepository.findActorByContentId(id);
+                List<Actor> actors = contentFound.get().getActors();
                 if (!actors.isEmpty()) {
                     for (int i = 0; i < actors.size(); i++) {
                         if (contentResource.getActors().get(i).getFullname() != null &&
@@ -760,7 +407,7 @@ public class ContentService {
                     if (contentResource.getWriters() != null &&
                             !Objects.equals(movieFound.get().getWriters(), contentResource.getWriters())) {
 
-                        List<Writer> writers = writerRepository.findWriterByByMovieId(movieFound.get().getId());
+                        List<Writer> writers = movieFound.get().getWriters();
                         if (!writers.isEmpty()) {
                             for (int i = 0; i < writers.size(); i++) {
                                 if (contentResource.getWriters().get(i).getFullname() != null &&
@@ -781,7 +428,7 @@ public class ContentService {
                     if (contentResource.getDirectors() != null &&
                             !Objects.equals(movieFound.get().getDirectors(), contentResource.getDirectors())) {
 
-                        List<Director> directors = directorRepository.findDirectorByByMovieId(movieFound.get().getId());
+                        List<Director> directors = movieFound.get().getDirectors();
                         if (!directors.isEmpty()) {
                             for (int i = 0; i < directors.size(); i++) {
                                 if (contentResource.getDirectors().get(i).getFullname() != null &&
@@ -818,7 +465,7 @@ public class ContentService {
 
                     if (contentResource.getCreators() != null &&
                             !Objects.equals(tvSeriesFound.get().getCreators(), contentResource.getCreators())) {
-                        List<Creator> creators = creatorRepository.findCreatorByByTVSeriesId(tvSeriesFound.get().getId());
+                        List<Creator> creators = tvSeriesFound.get().getCreators();
                         if (!creators.isEmpty()) {
                             for (int i = 0; i < creators.size(); i++) {
                                 if (contentResource.getCreators().get(i).getFullname() != null &&
@@ -841,7 +488,7 @@ public class ContentService {
 
                     if (contentResource.getSeasons() != null &&
                             !Objects.equals(tvSeriesFound.get().getSeasons(), contentResource.getSeasons())) {
-                        List<Season> seasons = seasonRepository.findSeasonByTVSeriesId(tvSeriesFound.get().getId());
+                        List<Season> seasons = tvSeriesFound.get().getSeasons();
                         if (!seasons.isEmpty()) {
                             for (int i = 0; i < seasons.size()-1; i++) {
                                 if (contentResource.getSeasons().get(i).getSeasonNo() != null &&
@@ -852,7 +499,7 @@ public class ContentService {
 
                                 if (contentResource.getSeasons().get(i).getEpisodes() != null &&
                                         !Objects.equals(seasons.get(i).getEpisodes(), contentResource.getSeasons().get(i).getEpisodes())) {
-                                    List<Episode> episodes = episodeRepository.findEpisodeBySeasonId(seasons.get(i).getId());
+                                    List<Episode> episodes = episodeRepository.findEpisodesBySeason_Id(seasons.get(i).getId());
 
                                     for (int y = 0; y < episodes.size(); y++) {
                                         if (contentResource.getSeasons().get(i).getEpisodes().get(y).getTitle() != null &&

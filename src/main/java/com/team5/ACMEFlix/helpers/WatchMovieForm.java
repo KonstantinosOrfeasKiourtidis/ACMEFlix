@@ -13,5 +13,5 @@ public class WatchMovieForm {
     private Long movie_id;
     @NotNull(message = "Time watched cannot be null")
     @Min(1)
-    private Integer timeWatchedInSeconds;
+    private Float timeWatchedInMinutes;
 }

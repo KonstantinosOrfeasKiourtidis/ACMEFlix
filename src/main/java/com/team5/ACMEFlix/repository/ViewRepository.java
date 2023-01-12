@@ -1,13 +1,11 @@
 package com.team5.ACMEFlix.repository;
 
 import com.team5.ACMEFlix.domain.View;
-import com.team5.ACMEFlix.transfer.resource.AccountResource;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 @Repository
@@ -33,7 +31,7 @@ public interface ViewRepository extends JpaRepository<View, Long> {
             "LIMIT 5", nativeQuery = true)
     List<String> findTop5MostPopularGenres();
 
-    @Query(value = "SELECT SUM(VIEWS.TIME_WATCHED_IN_MINUTES), VIEWS.PROFILE_ID FROM VIEWS " +
+    @Query(value = "SELECT SUM(VIEWS.TIME_WATCHED_IN_MINUTES) FROM VIEWS " +
             "INNER JOIN PROFILES " +
             "ON PROFILES.ID=VIEWS.PROFILE_ID " +
             "INNER JOIN ACCOUNTS " +
@@ -41,4 +39,13 @@ public interface ViewRepository extends JpaRepository<View, Long> {
             "GROUP BY VIEWS.PROFILE_ID " +
             "HAVING ACCOUNTS.ID = ?1", nativeQuery = true)
     List<Float> findViewingHoursByAccountId(Long id);
+
+    @Query(value = "SELECT VIEWS.PROFILE_ID FROM VIEWS " +
+            "INNER JOIN PROFILES " +
+            "ON PROFILES.ID=VIEWS.PROFILE_ID " +
+            "INNER JOIN ACCOUNTS " +
+            "ON ACCOUNTS.ID=PROFILES.ACCOUNT_ID " +
+            "GROUP BY VIEWS.PROFILE_ID " +
+            "HAVING ACCOUNTS.ID = ?1", nativeQuery = true)
+    List<Long> findProfileIdsByAccountId(Long id);
 }

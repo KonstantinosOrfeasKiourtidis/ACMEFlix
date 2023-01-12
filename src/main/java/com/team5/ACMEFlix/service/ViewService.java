@@ -9,15 +9,13 @@ import com.team5.ACMEFlix.mapper.AccountMapperViewingHours;
 import com.team5.ACMEFlix.mapper.ContentMapper;
 import com.team5.ACMEFlix.mapper.ProfileMapper;
 import com.team5.ACMEFlix.repository.*;
-import com.team5.ACMEFlix.transfer.resource.AccountResource;
-import com.team5.ACMEFlix.transfer.resource.AccountResourceViewingHours;
-import com.team5.ACMEFlix.transfer.resource.ContentResource;
-import com.team5.ACMEFlix.transfer.resource.ProfileResourceViewingHours;
+import com.team5.ACMEFlix.transfer.resource.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
+import java.util.stream.Stream;
 
 @Service
 public class ViewService {
@@ -172,14 +170,20 @@ public class ViewService {
     }
 
     public AccountResourceViewingHours findViewingHoursByAccountId(Long id) {
+        List<Long> profileIds =  viewRepository.findProfileIdsByAccountId(id);
         List<Float> viewingMinutes =  viewRepository.findViewingHoursByAccountId(id);
+
+
         List<Float> viewingHours = new ArrayList<>();
         for (Float viewingMinute: viewingMinutes){
-            viewingMinute = viewingMinute/60;
-            viewingHours.add(viewingMinute);
+            viewingHours.add(viewingMinute/60);
         }
 
         Optional<Account> accountFound = accountRepository.findById(id);
+        if(!accountFound.isPresent()){
+            throw new NoSuchElementException("Account does not exist");
+        }
+
         AccountResourceViewingHours accountResourceViewingHours = new AccountResourceViewingHours();
         accountResourceViewingHours.setFirstname(accountFound.get().getFirstname());
         accountResourceViewingHours.setLastname(accountFound.get().getLastname());
@@ -201,13 +205,15 @@ public class ViewService {
             profileResourceViewingHours.setFirstname(profiles.get(i).getFirstname());
             profileResourceViewingHours.setId(profiles.get(i).getId());
 
-            if(i < viewingHours.size()){
-                profileResourceViewingHours.setViewingHours(viewingHours.get(i));
-            }
-            else{
-                profileResourceViewingHours.setViewingHours(0f);
 
-            }
+
+                if(profileIds.contains(profiles.get(i).getId()) ){
+                    int index= profileIds.indexOf(profiles.get(i).getId());
+                    profileResourceViewingHours.setViewingHours(viewingHours.get(index));
+                }
+
+
+
 
             profileResourceViewingHoursReturn.add(profileResourceViewingHours);
 

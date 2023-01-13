@@ -1,69 +1,64 @@
 package com.team5.ACMEFlix.controller;
 
+import com.team5.ACMEFlix.domain.Account;
 import com.team5.ACMEFlix.domain.Creator;
+import com.team5.ACMEFlix.mapper.CreatorMapper;
 import com.team5.ACMEFlix.service.CreatorService;
+import com.team5.ACMEFlix.transfer.ApiResponse;
+import com.team5.ACMEFlix.transfer.resource.CreatorResource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
 @RequestMapping(path = "api/v1/content/tvseries/creator")
-public class CreatorController {
+public class  CreatorController {
 
     private final CreatorService creatorService;
+    private final CreatorMapper creatorMapper;
     @Autowired
-    private CreatorController(CreatorService creatorService) {
+    private CreatorController(CreatorService creatorService, CreatorMapper creatorMapper) {
         this.creatorService = creatorService;
+        this.creatorMapper = creatorMapper;
     }
 
     @GetMapping
-    public ResponseEntity<List<Creator>> findAllCreators(){
-        return new ResponseEntity<>(creatorService.findAllCreators(), HttpStatus.OK);
+    public ResponseEntity<ApiResponse<List<CreatorResource>>> findAllCreators(){
+        return  new ResponseEntity<>(ApiResponse.<List<CreatorResource>>builder().data(creatorMapper.toResources(creatorService.findAllCreators())).build(), HttpStatus.OK);
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<Creator> findCreatorById(@PathVariable("id") Long id){
-        return creatorService.findCreatorById(id);
+    public ResponseEntity<ApiResponse<CreatorResource>> findCreatorById(@PathVariable("id") Long id){
+        return new ResponseEntity<>(ApiResponse.<CreatorResource>builder().data(creatorMapper.toResource(creatorService.findCreatorById(id).get())).build(), HttpStatus.OK);
     }
 
     @GetMapping("findAllCreatorsByContentId/{id}")
-    public ResponseEntity<List<Creator>>findAllCreatorsByContentId(@PathVariable("id") Long id){
-        return new ResponseEntity<>(creatorService.findAllCreatorsByContentId(id), HttpStatus.OK);
+    public ResponseEntity<ApiResponse<List<CreatorResource>>>findAllCreatorsByContentId(@PathVariable("id") Long id){
+        return new ResponseEntity<>(ApiResponse.<List<CreatorResource>>builder().data(creatorMapper.toResources(creatorService.findAllCreatorsByContentId(id))).build(), HttpStatus.OK);
     }
-    @ResponseStatus(code = HttpStatus.CREATED)
+
     @PostMapping(path = "addCreatorByContentId/{id}")
-    public void addCreatorByContentId(@RequestBody Creator creator, @PathVariable("id") Long id){
-
-
-
-        creatorService.addCreatorByContentId(creator, id);
+    public ResponseEntity<ApiResponse<CreatorResource>> addCreatorByContentId(@PathVariable("id") Long id, @Valid @RequestBody CreatorResource creator){
+        return new ResponseEntity<>(ApiResponse.<CreatorResource>builder().data(creatorMapper.toResource(creatorService.addCreatorByContentId(id, creatorMapper.toDomain(creator)))).build(), HttpStatus.CREATED);
     }
-    @ResponseStatus(code = HttpStatus.CREATED)
+
     @PostMapping(path = "addCreatorsByContentId/{id}")
-    public void addCreatorsByContentId(@RequestBody Creator[] creators, @PathVariable("id") Long id){
-
-
-
-        creatorService.addCreatorsByContentId(creators, id);
+    public ResponseEntity<ApiResponse<List<CreatorResource>>> addCreatorsByContentId(@PathVariable("id") Long id, @Valid @RequestBody List<CreatorResource> creators){
+        return  new ResponseEntity<>(ApiResponse.<List<CreatorResource>>builder().data(creatorMapper.toResources(creatorService.addCreatorsByContentId(id, creatorMapper.toDomains(creators)))).build(), HttpStatus.CREATED);
     }
-    @ResponseStatus(code = HttpStatus.CREATED)
+
     @PostMapping(path = "addCreatorByTVSeriesId/{id}")
-    public void addCreatorByTVSeriesId(@RequestBody Creator creator, @PathVariable("id") Long id){
-
-
-
-        creatorService.addCreatorByTVSeriesId(creator, id);
+    public ResponseEntity<ApiResponse<CreatorResource>> addCreatorByTVSeriesId(@PathVariable("id") Long id, @Valid @RequestBody CreatorResource creator){
+        return new ResponseEntity<>(ApiResponse.<CreatorResource>builder().data(creatorMapper.toResource(creatorService.addCreatorByTVSeriesId(id, creatorMapper.toDomain(creator)))).build(), HttpStatus.CREATED);
     }
-    @ResponseStatus(code = HttpStatus.CREATED)
+
     @PostMapping(path = "addCreatorsByTVSeriesId/{id}")
-    public void addCreatorsByTVSeriesId(@RequestBody Creator[] creators, @PathVariable("id") Long id){
-
-
-
-        creatorService.addCreatorsByTVSeriesId(creators, id);
+    public ResponseEntity<ApiResponse<List<CreatorResource>>> addCreatorsByTVSeriesId(@PathVariable("id") Long id, @Valid @RequestBody List<CreatorResource> creators){
+        return  new ResponseEntity<>(ApiResponse.<List<CreatorResource>>builder().data(creatorMapper.toResources(creatorService.addCreatorsByTVSeriesId(id, creatorMapper.toDomains(creators)))).build(), HttpStatus.CREATED);
     }
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     @DeleteMapping(path = "deleteCreatorById/{id}")
@@ -72,16 +67,16 @@ public class CreatorController {
     }
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     @DeleteMapping(path = "deleteCreatorsByIds/{ids}")
-    public void deleteCreatorsByIds(@PathVariable("ids") Long[] ids){
+    public void deleteCreatorsByIds(@PathVariable("ids") List<Long> ids){
         creatorService.deleteCreatorsByIds(ids);
     }
 
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     @PatchMapping(path = "updateCreatorById/{id}")
     public void updateCreatorById(
-            @RequestBody Creator creator,
-            @PathVariable("id") Long id
+            @PathVariable("id") Long id,
+            @Valid @RequestBody CreatorResource creator
     ){
-        creatorService.updateCreatorById(creator, id);
+        creatorService.updateCreatorById(id, creatorMapper.toDomain(creator));
     }
 }

@@ -5,6 +5,7 @@ import lombok.*;
 import lombok.experimental.SuperBuilder;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 @Data
 @SuperBuilder
@@ -17,7 +18,8 @@ import javax.validation.constraints.NotNull;
 @SequenceGenerator(name = "idGenerator", sequenceName = "GENRES_SEQ", initialValue = 1, allocationSize = 1)
 public class Genre extends BaseModel{
     @NotNull(message = "Genre's name cannot be null")
-    @Column(length = 20, nullable = false, unique = false)
+    @Column(length = 20, nullable = false)
+    @Pattern(regexp = "^[A-Za-z0-9\\. ]+$", message="Genre's name can only contain alphanumeric symbols")
     private String name;
 
 

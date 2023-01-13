@@ -6,6 +6,7 @@ import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 @Data
 @SuperBuilder
@@ -19,7 +20,8 @@ import javax.validation.constraints.NotNull;
 public class Writer extends BaseModel{
 
     @NotNull(message = "Writer's name cannot be null")
-    @Column(length = 150, nullable = false, unique = false)
+    @Column(length = 150, nullable = false)
+    @Pattern(regexp = "^[A-Za-z\\. ]+$", message="Writer's fullname can only contain alphabetical symbols")
     private String fullname;
 
     private String imageUrl;

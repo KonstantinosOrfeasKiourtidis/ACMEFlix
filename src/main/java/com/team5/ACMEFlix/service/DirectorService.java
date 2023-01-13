@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -31,24 +32,24 @@ public class DirectorService {
         return directorRepository.findAll();
     }
     @Transactional(readOnly = true)
-    public ResponseEntity<Director> findDirectorById(Long id) {
-        return directorRepository.findById(id).map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    public Optional<Director> findDirectorById(Long id) {
+        return directorRepository.findById(id);
     }
     @Transactional(readOnly = true)
     public List<Director> findAllDirectorsByContentId(Long id) {
         Optional<Movie> movie = movieRepository.findMovieByContentId(id);
         if(!movie.isPresent()){
-            throw new IllegalStateException("Movie does not exist");
+            throw new NoSuchElementException("Movie does not exist");
         }
         else {
             return directorRepository.findDirectorByByMovieId(movie.get().getId());
         }
     }
     @Transactional
-    public void addDirectorByContentId(Director director, Long id) {
+    public Director addDirectorByContentId(Long id, Director director) {
         Optional<Content> contentExists = contentRepository.findById(id);
         if(!contentExists.isPresent()){
-            throw new IllegalStateException("Content does not exist");
+            throw new NoSuchElementException("Content does not exist");
         }
         else if(!contentExists.get().getContentType().equals(ContentType.MOVIE)){
             throw new IllegalStateException("Content is not a movie");
@@ -64,12 +65,13 @@ public class DirectorService {
             }
 
         }
+        return director;
     }
     @Transactional
-    public void addDirectosrByContentId(Director[] directors, Long id) {
+    public List<Director> addDirectosrByContentId(Long id, List<Director> directors) {
         Optional<Content> contentExists = contentRepository.findById(id);
         if(!contentExists.isPresent()){
-            throw new IllegalStateException("Content does not exist");
+            throw new NoSuchElementException("Content does not exist");
         }
         else if(!contentExists.get().getContentType().equals(ContentType.MOVIE)){
             throw new IllegalStateException("Content is not a movie");
@@ -77,7 +79,7 @@ public class DirectorService {
         else {
             Optional<Movie> movieExists = movieRepository.findMovieByContentId(id);
             if(!movieExists.isPresent()){
-                throw new IllegalStateException("Movie does not exist");
+                throw new NoSuchElementException("Movie does not exist");
             } else {
                 for (Director director : directors) {
                     director.setMovie(movieExists.get());
@@ -88,23 +90,25 @@ public class DirectorService {
 
 
         }
+        return directors;
     }
     @Transactional
-    public void addDirectorByMovieId(Director director, Long id) {
+    public Director addDirectorByMovieId(Long id, Director director) {
         Optional<Movie> movieExists = movieRepository.findById(id);
         if(!movieExists.isPresent()){
-            throw new IllegalStateException("Movie does not exist");
+            throw new NoSuchElementException("Movie does not exist");
         }
         else{
             director.setMovie(movieExists.get());
             directorRepository.save(director);
         }
+        return director;
     }
     @Transactional
-    public void addDirectorsByMovieId(Director[] directors, Long id) {
+    public List<Director> addDirectorsByMovieId(Long id, List<Director> directors) {
         Optional<Movie> movieExists = movieRepository.findById(id);
         if(!movieExists.isPresent()){
-            throw new IllegalStateException("Movie does not exist");
+            throw new NoSuchElementException("Movie does not exist");
         }
         else{
             for (Director director : directors) {
@@ -112,13 +116,14 @@ public class DirectorService {
                 directorRepository.save(director);
             }
         }
+        return directors;
     }
 
     @Transactional
     public void deleteDirectorById(Long id) {
         boolean exists = directorRepository.existsById(id);
         if(!exists){
-            throw new IllegalStateException("Director does not exist");
+            throw new NoSuchElementException("Director does not exist");
         }
         else{
 
@@ -127,11 +132,11 @@ public class DirectorService {
         }
     }
     @Transactional
-    public void deleteDirectorsByIds(Long[] ids) {
+    public void deleteDirectorsByIds(List<Long> ids) {
         for(Long id : ids){
             boolean exists = directorRepository.existsById(id);
             if(!exists){
-                throw new IllegalStateException("Director does not exist");
+                throw new NoSuchElementException("Director does not exist");
             }
             else{
 
@@ -142,10 +147,10 @@ public class DirectorService {
     }
 
     @Transactional
-    public void updateDirectorById(Director director, Long id) {
+    public void updateDirectorById(Long id, Director director) {
         Optional<Director> directorFound = directorRepository.findById(id);
         if(!directorFound.isPresent()){
-            throw new IllegalStateException("Director does not exist");
+            throw new NoSuchElementException("Director does not exist");
         }
         else{
             if(director.getFullname() !=null &&

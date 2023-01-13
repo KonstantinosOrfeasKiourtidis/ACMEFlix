@@ -1,50 +1,56 @@
 package com.team5.ACMEFlix.controller;
 
+import com.team5.ACMEFlix.domain.Account;
 import com.team5.ACMEFlix.domain.Address;
+import com.team5.ACMEFlix.mapper.AddressMapper;
+import com.team5.ACMEFlix.mapper.AddressMapperImpl;
+import com.team5.ACMEFlix.service.AddressService;
+import com.team5.ACMEFlix.transfer.ApiResponse;
+import com.team5.ACMEFlix.transfer.resource.AddressResource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping(path = "api/v1/account/address")
 public class AddressController {
 
     private final AddressService addressService;
+    private final AddressMapper addressMapper;
 
     @Autowired
-    private AddressController(AddressService addressService) {
+    private AddressController(AddressService addressService, AddressMapper addressMapper) {
         this.addressService = addressService;
+        this.addressMapper = addressMapper;
     }
 
     @GetMapping
-    public ResponseEntity<List<Address>> findAllAddresses(){
-        return new ResponseEntity<>(addressService.findAllAddresses(), HttpStatus.OK);
+    public ResponseEntity<ApiResponse<List<AddressResource>>> findAllAddresses(){
+        return new ResponseEntity<>(ApiResponse.<List<AddressResource>>builder().data(addressMapper.toResources(addressService.findAllAddresses())).build(), HttpStatus.OK);
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<Address> findAddressById(@PathVariable("id") Long id){
-        return addressService.findAddressById(id);
+    public ResponseEntity<ApiResponse<AddressResource>> findAddressById(@PathVariable("id") Long id){
+        return new ResponseEntity<>(ApiResponse.<AddressResource>builder().data(addressMapper.toResource(addressService.findAddressById(id).get())).build(), HttpStatus.OK);
     }
 
     @GetMapping("findAllAddressesByAccountId/{id}")
-    public ResponseEntity<List<Address>> findAllAddressesByAccountId(@PathVariable("id") Long id){
-        return new ResponseEntity<>(addressService.findAllAddressesByAccountId(id), HttpStatus.OK);
+    public ResponseEntity<ApiResponse<List<AddressResource>>> findAllAddressesByAccountId(@PathVariable("id") Long id){
+        return new ResponseEntity<>(ApiResponse.<List<AddressResource>>builder().data(addressMapper.toResources(addressService.findAllAddressesByAccountId(id))).build(), HttpStatus.OK);
     }
-    @ResponseStatus(code = HttpStatus.CREATED)
+
     @PostMapping(path = "addAddressByAccountId/{id}")
-    public void addAddressByAccountId(@RequestBody Address address, @PathVariable("id") Long id){
-
-        addressService.addAddressByAccountId(address, id);
+    public ResponseEntity<ApiResponse<AddressResource>> addAddressByAccountId(@PathVariable("id") Long id, @Valid @RequestBody AddressResource address){
+        return new ResponseEntity<>(ApiResponse.<AddressResource>builder().data(addressMapper.toResource(addressService.addAddressByAccountId(id, addressMapper.toDomain(address)))).build(), HttpStatus.CREATED);
     }
-    @ResponseStatus(code = HttpStatus.CREATED)
-    @PostMapping(path = "addAddressesByAccountId/{id}")
-    public void addAddressesByAccountId(@RequestBody Address[] addresses, @PathVariable("id") Long id){
 
-        addressService.addAddressesByAccountId(addresses, id);
+    @PostMapping(path = "addAddressesByAccountId/{id}")
+    public ResponseEntity<ApiResponse<List<AddressResource>>> addAddressesByAccountId(@PathVariable("id") Long id, @Valid @RequestBody List<AddressResource> addresses){
+        return new ResponseEntity<>(ApiResponse.<List<AddressResource>>builder().data(addressMapper.toResources(addressService.addAddressesByAccountId(id, addressMapper.toDomains(addresses)))).build(), HttpStatus.CREATED);
     }
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     @DeleteMapping(path = "deleteAddressById/{id}")
@@ -53,16 +59,16 @@ public class AddressController {
     }
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     @DeleteMapping(path = "deleteAddressesByIds/{ids}")
-    public void deleteAddressesByIds(@PathVariable("ids") Long[] ids){
+    public void deleteAddressesByIds(@PathVariable("ids") List<Long> ids){
         addressService.deleteAddressesByIds(ids);
     }
 
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     @PatchMapping(path = "updateAddressById/{id}")
     public void updateAddressById(
-            @RequestBody Address address,
-            @PathVariable("id") Long id
+            @PathVariable("id") Long id,
+            @Valid @RequestBody AddressResource address
     ){
-        addressService.updateAddressById(address, id);
+        addressService.updateAddressById(id, addressMapper.toDomain(address));
     }
 }

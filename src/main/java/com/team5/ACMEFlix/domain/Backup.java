@@ -1,5 +1,6 @@
 package com.team5.ACMEFlix.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
@@ -19,5 +20,7 @@ import java.util.Date;
 @Table(name = "BACKUPS", indexes = {@Index(columnList = "backupDate")})
 @SequenceGenerator(name = "idGenerator", sequenceName = "BACKUPS_SEQ", initialValue = 1, allocationSize = 1)
 public class Backup extends BaseModel{
-    private Date backupDate;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm:ss.SSS")
+    private Date backupDate = new Date();
+
 }

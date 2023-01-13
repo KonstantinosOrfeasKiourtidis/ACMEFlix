@@ -2,104 +2,43 @@ package com.team5.ACMEFlix.helpers;
 
 import com.team5.ACMEFlix.domain.Address;
 import com.team5.ACMEFlix.domain.CreditCard;
+import lombok.Getter;
+import lombok.Setter;
 
+import javax.persistence.Column;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.util.List;
 
+@Getter
 public class RegisterForm {
+    @NotNull(message = "Account's email cannot be null")
+    @Column(length = 50, nullable = false, unique = true)
+    @Email
     private String email;
+    @NotNull(message = "Account's username cannot be null")
+    @Column(length = 50, nullable = false, unique = false)
+    @Pattern(regexp = "^[A-Za-z0-9]*$", message="Account's username can only contain alphanumeric symbols")
     private String username;
+    @NotNull(message = "Account's firstname cannot be null")
+    @Column(length = 30, nullable = false)
+    @Pattern(regexp = "^[A-Za-z ]+$", message="Account's firstname can only contain alphabetical symbols")
     private String firstname;
+    @NotNull(message = "Account's lastname cannot be null")
+    @Column(length = 30, nullable = false)
+    @Pattern(regexp = "^[A-Za-z ]+$", message="Account's lastname can only contain alphabetical symbols")
     private String lastname;
+    @NotNull(message = "Account's password cannot be null")
+    @Column(length = 50, nullable = false)
     private String password;
+    @NotNull(message = "Account's password cannot be null")
+    @Column(length = 50, nullable = false)
     private String confirmPassword;
+    @Column(length = 14)
+    @Pattern(regexp = "^[0-9]*$", message="Account's phone Number can only contain numeric symbols")
     private String phoneNo;
     private List<Address> address;
     private List<CreditCard> creditCards;
 
-    public RegisterForm() {
-    }
-
-    public RegisterForm(String email, String username, String firstname, String lastname, String password, String confirmPassword, String phoneNo, List<Address> address, List<CreditCard> creditCards) {
-        this.email = email;
-        this.username = username;
-        this.firstname = firstname;
-        this.lastname = lastname;
-        this.password = password;
-        this.confirmPassword = confirmPassword;
-        this.phoneNo = phoneNo;
-        this.address = address;
-        this.creditCards = creditCards;
-    }
-
-    public String getPhoneNo() {
-        return phoneNo;
-    }
-
-    public void setPhoneNo(String phoneNo) {
-        this.phoneNo = phoneNo;
-    }
-
-    public List<Address> getAddress() {
-        return address;
-    }
-
-    public void setAddress(List<Address> address) {
-        this.address = address;
-    }
-
-    public List<CreditCard> getCreditCards() {
-        return creditCards;
-    }
-
-    public void setCreditCards(List<CreditCard> creditCards) {
-        this.creditCards = creditCards;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getFirstname() {
-        return firstname;
-    }
-
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
-    }
-
-    public String getLastname() {
-        return lastname;
-    }
-
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getConfirmPassword() {
-        return confirmPassword;
-    }
-
-    public void setConfirmPassword(String confirmPassword) {
-        this.confirmPassword = confirmPassword;
-    }
 }

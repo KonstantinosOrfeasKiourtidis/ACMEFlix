@@ -1,9 +1,11 @@
 package com.team5.ACMEFlix.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.List;
@@ -24,15 +26,15 @@ public class WatchedListMovie extends BaseModel {
     private Profile profile;
 
     @NotNull(message = "Movie's time watched cannot be null")
-    private Integer timeWatched;
+    @Min(1)
+    private Integer timeWatchedInSeconds;
 
     @NotNull(message = "Movie's watched date cannot be null")
-    private Date watchedMovieDate;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm:ss.SSS")
+    private Date watchedMovieDate = new Date();
 
-    @ToString.Exclude
-    @EqualsAndHashCode.Exclude
-    @ManyToMany(cascade=CascadeType.ALL, targetEntity=Movie.class, fetch = FetchType.LAZY)
-    @JoinTable(name="watchedListMovies_contents", joinColumns=@JoinColumn(name="content_id"), inverseJoinColumns=@JoinColumn(name="watchedListMovie_id"))
-    private List<Movie> movies;
+    @OneToOne
+    @JoinColumn(name = "movie_id", referencedColumnName = "id")
+    private Movie movie;
 
 }

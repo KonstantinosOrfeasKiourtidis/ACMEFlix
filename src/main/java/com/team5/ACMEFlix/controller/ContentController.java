@@ -1,110 +1,113 @@
 package com.team5.ACMEFlix.controller;
 
-import com.team5.ACMEFlix.domain.*;
-import com.team5.ACMEFlix.helpers.ContentFactory;
-import com.team5.ACMEFlix.helpers.RatingForm;
+import com.team5.ACMEFlix.mapper.ContentMapper;
 import com.team5.ACMEFlix.service.ContentService;
-import com.team5.ACMEFlix.service.RatingService;
+import com.team5.ACMEFlix.transfer.ApiResponse;
+import com.team5.ACMEFlix.transfer.resource.ContentResource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
-import java.util.Optional;
+
 
 @RestController
 @RequestMapping(path = "api/v1/content")
 public class ContentController {
     private final ContentService contentService;
+    private final ContentMapper contentMapper;
 
     @Autowired
-    private ContentController(ContentService contentService) {
+    private ContentController(ContentService contentService, ContentMapper contentMapper) {
         this.contentService = contentService;
+        this.contentMapper = contentMapper;
     }
 
     @GetMapping
-    public ResponseEntity<List<Content>> findAllContents(){
-        return new ResponseEntity<>(contentService.findAllContents(), HttpStatus.OK);
+    public ResponseEntity<ApiResponse<List<ContentResource>>> findAllContents(){
+        return  new ResponseEntity<>(ApiResponse.<List<ContentResource>>builder().data(contentMapper.domainToResources(contentService.findAllContents())).build(), HttpStatus.OK);
     }
 
     @GetMapping("alternative")
-    public ResponseEntity<List<ContentFactory>>findAllContentsAlternative(){
-        return new ResponseEntity<>(contentService.findAllContentsAlternative(), HttpStatus.OK);
+    public ResponseEntity<ApiResponse<List<ContentResource>>> findAllContentsAlternative(){
+        return  new ResponseEntity<>(ApiResponse.<List<ContentResource>>builder().data(contentService.findAllContentsAlternative()).build(), HttpStatus.OK);
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<Content> findContentById(@PathVariable("id") Long id){
-        return contentService.findContentById(id);
+    public ResponseEntity<ApiResponse<ContentResource>> findContentById(@PathVariable("id") Long id){
+        return new ResponseEntity<>(ApiResponse.<ContentResource>builder().data(contentMapper.domainToResource(contentService.findContentById(id).get())).build(), HttpStatus.OK);
     }
     @GetMapping("findContentByIdAlternative/{id}")
-    public ContentFactory findContentByIdAlternative(@PathVariable("id") Long id){
-        return contentService.findContentByIdAlternative(id);
+    public ResponseEntity<ApiResponse<ContentResource>> findContentByIdAlternative(@PathVariable("id") Long id){
+        return new ResponseEntity<>(ApiResponse.<ContentResource>builder().data(contentService.findContentByIdAlternative(id)).build(), HttpStatus.OK);
     }
 
     @GetMapping("findAllContentsByFamilyFriendly")
-    public ResponseEntity<List<ContentFactory>> findAllContentsByFamilyFriendly(){
-        return new ResponseEntity<>(contentService.findAllContentsByFamilyFriendly(), HttpStatus.OK);
+    public ResponseEntity<ApiResponse<List<ContentResource>>> findAllContentsByFamilyFriendly(){
+        return  new ResponseEntity<>(ApiResponse.<List<ContentResource>>builder().data(contentService.findAllContentsByFamilyFriendly()).build(), HttpStatus.OK);
     }
 
     @GetMapping("findAllContentsByFamilyFriendlyAlternative")
-    public ResponseEntity<List<Content>>findAllContentsByFamilyFriendlyAlternative(){
-        return new ResponseEntity<>(contentService.findAllContentsByFamilyFriendlyAlternative(), HttpStatus.OK);
+    public ResponseEntity<ApiResponse<List<ContentResource>>>findAllContentsByFamilyFriendlyAlternative(){
+        return  new ResponseEntity<>(ApiResponse.<List<ContentResource>>builder().data(contentMapper.domainToResources(contentService.findAllContentsByFamilyFriendlyAlternative())).build(), HttpStatus.OK);
     }
 
     @GetMapping("findAllContentsByTitle")
-    public ResponseEntity<List<Content>> findAllContentsByTitle(@Param("search") String search){
-        return new ResponseEntity<>(contentService.findAllContentsByTitle(search), HttpStatus.OK);
+    public ResponseEntity<ApiResponse<List<ContentResource>>> findAllContentsByTitle(@Param("search") String search){
+        return  new ResponseEntity<>(ApiResponse.<List<ContentResource>>builder().data(contentMapper.domainToResources(contentService.findAllContentsByTitle(search))).build(), HttpStatus.OK);
+
     }
 
     @GetMapping("findAllContentsByTitleAlternative")
-    public ResponseEntity<List<ContentFactory>> findAllContentsByTitleAlternative(@Param("search") String search){
-        return new ResponseEntity<>(contentService.findAllContentsByTitleAlternative(search), HttpStatus.OK);
+    public ResponseEntity<ApiResponse<List<ContentResource>>> findAllContentsByTitleAlternative(@Param("search") String search){
+        return  new ResponseEntity<>(ApiResponse.<List<ContentResource>>builder().data(contentService.findAllContentsByTitleAlternative(search)).build(), HttpStatus.OK);
+
     }
 
     @GetMapping("findAllContentsByNameOrByEpisodeName")
-    public ResponseEntity<List<ContentFactory>> findAllContentsByNameOrByEpisodeName(@Param("search") String search){
-        return new ResponseEntity<>(contentService.findAllContentsByNameOrByEpisodeName(search), HttpStatus.OK);
+    public ResponseEntity<ApiResponse<List<ContentResource>>> findAllContentsByNameOrByEpisodeName(@Param("search") String search){
+        return  new ResponseEntity<>(ApiResponse.<List<ContentResource>>builder().data(contentService.findAllContentsByNameOrByEpisodeName(search)).build(), HttpStatus.OK);
+
     }
 
     @GetMapping("findAllContentByGenres")
-    public ResponseEntity<List<ContentFactory>> findAllContentByGenres(@Param("genre") String[] genre){
-        return new ResponseEntity<>(contentService.findAllContentByGenres(genre), HttpStatus.OK);
+    public ResponseEntity<ApiResponse<List<ContentResource>>> findAllContentByGenres(@Param("genre") String[] genre){
+        return  new ResponseEntity<>(ApiResponse.<List<ContentResource>>builder().data(contentService.findAllContentByGenres(genre)).build(), HttpStatus.OK);
+
     }
 
     @GetMapping("findAllContentByActors")
-    public ResponseEntity<List<ContentFactory>> findAllContentByActors(@Param("actor") String[] actor){
-        return new ResponseEntity<>(contentService.findAllContentByActors(actor), HttpStatus.OK);
+    public ResponseEntity<ApiResponse<List<ContentResource>>> findAllContentByActors(@Param("actor") String[] actor){
+        return  new ResponseEntity<>(ApiResponse.<List<ContentResource>>builder().data(contentService.findAllContentByActors(actor)).build(), HttpStatus.OK);
+
     }
 
     @GetMapping("findAllContentByLanguage")
-    public ResponseEntity<List<ContentFactory>> findAllContentByLanguage(@Param("language") String language){
-        return new ResponseEntity<>(contentService.findAllContentByLanguage(language), HttpStatus.OK);
+    public ResponseEntity<ApiResponse<List<ContentResource>>> findAllContentByLanguage(@Param("language") String language){
+        return  new ResponseEntity<>(ApiResponse.<List<ContentResource>>builder().data(contentService.findAllContentByLanguage(language)).build(), HttpStatus.OK);
     }
 
     @GetMapping("findAllContentByYear")
-    public ResponseEntity<List<ContentFactory>> findAllContentByYear(@Param("year") String year){
-        return new ResponseEntity<>(contentService.findAllContentByYear(year), HttpStatus.OK);
+    public ResponseEntity<ApiResponse<List<ContentResource>>> findAllContentByYear(@Param("year") String year){
+        return  new ResponseEntity<>(ApiResponse.<List<ContentResource>>builder().data(contentService.findAllContentByYear(year)).build(), HttpStatus.OK);
     }
 
     @GetMapping("findTop10HighestRatedContent")
-    public ResponseEntity<List<ContentFactory>> findTop10HighestRatedContent(){
-        return new ResponseEntity<>(contentService.findTop10HighestRatedContent(), HttpStatus.OK);
+    public ResponseEntity<ApiResponse<List<ContentResource>>> findTop10HighestRatedContent(){
+        return  new ResponseEntity<>(ApiResponse.<List<ContentResource>>builder().data(contentService.findTop10HighestRatedContent()).build(), HttpStatus.OK);
     }
-    @ResponseStatus(code = HttpStatus.CREATED)
+
     @PostMapping(path = "addContent")
-    public void addContent(@RequestBody ContentFactory contentFactory){
-
-        contentService.addContent(contentFactory);
-
+    public ResponseEntity<ApiResponse<ContentResource>> addContent(@Valid @RequestBody ContentResource contentResource){
+        return new ResponseEntity<>(ApiResponse.<ContentResource>builder().data(contentService.addContent(contentResource)).build(), HttpStatus.CREATED);
     }
-    @ResponseStatus(code = HttpStatus.CREATED)
+
     @PostMapping(path = "addContents")
-    public void addContents(@RequestBody ContentFactory... contentFactories){
-
-        contentService.addContents(contentFactories);
-
+    public ResponseEntity<ApiResponse<List<ContentResource>>> addContents(@Valid @RequestBody List<ContentResource> contentResources){
+        return  new ResponseEntity<>(ApiResponse.<List<ContentResource>>builder().data(contentService.addContents(contentResources)).build(), HttpStatus.CREATED);
     }
 
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
@@ -114,24 +117,24 @@ public class ContentController {
     }
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     @DeleteMapping(path = "deleteContentsByIds/{ids}")
-    public void deleteContentsByIds(@PathVariable("ids") Long[] ids){
+    public void deleteContentsByIds(@PathVariable("ids") List<Long> ids){
         contentService.deleteContentsByIds(ids);
     }
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     @PatchMapping(path = "updateContentById/{id}")
     public void updateContentById(
-            @RequestBody Content content,
-            @PathVariable("id") Long id
+            @PathVariable("id") Long id,
+            @Valid @RequestBody ContentResource content
     ){
-        contentService.updateContentById(content, id);
+        contentService.updateContentById(id, contentMapper.resourceToDomain(content));
     }
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     @PatchMapping(path = "updateContentByIdAlternative/{id}")
     public void updateContentByIdAlternative(
-            @RequestBody ContentFactory contentFactory,
-            @PathVariable("id") Long id
+            @PathVariable("id") Long id,
+            @Valid @RequestBody ContentResource contentResource
     ){
-        contentService.updateContentByIdAlternative(contentFactory, id);
+        contentService.updateContentByIdAlternative(id, contentResource);
     }
 
 }

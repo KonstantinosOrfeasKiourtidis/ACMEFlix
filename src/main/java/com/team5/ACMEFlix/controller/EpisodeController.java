@@ -1,13 +1,18 @@
 package com.team5.ACMEFlix.controller;
 
+import com.team5.ACMEFlix.domain.Account;
 import com.team5.ACMEFlix.domain.Episode;
+import com.team5.ACMEFlix.mapper.EpisodeMapper;
 import com.team5.ACMEFlix.service.EpisodeService;
+import com.team5.ACMEFlix.transfer.ApiResponse;
+import com.team5.ACMEFlix.transfer.resource.EpisodeResource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -15,45 +20,41 @@ import java.util.List;
 public class EpisodeController {
 
     private final EpisodeService episodeService;
+    private final EpisodeMapper episodeMapper;
     @Autowired
-    private EpisodeController(EpisodeService episodeService) {
+    private EpisodeController(EpisodeService episodeService, EpisodeMapper episodeMapper) {
         this.episodeService = episodeService;
+        this.episodeMapper = episodeMapper;
     }
 
     @GetMapping
-    public ResponseEntity<List<Episode>> findAllEpisodes(){
-        return new ResponseEntity<>(episodeService.findAllEpisodes(), HttpStatus.OK);
+    public ResponseEntity<ApiResponse<List<EpisodeResource>>> findAllEpisodes(){
+        return  new ResponseEntity<>(ApiResponse.<List<EpisodeResource>>builder().data(episodeMapper.toResources(episodeService.findAllEpisodes())).build(), HttpStatus.OK);
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<Episode> findEpisodeById(@PathVariable("id") Long id){
-        return episodeService.findEpisodeById(id);
+    public ResponseEntity<ApiResponse<EpisodeResource>> findEpisodeById(@PathVariable("id") Long id){
+        return new ResponseEntity<>(ApiResponse.<EpisodeResource>builder().data(episodeMapper.toResource(episodeService.findEpisodeById(id).get())).build(), HttpStatus.OK);
     }
 
     @GetMapping("findAllEpisodesByContentId/{id}")
-    public ResponseEntity<List<Episode>> findAllEpisodesByContentId(@PathVariable("id") Long id){
-        return new ResponseEntity<>(episodeService.findAllEpisodesByContentId(id), HttpStatus.OK);
+    public ResponseEntity<ApiResponse<List<EpisodeResource>>> findAllEpisodesByContentId(@PathVariable("id") Long id){
+        return  new ResponseEntity<>(ApiResponse.<List<EpisodeResource>>builder().data(episodeMapper.toResources(episodeService.findAllEpisodesByContentId(id))).build(), HttpStatus.OK);
     }
 
     @GetMapping("findAllEpisodesByTitle")
-    public ResponseEntity<List<Episode>> findAllEpisodesByTitle(@Param("search") String search){
-        return new ResponseEntity<>(episodeService.findAllEpisodesByTitle(search), HttpStatus.OK);
+    public ResponseEntity<ApiResponse<List<EpisodeResource>>> findAllEpisodesByTitle(@Param("search") String search){
+        return  new ResponseEntity<>(ApiResponse.<List<EpisodeResource>>builder().data(episodeMapper.toResources(episodeService.findAllEpisodesByTitle(search))).build(), HttpStatus.OK);
     }
-    @ResponseStatus(code = HttpStatus.CREATED)
+
     @PostMapping(path = "addEpisodeBySeasonId/{id}")
-    public void addEpisodeBySeasonId(@RequestBody Episode episode, @PathVariable("id") Long id){
-
-
-
-        episodeService.addEpisodeBySeasonId(episode, id);
+    public ResponseEntity<ApiResponse<EpisodeResource>> addEpisodeBySeasonId(@PathVariable("id") Long id, @Valid @RequestBody EpisodeResource episode){
+        return new ResponseEntity<>(ApiResponse.<EpisodeResource>builder().data(episodeMapper.toResource(episodeService.addEpisodeBySeasonId(id, episodeMapper.toDomain(episode)))).build(), HttpStatus.OK);
     }
-    @ResponseStatus(code = HttpStatus.CREATED)
+
     @PostMapping(path = "addEpisodesBySeasonId/{id}")
-    public void addEpisodesBySeasonId(@RequestBody Episode[] episodes, @PathVariable("id") Long id){
-
-
-
-        episodeService.addEpisodesBySeasonId(episodes, id);
+    public ResponseEntity<ApiResponse<List<EpisodeResource>>> addEpisodesBySeasonId(@PathVariable("id") Long id, @Valid @RequestBody List<EpisodeResource> episodes){
+        return  new ResponseEntity<>(ApiResponse.<List<EpisodeResource>>builder().data(episodeMapper.toResources(episodeService.addEpisodesBySeasonId(id, episodeMapper.toDomains(episodes)))).build(), HttpStatus.CREATED);
     }
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     @DeleteMapping(path = "deleteEpisodeById/{id}")
@@ -62,15 +63,15 @@ public class EpisodeController {
     }
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     @DeleteMapping(path = "deleteEpisodesByIds/{ids}")
-    public void deleteEpisodesByIds(@PathVariable("ids") Long[] ids){
+    public void deleteEpisodesByIds(@PathVariable("ids") List<Long> ids){
         episodeService.deleteEpisodesByIds(ids);
     }
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     @PatchMapping(path = "updateEpisodeById/{id}")
     public void updateEpisodeById(
-            @RequestBody Episode episode,
-            @PathVariable("id") Long id
+            @PathVariable("id") Long id,
+            @Valid @RequestBody EpisodeResource episode
     ){
-        episodeService.updateEpisodeById(episode, id);
+        episodeService.updateEpisodeById(id, episodeMapper.toDomain(episode));
     }
 }

@@ -4,13 +4,17 @@ import com.team5.ACMEFlix.domain.Account;
 import com.team5.ACMEFlix.helpers.LoginForm;
 import com.team5.ACMEFlix.helpers.RegisterForm;
 import com.team5.ACMEFlix.helpers.SubscribeForm;
+import com.team5.ACMEFlix.mapper.AccountMapper;
 import com.team5.ACMEFlix.service.AccountService;
+import com.team5.ACMEFlix.transfer.ApiResponse;
+import com.team5.ACMEFlix.transfer.resource.AccountResource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -19,37 +23,38 @@ public class AccountController {
 
 
     private final AccountService accountService;
+    private final AccountMapper accountMapper;
 
     @Autowired
-    private AccountController(AccountService accountService) {
+    private AccountController(AccountService accountService, AccountMapper accountMapper) {
         this.accountService = accountService;
+        this.accountMapper = accountMapper;
     }
 
     @GetMapping
-    public ResponseEntity<List<Account>> findAllAccounts(){
-        return  new ResponseEntity<>(accountService.findAllAccounts(), HttpStatus.OK);
+    public ResponseEntity<ApiResponse<List<AccountResource>>> findAllAccounts(){
+        return  new ResponseEntity<>(ApiResponse.<List<AccountResource>>builder().data(accountMapper.toResources(accountService.findAllAccounts())).build(), HttpStatus.OK);
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<Account> findAccountById(@PathVariable("id") Long id){
-        return accountService.findAccountById(id);
+    public ResponseEntity<ApiResponse<AccountResource>> findAccountById(@PathVariable("id") Long id){
+        return new ResponseEntity<>(ApiResponse.<AccountResource>builder().data(accountMapper.toResource(accountService.findAccountById(id).get())).build(), HttpStatus.OK);
     }
 
     @GetMapping("findAccountByEmail/{email}")
-    public ResponseEntity<Account> findAccountByEmail(@PathVariable("email") String email){
-        return accountService.findAccountByEmail(email);
+    public ResponseEntity<ApiResponse<AccountResource>> findAccountByEmail(@PathVariable("email") String email){
+        return new ResponseEntity<>(ApiResponse.<AccountResource>builder().data(accountMapper.toResource(accountService.findAccountByEmail(email).get())).build(), HttpStatus.OK);
     }
-    @ResponseStatus(code = HttpStatus.CREATED)
+
     @PostMapping(path = "addAccount")
-    public void addAccount(@RequestBody Account account){
-
-        accountService.addAccount(account);
+    public ResponseEntity<ApiResponse<AccountResource>> addAccount(@Valid @RequestBody AccountResource account){
+        return new ResponseEntity<>(ApiResponse.<AccountResource>builder().data(accountMapper.toResource(accountService.addAccount(accountMapper.toDomain(account)))).build(), HttpStatus.CREATED);
     }
-    @ResponseStatus(code = HttpStatus.CREATED)
-    @PostMapping(path = "addAccounts")
-    public void addAccounts(@RequestBody Account... accounts){
 
-        accountService.addAccounts(accounts);
+    @PostMapping(path = "addAccounts")
+    public ResponseEntity<ApiResponse<List<AccountResource>>> addAccounts(@Valid @RequestBody List<AccountResource> accounts){
+
+        return new ResponseEntity<>(ApiResponse.<List<AccountResource>>builder().data(accountMapper.toResources(accountService.addAccounts(accountMapper.toDomains(accounts)))).build(), HttpStatus.CREATED);
     }
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     @DeleteMapping(path = "deleteAccountById/{id}")
@@ -58,7 +63,7 @@ public class AccountController {
     }
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     @DeleteMapping(path = "deleteAccountsByIds/{ids}")
-    public void deleteAccountsByIds(@PathVariable("ids") Long[] ids){
+    public void deleteAccountsByIds(@PathVariable("ids") List<Long> ids){
         accountService.deleteAccountsByIds(ids);
     }
 
@@ -78,25 +83,25 @@ public class AccountController {
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     @PatchMapping(path = "updateAccountById/{id}")
     public void updateAccountByIdPatch(
-            @RequestBody Account account,
-            @PathVariable("id") Long id
+            @PathVariable("id") Long id,
+            @Valid @RequestBody AccountResource account
     ){
-        accountService.updateAccountByIdPatch(account, id);
+        accountService.updateAccountByIdPatch(id, accountMapper.toDomain(account));
     }
-    @ResponseStatus(code = HttpStatus.OK)
+
     @PostMapping(path = "login")
-    public void login(@RequestBody LoginForm loginForm){
-        accountService.login(loginForm);
+    public ResponseEntity<ApiResponse<Account>> login(@Valid @RequestBody LoginForm loginForm){
+        return new ResponseEntity<>(ApiResponse.<Account>builder().data( accountService.login(loginForm).get()).build(), HttpStatus.OK);
     }
-    @ResponseStatus(code = HttpStatus.CREATED)
+
     @PostMapping(path = "register")
-    public void register(@RequestBody RegisterForm registerForm){
-        accountService.register(registerForm);
+    public ResponseEntity<ApiResponse<Account>> register(@Valid @RequestBody RegisterForm registerForm){
+        return new ResponseEntity<>(ApiResponse.<Account>builder().data( accountService.register(registerForm)).build(), HttpStatus.CREATED);
     }
-    @ResponseStatus(code = HttpStatus.OK)
+    @ResponseStatus(code = HttpStatus.NO_CONTENT)
     @PatchMapping(path = "subscribe/{id}")
     public void subscribe(@PathVariable Long id,
-                          @RequestBody SubscribeForm subscribeForm){
+                         @Valid @RequestBody SubscribeForm subscribeForm){
         accountService.subscribe(id, subscribeForm);
     }
 

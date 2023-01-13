@@ -5,8 +5,8 @@ import lombok.Value;
 
 @Value
 @ToString
-public class APIError {
+public class ApiError {
     Integer status;
     String message;
-    String  path;
+    String path;
 }

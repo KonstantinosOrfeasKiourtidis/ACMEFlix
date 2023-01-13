@@ -1,12 +1,16 @@
 package com.team5.ACMEFlix.controller;
 
 import com.team5.ACMEFlix.domain.Genre;
+import com.team5.ACMEFlix.mapper.GenreMapper;
 import com.team5.ACMEFlix.service.GenreService;
+import com.team5.ACMEFlix.transfer.ApiResponse;
+import com.team5.ACMEFlix.transfer.resource.GenreResource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -14,70 +18,57 @@ import java.util.List;
 public class GenreController {
 
     private final GenreService genreService;
+    private final GenreMapper genreMapper;
     @Autowired
-    private GenreController(GenreService genreService) {
+    private GenreController(GenreService genreService, GenreMapper genreMapper) {
         this.genreService = genreService;
+        this.genreMapper = genreMapper;
     }
 
     @GetMapping
-    public ResponseEntity<List<Genre>> findAllGenres(){
-        return new ResponseEntity<>(genreService.findAllGenres(), HttpStatus.OK);
+    public ResponseEntity<ApiResponse<List<GenreResource>>> findAllGenres(){
+        return  new ResponseEntity<>(ApiResponse.<List<GenreResource>>builder().data(genreMapper.toResources(genreService.findAllGenres())).build(), HttpStatus.OK);
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<Genre> findGenreById(@PathVariable("id") Long id){
-        return genreService.findGenreById(id);
+    public ResponseEntity<ApiResponse<GenreResource>> findGenreById(@PathVariable("id") Long id){
+        return new ResponseEntity<>(ApiResponse.<GenreResource>builder().data(genreMapper.toResource(genreService.findGenreById(id).get())).build(), HttpStatus.OK);
     }
 
     @GetMapping("findAllGenresByContentId/{id}")
-    public ResponseEntity<List<Genre>> findAllGenresByContentId(@PathVariable("id") Long id){
-        return new ResponseEntity<>(genreService.findAllGenresByContentId(id), HttpStatus.OK);
+    public ResponseEntity<ApiResponse<List<GenreResource>>> findAllGenresByContentId(@PathVariable("id") Long id){
+        return  new ResponseEntity<>(ApiResponse.<List<GenreResource>>builder().data(genreMapper.toResources(genreService.findAllGenresByContentId(id))).build(), HttpStatus.OK);
     }
 
     @PostMapping(path = "addGenreByContentId/{id}")
-    public void addGenreByContentId(@RequestBody Genre genre, @PathVariable("id") Long id){
-        genreService.addGenreByContentId(genre, id);
+    public ResponseEntity<ApiResponse<GenreResource>> addGenreByContentId(@PathVariable("id") Long id, @Valid @RequestBody GenreResource genre){
+        return new ResponseEntity<>(ApiResponse.<GenreResource>builder().data(genreMapper.toResource(genreService.addGenreByContentId(id, genreMapper.toDomain(genre)))).build(), HttpStatus.CREATED);
     }
-    @ResponseStatus(code = HttpStatus.CREATED)
+
     @PostMapping(path = "addGenresByContentId/{id}")
-    public void addGenresByContentId(@RequestBody Genre[] genres, @PathVariable("id") Long id){
-
-
-
-        genreService.addGenresByContentId(genres, id);
+    public ResponseEntity<ApiResponse<List<GenreResource>>> addGenresByContentId(@PathVariable("id") Long id, @Valid @RequestBody List<GenreResource> genres){
+        return  new ResponseEntity<>(ApiResponse.<List<GenreResource>>builder().data(genreMapper.toResources(genreService.addGenresByContentId(id, genreMapper.toDomains(genres)))).build(), HttpStatus.CREATED);
     }
-    @ResponseStatus(code = HttpStatus.CREATED)
+
     @PostMapping(path = "addGenreByMovieId/{id}")
-    public void addGenreByMovieId(@RequestBody Genre genre, @PathVariable("id") Long id){
-
-
-
-        genreService.addGenreByMovieId(genre, id);
+    public ResponseEntity<ApiResponse<GenreResource>> addGenreByMovieId(@PathVariable("id") Long id, @Valid @RequestBody GenreResource genre){
+        return new ResponseEntity<>(ApiResponse.<GenreResource>builder().data(genreMapper.toResource(genreService.addGenreByMovieId(id, genreMapper.toDomain(genre)))).build(), HttpStatus.CREATED);
     }
-    @ResponseStatus(code = HttpStatus.CREATED)
+
     @PostMapping(path = "addGenresByMovieId/{id}")
-    public void addGenresByMovieId(@RequestBody Genre[] genres, @PathVariable("id") Long id){
-
-
-
-        genreService.addGenresByMovieId(genres, id);
+    public ResponseEntity<ApiResponse<List<GenreResource>>> addGenresByMovieId(@PathVariable("id") Long id, @Valid @RequestBody List<GenreResource> genres){
+        return  new ResponseEntity<>(ApiResponse.<List<GenreResource>>builder().data(genreMapper.toResources(genreService.addGenresByMovieId(id, genreMapper.toDomains(genres)))).build(), HttpStatus.CREATED);
     }
-    @ResponseStatus(code = HttpStatus.CREATED)
+
     @PostMapping(path = "addGenreByTVSeriesId/{id}")
-    public void addGenreByTVSeriesId(@RequestBody Genre genre, @PathVariable("id") Long id){
-
-
-
-        genreService.addGenreByTVSeriesId(genre, id);
+    public ResponseEntity<ApiResponse<GenreResource>> addGenreByTVSeriesId(@PathVariable("id") Long id, @Valid @RequestBody GenreResource genre){
+        return new ResponseEntity<>(ApiResponse.<GenreResource>builder().data(genreMapper.toResource(genreService.addGenreByTVSeriesId(id, genreMapper.toDomain(genre)))).build(), HttpStatus.CREATED);
     }
 
-    @ResponseStatus(code = HttpStatus.CREATED)
+
     @PostMapping(path = "addGenresByTVSeriesId/{id}")
-    public void addGenresByTVSeriesId(@RequestBody Genre[] genres, @PathVariable("id") Long id){
-
-
-
-        genreService.addGenresByTVSeriesId(genres, id);
+    public ResponseEntity<ApiResponse<List<GenreResource>>> addGenresByTVSeriesId(@PathVariable("id") Long id, @Valid @RequestBody List<GenreResource> genres){
+        return  new ResponseEntity<>(ApiResponse.<List<GenreResource>>builder().data(genreMapper.toResources(genreService.addGenresByTVSeriesId(id, genreMapper.toDomains(genres)))).build(), HttpStatus.CREATED);
     }
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     @DeleteMapping(path = "deleteGenreById/{id}")
@@ -86,15 +77,15 @@ public class GenreController {
     }
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     @DeleteMapping(path = "deleteGenresByIds/{ids}")
-    public void deleteGenresByIds(@PathVariable("ids") Long[] ids){
+    public void deleteGenresByIds(@PathVariable("ids") List<Long> ids){
         genreService.deleteGenresByIds(ids);
     }
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     @PatchMapping(path = "updateGenreById/{id}")
     public void updateGenreById(
-            @RequestBody Genre genre,
-            @PathVariable("id") Long id
+            @PathVariable("id") Long id,
+            @Valid @RequestBody GenreResource genre
     ){
-        genreService.updateGenreById(genre, id);
+        genreService.updateGenreById(id, genreMapper.toDomain(genre));
     }
 }

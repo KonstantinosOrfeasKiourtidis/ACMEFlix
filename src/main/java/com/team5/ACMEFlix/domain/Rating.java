@@ -2,6 +2,8 @@ package com.team5.ACMEFlix.domain;
 
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 import javax.persistence.*;
@@ -24,14 +26,14 @@ public class Rating extends BaseModel {
     @NotNull(message = "Rating cannot be null")
     private Float rating;
 
-    @JsonBackReference
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @ManyToOne(targetEntity=Profile.class, fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name="profile_id")
     private Profile profile;
 
-    @JsonBackReference
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @ManyToOne(targetEntity=Content.class, fetch = FetchType.LAZY, optional = false)

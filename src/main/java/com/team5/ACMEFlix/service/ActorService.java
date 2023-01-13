@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -31,8 +32,8 @@ public class ActorService {
         return actorRepository.findAll();
     }
     @Transactional(readOnly = true)
-    public ResponseEntity<Actor> findActorById(Long id) {
-        return actorRepository.findById(id).map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    public Optional<Actor> findActorById(Long id) {
+        return actorRepository.findById(id);
     }
     @Transactional
     public List<Actor> findAllActorsByContentId(Long id) {
@@ -40,86 +41,92 @@ public class ActorService {
     }
 
     @Transactional(readOnly = true)
-    public void addActorByContentId(Actor actor, Long id) {
+    public Actor addActorByContentId(Long id, Actor actor) {
         Optional<Content> contentExists = contentRepository.findById(id);
         if(!contentExists.isPresent()){
-            throw new IllegalStateException("Content does not exist");
+            throw new NoSuchElementException("Content does not exist");
         }
         else{
             actor.setContent(contentExists.get());
             actorRepository.save(actor);
         }
+        return actor;
     }
     @Transactional
-    public void addActorsByContentId(Actor[] actors, Long id) {
+    public List<Actor> addActorsByContentId(Long id, List<Actor> actors) {
         for(Actor actor : actors){
             Optional<Content> contentExists = contentRepository.findById(id);
             if(!contentExists.isPresent()){
-                throw new IllegalStateException("Content does not exist");
+                throw new NoSuchElementException("Content does not exist");
             }
             else{
                 actor.setContent(contentExists.get());
                 actorRepository.save(actor);
             }
         }
+        return actors;
     }
     @Transactional
-    public void addActorByMovieId(Actor actor, Long id) {
+    public Actor addActorByMovieId(Long id, Actor actor) {
         Optional<Movie> movieExists = movieRepository.findById(id);
         if(!movieExists.isPresent()){
-            throw new IllegalStateException("Movie does not exist");
+            throw new NoSuchElementException("Movie does not exist");
         }
         else{
             actor.setContent(movieExists.get().getContent());
             actorRepository.save(actor);
         }
+        return actor;
     }
 
     @Transactional
-    public void addActorsByMovieId(Actor[] actors, Long id) {
+    public List<Actor> addActorsByMovieId(Long id, List<Actor> actors) {
         for(Actor actor : actors){
             Optional<Movie> movieExists = movieRepository.findById(id);
             if(!movieExists.isPresent()){
-                throw new IllegalStateException("Movie does not exist");
+                throw new NoSuchElementException("Movie does not exist");
             }
             else{
                 actor.setContent(movieExists.get().getContent());
                 actorRepository.save(actor);
             }
         }
+        return actors;
     }
 
     @Transactional
-    public void addActorByTVSeriesId(Actor actor, Long id) {
+    public Actor addActorByTVSeriesId(Long id, Actor actor) {
         Optional<TVSeries> tvSeriesExists = tVSeriesRepository.findById(id);
         if(!tvSeriesExists.isPresent()){
-            throw new IllegalStateException("TV Series does not exist");
+            throw new NoSuchElementException("TV Series does not exist");
         }
         else{
             actor.setContent(tvSeriesExists.get().getContent());
             actorRepository.save(actor);
         }
+        return actor;
     }
 
     @Transactional
-    public void addActorsByTVSeriesId(Actor[] actors, Long id) {
+    public List<Actor> addActorsByTVSeriesId(Long id, List<Actor> actors) {
         for(Actor actor : actors){
             Optional<TVSeries> tvSeriesExists = tVSeriesRepository.findById(id);
             if(!tvSeriesExists.isPresent()){
-                throw new IllegalStateException("TV Series does not exist");
+                throw new NoSuchElementException("TV Series does not exist");
             }
             else{
                 actor.setContent(tvSeriesExists.get().getContent());
                 actorRepository.save(actor);
             }
         }
+        return actors;
     }
 
     @Transactional
     public void deleteActorById(Long id) {
         boolean exists = actorRepository.existsById(id);
         if(!exists){
-            throw new IllegalStateException("Actor does not exist");
+            throw new NoSuchElementException("Actor does not exist");
         }
         else{
 
@@ -128,11 +135,11 @@ public class ActorService {
         }
     }
     @Transactional
-    public void deleteActorsByIds(Long[] ids) {
+    public void deleteActorsByIds(List<Long> ids) {
         for(Long id : ids){
             boolean exists = actorRepository.existsById(id);
             if(!exists){
-                throw new IllegalStateException("Actor does not exist");
+                throw new NoSuchElementException("Actor does not exist");
             }
             else{
 
@@ -143,10 +150,10 @@ public class ActorService {
     }
 
     @Transactional
-    public void updateActorById(Actor actor, Long id) {
+    public void updateActorById(Long id, Actor actor) {
         Optional<Actor> actorFound = actorRepository.findById(id);
         if(!actorFound.isPresent()){
-            throw new IllegalStateException("Actor does not exist");
+            throw new NoSuchElementException("Actor does not exist");
         }
         else{
             if(actor.getFullname() !=null &&

@@ -1,15 +1,15 @@
-package com.team5.ACMEFlix.controller;
+package com.team5.ACMEFlix.service;
 
 import com.team5.ACMEFlix.domain.Account;
 import com.team5.ACMEFlix.domain.Address;
 import com.team5.ACMEFlix.repository.AccountRepository;
 import com.team5.ACMEFlix.repository.AddressRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -26,8 +26,8 @@ public class AddressService {
     }
 
     @Transactional(readOnly = true)
-    public ResponseEntity<Address> findAddressById(Long id) {
-        return addressRepository.findById(id).map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    public Optional<Address> findAddressById(Long id) {
+        return addressRepository.findById(id);
     }
 
 
@@ -38,22 +38,23 @@ public class AddressService {
 
 
     @Transactional
-    public void addAddressByAccountId(Address address, Long id) {
+    public Address addAddressByAccountId(Long id, Address address) {
         Optional<Account> accountExists = accountRepository.findById(id);
         if(!accountExists.isPresent()){
-            throw new IllegalStateException("Account does not exist");
+            throw new NoSuchElementException("Account does not exist");
         }
         else{
             address.setAccount(accountExists.get());
             addressRepository.save(address);
         }
+        return address;
     }
 
     @Transactional
-    public void addAddressesByAccountId(Address[] addresses, Long id) {
+    public List<Address> addAddressesByAccountId(Long id, List<Address> addresses) {
         Optional<Account> accountExists = accountRepository.findById(id);
         if(!accountExists.isPresent()){
-            throw new IllegalStateException("Account does not exist");
+            throw new NoSuchElementException("Account does not exist");
         }
         else{
             for(Address address : addresses) {
@@ -61,13 +62,14 @@ public class AddressService {
                 addressRepository.save(address);
             }
         }
+        return addresses;
     }
 
     @Transactional
     public void deleteAddressById(Long id) {
         boolean exists = addressRepository.existsById(id);
         if(!exists){
-            throw new IllegalStateException("Address does not exist");
+            throw new NoSuchElementException("Address does not exist");
         }
         else{
             addressRepository.deleteById(id);
@@ -75,11 +77,11 @@ public class AddressService {
     }
 
     @Transactional
-    public void deleteAddressesByIds(Long[] ids) {
+    public void deleteAddressesByIds(List<Long> ids) {
         for(Long id : ids) {
             boolean exists = addressRepository.existsById(id);
             if (!exists) {
-                throw new IllegalStateException("Address does not exist");
+                throw new NoSuchElementException("Address does not exist");
             } else {
                 addressRepository.deleteById(id);
             }
@@ -87,8 +89,8 @@ public class AddressService {
     }
 
     @Transactional
-    public void updateAddressById(Address address, Long id) {
-        Address foundAddress = addressRepository.findById(id).orElseThrow(() -> new IllegalStateException(
+    public void updateAddressById(Long id, Address address) {
+        Address foundAddress = addressRepository.findById(id).orElseThrow(() -> new NoSuchElementException(
                 "Address doesnt not exists"
         ));
 

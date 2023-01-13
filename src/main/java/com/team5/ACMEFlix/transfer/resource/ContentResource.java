@@ -80,4 +80,6 @@ public class ContentResource extends BaseResource {
 
     private Integer profileNo;
 
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private List<RatingResource> ratings;
 }

@@ -9,6 +9,8 @@ import com.team5.ACMEFlix.mapper.TVSeriesMapper;
 import com.team5.ACMEFlix.repository.*;
 
 import com.team5.ACMEFlix.transfer.resource.ContentResource;
+import com.team5.ACMEFlix.transfer.resource.MovieResource;
+import com.team5.ACMEFlix.transfer.resource.TVSeriesResource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -41,6 +43,8 @@ public class ContentService {
     private MovieService movieService;
     @Autowired
     private TVSeriesService tvSeriesService;
+    @Autowired
+    private EpisodeService episodeService;
 
 
     @Transactional(readOnly = true)
@@ -80,6 +84,14 @@ public class ContentService {
         return contentRepository.findById(id);
     }
 
+    @Transactional(readOnly = true)
+    public List<ContentResource> findAllContentsByFamilyFriendly() {
+        List<ContentResource> contentResources = new ArrayList<>();
+        contentResources.addAll(contentMapper.moviesToContentResources(movieService.findAllMoviesFamilyFriendly()));
+        contentResources.addAll(contentMapper.tvSeriesToContentResources(tvSeriesService.findAllTVSeriesFamilyFriendly()));
+        Collections.shuffle(contentResources);
+        return contentResources;
+    }
 
     @Transactional(readOnly = true)
     public List<Content> findAllContentsByFamilyFriendlyAlternative() {
@@ -94,13 +106,69 @@ public class ContentService {
 
 
     @Transactional(readOnly = true)
-    public List<Content> findAllContentsByTitleAlternative(String search) {
-        return contentRepository.findContentByName(search);
+    public List<ContentResource> findAllContentsByTitleAlternative(String search) {
+        List<ContentResource> contentResourcesSearchResult = contentMapper.domainToResources(contentRepository.findContentByName(search));
+        List<MovieResource>  movieResources = new ArrayList<>();
+        List<TVSeriesResource>  tvSeriesResources = new ArrayList<>();
+        for (ContentResource contentResource: contentResourcesSearchResult){
+            if(contentResource.getContentType().equals(ContentType.MOVIE)){
+
+                movieResources.add(movieMapper.toResource(movieService.findMovieByContentId(contentResource.getId()).get()));
+
+            }
+            else if(contentResource.getContentType().equals(ContentType.TV_SERIES)){
+                tvSeriesResources.add(tvSeriesMapper.toResource(tvSeriesService.findTVSeriesByContentId(contentResource.getId()).get()));
+            }
+        }
+
+        List<ContentResource> contentResourcesReturn = new ArrayList<>();
+        contentResourcesReturn.addAll(contentMapper.tvSeriesToContentResources(tvSeriesMapper.toDomains(tvSeriesResources)));
+        contentResourcesReturn.addAll(contentMapper.moviesToContentResources(movieMapper.toDomains(movieResources)));
+
+        return contentResourcesReturn;
     }
 
+    @Transactional(readOnly = true)
+    public List<ContentResource> findAllContentsByTitleOrEpisodeName(String search) {
+        List<ContentResource> contentResourcesSearchResult = contentMapper.domainToResources(contentRepository.findContentByName(search));
+        List<MovieResource>  movieResources = new ArrayList<>();
+        List<TVSeriesResource>  tvSeriesResources = new ArrayList<>();
+        List<Long> contentIds = new ArrayList<>();
+        for (ContentResource contentResource: contentResourcesSearchResult){
+
+            contentIds.add(contentResource.getId());
+        }
+
+
+        List<Long> episodeContentIds = episodeService.findAllEpisodesByEpisodeName(search, contentIds);
+
+        List<ContentResource> newContentResource = contentMapper.domainToResources(contentRepository.findAllById(episodeContentIds));
+        for (ContentResource contentResource: newContentResource){
+            if(contentResource.getContentType().equals(ContentType.MOVIE)){
+
+                movieResources.add(movieMapper.toResource(movieService.findMovieByContentId(contentResource.getId()).get()));
+
+
+            }
+            else if(contentResource.getContentType().equals(ContentType.TV_SERIES)){
+                tvSeriesResources.add(tvSeriesMapper.toResource(tvSeriesService.findTVSeriesByContentId(contentResource.getId()).get()));
+            }
+        }
+
+
+
+        List<ContentResource> contentResourcesReturn = new ArrayList<>();
+
+
+        contentResourcesReturn.addAll(contentMapper.moviesToContentResources(movieMapper.toDomains(movieResources)));
+
+        contentResourcesReturn.addAll(contentMapper.tvSeriesToContentResources(tvSeriesMapper.toDomains(tvSeriesResources)));
+
+        return contentResourcesReturn;
+    }
 
     @Transactional(readOnly = true)
-    public List<BigInteger> findAllContentByGenres(String[] genre) {
+    public List<ContentResource> findAllContentByGenres(String[] genre) {
 
         String query;
         query = "SELECT GENRES.CONTENT_ID FROM GENRES GROUP BY GENRES.CONTENT_ID ";
@@ -119,7 +187,28 @@ public class ContentService {
         List<BigInteger> contentIds = entityManager.createNativeQuery(query).getResultList();
 
 
-        return contentIds;
+        List<ContentResource> contentResources = contentMapper.domainToResources(contentRepository.findAllContentsById(contentIds));
+        List<MovieResource> movies = new ArrayList<>();
+        List<TVSeriesResource> tvSeries = new ArrayList<>();
+        for (ContentResource content: contentResources){
+
+
+            if(content.getContentType().equals(ContentType.MOVIE)){
+                movies.add(movieMapper.toResource(movieService.findMovieByContentId(content.getId()).get()));
+            }
+            else if(content.getContentType().equals(ContentType.TV_SERIES)){
+                tvSeries.add(tvSeriesMapper.toResource(tvSeriesService.findTVSeriesByContentId(content.getId()).get()));
+            }
+            else{
+
+            }
+        }
+
+        List<ContentResource> contentResourcesReturn = new ArrayList<>();
+        contentResourcesReturn.addAll(contentMapper.moviesToContentResources(movieMapper.toDomains(movies)));
+        contentResourcesReturn.addAll(contentMapper.tvSeriesToContentResources(tvSeriesMapper.toDomains(tvSeries)));
+
+        return contentResourcesReturn;
     }
 
     @Transactional(readOnly = true)
@@ -129,7 +218,7 @@ public class ContentService {
 
 
     @Transactional(readOnly = true)
-    public List<BigInteger> findAllContentByActors(String[] actor) {
+    public List<ContentResource> findAllContentByActors(String[] actor) {
         String query;
         query = "SELECT ACTORS.CONTENT_ID FROM ACTORS GROUP BY ACTORS.CONTENT_ID ";
 
@@ -145,32 +234,153 @@ public class ContentService {
         }
 
         List<BigInteger> contentIds = entityManager.createNativeQuery(query).getResultList();
+        List<ContentResource> contents = contentMapper.domainToResources(contentRepository.findAllContentsById(contentIds));
+        List<MovieResource> movies = new ArrayList<>();
+        List<TVSeriesResource> tvSeries = new ArrayList<>();
+        for (ContentResource content: contents){
+            if(content.getContentType().equals(ContentType.MOVIE)){
+                movies.add(movieMapper.toResource(movieService.findMovieByContentId(content.getId()).get()));
+            }
+            else if(content.getContentType().equals(ContentType.TV_SERIES)){
+                tvSeries.add(tvSeriesMapper.toResource(tvSeriesService.findTVSeriesByContentId(content.getId()).get()));
+            }
+            else{
 
-        return contentIds;
+            }
+        }
+
+        List<ContentResource> contentResourcesReturn = new ArrayList<>();
+        contentResourcesReturn.addAll(contentMapper.moviesToContentResources(movieMapper.toDomains(movies)));
+        contentResourcesReturn.addAll(contentMapper.tvSeriesToContentResources(tvSeriesMapper.toDomains(tvSeries)));
+
+
+        return contentResourcesReturn;
     }
 
     @Transactional(readOnly = true)
-    public List<Content> findAllContentByLanguage(String language) {
-        return contentRepository.findContentByLanguage(language);
+    public List<ContentResource> findAllContentByLanguage(String language) {
+        List<ContentResource> contentResources = contentMapper.domainToResources(contentRepository.findContentByLanguage(language));
+        List<MovieResource> movies = new ArrayList<>();
+        List<TVSeriesResource> tvSeries = new ArrayList<>();
+        for (ContentResource content: contentResources){
+            if(content.getContentType().equals(ContentType.MOVIE)){
+                movies.add(movieMapper.toResource(movieService.findMovieByContentId(content.getId()).get()));
+            }
+            else if(content.getContentType().equals(ContentType.TV_SERIES)){
+                tvSeries.add(tvSeriesMapper.toResource(tvSeriesService.findTVSeriesByContentId(content.getId()).get()));
+            }
+            else{
+
+            }
+        }
+
+        List<ContentResource> contentResourcesReturn = new ArrayList<>();
+        contentResourcesReturn.addAll(contentMapper.moviesToContentResources(movieMapper.toDomains(movies)));
+        contentResourcesReturn.addAll(contentMapper.tvSeriesToContentResources(tvSeriesMapper.toDomains(tvSeries)));
+
+        return contentResourcesReturn;
     }
     @Transactional(readOnly = true)
-    public List<Content> findAllContentByYear(String year) {
+    public List<ContentResource> findAllContentByYear(String year) {
+        List<ContentResource> contentResources = contentMapper.domainToResources(contentRepository.findContentByYear(year));
 
-        return contentRepository.findContentByYear(year);
+        List<MovieResource> movies = new ArrayList<>();
+        List<TVSeriesResource> tvSeries = new ArrayList<>();
+        for (ContentResource content: contentResources){
+            if(content.getContentType().equals(ContentType.MOVIE)){
+                movies.add(movieMapper.toResource(movieService.findMovieByContentId(content.getId()).get()));
+            }
+            else if(content.getContentType().equals(ContentType.TV_SERIES)){
+                tvSeries.add(tvSeriesMapper.toResource(tvSeriesService.findTVSeriesByContentId(content.getId()).get()));
+            }
+            else{
+
+            }
+        }
+        List<ContentResource> contentResourcesReturn = new ArrayList<>();
+        contentResourcesReturn.addAll(contentMapper.moviesToContentResources(movieMapper.toDomains(movies)));
+        contentResourcesReturn.addAll(contentMapper.tvSeriesToContentResources(tvSeriesMapper.toDomains(tvSeries)));
+
+        return contentResourcesReturn;
     }
 
     @Transactional (readOnly = true)
-    public List<Long> findTop10HighestRatedContent() {
+    public List<ContentResource> findTop10HighestRatedContent() {
+        List<Long> contentIds = ratingRepository.findContent10HighestRated();
+
+        List<ContentResource> contents = contentMapper.domainToResources(contentRepository.findAllById(contentIds));
+
+        List<MovieResource> movies = new ArrayList<>();
+        List<TVSeriesResource> tvSeries = new ArrayList<>();
+        for (ContentResource content: contents){
+            if(content.getContentType().equals(ContentType.MOVIE)){
+                movies.add(movieMapper.toResource(movieService.findMovieByContentId(content.getId()).get()));
+            }
+            else if(content.getContentType().equals(ContentType.TV_SERIES)){
+                tvSeries.add(tvSeriesMapper.toResource(tvSeriesService.findTVSeriesByContentId(content.getId()).get()));
+            }
+            else{
+
+            }
+        }
+
+        List<ContentResource> contentResourcesReturn = new ArrayList<>();
+        contentResourcesReturn.addAll(contentMapper.moviesToContentResources(movieMapper.toDomains(movies)));
+        contentResourcesReturn.addAll(contentMapper.tvSeriesToContentResources(tvSeriesMapper.toDomains(tvSeries)));
+
+        Collections.sort(contentResourcesReturn, new Comparator<ContentResource>() {
+            public int compare(ContentResource cr1, ContentResource cr2) {
+
+                int result = Float.compare(cr2.getRating(), cr1.getRating());
+                return result;
+            }
+        });
 
 
-
-        return ratingRepository.findContent10HighestRated();
+        return contentResourcesReturn;
     }
 
     @Transactional (readOnly = true)
     public List<Content> findAllById(List<Long> ids) {
 
         return contentRepository.findAllById(ids);
+    }
+
+    @Transactional
+    public ContentResource addContent(ContentResource contentResource) {
+        if(contentResource.getContentType().equals(ContentType.TV_SERIES)){
+            TVSeriesResource tvSerie = tvSeriesMapper.toResource(contentMapper.contentResourceToTVSerie(contentResource));
+
+            tvSeriesService.addTVSerie(tvSeriesMapper.toDomain(tvSerie));
+        }
+        else if(contentResource.getContentType().equals(ContentType.MOVIE)){
+            MovieResource movie = movieMapper.toResource(contentMapper.contentResourceToMovie(contentResource));
+
+            movieService.addMovie(movieMapper.toDomain(movie));
+        }
+        else{
+            throw new IllegalStateException("Not a Movie or a TV Series");
+        }
+
+        return contentResource;
+    }
+
+    @Transactional
+    public List<ContentResource> addContents(List<ContentResource> contentResources) {
+        for(ContentResource contentResource : contentResources) {
+            if (contentResource.getContentType().equals(ContentType.TV_SERIES)) {
+                TVSeriesResource tvSerie = tvSeriesMapper.toResource(contentMapper.contentResourceToTVSerie(contentResource));
+
+                tvSeriesService.addTVSerie(tvSeriesMapper.toDomain(tvSerie));
+            } else if (contentResource.getContentType().equals(ContentType.MOVIE)) {
+                MovieResource movie = movieMapper.toResource(contentMapper.contentResourceToMovie(contentResource));
+
+                movieService.addMovie(movieMapper.toDomain(movie));
+            } else {
+                throw new IllegalStateException("Not a Movie or a TV Series");
+            }
+        }
+        return contentResources;
     }
 
 

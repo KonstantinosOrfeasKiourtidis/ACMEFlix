@@ -1,6 +1,7 @@
 package com.team5.ACMEFlix.transfer.resource;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.team5.ACMEFlix.domain.Account;
 import com.team5.ACMEFlix.domain.enumeration.CardType;
 import com.team5.ACMEFlix.transfer.BaseResource;

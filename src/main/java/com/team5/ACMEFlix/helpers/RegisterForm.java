@@ -40,7 +40,6 @@ public class RegisterForm {
     @Column(length = 14)
     @Pattern(regexp = "^[0-9]*$", message="Account's phone Number can only contain numeric symbols")
     private String phoneNo;
-    private List<AddressResource> address;
-    private List<CreditCardResource> creditCards;
+
 
 }

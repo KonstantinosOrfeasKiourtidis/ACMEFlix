@@ -33,20 +33,34 @@ public class ViewService {
     @Autowired
     private MovieRepository movieRepository;
     @Autowired
+    private MovieService movieService;
+    @Autowired
+    private TVSeriesService tvSeriesService;
+    @Autowired
     private WatchListMovieRepository watchListMovieRepository;
     @Autowired
     private ContentRepository contentRepository;
     @Autowired
-    private ProfileMapper profileMapper;
+    private ContentMapper contentMapper;
 
 
     @Transactional(readOnly = true)
-    public List<Content> findTop10MostViewedContent() {
+    public List<ContentResource> findTop10MostViewedContent() {
         List<Long> contentIds= viewRepository.findTop10MostViewedContent();
         List<Content> contents = contentRepository.findAllById(contentIds);
+        List<ContentResource> contentResources = contentMapper.domainToResources(contents);
 
+        List<ContentResource> contentResourcesReturn = new ArrayList<>();
+        for(ContentResource content: contentResources){
+            if(content.getContentType().equals(ContentType.MOVIE)){
+                contentResources.add(contentMapper.movieToContentResource(movieService.findMovieByContentId(content.getId()).get()));
+            }
+            else if(content.getContentType().equals(ContentType.TV_SERIES)){
+                contentResources.add(contentMapper.tvSerieToContentResource(tvSeriesService.findTVSeriesByContentId(content.getId()).get()));
+            }
+        }
 
-        return contents;
+        return contentResourcesReturn;
     }
 
     @Transactional(readOnly = true)
@@ -55,14 +69,14 @@ public class ViewService {
     }
 
     @Transactional
-    public View watchEpisode(Long profile_id, Long episode_id, Float watchedInMinutes) {
+    public View watchEpisode(WatchEpisodeForm watchEpisodeForm) {
 
 
-        Profile foundProfile = profileRepository.findById(profile_id).orElseThrow(() -> new NoSuchElementException(
+        Profile foundProfile = profileRepository.findById(watchEpisodeForm.getProfile_id()).orElseThrow(() -> new NoSuchElementException(
                 "Profile does not exists"
         ));
 
-        Episode foundEpisode = episodeRepository.findById(episode_id).orElseThrow(() -> new NoSuchElementException(
+        Episode foundEpisode = episodeRepository.findById(watchEpisodeForm.getEpisode_id()).orElseThrow(() -> new NoSuchElementException(
                 "Episode does not exists"
         ));
 
@@ -77,27 +91,27 @@ public class ViewService {
         }
 
 
-        if(!(watchedInMinutes > 0 && watchedInMinutes  <= foundEpisode.getSeason().getTvSeries().getContent().getRuntime())){
+        if(!(watchEpisodeForm.getTimeWatchedInMinutes() > 0 && watchEpisodeForm.getTimeWatchedInMinutes()  <= foundEpisode.getSeason().getTvSeries().getContent().getRuntime())){
             throw new IllegalStateException("The amount of time you are trying to watch from this episode is invalid");
         }
 
 
 
-        Optional<View> viewFound = viewRepository.findViewByEpisodeIdAndProfileId(episode_id, profile_id);
+        Optional<View> viewFound = viewRepository.findViewByEpisodeIdAndProfileId(watchEpisodeForm.getEpisode_id(), watchEpisodeForm.getProfile_id());
         WatchedListEpisode watchedListEpisode = new WatchedListEpisode();
 
         View view = new View();
 
         if(!viewFound.isEmpty()){
             viewFound.get().setWatchedDate(new Date());
-            viewFound.get().setTimeWatchedInMinutes(watchedInMinutes);
+            viewFound.get().setTimeWatchedInMinutes(watchEpisodeForm.getTimeWatchedInMinutes());
 
         }
         else{
 
             view.setWatchedDate(new Date());
             view.setProfile(foundProfile);
-            view.setTimeWatchedInMinutes(watchedInMinutes);
+            view.setTimeWatchedInMinutes(watchEpisodeForm.getTimeWatchedInMinutes());
             view.setContent(foundEpisode.getSeason().getTvSeries().getContent());
 
             watchedListEpisode.setEpisode(foundEpisode);
@@ -112,14 +126,14 @@ public class ViewService {
     }
 
     @Transactional
-    public View watchMovie(Long profile_id, Long movie_id, Float watchedInMinutes) {
+    public View watchMovie(WatchMovieForm watchMovieForm) {
 
 
-        Profile foundProfile = profileRepository.findById(profile_id).orElseThrow(() -> new NoSuchElementException(
+        Profile foundProfile = profileRepository.findById(watchMovieForm.getProfile_id()).orElseThrow(() -> new NoSuchElementException(
                 "Profile does not exists"
         ));
 
-        Movie foundMovie = movieRepository.findById(movie_id).orElseThrow(() -> new NoSuchElementException(
+        Movie foundMovie = movieRepository.findById(watchMovieForm.getMovie_id()).orElseThrow(() -> new NoSuchElementException(
                 "Movie does not exists"
         ));
 
@@ -134,13 +148,13 @@ public class ViewService {
         }
 
 
-        if(!(watchedInMinutes > 0 && watchedInMinutes  <= foundMovie.getContent().getRuntime())){
+        if(!(watchMovieForm.getTimeWatchedInMinutes() > 0 && watchMovieForm.getTimeWatchedInMinutes()  <= foundMovie.getContent().getRuntime())){
             throw new IllegalStateException("The amount of time you are trying to watch from this movie is invalid");
         }
 
 
 
-        Optional<View> viewFound = viewRepository.findViewByMovieIdAndProfileId(movie_id, profile_id);
+        Optional<View> viewFound = viewRepository.findViewByMovieIdAndProfileId(watchMovieForm.getMovie_id(), watchMovieForm.getProfile_id());
 
         WatchedListMovie watchedListMovie = new WatchedListMovie();
 
@@ -148,14 +162,14 @@ public class ViewService {
 
         if(!viewFound.isEmpty()){
             viewFound.get().setWatchedDate(new Date());
-            viewFound.get().setTimeWatchedInMinutes(watchedInMinutes);
+            viewFound.get().setTimeWatchedInMinutes(watchMovieForm.getTimeWatchedInMinutes());
 
         }
         else{
 
             view.setWatchedDate(new Date());
             view.setProfile(foundProfile);
-            view.setTimeWatchedInMinutes(watchedInMinutes);
+            view.setTimeWatchedInMinutes(watchMovieForm.getTimeWatchedInMinutes());
             view.setContent(foundMovie.getContent());
 
             watchedListMovie.setMovie(foundMovie);

@@ -6,6 +6,9 @@ import com.team5.ACMEFlix.domain.enumeration.SubscriptionType;
 import com.team5.ACMEFlix.helpers.LoginForm;
 import com.team5.ACMEFlix.helpers.RegisterForm;
 import com.team5.ACMEFlix.helpers.SubscribeForm;
+import com.team5.ACMEFlix.mapper.AccountMapper;
+import com.team5.ACMEFlix.mapper.AddressMapper;
+import com.team5.ACMEFlix.mapper.CreditCardMapper;
 import com.team5.ACMEFlix.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,6 +25,12 @@ public class AccountService {
     private  ProfileRepository profileRepository;
     @Autowired
     private  PaymentRepository paymentRepository;
+    @Autowired
+    private AddressMapper addressMapper;
+    @Autowired
+    private CreditCardMapper creditCardMapper;
+    @Autowired
+    private AccountMapper accountMapper;
 
 
 
@@ -299,40 +308,39 @@ public class AccountService {
 
     }
     @Transactional
-    public Account register(String email, String password, String confirmPassword, String firstname, String lastname, String usermane, String phoneNo,
-                            List<CreditCard> creditCards, List<Address> addresses) {
-        if(!(email!=null || email.length() > 0)){
+    public Account register(RegisterForm registerForm) {
+        if(!(registerForm.getEmail()!=null || registerForm.getEmail().length() > 0)){
             throw new IllegalStateException("Email is a required field");
         }
 
-        if(!(firstname!=null || firstname.length() > 0)){
+        if(!(registerForm.getFirstname()!=null || registerForm.getFirstname().length() > 0)){
             throw new IllegalStateException("First name is a required field");
         }
-        if(!(lastname!=null || lastname.length() > 0)){
+        if(!(registerForm.getLastname()!=null || registerForm.getLastname().length() > 0)){
             throw new IllegalStateException("Last name is a required field");
         }
-        if(!(usermane!=null ||usermane.length() > 0)){
+        if(!(registerForm.getUsername()!=null ||registerForm.getUsername().length() > 0)){
             throw new IllegalStateException("Username is a required field");
         }
-        if(!(password!=null || password.length() > 0)){
+        if(!(registerForm.getPassword()!=null || registerForm.getPassword().length() > 0)){
             throw new IllegalStateException("Password is a required field");
         }
 
-        if(!(confirmPassword!=null || confirmPassword.length() > 0)){
+        if(!(registerForm.getConfirmPassword()!=null || registerForm.getConfirmPassword().length() > 0)){
             throw new IllegalStateException("Repeat password is a required field");
         }
 
-        if(!(phoneNo!=null || phoneNo.length() > 0)){
+        if(!(registerForm.getPhoneNo()!=null || registerForm.getPhoneNo().length() > 0)){
             throw new IllegalStateException("Phone number is a required field");
         }
 
 
-        Optional<Account> accountExists = accountRepository.findAccountByEmail(email);
+        Optional<Account> accountExists = accountRepository.findAccountByEmail(registerForm.getEmail());
         if(accountExists.isPresent()){
             throw new IllegalStateException("The email is in use");
         }
 
-        if(!password.equals(confirmPassword)){
+        if(!registerForm.getPassword().equals(registerForm.getConfirmPassword())){
             throw new IllegalStateException("The passwords are not the same");
         }
 
@@ -341,26 +349,17 @@ public class AccountService {
 
 
 
-        account.setEmail(email);
-        account.setUsername(usermane);
-        account.setFirstname(firstname);
-        account.setLastname(lastname);
-        account.setPhoneNo(phoneNo);
+        account.setEmail(registerForm.getEmail());
+        account.setUsername(registerForm.getUsername());
+        account.setFirstname(registerForm.getFirstname());
+        account.setLastname(registerForm.getLastname());
+        account.setPhoneNo(registerForm.getPhoneNo());
 
-        account.setPassword(password);
+        account.setPassword(registerForm.getPassword());
         //account.setPassword(passwordEncoder.encode(registerForm.getPassword()));
 
 
-        account.setAddress(addresses);
-        account.setCreditCards(creditCards);
 
-
-
-        addresses
-                .forEach(a -> a.setAccount(account));
-
-        creditCards
-                .forEach(c -> c.setAccount(account));
 
         Account emptyAccount = account;
         emptyAccount.setProfiles(Collections.emptyList()) ;
@@ -377,7 +376,7 @@ public class AccountService {
 
 
     @Transactional
-    public void subscribe(Long id, SubscriptionType subscriptionType) {
+    public void subscribe(Long id, SubscribeForm subscribeForm) {
         Account foundAccount = accountRepository.findById(id).orElseThrow(() -> new NoSuchElementException(
                 "Account does not exists"
         ));
@@ -390,15 +389,15 @@ public class AccountService {
             throw new IllegalStateException("The account does not have any valid billing addresses");
         }
 
-        if(!subscriptionType.equals(SubscriptionType.NO_SUBSCRIPTION) &&
-                !subscriptionType.equals(SubscriptionType.BASIC) &&
-                !subscriptionType.equals(SubscriptionType.STANDARD)&&
-                !subscriptionType.equals(SubscriptionType.PREMIUM)
+        if(!subscribeForm.getSubscriptionType().equals(SubscriptionType.NO_SUBSCRIPTION) &&
+                !subscribeForm.getSubscriptionType().equals(SubscriptionType.BASIC) &&
+                !subscribeForm.getSubscriptionType().equals(SubscriptionType.STANDARD)&&
+                !subscribeForm.getSubscriptionType().equals(SubscriptionType.PREMIUM)
         ){
             throw new IllegalStateException("Not a valid plan");
         }
 
-        foundAccount.setSubscriptionType(subscriptionType);
+        foundAccount.setSubscriptionType(subscribeForm.getSubscriptionType());
         foundAccount.setSubscriptionDate(new Date());
 
         if(!foundAccount.getProfiles().isEmpty()){
@@ -422,8 +421,8 @@ public class AccountService {
         }
 
         Payment payment = new Payment();
-        payment.setAmount(subscriptionType.getPrice());
-        payment.setSubscriptionType(subscriptionType);
+        payment.setAmount(subscribeForm.getSubscriptionType().getPrice());
+        payment.setSubscriptionType(subscribeForm.getSubscriptionType());
         payment.setAccount(foundAccount);
         payment.setPaymentDate(new Date());
         payment.setCreditCard(foundAccount.getCreditCards().get(0));

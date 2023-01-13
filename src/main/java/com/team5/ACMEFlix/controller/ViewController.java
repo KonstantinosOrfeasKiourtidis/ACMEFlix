@@ -25,40 +25,20 @@ public class ViewController {
 
     private final ViewService viewService;
     private final ViewMapper viewMapper;
-    private final ContentMapper contentMapper;
-    private final MovieMapper movieMapper;
-    private final TVSeriesMapper tvSeriesMapper;
-    private final MovieService movieService;
-    private final TVSeriesService tvSeriesService;
+
 
     @Autowired
-    private ViewController( ViewService viewService, ViewMapper viewMapper,
-                            ContentMapper contentMapper, MovieMapper movieMapper, TVSeriesMapper tvSeriesMapper,  MovieService movieService, TVSeriesService tvSeriesService) {
+    private ViewController( ViewService viewService, ViewMapper viewMapper) {
         this.viewService = viewService;
         this.viewMapper = viewMapper;
-        this.contentMapper = contentMapper;
-        this.movieMapper = movieMapper;
-        this.tvSeriesMapper = tvSeriesMapper;
-        this.movieService = movieService;
-        this.tvSeriesService = tvSeriesService;
     }
 
     @GetMapping("findTop10MostViewedContents")
     public ResponseEntity<ApiResponse<List<ContentResource>>> findTop10MostViewedContent(){
 
-        List<ContentResource> contentResources = contentMapper.domainToResources(viewService.findTop10MostViewedContent());
 
-        List<ContentResource> contentResourcesReturn = new ArrayList<>();
-        for(ContentResource content: contentResources){
-            if(content.getContentType().equals(ContentType.MOVIE)){
-                contentResources.add(contentMapper.movieToContentResource(movieService.findMovieByContentId(content.getId()).get()));
-            }
-            else if(content.getContentType().equals(ContentType.TV_SERIES)){
-                contentResources.add(contentMapper.tvSerieToContentResource(tvSeriesService.findTVSeriesByContentId(content.getId()).get()));
-            }
-        }
 
-        return new ResponseEntity<>(ApiResponse.<List<ContentResource>>builder().data(contentResourcesReturn).build(), HttpStatus.OK);
+        return new ResponseEntity<>(ApiResponse.<List<ContentResource>>builder().data(viewService.findTop10MostViewedContent()).build(), HttpStatus.OK);
     }
 
     @GetMapping("findTop5MostPopularGenres")
@@ -73,11 +53,11 @@ public class ViewController {
 
     @PostMapping(path = "watchEpisode")
     public ResponseEntity<ApiResponse<ViewResource>> watchEpisode(@Valid @RequestBody WatchEpisodeForm watchEpisodeForm){
-        return new ResponseEntity<>(ApiResponse.<ViewResource>builder().data(viewMapper.toResource(viewService.watchEpisode(watchEpisodeForm.getProfile_id(), watchEpisodeForm.getEpisode_id(), watchEpisodeForm.getTimeWatchedInMinutes()))).build(), HttpStatus.CREATED);
+        return new ResponseEntity<>(ApiResponse.<ViewResource>builder().data(viewMapper.toResource(viewService.watchEpisode(watchEpisodeForm))).build(), HttpStatus.CREATED);
     }
 
     @PostMapping(path = "watchMovie")
     public ResponseEntity<ApiResponse<ViewResource>> watchMovie(@Valid @RequestBody WatchMovieForm watchMovieForm){
-        return new ResponseEntity<>(ApiResponse.<ViewResource>builder().data(viewMapper.toResource(viewService.watchMovie(watchMovieForm.getProfile_id(), watchMovieForm.getMovie_id(), watchMovieForm.getTimeWatchedInMinutes()))).build(), HttpStatus.CREATED);
+        return new ResponseEntity<>(ApiResponse.<ViewResource>builder().data(viewMapper.toResource(viewService.watchMovie(watchMovieForm))).build(), HttpStatus.CREATED);
     }
 }

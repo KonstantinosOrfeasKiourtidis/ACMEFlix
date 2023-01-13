@@ -106,17 +106,13 @@ public class AccountController {
 
     @PostMapping(path = "register")
     public ResponseEntity<ApiResponse<Account>> register(@Valid @RequestBody RegisterForm registerForm){
-        return new ResponseEntity<>(ApiResponse.<Account>builder().data( accountService.register(
-                registerForm.getEmail(), registerForm.getPassword(), registerForm.getConfirmPassword(),
-                registerForm.getFirstname(), registerForm.getLastname(), registerForm.getUsername(),
-                registerForm.getPhoneNo(), creditCardMapper.toDomains(registerForm.getCreditCards()), addressMapper.toDomains(registerForm.getAddress())
-        )).build(), HttpStatus.CREATED);
+        return new ResponseEntity<>(ApiResponse.<Account>builder().data( accountService.register(registerForm)).build(), HttpStatus.CREATED);
     }
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     @PatchMapping(path = "subscribe/{id}")
     public void subscribe(@PathVariable Long id,
                          @Valid @RequestBody SubscribeForm subscribeForm){
-        accountService.subscribe(id, subscribeForm.getSubscriptionType());
+        accountService.subscribe(id, subscribeForm);
     }
 
 

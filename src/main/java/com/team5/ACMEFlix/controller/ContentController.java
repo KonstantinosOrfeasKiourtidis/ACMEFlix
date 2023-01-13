@@ -29,27 +29,16 @@ import java.util.*;
 @RestController
 @RequestMapping(path = "api/v1/content")
 public class ContentController {
-    //TODO
-    //move services to content service
+
     private final ContentService contentService;
-    private final MovieService movieService;
-    private final TVSeriesService tvSeriesService;
     private final ContentMapper contentMapper;
-    private final MovieMapper movieMapper;
-    private final TVSeriesMapper tvSeriesMapper;
-    private final EpisodeService episodeService;
+
 
 
     @Autowired
-    private ContentController(ContentService contentService, ContentMapper contentMapper, MovieService movieService, TVSeriesService tvSeriesService, MovieMapper movieMapper, TVSeriesMapper tvSeriesMapper,
-                              EpisodeService episodeService) {
+    private ContentController(ContentService contentService, ContentMapper contentMapper) {
         this.contentService = contentService;
         this.contentMapper = contentMapper;
-        this.movieService = movieService;
-        this.tvSeriesService = tvSeriesService;
-        this.movieMapper = movieMapper;
-        this.tvSeriesMapper = tvSeriesMapper;
-        this.episodeService = episodeService;
     }
 
     @GetMapping
@@ -74,11 +63,8 @@ public class ContentController {
 
     @GetMapping("findAllContentsByFamilyFriendly")
     public ResponseEntity<ApiResponse<List<ContentResource>>> findAllContentsByFamilyFriendly(){
-        List<ContentResource> contentResources = new ArrayList<>();
-        contentResources.addAll(contentMapper.moviesToContentResources(movieService.findAllMoviesFamilyFriendly()));
-        contentResources.addAll(contentMapper.tvSeriesToContentResources(tvSeriesService.findAllTVSeriesFamilyFriendly()));
-        Collections.shuffle(contentResources);
-        return  new ResponseEntity<>(ApiResponse.<List<ContentResource>>builder().data(contentResources).build(), HttpStatus.OK);
+
+        return  new ResponseEntity<>(ApiResponse.<List<ContentResource>>builder().data(contentService.findAllContentsByFamilyFriendly()).build(), HttpStatus.OK);
     }
 
     @GetMapping("findAllContentsByFamilyFriendlyAlternative")
@@ -94,245 +80,72 @@ public class ContentController {
 
     @GetMapping("findAllContentsByTitleAlternative")
     public ResponseEntity<ApiResponse<List<ContentResource>>> findAllContentsByTitleAlternative(@Param("search") String search){
-        List<ContentResource> contentResourcesSearchResult = contentMapper.domainToResources(contentService.findAllContentsByTitleAlternative(search));
-        List<MovieResource>  movieResources = new ArrayList<>();
-        List<TVSeriesResource>  tvSeriesResources = new ArrayList<>();
-        for (ContentResource contentResource: contentResourcesSearchResult){
-            if(contentResource.getContentType().equals(ContentType.MOVIE)){
 
-                movieResources.add(movieMapper.toResource(movieService.findMovieByContentId(contentResource.getId()).get()));
 
-            }
-            else if(contentResource.getContentType().equals(ContentType.TV_SERIES)){
-                tvSeriesResources.add(tvSeriesMapper.toResource(tvSeriesService.findTVSeriesByContentId(contentResource.getId()).get()));
-            }
-        }
-
-        List<ContentResource> contentResourcesReturn = new ArrayList<>();
-        contentResourcesReturn.addAll(contentMapper.tvSeriesToContentResources(tvSeriesMapper.toDomains(tvSeriesResources)));
-        contentResourcesReturn.addAll(contentMapper.moviesToContentResources(movieMapper.toDomains(movieResources)));
-
-        return  new ResponseEntity<>(ApiResponse.<List<ContentResource>>builder().data(contentResourcesReturn).build(), HttpStatus.OK);
+        return  new ResponseEntity<>(ApiResponse.<List<ContentResource>>builder().data(contentService.findAllContentsByTitleAlternative(search)).build(), HttpStatus.OK);
 
     }
 
     @GetMapping("findAllContentsByNameOrByEpisodeName")
     public ResponseEntity<ApiResponse<List<ContentResource>>> findAllContentsByNameOrByEpisodeName(@Param("search") String search){
-        List<ContentResource> contentResourcesSearchResult = contentMapper.domainToResources(contentService.findAllContentsByTitleAlternative(search));
-        List<MovieResource>  movieResources = new ArrayList<>();
-        List<TVSeriesResource>  tvSeriesResources = new ArrayList<>();
-        List<Long> contentIds = new ArrayList<>();
-        for (ContentResource contentResource: contentResourcesSearchResult){
-
-            contentIds.add(contentResource.getId());
-        }
 
 
-        List<Long> episodeContentIds = episodeService.findAllEpisodesByEpisodeName(search, contentIds);
-
-        List<ContentResource> newContentResource = contentMapper.domainToResources(contentService.findAllById(episodeContentIds));
-        for (ContentResource contentResource: newContentResource){
-            if(contentResource.getContentType().equals(ContentType.MOVIE)){
-
-                movieResources.add(movieMapper.toResource(movieService.findMovieByContentId(contentResource.getId()).get()));
-
-
-            }
-            else if(contentResource.getContentType().equals(ContentType.TV_SERIES)){
-                tvSeriesResources.add(tvSeriesMapper.toResource(tvSeriesService.findTVSeriesByContentId(contentResource.getId()).get()));
-            }
-        }
-
-
-
-        List<ContentResource> contentResourcesReturn = new ArrayList<>();
-
-
-        contentResourcesReturn.addAll(contentMapper.moviesToContentResources(movieMapper.toDomains(movieResources)));
-
-        contentResourcesReturn.addAll(contentMapper.tvSeriesToContentResources(tvSeriesMapper.toDomains(tvSeriesResources)));
-
-        return new ResponseEntity<>(ApiResponse.<List<ContentResource>>builder().data(contentResourcesReturn).build(), HttpStatus.OK);
+        return new ResponseEntity<>(ApiResponse.<List<ContentResource>>builder().data(contentService.findAllContentsByTitleOrEpisodeName(search)).build(), HttpStatus.OK);
     }
 
     @GetMapping("findAllContentByGenres")
     public ResponseEntity<ApiResponse<List<ContentResource>>> findAllContentByGenres(@Param("genre") String[] genre){
 
 
-        List<ContentResource> contentResources = contentMapper.domainToResources(contentService.findAllContentsById(contentService.findAllContentByGenres(genre)));
-        List<MovieResource> movies = new ArrayList<>();
-        List<TVSeriesResource> tvSeries = new ArrayList<>();
-        for (ContentResource content: contentResources){
 
 
-            if(content.getContentType().equals(ContentType.MOVIE)){
-                movies.add(movieMapper.toResource(movieService.findMovieByContentId(content.getId()).get()));
-            }
-            else if(content.getContentType().equals(ContentType.TV_SERIES)){
-                tvSeries.add(tvSeriesMapper.toResource(tvSeriesService.findTVSeriesByContentId(content.getId()).get()));
-            }
-            else{
-
-            }
-        }
-
-        List<ContentResource> contentResourcesReturn = new ArrayList<>();
-        contentResourcesReturn.addAll(contentMapper.moviesToContentResources(movieMapper.toDomains(movies)));
-        contentResourcesReturn.addAll(contentMapper.tvSeriesToContentResources(tvSeriesMapper.toDomains(tvSeries)));
-
-        return  new ResponseEntity<>(ApiResponse.<List<ContentResource>>builder().data(contentResourcesReturn).build(), HttpStatus.OK);
+        return  new ResponseEntity<>(ApiResponse.<List<ContentResource>>builder().data(contentService.findAllContentByGenres(genre)).build(), HttpStatus.OK);
 
     }
 
     @GetMapping("findAllContentByActors")
     public ResponseEntity<ApiResponse<List<ContentResource>>> findAllContentByActors(@Param("actor") String[] actor){
-        List<ContentResource> contents = contentMapper.domainToResources(contentService.findAllContentsById(contentService.findAllContentByActors(actor)));
-        List<MovieResource> movies = new ArrayList<>();
-        List<TVSeriesResource> tvSeries = new ArrayList<>();
-        for (ContentResource content: contents){
-            if(content.getContentType().equals(ContentType.MOVIE)){
-                movies.add(movieMapper.toResource(movieService.findMovieByContentId(content.getId()).get()));
-            }
-            else if(content.getContentType().equals(ContentType.TV_SERIES)){
-                tvSeries.add(tvSeriesMapper.toResource(tvSeriesService.findTVSeriesByContentId(content.getId()).get()));
-            }
-            else{
-
-            }
-        }
-
-        List<ContentResource> contentResourcesReturn = new ArrayList<>();
-        contentResourcesReturn.addAll(contentMapper.moviesToContentResources(movieMapper.toDomains(movies)));
-        contentResourcesReturn.addAll(contentMapper.tvSeriesToContentResources(tvSeriesMapper.toDomains(tvSeries)));
 
 
-        return  new ResponseEntity<>(ApiResponse.<List<ContentResource>>builder().data(contentResourcesReturn).build(), HttpStatus.OK);
+
+        return  new ResponseEntity<>(ApiResponse.<List<ContentResource>>builder().data(contentService.findAllContentByActors(actor)).build(), HttpStatus.OK);
 
     }
 
     @GetMapping("findAllContentByLanguage")
     public ResponseEntity<ApiResponse<List<ContentResource>>> findAllContentByLanguage(@Param("language") String language){
-        List<ContentResource> contentResources = contentMapper.domainToResources(contentService.findAllContentByLanguage(language));
-        List<MovieResource> movies = new ArrayList<>();
-        List<TVSeriesResource> tvSeries = new ArrayList<>();
-        for (ContentResource content: contentResources){
-            if(content.getContentType().equals(ContentType.MOVIE)){
-                movies.add(movieMapper.toResource(movieService.findMovieByContentId(content.getId()).get()));
-            }
-            else if(content.getContentType().equals(ContentType.TV_SERIES)){
-                tvSeries.add(tvSeriesMapper.toResource(tvSeriesService.findTVSeriesByContentId(content.getId()).get()));
-            }
-            else{
 
-            }
-        }
 
-        List<ContentResource> contentResourcesReturn = new ArrayList<>();
-        contentResourcesReturn.addAll(contentMapper.moviesToContentResources(movieMapper.toDomains(movies)));
-        contentResourcesReturn.addAll(contentMapper.tvSeriesToContentResources(tvSeriesMapper.toDomains(tvSeries)));
-
-        return  new ResponseEntity<>(ApiResponse.<List<ContentResource>>builder().data(contentResourcesReturn).build(), HttpStatus.OK);
+        return  new ResponseEntity<>(ApiResponse.<List<ContentResource>>builder().data(contentService.findAllContentByLanguage(language)).build(), HttpStatus.OK);
     }
 
     @GetMapping("findAllContentByYear")
     public ResponseEntity<ApiResponse<List<ContentResource>>> findAllContentByYear(@Param("year") String year){
-        List<ContentResource> contentResources = contentMapper.domainToResources(contentService.findAllContentByYear(year));
 
-        List<MovieResource> movies = new ArrayList<>();
-        List<TVSeriesResource> tvSeries = new ArrayList<>();
-        for (ContentResource content: contentResources){
-            if(content.getContentType().equals(ContentType.MOVIE)){
-                movies.add(movieMapper.toResource(movieService.findMovieByContentId(content.getId()).get()));
-            }
-            else if(content.getContentType().equals(ContentType.TV_SERIES)){
-                tvSeries.add(tvSeriesMapper.toResource(tvSeriesService.findTVSeriesByContentId(content.getId()).get()));
-            }
-            else{
 
-            }
-        }
-        List<ContentResource> contentResourcesReturn = new ArrayList<>();
-        contentResourcesReturn.addAll(contentMapper.moviesToContentResources(movieMapper.toDomains(movies)));
-        contentResourcesReturn.addAll(contentMapper.tvSeriesToContentResources(tvSeriesMapper.toDomains(tvSeries)));
-
-        return  new ResponseEntity<>(ApiResponse.<List<ContentResource>>builder().data(contentResourcesReturn).build(), HttpStatus.OK);
+        return  new ResponseEntity<>(ApiResponse.<List<ContentResource>>builder().data(contentService.findAllContentByYear(year)).build(), HttpStatus.OK);
     }
 
     @GetMapping("findTop10HighestRatedContent")
     public ResponseEntity<ApiResponse<List<ContentResource>>> findTop10HighestRatedContent(){
 
-        List<Long> contentIds = contentService.findTop10HighestRatedContent();
-
-        List<ContentResource> contents = contentMapper.domainToResources(contentService.findAllById(contentIds));
-
-        List<MovieResource> movies = new ArrayList<>();
-        List<TVSeriesResource> tvSeries = new ArrayList<>();
-        for (ContentResource content: contents){
-            if(content.getContentType().equals(ContentType.MOVIE)){
-                movies.add(movieMapper.toResource(movieService.findMovieByContentId(content.getId()).get()));
-            }
-            else if(content.getContentType().equals(ContentType.TV_SERIES)){
-                tvSeries.add(tvSeriesMapper.toResource(tvSeriesService.findTVSeriesByContentId(content.getId()).get()));
-            }
-            else{
-
-            }
-        }
-
-        List<ContentResource> contentResourcesReturn = new ArrayList<>();
-        contentResourcesReturn.addAll(contentMapper.moviesToContentResources(movieMapper.toDomains(movies)));
-        contentResourcesReturn.addAll(contentMapper.tvSeriesToContentResources(tvSeriesMapper.toDomains(tvSeries)));
-
-        Collections.sort(contentResourcesReturn, new Comparator<ContentResource>() {
-            public int compare(ContentResource cr1, ContentResource cr2) {
-
-                int result = Float.compare(cr2.getRating(), cr1.getRating());
-                return result;
-            }
-        });
 
 
-        return  new ResponseEntity<>(ApiResponse.<List<ContentResource>>builder().data(contentResourcesReturn).build(), HttpStatus.OK);
+        return  new ResponseEntity<>(ApiResponse.<List<ContentResource>>builder().data(contentService.findTop10HighestRatedContent()).build(), HttpStatus.OK);
     }
 
     @PostMapping(path = "addContent")
     public ResponseEntity<ApiResponse<ContentResource>> addContent(@Valid @RequestBody ContentResource contentResource){
-        if(contentResource.getContentType().equals(ContentType.TV_SERIES)){
-            TVSeriesResource tvSerie = tvSeriesMapper.toResource(contentMapper.contentResourceToTVSerie(contentResource));
 
-            tvSeriesService.addTVSerie(tvSeriesMapper.toDomain(tvSerie));
-        }
-        else if(contentResource.getContentType().equals(ContentType.MOVIE)){
-            MovieResource movie = movieMapper.toResource(contentMapper.contentResourceToMovie(contentResource));
 
-            movieService.addMovie(movieMapper.toDomain(movie));
-        }
-        else{
-            throw new IllegalStateException("Not a Movie or a TV Series");
-        }
-
-        return new ResponseEntity<>(ApiResponse.<ContentResource>builder().data(contentResource).build(), HttpStatus.CREATED);
+        return new ResponseEntity<>(ApiResponse.<ContentResource>builder().data(contentService.addContent(contentResource)).build(), HttpStatus.CREATED);
     }
 
     @PostMapping(path = "addContents")
     public ResponseEntity<ApiResponse<List<ContentResource>>> addContents(@Valid @RequestBody List<ContentResource> contentResources){
-        for(ContentResource contentResource : contentResources){
-            if(contentResource.getContentType().equals(ContentType.TV_SERIES)){
-                TVSeriesResource tvSerie = tvSeriesMapper.toResource(contentMapper.contentResourceToTVSerie(contentResource));
 
-                tvSeriesService.addTVSerie(tvSeriesMapper.toDomain(tvSerie));
-            }
-            else if(contentResource.getContentType().equals(ContentType.MOVIE)){
-                MovieResource movie = movieMapper.toResource(contentMapper.contentResourceToMovie(contentResource));
 
-                movieService.addMovie(movieMapper.toDomain(movie));
-            }
-            else{
-                throw new IllegalStateException("Not a Movie or a TV Series");
-            }
-        }
-
-        return  new ResponseEntity<>(ApiResponse.<List<ContentResource>>builder().data(contentResources).build(), HttpStatus.CREATED);
+        return  new ResponseEntity<>(ApiResponse.<List<ContentResource>>builder().data(contentService.addContents(contentResources)).build(), HttpStatus.CREATED);
     }
 
     @ResponseStatus(code = HttpStatus.NO_CONTENT)

@@ -1,5 +1,6 @@
 package com.team5.ACMEFlix.transfer.resource;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.team5.ACMEFlix.transfer.BaseResource;
 import lombok.*;
 
@@ -37,5 +38,6 @@ public class AddressResource extends BaseResource {
     @Column(length = 50, nullable = false)
     @Pattern(regexp = "^[A-Za-z ]+$", message="Address's province can only contain alphabetical symbols")
     private String province;
+
 
 }

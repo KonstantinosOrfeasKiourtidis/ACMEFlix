@@ -34,7 +34,7 @@ public class CreditCardService {
 
     @Transactional(readOnly = true)
     public List<CreditCard> findAllCreditCardsByAccountId(Long id) {
-        return creditCardRepository.findCreditCardByAccountId(id);
+        return creditCardRepository.findCreditCardsByAccount_Id(id);
     }
 
     @Transactional

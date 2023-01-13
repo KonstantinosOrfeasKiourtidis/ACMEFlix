@@ -1,5 +1,6 @@
 package com.team5.ACMEFlix.transfer.resource;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.team5.ACMEFlix.transfer.BaseResource;
 import lombok.*;
 
@@ -14,7 +15,7 @@ import javax.validation.constraints.Pattern;
 public class AddressResource extends BaseResource {
     @NotNull(message = "Address's street name cannot be null")
     @Column(length = 50, nullable = false)
-    @Pattern(regexp = "^[A-Za-z ]+$", message="Address's street name can only contain alphabetical symbols")
+    @Pattern(regexp = "^[A-Za-z\\. ]+$", message="Address's street name can only contain alphabetical symbols")
     private String streetName;
 
     @NotNull(message = "Address's street number cannot be null")
@@ -37,5 +38,6 @@ public class AddressResource extends BaseResource {
     @Column(length = 50, nullable = false)
     @Pattern(regexp = "^[A-Za-z ]+$", message="Address's province can only contain alphabetical symbols")
     private String province;
+
 
 }

@@ -42,7 +42,7 @@ public class DirectorService {
             throw new NoSuchElementException("Movie does not exist");
         }
         else {
-            return directorRepository.findDirectorByByMovieId(movie.get().getId());
+            return directorRepository.findDirectorsByMovie_Id(movie.get().getId());
         }
     }
     @Transactional

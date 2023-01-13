@@ -11,7 +11,5 @@ import java.util.Optional;
 
 @Repository
 public interface CreditCardRepository extends JpaRepository<CreditCard, Long> {
-
-    @Query(value = "SELECT * FROM CREDIT_CARDS WHERE ACCOUNT_ID = ?", nativeQuery = true)
-    List<CreditCard> findCreditCardByAccountId(Long id);
+    List<CreditCard> findCreditCardsByAccount_Id(Long id);
 }

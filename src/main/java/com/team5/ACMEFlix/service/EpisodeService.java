@@ -6,6 +6,7 @@ import com.team5.ACMEFlix.domain.TVSeries;
 import com.team5.ACMEFlix.repository.EpisodeRepository;
 import com.team5.ACMEFlix.repository.SeasonRepository;
 import com.team5.ACMEFlix.repository.TVSeriesRepository;
+import com.team5.ACMEFlix.transfer.resource.EpisodeResource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -51,6 +52,21 @@ public class EpisodeService {
     @Transactional(readOnly = true)
     public List<Episode> findAllEpisodesByTitle(String search) {
         return episodeRepository.findEpisodesByName(search);
+
+    }
+
+    @Transactional(readOnly = true)
+    public List<Long> findAllEpisodesByEpisodeName(String search, List<Long> contentIds) {
+        List<Episode> episodes = episodeRepository.findEpisodesByName(search);
+        for (Episode episode : episodes){
+            if(!contentIds.contains(episode.getSeason().getTvSeries().getContent().getId())) {
+                contentIds.add(episode.getSeason().getTvSeries().getContent().getId());
+
+            }
+        }
+
+        return contentIds;
+
     }
 
     @Transactional

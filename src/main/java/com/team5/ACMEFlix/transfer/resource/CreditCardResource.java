@@ -1,6 +1,7 @@
 package com.team5.ACMEFlix.transfer.resource;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.team5.ACMEFlix.domain.Account;
 import com.team5.ACMEFlix.domain.enumeration.CardType;
 import com.team5.ACMEFlix.transfer.BaseResource;
@@ -24,7 +25,7 @@ public class CreditCardResource extends BaseResource {
 
     @NotNull(message = "Credit card name cannot be null")
     @Column(length = 20, nullable = false)
-    @Pattern(regexp = "^[A-Za-z ]+$", message="Credit card's name can only contain alphabetical symbols")
+    @Pattern(regexp = "^[A-Za-z\\. ]+$", message="Credit card's name can only contain alphabetical symbols")
     private String cardName;
 
     @NotNull(message = "Credit card cvc cannot be null")

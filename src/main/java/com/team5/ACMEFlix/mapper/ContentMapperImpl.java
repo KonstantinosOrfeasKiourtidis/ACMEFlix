@@ -2,7 +2,6 @@ package com.team5.ACMEFlix.mapper;
 
 
 import com.team5.ACMEFlix.domain.*;
-import com.team5.ACMEFlix.repository.RatingRepository;
 import com.team5.ACMEFlix.transfer.resource.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -14,7 +13,7 @@ import java.util.List;
 public class ContentMapperImpl implements ContentMapper{
 
     @Autowired
-    private RatingRepository ratingRepository;
+    private ProfileMapper profileMapper;
     
     @Override
     public Content resourceToDomain(ContentResource contentResource) {
@@ -36,6 +35,7 @@ public class ContentMapperImpl implements ContentMapper{
         content.actors( actorResourceListToActorList(contentResource.getActors()) );
         content.contentType( contentResource.getContentType() );
         content.runtime( contentResource.getRuntime() );
+        content.ratings( ratingResourceListToRatingList(contentResource.getRatings()) );
 
         return content.build();
     }
@@ -60,6 +60,7 @@ public class ContentMapperImpl implements ContentMapper{
         contentResource.setActors( actorListToActorResourceList( contentDomain.getActors() ) );
         contentResource.setContentType( contentDomain.getContentType() );
         contentResource.setRuntime( contentDomain.getRuntime() );
+        contentResource.setRatings( ratingListToRatingResourceList( contentDomain.getRatings() ) );
         return contentResource;
     }
 
@@ -115,6 +116,73 @@ public class ContentMapperImpl implements ContentMapper{
 
         return list1;
     }
+
+
+
+
+
+
+    //-------------------Rating----------------------------------//
+    protected RatingResource ratingToRatingResource(Rating rating) {
+        if ( rating == null ) {
+            return null;
+        }
+
+        RatingResource ratingResource = new RatingResource();
+
+        ratingResource.setId( rating.getId() );
+        ratingResource.setRating( rating.getRating() );
+        ratingResource.setProfile( profileMapper.toResource(rating.getProfile() ));
+
+        return ratingResource;
+    }
+
+    protected List<RatingResource> ratingListToRatingResourceList(List<Rating> list) {
+        if ( list == null ) {
+            return null;
+        }
+
+        List<RatingResource> list1 = new ArrayList<RatingResource>( list.size() );
+        for ( Rating rating : list ) {
+            list1.add( ratingToRatingResource( rating ) );
+        }
+
+        return list1;
+    }
+
+
+    protected Rating ratingResourceToRating(RatingResource ratingResource) {
+        if ( ratingResource == null ) {
+            return null;
+        }
+
+        Rating.RatingBuilder<?, ?> rating = Rating.builder();
+
+        rating.id( ratingResource.getId() );
+        rating.rating( ratingResource.getRating() );
+        rating.profile( profileMapper.toDomain(ratingResource.getProfile() ));
+
+        return rating.build();
+    }
+
+    protected List<Rating> ratingResourceListToRatingList(List<RatingResource> list) {
+        if ( list == null ) {
+            return null;
+        }
+
+        List<Rating> list1 = new ArrayList<Rating>( list.size() );
+        for ( RatingResource ratingResource : list ) {
+            list1.add( ratingResourceToRating( ratingResource ) );
+        }
+
+        return list1;
+    }
+
+
+
+
+
+
 
 
 
@@ -267,9 +335,10 @@ public class ContentMapperImpl implements ContentMapper{
         contentResource.setRuntime( movieDomain.getContent().getRuntime() );
         contentResource.setDirectors( directorListToDirectorResourceList(movieDomain.getDirectors() ));
         contentResource.setWriters( writerListToWriterResourceList (movieDomain.getWriters() ));
+        contentResource.setRatings( ratingListToRatingResourceList (movieDomain.getContent().getRatings() ));
 
 
-        List<Rating> ratings = ratingRepository.findRatingByContentId(movieDomain.getContent().getId());
+        List<Rating> ratings = movieDomain.getContent().getRatings() ;
         float rating = 0;
         for (Rating onlyRating: ratings){
             rating += onlyRating.getRating();
@@ -526,9 +595,10 @@ public class ContentMapperImpl implements ContentMapper{
         contentResource.setTvSeriesStatusType( tvSeriesDomains.getTvSeriesStatusType() );
         contentResource.setCreators( creatorListToCreatorResourceList(tvSeriesDomains.getCreators() ));
         contentResource.setSeasons( seasonListToSeasonResourceList (tvSeriesDomains.getSeasons() ));
+        contentResource.setRatings( ratingListToRatingResourceList (tvSeriesDomains.getContent().getRatings() ));
 
 
-        List<Rating> ratings = ratingRepository.findRatingByContentId(tvSeriesDomains.getContent().getId());
+        List<Rating> ratings = tvSeriesDomains.getContent().getRatings();
         float rating = 0;
         for (Rating onlyRating: ratings){
             rating += onlyRating.getRating();

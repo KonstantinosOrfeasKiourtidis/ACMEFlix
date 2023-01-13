@@ -11,6 +11,6 @@ import java.util.List;
 
 @Repository
 public interface AddressRepository extends JpaRepository<Address, Long> {
-    @Query(value = "SELECT * FROM ADDRESSES WHERE ACCOUNT_ID = ?", nativeQuery = true)
+
     List<Address> findAddressesByAccountId(Long id);
 }

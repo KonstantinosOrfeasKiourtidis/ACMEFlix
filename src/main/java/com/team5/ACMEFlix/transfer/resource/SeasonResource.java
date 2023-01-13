@@ -1,5 +1,6 @@
 package com.team5.ACMEFlix.transfer.resource;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.team5.ACMEFlix.transfer.BaseResource;
 import lombok.EqualsAndHashCode;

@@ -1,9 +1,20 @@
 package com.team5.ACMEFlix.controller;
 
+
+import com.team5.ACMEFlix.domain.Movie;
+import com.team5.ACMEFlix.domain.enumeration.ContentType;
 import com.team5.ACMEFlix.mapper.ContentMapper;
+import com.team5.ACMEFlix.mapper.MovieMapper;
+import com.team5.ACMEFlix.mapper.TVSeriesMapper;
+import com.team5.ACMEFlix.repository.ContentRepository;
 import com.team5.ACMEFlix.service.ContentService;
+import com.team5.ACMEFlix.service.EpisodeService;
+import com.team5.ACMEFlix.service.MovieService;
+import com.team5.ACMEFlix.service.TVSeriesService;
 import com.team5.ACMEFlix.transfer.ApiResponse;
 import com.team5.ACMEFlix.transfer.resource.ContentResource;
+import com.team5.ACMEFlix.transfer.resource.MovieResource;
+import com.team5.ACMEFlix.transfer.resource.TVSeriesResource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
@@ -11,14 +22,18 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.List;
+
+import java.util.*;
 
 
 @RestController
 @RequestMapping(path = "api/v1/content")
 public class ContentController {
+
     private final ContentService contentService;
     private final ContentMapper contentMapper;
+
+
 
     @Autowired
     private ContentController(ContentService contentService, ContentMapper contentMapper) {
@@ -33,7 +48,7 @@ public class ContentController {
 
     @GetMapping("alternative")
     public ResponseEntity<ApiResponse<List<ContentResource>>> findAllContentsAlternative(){
-        return  new ResponseEntity<>(ApiResponse.<List<ContentResource>>builder().data(contentService.findAllContentsAlternative()).build(), HttpStatus.OK);
+        return new ResponseEntity<>(ApiResponse.<List<ContentResource>>builder().data(contentService.findAllContentsAlternative()).build(), HttpStatus.OK);
     }
 
     @GetMapping("{id}")
@@ -42,11 +57,13 @@ public class ContentController {
     }
     @GetMapping("findContentByIdAlternative/{id}")
     public ResponseEntity<ApiResponse<ContentResource>> findContentByIdAlternative(@PathVariable("id") Long id){
+
         return new ResponseEntity<>(ApiResponse.<ContentResource>builder().data(contentService.findContentByIdAlternative(id)).build(), HttpStatus.OK);
     }
 
     @GetMapping("findAllContentsByFamilyFriendly")
     public ResponseEntity<ApiResponse<List<ContentResource>>> findAllContentsByFamilyFriendly(){
+
         return  new ResponseEntity<>(ApiResponse.<List<ContentResource>>builder().data(contentService.findAllContentsByFamilyFriendly()).build(), HttpStatus.OK);
     }
 
@@ -63,50 +80,71 @@ public class ContentController {
 
     @GetMapping("findAllContentsByTitleAlternative")
     public ResponseEntity<ApiResponse<List<ContentResource>>> findAllContentsByTitleAlternative(@Param("search") String search){
+
+
         return  new ResponseEntity<>(ApiResponse.<List<ContentResource>>builder().data(contentService.findAllContentsByTitleAlternative(search)).build(), HttpStatus.OK);
 
     }
 
     @GetMapping("findAllContentsByNameOrByEpisodeName")
     public ResponseEntity<ApiResponse<List<ContentResource>>> findAllContentsByNameOrByEpisodeName(@Param("search") String search){
-        return  new ResponseEntity<>(ApiResponse.<List<ContentResource>>builder().data(contentService.findAllContentsByNameOrByEpisodeName(search)).build(), HttpStatus.OK);
 
+
+        return new ResponseEntity<>(ApiResponse.<List<ContentResource>>builder().data(contentService.findAllContentsByTitleOrEpisodeName(search)).build(), HttpStatus.OK);
     }
 
     @GetMapping("findAllContentByGenres")
     public ResponseEntity<ApiResponse<List<ContentResource>>> findAllContentByGenres(@Param("genre") String[] genre){
+
+
+
+
         return  new ResponseEntity<>(ApiResponse.<List<ContentResource>>builder().data(contentService.findAllContentByGenres(genre)).build(), HttpStatus.OK);
 
     }
 
     @GetMapping("findAllContentByActors")
     public ResponseEntity<ApiResponse<List<ContentResource>>> findAllContentByActors(@Param("actor") String[] actor){
+
+
+
         return  new ResponseEntity<>(ApiResponse.<List<ContentResource>>builder().data(contentService.findAllContentByActors(actor)).build(), HttpStatus.OK);
 
     }
 
     @GetMapping("findAllContentByLanguage")
     public ResponseEntity<ApiResponse<List<ContentResource>>> findAllContentByLanguage(@Param("language") String language){
+
+
         return  new ResponseEntity<>(ApiResponse.<List<ContentResource>>builder().data(contentService.findAllContentByLanguage(language)).build(), HttpStatus.OK);
     }
 
     @GetMapping("findAllContentByYear")
     public ResponseEntity<ApiResponse<List<ContentResource>>> findAllContentByYear(@Param("year") String year){
+
+
         return  new ResponseEntity<>(ApiResponse.<List<ContentResource>>builder().data(contentService.findAllContentByYear(year)).build(), HttpStatus.OK);
     }
 
     @GetMapping("findTop10HighestRatedContent")
     public ResponseEntity<ApiResponse<List<ContentResource>>> findTop10HighestRatedContent(){
+
+
+
         return  new ResponseEntity<>(ApiResponse.<List<ContentResource>>builder().data(contentService.findTop10HighestRatedContent()).build(), HttpStatus.OK);
     }
 
     @PostMapping(path = "addContent")
     public ResponseEntity<ApiResponse<ContentResource>> addContent(@Valid @RequestBody ContentResource contentResource){
+
+
         return new ResponseEntity<>(ApiResponse.<ContentResource>builder().data(contentService.addContent(contentResource)).build(), HttpStatus.CREATED);
     }
 
     @PostMapping(path = "addContents")
     public ResponseEntity<ApiResponse<List<ContentResource>>> addContents(@Valid @RequestBody List<ContentResource> contentResources){
+
+
         return  new ResponseEntity<>(ApiResponse.<List<ContentResource>>builder().data(contentService.addContents(contentResources)).build(), HttpStatus.CREATED);
     }
 

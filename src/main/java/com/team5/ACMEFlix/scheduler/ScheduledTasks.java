@@ -26,7 +26,7 @@ public class ScheduledTasks extends BaseModel {
     private ScheduledTasks(DatabaseBackupService databaseBackupService) {
         this.databaseBackupService = databaseBackupService;
     }
-    @Scheduled(fixedRate = 10000)
+    @Scheduled(fixedRate = 600000)
     public void reportCurrentTime() throws SQLException, IOException, ClassNotFoundException {
 
         log.info("The time is now {}", dateFormat.format(new Date()));

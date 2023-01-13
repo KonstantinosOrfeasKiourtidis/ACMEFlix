@@ -1,9 +1,6 @@
 package com.team5.ACMEFlix.transfer.resource;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.team5.ACMEFlix.domain.Content;
-import com.team5.ACMEFlix.domain.Creator;
-import com.team5.ACMEFlix.domain.Season;
 import com.team5.ACMEFlix.domain.enumeration.TVSeriesStatusType;
 import com.team5.ACMEFlix.transfer.BaseResource;
 import lombok.EqualsAndHashCode;

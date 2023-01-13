@@ -41,10 +41,6 @@ public class AccountResource extends BaseResource {
     @Pattern(regexp = "^[A-Za-z ]+$", message="Account's lastname can only contain alphabetical symbols")
     private String lastname;
 
-    @NotNull(message = "Account's password cannot be null")
-    @Column(length = 50, nullable = false)
-    private String password;
-
     @Column(length = 14)
     @Pattern(regexp = "^[0-9]*$", message="Account's phone Number can only contain numeric symbols")
     private String phoneNo;

@@ -1,5 +1,6 @@
 package com.team5.ACMEFlix.transfer.resource;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.team5.ACMEFlix.transfer.BaseResource;
 import lombok.Getter;
 import lombok.Setter;
@@ -32,6 +33,7 @@ public class EpisodeResource extends BaseResource {
     @Column(length = 20, nullable = false)
     @Pattern(regexp = "^[A-Za-z0-9\\. ]+$", message="Episode's release date can only contain alphanumeric symbols")
     private String releaseDate;
+
 
 
 

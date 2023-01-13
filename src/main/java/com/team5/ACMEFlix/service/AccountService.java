@@ -6,6 +6,9 @@ import com.team5.ACMEFlix.domain.enumeration.SubscriptionType;
 import com.team5.ACMEFlix.helpers.LoginForm;
 import com.team5.ACMEFlix.helpers.RegisterForm;
 import com.team5.ACMEFlix.helpers.SubscribeForm;
+import com.team5.ACMEFlix.mapper.AccountMapper;
+import com.team5.ACMEFlix.mapper.AddressMapper;
+import com.team5.ACMEFlix.mapper.CreditCardMapper;
 import com.team5.ACMEFlix.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,13 +22,16 @@ public class AccountService {
     @Autowired
     private  AccountRepository accountRepository;
     @Autowired
-    private ProfileRepository profileRepository;
+    private  ProfileRepository profileRepository;
     @Autowired
-    private CreditCardRepository creditCardRepository;
+    private  PaymentRepository paymentRepository;
     @Autowired
-    private AddressRepository addressRepository;
+    private AddressMapper addressMapper;
     @Autowired
-    private PaymentRepository paymentRepository;
+    private CreditCardMapper creditCardMapper;
+    @Autowired
+    private AccountMapper accountMapper;
+
 
 
     @Transactional(readOnly = true)
@@ -184,7 +190,7 @@ public class AccountService {
 
         if(account.getAddress() !=null &&
                 !Objects.equals(foundAccount.getAddress(), account.getAddress())){
-            List<Address> addresses = addressRepository.findAddressesByAccountId(id);
+            List<Address> addresses = account.getAddress();
             if(!addresses.isEmpty()){
                 for (int i = 0; i < addresses.size()-1; i++) {
                     if (account.getAddress().get(i).getProvince() != null &&
@@ -224,7 +230,7 @@ public class AccountService {
 
         if(account.getCreditCards() !=null &&
                 !Objects.equals(foundAccount.getCreditCards(), account.getCreditCards())){
-            List<CreditCard> creditCards = creditCardRepository.findCreditCardByAccountId(id);
+            List<CreditCard> creditCards = account.getCreditCards();
             if(!creditCards.isEmpty()){
                 for (int i = 0; i < creditCards.size()-1; i++) {
                     if (account.getCreditCards().get(i).getCardNo() != null &&
@@ -260,7 +266,7 @@ public class AccountService {
 
         if(account.getProfiles() !=null &&
                 !Objects.equals(foundAccount.getProfiles(), account.getProfiles())){
-            List<Profile> profiles = profileRepository.findProfileByByAccountId(id);
+            List<Profile> profiles = account.getProfiles();
             if(!profiles.isEmpty()){
                 for (int i = 0; i < profiles.size()-1; i++) {
                     if (account.getProfiles().get(i).getFirstname() != null &&
@@ -287,14 +293,14 @@ public class AccountService {
     }
 
     @Transactional(readOnly = true)
-    public Optional<Account> login(LoginForm loginForm) {
+    public Optional<Account> login(String email, String password) {
 
-        Optional<Account> accountExists = accountRepository.findAccountByEmail(loginForm.getEmail());
+        Optional<Account> accountExists = accountRepository.findAccountByEmail(email);
         if(!accountExists.isPresent()){
             throw new IllegalStateException("The email or the password are incorrect");
         }
 
-        if(!accountExists.get().getPassword().equals(loginForm.getPassword())){
+        if(!accountExists.get().getPassword().equals(password)){
             throw new IllegalStateException("The email or the password are incorrect");
         }
 
@@ -313,7 +319,7 @@ public class AccountService {
         if(!(registerForm.getLastname()!=null || registerForm.getLastname().length() > 0)){
             throw new IllegalStateException("Last name is a required field");
         }
-        if(!(registerForm.getUsername()!=null || registerForm.getUsername().length() > 0)){
+        if(!(registerForm.getUsername()!=null ||registerForm.getUsername().length() > 0)){
             throw new IllegalStateException("Username is a required field");
         }
         if(!(registerForm.getPassword()!=null || registerForm.getPassword().length() > 0)){
@@ -347,23 +353,13 @@ public class AccountService {
         account.setUsername(registerForm.getUsername());
         account.setFirstname(registerForm.getFirstname());
         account.setLastname(registerForm.getLastname());
-        account.setLastname(registerForm.getLastname());
         account.setPhoneNo(registerForm.getPhoneNo());
 
         account.setPassword(registerForm.getPassword());
         //account.setPassword(passwordEncoder.encode(registerForm.getPassword()));
 
 
-        account.setAddress(registerForm.getAddress());
-        account.setCreditCards(registerForm.getCreditCards());
 
-
-
-        registerForm.getAddress()
-                .forEach(a -> a.setAccount(account));
-
-        registerForm.getCreditCards()
-                .forEach(c -> c.setAccount(account));
 
         Account emptyAccount = account;
         emptyAccount.setProfiles(Collections.emptyList()) ;
@@ -418,8 +414,9 @@ public class AccountService {
                 profileKids.setAccount(foundAccount);
                 profileKids.setAgeRestricted(true);
                 profileKids.setAccount(foundAccount);
+                
                 profileRepository.save(profile);
-                profileRepository.save(profile);
+                profileRepository.save(profileKids);
 
         }
 

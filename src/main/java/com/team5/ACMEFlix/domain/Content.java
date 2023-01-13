@@ -67,4 +67,10 @@ public class Content extends BaseModel {
     @Min(0)
     private Integer runtime;
 
+    @JsonManagedReference
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @OneToMany(targetEntity=Rating.class, fetch = FetchType.LAZY, mappedBy = "content", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Rating> ratings;
+
 }

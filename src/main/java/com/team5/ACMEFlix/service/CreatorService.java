@@ -41,7 +41,7 @@ public class CreatorService {
             throw new NoSuchElementException("TV Series does not exist");
         }
         else {
-            return creatorRepository.findCreatorByByTVSeriesId(tvSeries.get().getId());
+            return creatorRepository.findCreatorsByTvSeriesId(tvSeries.get().getId());
         }
     }
 

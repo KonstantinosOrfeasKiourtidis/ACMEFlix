@@ -19,19 +19,7 @@ public class TVSeriesService {
     @Autowired
     private TVSeriesRepository tVSeriesRepository;
     @Autowired
-    private ActorRepository actorRepository;
-    @Autowired
-    private GenreRepository genreRepository;
-    @Autowired
-    private SeasonRepository seasonRepository;
-    @Autowired
-    private CreatorRepository creatorRepository;
-    @Autowired
-    private EpisodeRepository episodeRepository;
-    @Autowired
     private EntityManager entityManager;
-    @Autowired
-    private ContentRepository contentRepository;
 
     @Transactional(readOnly = true)
     public List<TVSeries> findAllTVSeries() {
@@ -42,16 +30,14 @@ public class TVSeriesService {
     public Optional<TVSeries> findTVSeriesById(Long id) {
         return tVSeriesRepository.findById(id);
     }
+    public Optional<TVSeries> findTVSeriesByContentId(Long id) {
+        return tVSeriesRepository.findTVSeriesByContentId(id);
+    }
 
     @Transactional(readOnly = true)
     public List<TVSeries> findAllTVSeriesFamilyFriendly() {
-        List<Content> contents= contentRepository.findAllContentsByFamilyFriendly();
-        List<Long> contentIds = new ArrayList<>();
-        for (Content content : contents) {
-            contentIds.add(content.getId());
-        }
-        List<TVSeries> tvSeries = tVSeriesRepository.findAllTVSeriesByContentId(contentIds);
-        return tvSeries;
+        return tVSeriesRepository.findTVSeriesByFamilyFriendly();
+
     }
 
     @Transactional(readOnly = true)
@@ -191,7 +177,7 @@ public class TVSeriesService {
 
             if (tvSeries.getContent().getActors() != null &&
                     !Objects.equals(tvSeriesFound.get().getContent().getActors(), tvSeries.getContent().getActors())) {
-                List<Actor> actors = actorRepository.findActorByContentId(tvSeriesFound.get().getContent().getId());
+                List<Actor> actors = tvSeriesFound.get().getContent().getActors();
                 if (!actors.isEmpty()) {
                     for (int i = 0; i < actors.size(); i++) {
                         if (tvSeries.getContent().getActors().get(i).getFullname() != null &&
@@ -211,7 +197,7 @@ public class TVSeriesService {
 
             if (tvSeries.getContent().getGenres() != null &&
                     !Objects.equals(tvSeriesFound.get().getContent().getGenres(), tvSeries.getContent().getGenres())) {
-                List<Genre> genres = genreRepository.findGenreByContentId(tvSeriesFound.get().getContent().getId());
+                List<Genre> genres = tvSeriesFound.get().getContent().getGenres();
                 if (!genres.isEmpty()) {
                     for (int i = 0; i < genres.size(); i++) {
                         if (tvSeries.getContent().getGenres().get(i).getName() != null &&
@@ -235,7 +221,7 @@ public class TVSeriesService {
 
             if (tvSeries.getCreators() != null &&
                     !Objects.equals(tvSeriesFound.get().getCreators(), tvSeries.getCreators())) {
-                List<Creator> creators = creatorRepository.findCreatorByByTVSeriesId(id);
+                List<Creator> creators = tvSeriesFound.get().getCreators();
                 if (!creators.isEmpty()) {
                     for (int i = 0; i < creators.size(); i++) {
                         if (tvSeries.getCreators().get(i).getFullname() != null &&
@@ -257,7 +243,7 @@ public class TVSeriesService {
 
             if (tvSeries.getSeasons() != null &&
                     !Objects.equals(tvSeriesFound.get().getSeasons(), tvSeries.getSeasons())) {
-                List<Season> seasons = seasonRepository.findSeasonByTVSeriesId(id);
+                List<Season> seasons = tvSeriesFound.get().getSeasons();
                 if (!seasons.isEmpty()) {
                     for (int i = 0; i < seasons.size()-1; i++) {
                         if (tvSeries.getSeasons().get(i).getSeasonNo() != null &&
@@ -268,7 +254,7 @@ public class TVSeriesService {
 
                         if (tvSeries.getSeasons().get(i).getEpisodes() != null &&
                                 !Objects.equals(seasons.get(i).getEpisodes(), tvSeries.getSeasons().get(i).getEpisodes())) {
-                            List<Episode> episodes = episodeRepository.findEpisodeBySeasonId(seasons.get(i).getId());
+                            List<Episode> episodes = tvSeriesFound.get().getSeasons().get(i).getEpisodes();
 
                             for (int y = 0; y < episodes.size(); y++) {
                                 if (tvSeries.getSeasons().get(i).getEpisodes().get(y).getTitle() != null &&

@@ -25,13 +25,6 @@ public class AccountService {
     private  ProfileRepository profileRepository;
     @Autowired
     private  PaymentRepository paymentRepository;
-    @Autowired
-    private AddressMapper addressMapper;
-    @Autowired
-    private CreditCardMapper creditCardMapper;
-    @Autowired
-    private AccountMapper accountMapper;
-
 
 
     @Transactional(readOnly = true)

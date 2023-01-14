@@ -46,6 +46,7 @@ public class ContentController {
         return  new ResponseEntity<>(ApiResponse.<List<ContentResource>>builder().data(contentMapper.domainToResources(contentService.findAllContents())).build(), HttpStatus.OK);
     }
 
+
     @GetMapping("alternative")
     public ResponseEntity<ApiResponse<List<ContentResource>>> findAllContentsAlternative(){
         return new ResponseEntity<>(ApiResponse.<List<ContentResource>>builder().data(contentService.findAllContentsAlternative()).build(), HttpStatus.OK);

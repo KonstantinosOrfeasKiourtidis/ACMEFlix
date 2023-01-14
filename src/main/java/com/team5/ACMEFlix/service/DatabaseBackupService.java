@@ -13,9 +13,6 @@ public class DatabaseBackupService {
     @Autowired
     private BackupRepository backupRepository;
 
-    public DatabaseBackupService(BackupRepository backupRepository) {
-        this.backupRepository = backupRepository;
-    }
 
     @Transactional
     public int backup(String path) {

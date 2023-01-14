@@ -27,7 +27,7 @@ public class Content extends BaseModel {
     private String title;
 
     @NotNull(message = "Content's description cannot be null")
-    @Column(length = 255, nullable = false)
+    @Column(nullable = false)
     private String description;
 
     @NotNull(message = "Content's language cannot be null")
@@ -40,7 +40,9 @@ public class Content extends BaseModel {
     @Pattern(regexp = "^[A-Za-z0-9\\. ]+$", message="Content's release date can only contain alphanumeric symbols")
     private String releaseDate;
 
+    @Lob
     private String imageUrl;
+    @Lob
     private String trailerUrl;
 
     @NotNull(message = "Content's age restriction cannot be null")

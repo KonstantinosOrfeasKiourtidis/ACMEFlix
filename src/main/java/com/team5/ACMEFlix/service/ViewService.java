@@ -5,17 +5,16 @@ import com.team5.ACMEFlix.domain.enumeration.ContentType;
 import com.team5.ACMEFlix.domain.enumeration.SubscriptionType;
 import com.team5.ACMEFlix.helpers.WatchEpisodeForm;
 import com.team5.ACMEFlix.helpers.WatchMovieForm;
-import com.team5.ACMEFlix.mapper.AccountMapperViewingHours;
-import com.team5.ACMEFlix.mapper.ContentMapper;
-import com.team5.ACMEFlix.mapper.ProfileMapper;
+import com.team5.ACMEFlix.mapper.*;
 import com.team5.ACMEFlix.repository.*;
 import com.team5.ACMEFlix.transfer.resource.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.Clob;
+import java.sql.SQLException;
 import java.util.*;
-import java.util.stream.Stream;
 
 @Service
 public class ViewService {
@@ -42,6 +41,26 @@ public class ViewService {
     private ContentRepository contentRepository;
     @Autowired
     private ContentMapper contentMapper;
+    @Autowired
+    private GenreMapper genreMapper;
+    @Autowired
+    private ActorMapper actorMapper;
+    @Autowired
+    private DirectorMapper directorMapper;
+    @Autowired
+    private WriterMapper writerMapper;
+    @Autowired
+    private CreatorMapper creatorMapper;
+    @Autowired
+    private GenreRepository genreRepository;
+    @Autowired
+    private ActorRepository actorRepository;
+    @Autowired
+    private DirectorRepository directorRepository;
+    @Autowired
+    private WriterRepository writerRepository;
+    @Autowired
+    private CreatorRepository creatorRepository;
 
 
     @Transactional(readOnly = true)
@@ -237,5 +256,179 @@ public class ViewService {
 
 
         return accountResourceViewingHours;
+    }
+
+    public List<AccountResourceViewingHistory> findAllViewingHistory() throws SQLException {
+
+        List<Account> accounts = accountRepository.findAll();
+        List<AccountResourceViewingHistory> accountResourcesViewingHistory = new ArrayList<>();
+
+        List<ContentResourceProjection> movieResources = viewRepository.findAllViewingHistoryMovies();
+        List<ContentResourceProjection> episodeResources = viewRepository.findAllViewingHistoryEpisodes();
+
+
+        for(Account account: accounts){
+            AccountResourceViewingHistory accountResourceViewingHistory = new AccountResourceViewingHistory();
+            accountResourceViewingHistory.setId(account.getId());
+            accountResourceViewingHistory.setEmail(account.getEmail());
+            accountResourceViewingHistory.setFirstname(account.getFirstname());
+            accountResourceViewingHistory.setUsername(account.getUsername());
+            accountResourceViewingHistory.setLastname(account.getLastname());
+            accountResourceViewingHistory.setCreationDate(account.getCreationDate());
+            accountResourceViewingHistory.setSubscriptionType(account.getSubscriptionType());
+            accountResourceViewingHistory.setSubscriptionDate(account.getSubscriptionDate());
+            accountResourceViewingHistory.setPhoneNo(account.getPhoneNo());
+            List<ProfileResourceViewingHistory> profileResourcesViewingHistory = new ArrayList<>();
+
+
+            for(Profile profile : account.getProfiles()) {
+                Float sumViewingHours = 0f;
+                List<ContentResourceViewingHistory> contens = new ArrayList<>();
+
+                ProfileResourceViewingHistory profileResourceViewingHistory = new ProfileResourceViewingHistory();
+
+                profileResourceViewingHistory.setId(profile.getId());
+                profileResourceViewingHistory.setImageUrl(profile.getImageUrl());
+                profileResourceViewingHistory.setAgeRestricted(profile.getAgeRestricted());
+                profileResourceViewingHistory.setFirstname(profile.getFirstname());
+
+
+                for(ContentResourceProjection contentResourceProjection : movieResources){
+
+                    if (profile.getId() == contentResourceProjection.getProfileId()) {
+
+                        ContentResourceViewingHistory contentResourceViewingHistory = new ContentResourceViewingHistory();
+
+
+
+                        contentResourceViewingHistory.setId(contentResourceProjection.getMovieId());
+                        contentResourceViewingHistory.setTitle(contentResourceProjection.getTitle());
+                        contentResourceViewingHistory.setDescription(contentResourceProjection.getTitle());
+                        contentResourceViewingHistory.setSpokenLanguage(contentResourceProjection.getSpokenLanguage());
+                        contentResourceViewingHistory.setIsAgeRestricted(contentResourceProjection.getIsAgeRestricted());
+                        contentResourceViewingHistory.setContentType(contentResourceProjection.getContentType());
+                        contentResourceViewingHistory.setRuntime(contentResourceProjection.getRuntime());
+                        contentResourceViewingHistory.setReleaseDate(contentResourceProjection.getReleaseDate());
+
+
+                        Clob imageUrl= contentResourceProjection.getImageUrl();
+                        if(imageUrl!=null)
+                            contentResourceViewingHistory.setImageUrl(imageUrl.getSubString(1, (int) imageUrl.length()));
+
+
+                        Clob trailerUrl= contentResourceProjection.getTrailerUrl();
+                        if(trailerUrl!=null)
+                            contentResourceViewingHistory.setTrailerUrl(trailerUrl.getSubString(1, (int) trailerUrl.length()));
+
+                        contentResourceViewingHistory.setWatchedDate(contentResourceProjection.getWatchedDate());
+                        contentResourceViewingHistory.setViewingHours(contentResourceProjection.getTimeWatchedInMinutes()/60);
+                        sumViewingHours += contentResourceProjection.getTimeWatchedInMinutes()/60;
+
+                        List<Genre> genres = genreRepository.findGenreByContentId(contentResourceProjection.getId());
+                        contentResourceViewingHistory.setGenres(genreMapper.toResources(genres));
+
+                        List<Actor> actors = actorRepository.findActorByContentId(contentResourceProjection.getId());
+                        contentResourceViewingHistory.setActors(actorMapper.toResources(actors));
+
+                        List<Director> directors = directorRepository.findDirectorsByMovie_Id(contentResourceProjection.getMovieId());
+                        contentResourceViewingHistory.setDirectors(directorMapper.toResources(directors));
+
+                        List<Writer> writers = writerRepository.findWritersByMovieId(contentResourceProjection.getMovieId());
+                        contentResourceViewingHistory.setWriters(writerMapper.toResources(writers));
+
+                        contens.add(contentResourceViewingHistory);
+
+
+                    }
+                }
+
+                for(ContentResourceProjection contentResourceProjection : episodeResources){
+
+                    if (profile.getId() == contentResourceProjection.getProfileId()) {
+
+                        ContentResourceViewingHistory contentResourceViewingHistory = new ContentResourceViewingHistory();
+
+
+
+                        contentResourceViewingHistory.setId(contentResourceProjection.getEpisodeId());
+                        contentResourceViewingHistory.setTitle(contentResourceProjection.getTitle());
+                        contentResourceViewingHistory.setDescription(contentResourceProjection.getDescription());
+                        contentResourceViewingHistory.setSpokenLanguage(contentResourceProjection.getSpokenLanguage());
+                        contentResourceViewingHistory.setIsAgeRestricted(contentResourceProjection.getIsAgeRestricted());
+                        contentResourceViewingHistory.setContentType(contentResourceProjection.getContentType());
+                        contentResourceViewingHistory.setRuntime(contentResourceProjection.getRuntime());
+                        contentResourceViewingHistory.setReleaseDate(contentResourceProjection.getReleaseDate());
+
+                        Clob imageUrl= contentResourceProjection.getImageUrl();
+                        if(imageUrl!=null)
+                            contentResourceViewingHistory.setImageUrl(imageUrl.getSubString(1, (int) imageUrl.length()));
+
+
+                        Clob trailerUrl= contentResourceProjection.getTrailerUrl();
+                        if(trailerUrl!=null)
+                            contentResourceViewingHistory.setTrailerUrl(trailerUrl.getSubString(1, (int) trailerUrl.length()));
+
+                        contentResourceViewingHistory.setEpisodeImageUrl(contentResourceProjection.getEpisodeImageUrl());
+                        contentResourceViewingHistory.setEpisodeNo(contentResourceProjection.getEpisodeNo());
+                        contentResourceViewingHistory.setSeasonNo(contentResourceProjection.getSeasonNo());
+                        contentResourceViewingHistory.setEpisodeTitle(contentResourceProjection.getEpisodeTitle());
+                        contentResourceViewingHistory.setEpisodeDescription(contentResourceProjection.getEpisodeDescription());
+                        contentResourceViewingHistory.setEpisodeReleaseDate(contentResourceProjection.getEpisodeReleaseDate());
+                        contentResourceViewingHistory.setWatchedDate(contentResourceProjection.getWatchedDate());
+                        contentResourceViewingHistory.setViewingHours(contentResourceProjection.getTimeWatchedInMinutes()/60);
+
+                        sumViewingHours += contentResourceProjection.getTimeWatchedInMinutes()/60;
+
+                        List<Genre> genres = genreRepository.findGenreByContentId(contentResourceProjection.getId());
+                        contentResourceViewingHistory.setGenres(genreMapper.toResources(genres));
+
+                        List<Actor> actors = actorRepository.findActorByContentId(contentResourceProjection.getId());
+                        contentResourceViewingHistory.setActors(actorMapper.toResources(actors));
+
+                        List<Creator> creators = creatorRepository.findCreatorsByTvSeriesId(contentResourceProjection.getTvSeriesId());
+                        contentResourceViewingHistory.setCreators(creatorMapper.toResources(creators));
+
+
+
+                        contens.add(contentResourceViewingHistory);
+
+
+                    }
+                }
+
+
+
+                profileResourceViewingHistory.setViewingHours(sumViewingHours);
+
+                Collections.sort(contens, new Comparator<ContentResourceViewingHistory>() {
+                    public int compare(ContentResourceViewingHistory o1, ContentResourceViewingHistory o2) {
+                        if (o1.getWatchedDate() == null || o2.getWatchedDate() == null)
+                            return 0;
+                        return o2.getWatchedDate().compareTo(o1.getWatchedDate());
+                    }
+                });
+
+
+
+                profileResourceViewingHistory.setContents(contens);
+
+                profileResourcesViewingHistory.add(profileResourceViewingHistory);
+
+
+            }
+
+
+
+            accountResourceViewingHistory.setProfiles(profileResourcesViewingHistory);
+
+
+
+            accountResourcesViewingHistory.add(accountResourceViewingHistory);
+
+        }
+
+
+
+        return accountResourcesViewingHistory;
     }
 }

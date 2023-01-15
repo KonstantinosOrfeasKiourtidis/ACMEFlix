@@ -1,6 +1,7 @@
 package com.team5.ACMEFlix.repository;
 
 import com.team5.ACMEFlix.domain.View;
+import com.team5.ACMEFlix.transfer.resource.ContentResourceProjection;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -48,4 +49,36 @@ public interface ViewRepository extends JpaRepository<View, Long> {
             "GROUP BY VIEWS.PROFILE_ID " +
             "HAVING ACCOUNTS.ID = ?1", nativeQuery = true)
     List<Long> findProfileIdsByAccountId(Long id);
+
+    @Query(value = "SELECT " +
+            "CONTENTS.ID AS id, CONTENTS.TITLE AS title, CONTENTS.DESCRIPTION AS description, CONTENTS.CONTENT_TYPE AS contentType, " +
+            "CONTENTS.IMAGE_URL AS imageUrl, CONTENTS.IS_AGE_RESTRICTED AS isAgeRestricted, CONTENTS.RELEASE_DATE AS releaseDate, " +
+            "CONTENTS.RUNTIME AS runtime, CONTENTS.SPOKEN_LANGUAGE AS spokenLanguage, CONTENTS.TRAILER_URL AS trailerUrl, MOVIES.ID AS movieId, " +
+            "VIEWS.TIME_WATCHED_IN_MINUTES AS timeWatchedInMinutes, VIEWS.WATCHED_DATE AS watchedDate, PROFILES.ID AS profileId " +
+            "FROM VIEWS " +
+            "INNER JOIN WATCHED_LIST_MOVIES ON WATCHED_LIST_MOVIES.VIEW_ID  = VIEWS.ID " +
+            "INNER JOIN MOVIES ON MOVIES.ID=  WATCHED_LIST_MOVIES .MOVIE_ID " +
+            "INNER JOIN CONTENTS ON CONTENTS.ID=MOVIES.CONTENT_ID " +
+            "INNER JOIN PROFILES ON VIEWS.PROFILE_ID=PROFILES.ID " +
+            "ORDER BY VIEWS.WATCHED_DATE DESC", nativeQuery = true)
+    List<ContentResourceProjection> findAllViewingHistoryMovies();
+
+
+    @Query(value = "SELECT " +
+            "CONTENTS.ID AS id, CONTENTS.TITLE AS title, CONTENTS.DESCRIPTION AS description, CONTENTS.CONTENT_TYPE AS contentType, " +
+            "CONTENTS.IMAGE_URL AS imageUrl, CONTENTS.IS_AGE_RESTRICTED AS isAgeRestricted, CONTENTS.RELEASE_DATE AS releaseDate, " +
+            "CONTENTS.RUNTIME AS runtime, CONTENTS.SPOKEN_LANGUAGE AS spokenLanguage, CONTENTS.TRAILER_URL AS trailerUrl, TV_SERIES.ID AS tvSeriesId, " +
+            "SEASONS.SEASON_NO AS seasonNo, EPISODES.TITLE AS episodeTitle, EPISODES.DESCRIPTION AS episodeDescription, EPISODES.ID AS episodeId, " +
+            "EPISODES.RELEASE_DATE AS episodeReleaseDate, EPISODES.IMAGE_URL AS episodeImageUrl, " +
+            "VIEWS.TIME_WATCHED_IN_MINUTES AS timeWatchedInMinutes, VIEWS.WATCHED_DATE AS watchedDate, PROFILES.ID AS profileId " +
+            "FROM VIEWS " +
+            "INNER JOIN WATCHED_LIST_EPISODES ON WATCHED_LIST_EPISODES.VIEW_ID  = VIEWS.ID " +
+            "INNER JOIN EPISODES ON EPISODES.ID=  WATCHED_LIST_EPISODES.EPISODE_ID " +
+            "INNER JOIN SEASONS ON SEASONS.ID=  EPISODES.SEASON_ID " +
+            "INNER JOIN TV_SERIES ON SEASONS.TV_SERIES_ID=  TV_SERIES.ID " +
+            "INNER JOIN CONTENTS ON CONTENTS.ID=TV_SERIES.CONTENT_ID " +
+            "INNER JOIN PROFILES ON VIEWS.PROFILE_ID=PROFILES.ID " +
+            "ORDER BY VIEWS.WATCHED_DATE DESC", nativeQuery = true)
+    List<ContentResourceProjection> findAllViewingHistoryEpisodes();
+
 }

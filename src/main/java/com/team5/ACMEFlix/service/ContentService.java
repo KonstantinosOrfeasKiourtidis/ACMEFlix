@@ -12,12 +12,14 @@ import com.team5.ACMEFlix.transfer.resource.ContentResource;
 import com.team5.ACMEFlix.transfer.resource.MovieResource;
 import com.team5.ACMEFlix.transfer.resource.TVSeriesResource;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import java.math.BigInteger;
 import java.util.*;
+import java.util.function.Function;
 
 @Service
 public class ContentService {
@@ -50,6 +52,143 @@ public class ContentService {
     @Transactional(readOnly = true)
     public List<Content> findAllContents() {
         return contentRepository.findAll();
+    }
+
+    @Transactional(readOnly = true)
+    public List<Content> advancedSearch (Integer pageNo, Integer pageSize, String search, String[] genres, String year, Boolean isAgeRestricted, String language, String contentType) {
+        List<Content> contents = new ArrayList<>();
+        Pageable paging = PageRequest.of(pageNo, pageSize);
+
+         Page<Content> pageContents;
+         if(search !=null && genres== null && year ==null && isAgeRestricted==null && language==null && contentType == null){
+             pageContents = contentRepository.findAllByTitleContainingIgnoreCase(search, paging);
+         }
+        else if(search ==null && genres!= null && year ==null && isAgeRestricted==null && language==null && contentType == null){
+
+            pageContents = contentRepository.findContentsByGenres(genres, paging);
+
+        }
+         else if(search ==null && genres== null && year !=null && isAgeRestricted==null&& language==null && contentType == null){
+
+             pageContents = contentRepository.findAllByReleaseDateContainingIgnoreCase(year, paging);
+
+         }
+         else if(search ==null && genres== null && year ==null && isAgeRestricted!=null && language==null && contentType == null){
+
+             pageContents = contentRepository.findAllByIsAgeRestrictedEquals(isAgeRestricted, paging);
+
+         }
+         else if(search ==null && genres== null && year ==null && isAgeRestricted==null&& language!=null && contentType == null){
+
+             pageContents = contentRepository.findAllBySpokenLanguageContainingIgnoreCase(language, paging);
+
+         }
+
+         else if(search ==null && genres== null && year ==null && isAgeRestricted==null&& language==null && contentType != null){
+
+             pageContents = contentRepository.findAllByContentType(contentType, paging);
+
+         }
+         else if(search !=null && genres!= null && year !=null && isAgeRestricted!=null && language!=null && contentType != null){
+
+             pageContents = contentRepository.findContentsByEverything(search, genres, year, isAgeRestricted, language, contentType, paging);
+
+         }
+
+        else if(search == null || genres == null || year== null || isAgeRestricted==null && language==null || contentType == null)
+        {
+            pageContents = contentRepository.findAll(paging);
+
+        }
+
+        else {
+            System.out.println( "4 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+
+            pageContents = new Page<Content>() {
+                @Override
+                public int getTotalPages() {
+                    return 0;
+                }
+
+                @Override
+                public long getTotalElements() {
+                    return 0;
+                }
+
+                @Override
+                public <U> Page<U> map(Function<? super Content, ? extends U> converter) {
+                    return null;
+                }
+
+                @Override
+                public int getNumber() {
+                    return 0;
+                }
+
+                @Override
+                public int getSize() {
+                    return 0;
+                }
+
+                @Override
+                public int getNumberOfElements() {
+                    return 0;
+                }
+
+                @Override
+                public List<Content> getContent() {
+                    return null;
+                }
+
+                @Override
+                public boolean hasContent() {
+                    return false;
+                }
+
+                @Override
+                public Sort getSort() {
+                    return null;
+                }
+
+                @Override
+                public boolean isFirst() {
+                    return false;
+                }
+
+                @Override
+                public boolean isLast() {
+                    return false;
+                }
+
+                @Override
+                public boolean hasNext() {
+                    return false;
+                }
+
+                @Override
+                public boolean hasPrevious() {
+                    return false;
+                }
+
+                @Override
+                public Pageable nextPageable() {
+                    return null;
+                }
+
+                @Override
+                public Pageable previousPageable() {
+                    return null;
+                }
+
+                @Override
+                public Iterator<Content> iterator() {
+                    return null;
+                }
+            };
+        }
+
+        contents = pageContents.getContent();
+        return contents;
     }
 
     @Transactional(readOnly = true)

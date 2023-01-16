@@ -21,6 +21,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.validation.Valid;
 
 import java.util.*;
@@ -46,6 +48,18 @@ public class ContentController {
         return  new ResponseEntity<>(ApiResponse.<List<ContentResource>>builder().data(contentMapper.domainToResources(contentService.findAllContents())).build(), HttpStatus.OK);
     }
 
+
+    @GetMapping("advncedSearch")
+    public ResponseEntity<ApiResponse<List<ContentResource>>> advancedSearch(@RequestParam(defaultValue = "0") Integer pageNo,
+                                                                             @RequestParam(defaultValue = "2") Integer pageSize,
+                                                                             @RequestParam(value = "search", required = false) String search,
+                                                                             @RequestParam(value = "genres", required = false) String[] genres,
+                                                                             @RequestParam(value = "year", required = false) String year,
+                                                                             @RequestParam(value = "isAgeRestricted", required = false) Boolean isAgeRestricted,
+                                                                             @RequestParam(value = "language", required = false) String language,
+                                                                             @RequestParam(value = "contentType", required = false) String contentType){
+        return new ResponseEntity<>(ApiResponse.<List<ContentResource>>builder().data(contentMapper.domainToResources(contentService.advancedSearch(pageNo, pageSize, search, genres, year, isAgeRestricted, language, contentType))).build(), HttpStatus.OK);
+    }
 
     @GetMapping("alternative")
     public ResponseEntity<ApiResponse<List<ContentResource>>> findAllContentsAlternative(){

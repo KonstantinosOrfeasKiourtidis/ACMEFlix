@@ -1931,7 +1931,7 @@ public class ContentCreator implements CommandLineRunner {
         actorRepository.save(actorC10A3);
         writerRepository.save(writerM9W1);
         writerRepository.save(writerM9W2);
-        writerRepository.save(writerM9W2);
+        writerRepository.save(writerM9W3);
         directorRepository.save(directorM9D1);
         //endregion
 
@@ -2464,5 +2464,3585 @@ public class ContentCreator implements CommandLineRunner {
         actorRepository.save(actorC12A3);
 
         //endregion
+
+
+        //region Content 19
+        //-----------------Content 19----------------//
+        Content content19 = Content.builder()
+                .title("The Invisible Guest")
+                .description("A successful entrepreneur accused of murder and a witness preparation expert have less than three hours to come up with an impregnable defense.")
+                .spokenLanguage("English")
+                .releaseDate("20 Jul 2017")
+                .imageUrl("https://s.kaskus.id/images/2020/07/16/10867266_202007161115010282.png")
+                .trailerUrl("<iframe width=\"560\" height=\"315\" src=\"https://youtu.be/epCg2RbyF80\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>")
+                .isAgeRestricted(false)
+                .contentType(ContentType.MOVIE)
+                .runtime(106)
+                .build();
+
+        Genre genreC19G1 = Genre.builder()
+                .name("Crime")
+                .content(content19)
+                .build();
+
+        Genre genreC19G2 = Genre.builder()
+                .name("Drama")
+                .content(content19)
+                .build();
+
+        Genre genreC19G3 = Genre.builder()
+                .name("Mystery")
+                .content(content19)
+                .build();
+
+        Actor actorC19A1 = Actor.builder()
+                .fullname("Mario Casas")
+                .imageUrl("https://upload.wikimedia.org/wikipedia/commons/thumb/0/01/MJK35177_Mario_Casas_%28El_Bar%2C_Berlinale_2017%29_%28cropped%29.jpg/800px-MJK35177_Mario_Casas_%28El_Bar%2C_Berlinale_2017%29_%28cropped%29.jpg")
+                .content(content19)
+                .build();
+
+        Actor actorC19A2 = Actor.builder()
+                .fullname("Ana Wagener")
+                .imageUrl("http://t1.gstatic.com/licensed-image?q=tbn:ANd9GcS1pmOAo2Ba-ArEMqGLMiAEUfNEMzcpQoxdvcdIjjoYx2bOdQQ6NjTuH5DHW80yXPRh")
+                .content(content19)
+                .build();
+
+        Actor actorC19A3 = Actor.builder()
+                .fullname("Jose Coronado")
+                .imageUrl("https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/Jos%C3%A9_Coronado_at_Premios_Goya_2017_%28cropped%29.jpg/800px-Jos%C3%A9_Coronado_at_Premios_Goya_2017_%28cropped%29.jpg")
+                .content(content19)
+                .build();
+
+        Movie movie19 = Movie.builder()
+                .content(content19)
+                .build();
+
+        Writer writerM19W1 = Writer.builder()
+                .fullname("Oriol Paulo")
+                .imageUrl("https://upload.wikimedia.org/wikipedia/commons/a/ab/Festival_de_cinema_de_Sitges_2018_%2831305141408%29_%28cropped4%29.jpg")
+                .movie(movie19)
+                .build();
+
+         Writer writerM19W2 = Writer.builder()
+                .fullname("Lara Sendim")
+                .imageUrl("https://m.media-amazon.com/images/M/MV5BYjUwYWQxMWEtYTQ0OS00ZTI4LTliNTAtNDAwOTk4N2QzYWIxXkEyXkFqcGdeQXVyNjUxMjc1OTM@._V1_.jpg")
+                .movie(movie19)
+                .build();
+
+        Director directorM19D1 = Director.builder()
+                .fullname("Oriol Paulo")
+                .imageUrl("https://upload.wikimedia.org/wikipedia/commons/a/ab/Festival_de_cinema_de_Sitges_2018_%2831305141408%29_%28cropped4%29.jpg")
+                .movie(movie19)
+                .build();
+
+        movieRepository.save(movie19);
+        genreRepository.save(genreC19G1);
+        genreRepository.save(genreC19G2);
+        genreRepository.save(genreC19G3);
+        actorRepository.save(actorC19A1);
+        actorRepository.save(actorC19A2);
+        actorRepository.save(actorC19A3);
+        writerRepository.save(writerM19W1);
+        writerRepository.save(writerM19W2);
+        directorRepository.save(directorM19D1);
+        //endregion
+
+        //region Content 20
+        // -----------------Content 20----------------//
+        Content content20 = Content.builder()
+                .title("The Sea Inside")
+                .description("The factual story of Spaniard Ramon Sampedro, who fought a 28-year campaign in favor of euthanasia and his own right to die.")
+                .spokenLanguage("Spanish")
+                .releaseDate("7 Jan 2005 ")
+                .imageUrl("https://i0.wp.com/25.media.tumblr.com/bb6ff40ee64b916ea3c8816311b75383/tumblr_mg9tt14QPP1r37w3co1_1280.png?zoom=2")
+                .trailerUrl("<iframe width=\"560\" height=\"315\" src=\"https://youtu.be/afrVh6ksKII\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>")
+                .isAgeRestricted(false)
+                .contentType(ContentType.MOVIE)
+                .runtime(126)
+                .build();
+
+        Genre genreC20G1 = Genre.builder()
+                .name("Biography")
+                .content(content20)
+                .build();
+
+        Genre genreC20G2 = Genre.builder()
+                .name("Drama")
+                .content(content20)
+                .build();
+
+
+        Actor actorC20A1 = Actor.builder()
+                .fullname("Javier Bardem")
+                .imageUrl("https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Premios_Goya_2018_-_Javier_Bardem_%28cropped%29.jpg/800px-Premios_Goya_2018_-_Javier_Bardem_%28cropped%29.jpg")
+                .content(content20)
+                .build();
+
+        Actor actorC20A2 = Actor.builder()
+                .fullname("Belen Rueda")
+                .imageUrl("https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Premios_Goya_2018_-_Bel%C3%A9n_Rueda.jpg/800px-Premios_Goya_2018_-_Bel%C3%A9n_Rueda.jpg")
+                .content(content20)
+                .build();
+
+        Actor actorC20A3 = Actor.builder()
+                .fullname("Lola Duenas")
+                .imageUrl("https://upload.wikimedia.org/wikipedia/commons/f/fb/Lola_Duenas_Cabourg_2013.jpg")
+                .content(content20)
+                .build();
+
+        Movie movie20 = Movie.builder()
+                .content(content20)
+                .build();
+
+        Writer writerM20W1 = Writer.builder()
+                .fullname("Alejandro Amenabar")
+                .imageUrl("https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Amenabar_%2822022306905%29_%28cropped%29.jpg/330px-Amenabar_%2822022306905%29_%28cropped%29.jpg")
+                .movie(movie20)
+                .build();
+
+         Writer writerM20W2 = Writer.builder()
+                .fullname("Mateo Gil")
+                .imageUrl("https://1.bp.blogspot.com/-xTxSwN7SwPU/WdOFrkn0VuI/AAAAAAABPR0/VmWozMjKD9QAP5ZFS8SlFW3xwGBrT5BGQCLcBGAs/s1600/Mateo-Gil-intensamente-Proyecto-Lazaro_EDIIMA20150219_0388_5.jpg")
+                .movie(movie20)
+                .build();
+
+        Director directorM20D1 = Director.builder()
+                .fullname("Alejandro Amenabar")
+                .imageUrl("https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Amenabar_%2822022306905%29_%28cropped%29.jpg/330px-Amenabar_%2822022306905%29_%28cropped%29.jpg")
+                .movie(movie20)
+                .build();
+
+        movieRepository.save(movie20);
+        genreRepository.save(genreC20G1);
+        genreRepository.save(genreC20G2);
+        actorRepository.save(actorC20A1);
+        actorRepository.save(actorC20A2);
+        actorRepository.save(actorC20A3);
+        writerRepository.save(writerM20W1);
+        writerRepository.save(writerM20W2);
+        directorRepository.save(directorM20D1);
+        //endregion
+
+        //region Content 21
+        //-----------------Content 21----------------//
+        Content content21 = Content.builder()
+                .title("La La Land")
+                .description("While navigating their careers in Los Angeles, a pianist and an actress fall in love while attempting to reconcile their aspirations for the future.")
+                .spokenLanguage("English")
+                .releaseDate("22 Dec 2016 ")
+                .imageUrl("https://upload.wikimedia.org/wikipedia/el/a/ab/La_La_Land_%28film%29.png")
+                .trailerUrl("<iframe width=\"560\" height=\"315\" src=\"https://youtu.be/0pdqf4P9MB8\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>")
+                .isAgeRestricted(false)
+                .contentType(ContentType.MOVIE)
+                .runtime(128)
+                .build();
+
+        Genre genreC21G1 = Genre.builder()
+                .name("Comedy")
+                .content(content21)
+                .build();
+
+        Genre genreC21G2 = Genre.builder()
+                .name("Drama")
+                .content(content21)
+                .build();
+
+
+        Actor actorC21A1 = Actor.builder()
+                .fullname("Ryan Gosling")
+                .imageUrl("https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/Ryan_Gosling_at_SSIFF_2018_%281%29_%28cropped%29.jpg/800px-Ryan_Gosling_at_SSIFF_2018_%281%29_%28cropped%29.jpg")
+                .content(content21)
+                .build();
+
+        Actor actorC21A2 = Actor.builder()
+                .fullname("Emma Stone")
+                .imageUrl("https://upload.wikimedia.org/wikipedia/commons/3/31/Emma_Stone_at_Maniac_UK_premiere_%28cropped%29.jpg")
+                .content(content21)
+                .build();
+
+        Actor actorC21A3 = Actor.builder()
+                .fullname("Rosemarie DeWitt")
+                .imageUrl("https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Rosemarie_DeWitt.jpg/800px-Rosemarie_DeWitt.jpg")
+                .content(content21)
+                .build();
+
+        Movie movie21 = Movie.builder()
+                .content(content21)
+                .build();
+
+        Writer writerM21W1 = Writer.builder()
+                .fullname("Damien Chazelle")
+                .imageUrl("https://s3.amazonaws.com/static.rogerebert.com/uploads/blog_post/primary_image/interviews/damien-chazelle-interview-babylon/bab17760r2.jpg")
+                .movie(movie21)
+                .build();
+
+        Director directorM21D1 = Director.builder()
+                .fullname("Damien Chazelle")
+                .imageUrl("https://s3.amazonaws.com/static.rogerebert.com/uploads/blog_post/primary_image/interviews/damien-chazelle-interview-babylon/bab17760r2.jpg")
+                .movie(movie21)
+                .build();
+
+        movieRepository.save(movie21);
+        genreRepository.save(genreC21G1);
+        genreRepository.save(genreC21G2);
+        actorRepository.save(actorC21A1);
+        actorRepository.save(actorC21A2);
+        actorRepository.save(actorC21A3);
+        writerRepository.save(writerM21W1);
+        directorRepository.save(directorM21D1);
+        //endregion
+
+        //region Content 22
+        //-----------------Content 22----------------//
+        Content content22 = Content.builder()
+                .title("How To Lose A Guy In 10 Days")
+                .description("Benjamin Barry is an advertising executive and ladies' man who, to win a big campaign, bets that he can make a woman fall in love with him in 10 days.")
+                .spokenLanguage("English")
+                .releaseDate("9 May 2003 ")
+                .imageUrl("https://m.media-amazon.com/images/I/71QLcAJVGEL._AC_SL1500_.jpg")
+                .trailerUrl("<iframe width=\"560\" height=\"315\" src=\"https://youtu.be/2ZMGk_Ml1fc\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>")
+                .isAgeRestricted(false)
+                .contentType(ContentType.MOVIE)
+                .runtime(116)
+                .build();
+
+        Genre genreC22G1 = Genre.builder()
+                .name("Comedy")
+                .content(content22)
+                .build();
+
+        Genre genreC22G2 = Genre.builder()
+                .name("Romance")
+                .content(content22)
+                .build();
+
+
+        Actor actorC22A1 = Actor.builder()
+                .fullname("Kate Hudson")
+                .imageUrl("https://media.vanityfair.com/photos/6269919a2cb5cd8155013335/master/pass/1205187607")
+                .content(content22)
+                .build();
+
+        Actor actorC22A2 = Actor.builder()
+                .fullname("Matthew McConaughey")
+                .imageUrl("https://hips.hearstapps.com/hmg-prod/images/1-1665084333.jpg")
+                .content(content22)
+                .build();
+
+        Actor actorC22A3 = Actor.builder()
+                .fullname("Adam Goldberg")
+                .imageUrl("https://upload.wikimedia.org/wikipedia/commons/a/a2/Actor%2C_filmmaker%2C_musician_Adam_Goldberg_in_Brooklyn%2C_NY_in_2016.jpg")
+                .content(content22)
+                .build();
+
+        Movie movie22 = Movie.builder()
+                .content(content22)
+                .build();
+
+        Writer writerM22W1 = Writer.builder()
+                .fullname("Michele Alexander")
+                .imageUrl("https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQUEi06MKkigGAtU-Fyn01gNJR2Q6SPBcVqca-EqSh7zZ_U9E_M")
+                .movie(movie22)
+                .build();
+
+         Writer writerM22W2 = Writer.builder()
+                .fullname("Jeannie Long")
+                .imageUrl(null)
+                .movie(movie22)
+                .build();
+
+         Writer writerM22W3 = Writer.builder()
+                .fullname("Kristen Buckley")
+                .imageUrl("https://m.media-amazon.com/images/M/MV5BNzAyNGI3MGItZDVhYi00MTJiLTg3NGItMzdhOWI2NTIxYjQ2XkEyXkFqcGdeQXVyODY2NTc3ODY@._V1_.jpg")
+                .movie(movie22)
+                .build();
+
+        Director directorM22D1 = Director.builder()
+                .fullname("Donald Petrie")
+                .imageUrl("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBVGQtZyA1lvkxYCbfxAVyhl9fiWfDz_eJ6PMflnyRfzx_wr1o")
+                .movie(movie22)
+                .build();
+
+        movieRepository.save(movie22);
+        genreRepository.save(genreC22G1);
+        genreRepository.save(genreC22G2);
+        actorRepository.save(actorC22A1);
+        actorRepository.save(actorC22A2);
+        actorRepository.save(actorC22A3);
+        writerRepository.save(writerM22W1);
+        writerRepository.save(writerM22W2);
+        writerRepository.save(writerM22W3);
+        directorRepository.save(directorM22D1);
+        //endregion
+
+        //region Content 23
+        //-----------------Content 23----------------//
+        Content content23 = Content.builder()
+                .title("The Pale Blue Eye")
+                .description("A world-weary detective is hired to investigate the murder of a West Point cadet. Stymied by the cadets' code of silence, he enlists one of their own to help unravel the case - a young man the world would come to know as Edgar Allan Poe.")
+                .spokenLanguage("English")
+                .releaseDate("6 Jan 2023 ")
+                .imageUrl("https://m.media-amazon.com/images/M/MV5BZDg2YThlMTItYzhhMy00OWE3LTljYTAtYTExMDM5NzRjOGFhXkEyXkFqcGdeQXVyMTEzMTI1Mjk3._V1_FMjpg_UX1000_.jpg")
+                .trailerUrl("<iframe width=\"560\" height=\"315\" src=\"https://youtu.be/ddbL9jvg77w\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>")
+                .isAgeRestricted(false)
+                .contentType(ContentType.MOVIE)
+                .runtime(128)
+                .build();
+
+        Genre genreC23G1 = Genre.builder()
+                .name("Crime")
+                .content(content23)
+                .build();
+
+        Genre genreC23G2 = Genre.builder()
+                .name("Horror")
+                .content(content23)
+                .build();
+
+        Genre genreC23G3 = Genre.builder()
+                .name("Mystery")
+                .content(content23)
+                .build();
+
+
+        Actor actorC23A1 = Actor.builder()
+                .fullname("Christian Bale")
+                .imageUrl("https://www.onthisday.com/images/people/christian-bale-medium.jpg")
+                .content(content23)
+                .build();
+
+        Actor actorC23A2 = Actor.builder()
+                .fullname("Harry Melling")
+                .imageUrl("https://imgix.bustle.com/uploads/getty/2022/12/22/e4b57707-9362-40b2-9a52-e20a4d2eb3b6-getty-1449312995.jpg?w=800&fit=crop&crop=faces&auto=format%2Ccompress")
+                .content(content23)
+                .build();
+
+        Actor actorC23A3 = Actor.builder()
+                .fullname("Simon McBurney")
+                .imageUrl("https://i.guim.co.uk/img/media/f09e00eb4392e94b72f0fb6d769d030c0a16cc68/0_544_5792_3474/master/5792.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=656be9e8bbbef99cc376f920c302d2ce")
+                .content(content23)
+                .build();
+
+        Movie movie23 = Movie.builder()
+                .content(content23)
+                .build();
+
+        Writer writerM23W1 = Writer.builder()
+                .fullname("Scott Cooper")
+                .imageUrl("https://deadline.com/wp-content/uploads/2020/03/scott-cooper.jpg")
+                .movie(movie23)
+                .build();
+
+        Director directorM23D1 = Director.builder()
+                .fullname("Scott Cooper")
+                .imageUrl("https://deadline.com/wp-content/uploads/2020/03/scott-cooper.jpg")
+                .movie(movie23)
+                .build();
+
+        movieRepository.save(movie23);
+        genreRepository.save(genreC23G1);
+        genreRepository.save(genreC23G2);
+        genreRepository.save(genreC23G3);
+        actorRepository.save(actorC23A1);
+        actorRepository.save(actorC23A2);
+        actorRepository.save(actorC23A3);
+        writerRepository.save(writerM23W1);
+        directorRepository.save(directorM23D1);
+        //endregion
+
+        //region Content 24
+        //-----------------Content 24----------------//
+        Content content24 = Content.builder()
+                .title("Something In The Rain")
+                .description("Yoon Jin Ah is a woman in her mid-30s who doesn't know yet what it's like to date a man. She's been dumped by a man many times because of her clumsy, reckless and foolish behavior....")
+                .spokenLanguage("Korean")
+                .releaseDate("30 Mar 2018")
+                .imageUrl("https://m.media-amazon.com/images/M/MV5BZmU0NTY3YmUtNzhhMy00Mjg2LWFjMWEtMmI5MDAxNDBlZjZkXkEyXkFqcGdeQXVyNDI3NjU1NzQ@._V1_.jpg")
+                .trailerUrl("<iframe width=\"560\" height=\"315\" src=\"https://youtu.be/7RGk6NXwbrY\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" allowfullscreen></iframe>")
+                .isAgeRestricted(false)
+                .contentType(ContentType.TV_SERIES)
+                .runtime(75)
+                .build();
+
+        Genre genreC24G1 = Genre.builder()
+                .name("Romance")
+                .content(content24)
+                .build();
+
+        Genre genreC24G2 = Genre.builder()
+                .name("Drama")
+                .content(content24)
+                .build();
+
+        Actor actorC24A1 = Actor.builder()
+                .fullname("Son Ye-jin")
+                .imageUrl(null)
+                .content(content24)
+                .build();
+
+        Actor actorC24A2 = Actor.builder()
+                .fullname("Jung Hae-in")
+                .imageUrl(null)
+                .content(content24)
+                .build();
+
+        Actor actorC24A3 = Actor.builder()
+                .fullname("Joo Min-Kyung")
+                .imageUrl(null)
+                .content(content24)
+                .build();
+
+        TVSeries tvSeries24 = TVSeries.builder()
+                .tvSeriesStatusType(TVSeriesStatusType.COMPLETED)
+                .content(content24)
+                .build();
+
+        Creator creatorT24C1 = Creator.builder()
+                .fullname("Ahn Pan-seok")
+                .imageUrl(null)
+                .tvSeries(tvSeries24)
+                .build();
+
+
+        Season seasonT24S1 = Season.builder()
+                .seasonNo(1)
+                .tvSeries(tvSeries24)
+                .build();
+
+        Episode episodeT24S1E1 = Episode.builder()
+                .episodeNo(1)
+                .title("Episode #1")
+                .description("Life is tiresome for Jin-ah, from a bad breakup to a office stressful job. Out of the blue Joon-hee arrives home in Korea after 3 years out of the country. ")
+                .releaseDate("30 Mar 2018")
+                .imageUrl(null)
+                .season(seasonT24S1)
+                .build();
+
+        Episode episodeT24S1E2 = Episode.builder()
+                .episodeNo(2)
+                .title("Episode #2")
+                .description("One of Jin-ah's coworkers takes a liking to Joon-hee which rubs her the wrong way; Jin-a's mom begins to worry because Jin-a isn't preparing to get married like others her age.")
+                .releaseDate("30 Mar 2018")
+                .imageUrl(null)
+                .season(seasonT24S1)
+                .build();
+
+        Episode episodeT24S1E3 = Episode.builder()
+                .episodeNo(3)
+                .title("Episode #3")
+                .description("Gyoo-min tries to convince others about Jin-ah's feelings toward Joon-hee; Joon-hee suspects that Jin-a still has feelings for Gyu-min.")
+                .releaseDate("6 Apr 2018")
+                .imageUrl(null)
+                .season(seasonT24S1)
+                .build();
+
+        Episode episodeT24S1E4 = Episode.builder()
+                .episodeNo(4)
+                .title("Episode #4")
+                .description("Although happy with her relationship, Jin-ah still has concerns about it. At work she gets tricked into going on a business trip that no one else wants to take on.")
+                .releaseDate("7 Apr 2018")
+                .imageUrl(null)
+                .season(seasonT24S1)
+                .build();
+
+        Episode episodeT24S1E5 = Episode.builder()
+                .episodeNo(5)
+                .title("Episode #5")
+                .description("Setting aside her guilt, Jin-A spends the night at Jun-Hui's place. Back at work after the business trip, she gets called to director Nam's office.")
+                .releaseDate("13 Apr 2018")
+                .imageUrl(null)
+                .season(seasonT24S1)
+                .build();
+
+        Episode episodeT24S1E6 = Episode.builder()
+                .episodeNo(6)
+                .title("Episode #6")
+                .description("Jin Ah and Joon Hee struggle to hide their relationship from friends and family.")
+                .releaseDate("14 Apr 2018")
+                .imageUrl(null)
+                .season(seasonT24S1)
+                .build();
+
+        Episode episodeT24S1E7 = Episode.builder()
+                .episodeNo(7)
+                .title("Episode #7")
+                .description("Jin Ah wonders how she can tell her family that she's dating Joon Hee. Meanwhile, her ex just can't seem to let her go. ")
+                .releaseDate("20 Apr 2018")
+                .imageUrl(null)
+                .season(seasonT24S1)
+                .build();
+
+        Episode episodeT24S1E8 = Episode.builder()
+                .episodeNo(8)
+                .title("Episode #8")
+                .description("Jin Ah's ex-boyfriend does the unthinkable.")
+                .releaseDate("21 Apr 2018")
+                .imageUrl(null)
+                .season(seasonT24S1)
+                .build();
+
+        Episode episodeT24S1E9 = Episode.builder()
+                .episodeNo(9)
+                .title("Episode #9")
+                .description("The truth about Jin Ah and Joon Hee's relationship is finally out. Will Jin Ah's friendship with Joon Hee's sister survive? ")
+                .releaseDate("27 Apr 2018")
+                .imageUrl(null)
+                .season(seasonT24S1)
+                .build();
+
+
+        Episode episodeT24S1E10 = Episode.builder()
+                .episodeNo(10)
+                .title("Episode #10")
+                .description("Jin Ah's mother doesn't take the news of her daughter's relationship too well. ")
+                .releaseDate("28 Apr 2018")
+                .imageUrl(null)
+                .season(seasonT24S1)
+                .build();
+
+        Episode episodeT24S1E11 = Episode.builder()
+                .episodeNo(11)
+                .title("Episode #11")
+                .description("Joon Hee and Jin Ah's relationship is put to the test.")
+                .releaseDate("4 May 2018")
+                .imageUrl(null)
+                .season(seasonT24S1)
+                .build();
+
+        Episode episodeT24S1E12 = Episode.builder()
+                .episodeNo(12)
+                .title("Episode #12")
+                .description("Jin Ah and Joon Hee struggle to appease Jin Ah's mother. Kyung Sun sees her father for the first time in years. ")
+                .releaseDate("5 May 2018")
+                .imageUrl(null)
+                .season(seasonT24S1)
+                .build();
+
+        Episode episodeT24S1E13 = Episode.builder()
+                .episodeNo(13)
+                .title("Episode #13")
+                .description("Joon Hee and Kyung Sun's father tries to learn more about his kids' lives. ")
+                .releaseDate("11 May 2018")
+                .imageUrl(null)
+                .season(seasonT24S1)
+                .build();
+
+        Episode episodeT24S1E14 = Episode.builder()
+                .episodeNo(14)
+                .title("Episode #14")
+                .description("As Jin Ah's company is embroiled in scandal, Joon Hee asks Jin Ah to make a big decision.")
+                .releaseDate("12 May 2018")
+                .imageUrl(null)
+                .season(seasonT24S1)
+                .build();
+
+        Episode episodeT24S1E15 = Episode.builder()
+                .episodeNo(15)
+                .title("Episode #15")
+                .description("Yoon Jin Ah makes a drastic decision. ")
+                .releaseDate("18 May 2018")
+                .imageUrl(null)
+                .season(seasonT24S1)
+                .build();
+
+        Episode episodeT24S1E16 = Episode.builder()
+                .episodeNo(16)
+                .title("Episode #16")
+                .description("Joon Hee and Jin Ah meet again. Can they rekindle their relationship? ")
+                .releaseDate("19 May 2018")
+                .imageUrl(null)
+                .season(seasonT24S1)
+                .build();
+
+
+
+        tVSeriesRepository.save(tvSeries24);
+        creatorRepository.save(creatorT24C1);
+        seasonRepository.save(seasonT24S1);
+        episodeRepository.save(episodeT24S1E1);
+        episodeRepository.save(episodeT24S1E2);
+        episodeRepository.save(episodeT24S1E3);
+        episodeRepository.save(episodeT24S1E4);
+        episodeRepository.save(episodeT24S1E5);
+        episodeRepository.save(episodeT24S1E6);
+        episodeRepository.save(episodeT24S1E7);
+        episodeRepository.save(episodeT24S1E8);
+        episodeRepository.save(episodeT24S1E9);
+        episodeRepository.save(episodeT24S1E10);
+        episodeRepository.save(episodeT24S1E11);
+        episodeRepository.save(episodeT24S1E12);
+        episodeRepository.save(episodeT24S1E13);
+        episodeRepository.save(episodeT24S1E14);
+        episodeRepository.save(episodeT24S1E15);
+        episodeRepository.save(episodeT24S1E16);
+        genreRepository.save(genreC24G1);
+        genreRepository.save(genreC24G2);
+        actorRepository.save(actorC24A1);
+        actorRepository.save(actorC24A2);
+        actorRepository.save(actorC24A3);
+        //endregion
+
+        //region Content 25
+        //-----------------Content 25----------------//
+         Content content25 = Content.builder()
+                 .title("Crash Landing On You")
+                 .description("The absolute top secret love story of a chaebol heiress who made an emergency landing in North Korea because of a paragliding accident and a North Korean special officer who falls in love with her and who is hiding and protecting her.")
+                 .spokenLanguage("Korean")
+                 .releaseDate("14 Dec 2019")
+                 .imageUrl("https://m.media-amazon.com/images/M/MV5BZWQyZTkwMTMtYTJiZS00MGNlLThhN2EtYzEzOGQzYjFiZGQxXkEyXkFqcGdeQXVyMTEzMjQ4NzEw._V1_.jpg")
+                 .trailerUrl("<iframe width=\"560\" height=\"315\" src=\"https://youtu.be/eXMjTXL2Vks\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" allowfullscreen></iframe>")
+                 .isAgeRestricted(false)
+                 .contentType(ContentType.TV_SERIES)
+                 .runtime(70)
+                 .build();
+
+         Genre genreC25G1 = Genre.builder()
+                 .name("Romance")
+                 .content(content25)
+                 .build();
+
+         Genre genreC25G2 = Genre.builder()
+                 .name("Adventure")
+                 .content(content25)
+                 .build();
+
+         Genre genreC25G3 = Genre.builder()
+                 .name("Comedy")
+                 .content(content25)
+                 .build();
+
+         Actor actorC25A1 = Actor.builder()
+                 .fullname("Son Ye-jin")
+                 .imageUrl(null)
+                 .content(content25)
+                 .build();
+
+         Actor actorC25A2 = Actor.builder()
+                 .fullname("Hyun Bin")
+                 .imageUrl(null)
+                 .content(content25)
+                 .build();
+
+         Actor actorC25A3 = Actor.builder()
+                 .fullname("Seon Ji-hye")
+                 .imageUrl(null)
+                 .content(content25)
+                 .build();
+
+         TVSeries tvSeries25 = TVSeries.builder()
+                 .tvSeriesStatusType(TVSeriesStatusType.COMPLETED)
+                 .content(content25)
+                 .build();
+
+         Creator creatorT25C1 = Creator.builder()
+                 .fullname("Lee Jeong-hyo")
+                 .imageUrl(null)
+                 .tvSeries(tvSeries25)
+                 .build();
+
+         Season seasonT25S1 = Season.builder()
+                 .seasonNo(1)
+                 .tvSeries(tvSeries25)
+                 .build();
+
+         Episode episodeT25S1E1 = Episode.builder()
+                 .episodeNo(1)
+                 .title("Episode #1")
+                 .description(null)
+                 .releaseDate("14 Dec 2019")
+                 .imageUrl(null)
+                 .season(seasonT25S1)
+                 .build();
+
+         Episode episodeT25S1E2 = Episode.builder()
+                 .episodeNo(2)
+                 .title("Episode #2")
+                 .description(null)
+                 .releaseDate("15 Dec 2019")
+                 .imageUrl(null)
+                 .season(seasonT25S1)
+                 .build();
+
+         Episode episodeT25S1E3 = Episode.builder()
+                 .episodeNo(3)
+                 .title("Episode #3")
+                 .description(null)
+                 .releaseDate("21 Dec 2019")
+                 .imageUrl(null)
+                 .season(seasonT25S1)
+                 .build();
+
+         Episode episodeT25S1E4 = Episode.builder()
+                 .episodeNo(4)
+                 .title("Episode #4")
+                 .description(null)
+                 .releaseDate("22 Dec 2019")
+                 .imageUrl(null)
+                 .season(seasonT25S1)
+                 .build();
+
+         Episode episodeT25S1E5 = Episode.builder()
+                 .episodeNo(5)
+                 .title("Episode #5")
+                 .description(null)
+                 .releaseDate("28 Dec 2019")
+                 .imageUrl(null)
+                 .season(seasonT25S1)
+                 .build();
+
+         Episode episodeT25S1E6 = Episode.builder()
+                 .episodeNo(6)
+                 .title("Episode #6")
+                 .description(null)
+                 .releaseDate("29 Dec 2019")
+                 .imageUrl(null)
+                 .season(seasonT25S1)
+                 .build();
+
+        Episode episodeT25S1E7 = Episode.builder()
+                 .episodeNo(7)
+                 .title("Episode #7")
+                 .description(null)
+                 .releaseDate("11 Jan 2020")
+                 .imageUrl(null)
+                 .season(seasonT25S1)
+                 .build();
+
+        Episode episodeT25S1E8 = Episode.builder()
+                 .episodeNo(8)
+                 .title("Episode #8")
+                 .description(null)
+                 .releaseDate("12 Jan 2020")
+                 .imageUrl(null)
+                 .season(seasonT25S1)
+                 .build();
+
+        Episode episodeT25S1E9 = Episode.builder()
+                 .episodeNo(9)
+                 .title("Episode #9")
+                 .description(null)
+                 .releaseDate("18 Jan 2020")
+                 .imageUrl(null)
+                 .season(seasonT25S1)
+                 .build();
+
+
+         Episode episodeT25S1E10 = Episode.builder()
+                 .episodeNo(10)
+                 .title("Episode #10")
+                 .description(null)
+                 .releaseDate("19 Jan 2020")
+                 .imageUrl(null)
+                 .season(seasonT25S1)
+                 .build();
+
+         Episode episodeT25S1E11 = Episode.builder()
+                 .episodeNo(11)
+                 .title("Episode #11")
+                 .description(null)
+                 .releaseDate("1 Feb 2020")
+                 .imageUrl(null)
+                 .season(seasonT25S1)
+                 .build();
+
+        Episode episodeT25S1E12 = Episode.builder()
+                 .episodeNo(12)
+                 .title("Episode #12")
+                 .description(null)
+                 .releaseDate("2 Feb 2020")
+                 .imageUrl(null)
+                 .season(seasonT25S1)
+                 .build();
+
+        Episode episodeT25S1E13 = Episode.builder()
+                 .episodeNo(13)
+                 .title("Episode #13")
+                 .description(null)
+                 .releaseDate("8 Feb 2020")
+                 .imageUrl(null)
+                 .season(seasonT25S1)
+                 .build();
+
+        Episode episodeT25S1E14 = Episode.builder()
+                 .episodeNo(14)
+                 .title("Episode #14")
+                 .description(null)
+                 .releaseDate("9 Feb 2020")
+                 .imageUrl(null)
+                 .season(seasonT25S1)
+                 .build();
+
+         Episode episodeT25S1E15 = Episode.builder()
+                 .episodeNo(15)
+                 .title("Episode #15")
+                 .description(null)
+                 .releaseDate("15 Feb 2020")
+                 .imageUrl(null)
+                 .season(seasonT25S1)
+                 .build();
+
+          Episode episodeT25S1E16 = Episode.builder()
+                 .episodeNo(16)
+                 .title("Episode #16")
+                 .description(null)
+                 .releaseDate("16 Feb 2020")
+                 .imageUrl(null)
+                 .season(seasonT25S1)
+                 .build();
+
+
+
+         tVSeriesRepository.save(tvSeries25);
+         creatorRepository.save(creatorT25C1);
+         seasonRepository.save(seasonT25S1);
+         episodeRepository.save(episodeT25S1E1);
+         episodeRepository.save(episodeT25S1E2);
+         episodeRepository.save(episodeT25S1E3);
+         episodeRepository.save(episodeT25S1E4);
+         episodeRepository.save(episodeT25S1E5);
+         episodeRepository.save(episodeT25S1E6);
+         episodeRepository.save(episodeT25S1E7);
+         episodeRepository.save(episodeT25S1E8);
+         episodeRepository.save(episodeT25S1E9);
+         episodeRepository.save(episodeT25S1E10);
+         episodeRepository.save(episodeT25S1E11);
+         episodeRepository.save(episodeT25S1E12);
+         episodeRepository.save(episodeT25S1E13);
+         episodeRepository.save(episodeT25S1E14);
+         episodeRepository.save(episodeT25S1E15);
+         episodeRepository.save(episodeT25S1E16);
+         genreRepository.save(genreC25G1);
+         genreRepository.save(genreC25G2);
+         genreRepository.save(genreC25G3);
+         actorRepository.save(actorC25A1);
+         actorRepository.save(actorC25A2);
+         actorRepository.save(actorC25A3);
+        //endregion
+
+        //region Content 26
+        //-----------------Content 26----------------//
+        Content content26 = Content.builder()
+                .title("Little Women")
+                .description("Three sisters with a close bond who grew up in poverty. It is the exciting story of the sisters as they get embroiled in a major incident and face off against the wealthiest family in the nation.")
+                .spokenLanguage("Korean")
+                .releaseDate("3 Sept 2022")
+                .imageUrl("https://sa.kapamilya.com/absnews/abscbnnews/media/2022/tvpatrol/08/29/little-women.jpg")
+                .trailerUrl("<iframe width=\"560\" height=\"315\" src=\"https://youtu.be/Y52PRIHr-YI\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" allowfullscreen></iframe>")
+                .isAgeRestricted(false)
+                .contentType(ContentType.TV_SERIES)
+                .runtime(75)
+                .build();
+
+        Genre genreC26G1 = Genre.builder()
+                .name("Mystery")
+                .content(content26)
+                .build();
+
+        Genre genreC26G2 = Genre.builder()
+                .name("Drama")
+                .content(content26)
+                .build();
+
+        Actor actorC26A1 = Actor.builder()
+                .fullname("Kim Go-eun")
+                .imageUrl(null)
+                .content(content26)
+                .build();
+
+        Actor actorC26A2 = Actor.builder()
+                .fullname("Nam Ji-hyun")
+                .imageUrl(null)
+                .content(content25)
+                .build();
+
+        Actor actorC26A3 = Actor.builder()
+                .fullname("Park Ji-hu")
+                .imageUrl(null)
+                .content(content26)
+                .build();
+
+        TVSeries tvSeries26 = TVSeries.builder()
+                .tvSeriesStatusType(TVSeriesStatusType.COMPLETED)
+                .content(content26)
+                .build();
+
+        Creator creatorT26C1 = Creator.builder()
+                .fullname("Kim Hee-won")
+                .imageUrl(null)
+                .tvSeries(tvSeries26)
+                .build();
+
+        Season seasonT26S1 = Season.builder()
+                .seasonNo(1)
+                .tvSeries(tvSeries26)
+                .build();
+
+        Episode episodeT26S1E1 = Episode.builder()
+                .episodeNo(1)
+                .title("Episode #1")
+                .description("Oh In-joo turns to a work friend for help when an incident with her mother leaves her cash-strapped. Oh In-kyung digs into a four-year-old case. ")
+                .releaseDate("3 Sept 2022")
+                .imageUrl(null)
+                .season(seasonT26S1)
+                .build();
+
+        Episode episodeT26S1E2 = Episode.builder()
+                .episodeNo(2)
+                .title("Episode #2")
+                .description("After discovering Jin Hwa-young's surprising secret, In-joo comes to suspect a finance director to be the culprit of the murderous scheme. ")
+                .releaseDate("4 Sept 2022")
+                .imageUrl(null)
+                .season(seasonT26S1)
+                .build();
+
+        Episode episodeT26S1E3 = Episode.builder()
+                .episodeNo(3)
+                .title("Episode #3")
+                .description("In-kyung causes a scene at a party celebrating Park Hyo-rin's win in a contest. In-joo heads to a mental hospital to deliver an orchid and seek advice")
+                .releaseDate("10 Sept 2022")
+                .imageUrl(null)
+                .season(seasonT26S1)
+                .build();
+
+        Episode episodeT26S1E4 = Episode.builder()
+                .episodeNo(4)
+                .title("Episode #4")
+                .description("In a secret garden, Won Sang-ah commissions Oh In-hye to draw a portrait of her. In-joo and In-kyung debate over the fate of the found money. ")
+                .releaseDate("11 Sept 2022")
+                .imageUrl(null)
+                .season(seasonT26S1)
+                .build();
+
+        Episode episodeT26S1E5 = Episode.builder()
+                .episodeNo(5)
+                .title("Episode #5")
+                .description("In-joo and In-kyung start new jobs and dig deeper into unanswered questions. Sang-ah takes a sudden trip, inciting a surprising reaction.")
+                .releaseDate("17 Sept 2022")
+                .imageUrl(null)
+                .season(seasonT26S1)
+                .build();
+
+        Episode episodeT26S1E6 = Episode.builder()
+                .episodeNo(6)
+                .title("Episode #6")
+                .description("In-joo and In-hye debate what to do with a shocking piece of evidence. In-kyung contends with fallout from a media firestorm. ")
+                .releaseDate("18 Sept 2022")
+                .imageUrl(null)
+                .season(seasonT26S1)
+                .build();
+
+        Episode episodeT26S1E7 = Episode.builder()
+            .episodeNo(7)
+            .title("Episode #7")
+            .description("Reeling from recent events, the sisters must look further into the past in hopes of finding the truth. In-kyung unlocks a secret. In-joo hatches a plan.")
+            .releaseDate("24 Sept 2022")
+            .imageUrl(null)
+            .season(seasonT26S1)
+            .build();
+
+        Episode episodeT26S1E8 = Episode.builder()
+                .episodeNo(8)
+                .title("Episode #8")
+                .description("In-joo travels abroad and receives an unexpected welcome, leading to more questions. In-hye and Hyo-rin attempt to help Sang-ah, who's in isolation")
+                .releaseDate("25 Sept 2022")
+                .imageUrl(null)
+                .season(seasonT26S1)
+                .build();
+
+        Episode episodeT26S1E9 = Episode.builder()
+                .episodeNo(9)
+                .title("Episode #9")
+                .description("In-joo is in grave danger following an encounter with a mysterious visitor abroad. In-kyung offers to make a deal to save her older sister. ")
+                .releaseDate("1 Oct 2022")
+                .imageUrl(null)
+                .season(seasonT26S1)
+                .build();
+
+
+        Episode episodeT26S1E10 = Episode.builder()
+                .episodeNo(10)
+                .title("Episode #10")
+                .description("Park Jae-sang faces a threat. With some help, In-hye and Hyo-rin set out to start fresh. In-kyung finds her own way of shining light on the truth.")
+                .releaseDate("2 Oct 2022")
+                .imageUrl(null)
+                .season(seasonT26S1)
+                .build();
+
+        Episode episodeT26S1E11 = Episode.builder()
+                .episodeNo(11)
+                .title("Episode #11")
+                .description("Jae-sang makes a drastic move. In the aftermath, the sisters face the wrath of familiar adversaries, newly emboldened with great power. ")
+                .releaseDate("8 Oct 2022")
+                .imageUrl(null)
+                .season(seasonT26S1)
+                .build();
+
+        Episode episodeT26S1E12 = Episode.builder()
+                .episodeNo(12)
+                .title("Episode #12")
+                .description("During one sister's hearing, a bombshell courtroom appearance causes a stir. Emotions run high as lingering questions are finally answered. ")
+                .releaseDate("9 Oct 2022")
+                .imageUrl(null)
+                .season(seasonT26S1)
+                .build();
+
+        tVSeriesRepository.save(tvSeries26);
+        creatorRepository.save(creatorT26C1);
+        seasonRepository.save(seasonT26S1);
+        episodeRepository.save(episodeT26S1E1);
+        episodeRepository.save(episodeT26S1E2);
+        episodeRepository.save(episodeT26S1E3);
+        episodeRepository.save(episodeT26S1E4);
+        episodeRepository.save(episodeT26S1E5);
+        episodeRepository.save(episodeT26S1E6);
+        episodeRepository.save(episodeT26S1E7);
+        episodeRepository.save(episodeT26S1E8);
+        episodeRepository.save(episodeT26S1E9);
+        episodeRepository.save(episodeT26S1E10);
+        episodeRepository.save(episodeT26S1E11);
+        episodeRepository.save(episodeT26S1E12);
+        genreRepository.save(genreC26G1);
+        genreRepository.save(genreC26G2);
+        actorRepository.save(actorC26A1);
+        actorRepository.save(actorC26A2);
+        actorRepository.save(actorC26A3);
+        //endregion
+
+        //region Content 27
+        //-----------------Content 27----------------//
+         Content content27 = Content.builder()
+                 .title("Itaewon Class")
+                 .description("An ex-con opens a street bar in Itaewon, while also seeking revenge on the family who was responsible for his father's death.")
+                 .spokenLanguage("Korean")
+                 .releaseDate("31 Jan 2020")
+                 .imageUrl("https://m.media-amazon.com/images/M/MV5BODY1NWE2OTctOTU5MC00NTlmLWI2MzktMmYzMTUzYjk4YjEzXkEyXkFqcGdeQXVyNjc3MjQzNTI@._V1_.jpg")
+                 .trailerUrl("<iframe width=\"560\" height=\"315\" src=\"https://youtu.be/NeaHNQJ1kCo\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" allowfullscreen></iframe>")
+                 .isAgeRestricted(false)
+                 .contentType(ContentType.TV_SERIES)
+                 .runtime(70)
+                 .build();
+
+         Genre genreC27G1 = Genre.builder()
+                 .name("Romance")
+                 .content(content27)
+                 .build();
+
+         Genre genreC27G2 = Genre.builder()
+                 .name("Drama")
+                 .content(content27)
+                 .build();
+
+         Actor actorC27A1 = Actor.builder()
+                 .fullname("Park Seo-joon")
+                 .imageUrl(null)
+                 .content(content27)
+                 .build();
+
+         Actor actorC27A2 = Actor.builder()
+                 .fullname("Kim Da-mi")
+                 .imageUrl(null)
+                 .content(content27)
+                 .build();
+
+         Actor actorC27A3 = Actor.builder()
+                 .fullname("Yoo Jae-myung")
+                 .imageUrl(null)
+                 .content(content27)
+                 .build();
+
+         TVSeries tvSeries27 = TVSeries.builder()
+                 .tvSeriesStatusType(TVSeriesStatusType.COMPLETED)
+                 .content(content27)
+                 .build();
+
+         Creator creatorT27C1 = Creator.builder()
+                 .fullname("Kim Seong-yoon")
+                 .imageUrl(null)
+                 .tvSeries(tvSeries27)
+                 .build();
+
+         Season seasonT27S1 = Season.builder()
+                 .seasonNo(1)
+                 .tvSeries(tvSeries27)
+                 .build();
+
+         Episode episodeT27S1E1 = Episode.builder()
+                 .episodeNo(1)
+                 .title("Episode #1")
+                 .description(null)
+                 .releaseDate("31 Jan 2020")
+                 .imageUrl("On his first day at a new high school, Park Sae Ro Yi stands by his principles in front of powerful bullies. Oh Soo Ah works on getting into college.")
+                 .season(seasonT27S1)
+                 .build();
+
+         Episode episodeT27S1E2 = Episode.builder()
+                 .episodeNo(2)
+                 .title("Episode #2")
+                 .description("While serving his time, Park Sae Ro Yi develops a bold game plan for his future. Soo Ah can't ignore a generous offer from Jang Dae Hee")
+                 .releaseDate("1 Feb 2020")
+                 .imageUrl(null)
+                 .season(seasonT27S1)
+                 .build();
+
+         Episode episodeT27S1E3 = Episode.builder()
+                 .episodeNo(3)
+                 .title("Episode #3")
+                 .description("Park Sae Ro Yi crosses paths with Jo Yi Seo, who seems to have a knack for bringing him trouble. Meanwhile, Dan Bam struggles to attract customers")
+                 .releaseDate("7 Feb 2020")
+                 .imageUrl(null)
+                 .season(seasonT27S1)
+                 .build();
+
+         Episode episodeT27S1E4 = Episode.builder()
+                 .episodeNo(4)
+                 .title("Episode #4")
+                 .description("Choi Seung Kwon regrets reverting back to his old ways. When Yi Seo's night out takes an ugly turn, Sae Ro Yi is there to help")
+                 .releaseDate("8 Feb 2020")
+                 .imageUrl(null)
+                 .season(seasonT27S1)
+                 .build();
+
+         Episode episodeT27S1E5 = Episode.builder()
+                 .episodeNo(5)
+                 .title("Episode #5")
+                 .description("Before its reopening, Dan Bam gets a few upgrades. Yi Seo, Seung Kwon and Jang Geun Soo have a surprise encounter at a nightclub")
+                 .releaseDate("14 Feb 2020")
+                 .imageUrl(null)
+                 .season(seasonT27S1)
+                 .build();
+
+         Episode episodeT27S1E6 = Episode.builder()
+                 .episodeNo(6)
+                 .title("Episode #6")
+                 .description("Dae Hee keeps tabs on Dan Bam's progress. Sae Ro Yi runs into Jang Geun Won at the TV station. Yi Seo faces her mother's disappointment.")
+                 .releaseDate("15 Feb 2020")
+                 .imageUrl(null)
+                 .season(seasonT27S1)
+                 .build();
+
+        Episode episodeT27S1E7 = Episode.builder()
+                 .episodeNo(7)
+                 .title("Episode #7")
+                 .description("Dan Bam gets an unwelcome visitor. Sae Ro Yi approaches Kang Min Jung with a weighty proposition, and shares his entire story with Yi Seo.")
+                 .releaseDate("21 Feb 2020")
+                 .imageUrl(null)
+                 .season(seasonT27S1)
+                 .build();
+
+        Episode episodeT27S1E8 = Episode.builder()
+                 .episodeNo(8)
+                 .title("Episode #8")
+                 .description("Bad news strikes Dan Bam, but Sae Ro Yi isn't one to bow under pressure. Geun Soo learns a horrible truth. Kim Tony deals with discrimination")
+                 .releaseDate("22 Feb 2020")
+                 .imageUrl(null)
+                 .season(seasonT27S1)
+                 .build();
+
+        Episode episodeT27S1E9 = Episode.builder()
+                 .episodeNo(9)
+                 .title("Episode #9")
+                 .description("The bar's move to a quieter street poses fresh problems for the crew. Dae Hee takes an interest in Sae Ro Yi's people.")
+                 .releaseDate("28 Feb 2020")
+                 .imageUrl(null)
+                 .season(seasonT27S1)
+                 .build();
+
+
+         Episode episodeT27S1E10 = Episode.builder()
+                 .episodeNo(10)
+                 .title("Episode #10")
+                 .description("Jangga finds itself in hot water with the public. With the future of the company hanging in the balance, Dae Hee must make his choice.")
+                 .releaseDate("29 Feb 2020")
+                 .imageUrl(null)
+                 .season(seasonT27S1)
+                 .build();
+
+         Episode episodeT27S1E11 = Episode.builder()
+                 .episodeNo(11)
+                 .title("Episode #11")
+                 .description("After Ma Hyun Yi makes a buzzy TV appearance, a big opportunity comes knocking for Dan Bam. Geun Soo goes after what he wants.")
+                 .releaseDate("6 Mar 2020")
+                 .imageUrl(null)
+                 .season(seasonT27S1)
+                 .build();
+
+        Episode episodeT27S1E12 = Episode.builder()
+                 .episodeNo(12)
+                 .title("Episode #12")
+                 .description("While navigating their latest crisis, Sae Ro Yi and Yi Seo come across a potential investor. Hyun Yi preps for the competition's final round.")
+                 .releaseDate("7 Mar 2020")
+                 .imageUrl(null)
+                 .season(seasonT27S1)
+                 .build();
+
+       Episode episodeT27S1E13 = Episode.builder()
+                 .episodeNo(13)
+                 .title("Episode #13")
+                 .description("Geun Soo moves closer to his goal. With their sights set high, Sae Ro Yi and his team take the business to the next level.")
+                 .releaseDate("13 Mar 2020")
+                 .imageUrl(null)
+                 .season(seasonT27S1)
+                 .build();
+
+        Episode episodeT27S1E14 = Episode.builder()
+                 .episodeNo(14)
+                 .title("Episode #14")
+                 .description("Yi Seo overworks herself as she steps into a critical role for the team's new strategy against Jangga, worrying Sae Ro Yi.")
+                 .releaseDate("14 Mar 2020")
+                 .imageUrl(null)
+                 .season(seasonT27S1)
+                 .build();
+
+        Episode episodeT27S1E15 = Episode.builder()
+                 .episodeNo(15)
+                 .title("Episode #15")
+                 .description("Searching for Yi Seo, Seung Kwon pays his old boss a visit. Dae Hee receives a warning from Soo Ah, and a disturbing call from Geun Won")
+                 .releaseDate("20 Mar 2020")
+                 .imageUrl(null)
+                 .season(seasonT27S1)
+                 .build();
+
+        Episode episodeT27S1E16 = Episode.builder()
+                 .episodeNo(16)
+                 .title("Episode #16")
+                 .description("Yi Seo runs from Geun Won, who's out to put an end to everything. Desperate to salvage his crumbling legacy, Dae Hee heads to DanBam.")
+                 .releaseDate("21 Mar 2020")
+                 .imageUrl(null)
+                 .season(seasonT27S1)
+                 .build();
+
+
+
+         tVSeriesRepository.save(tvSeries27);
+         creatorRepository.save(creatorT27C1);
+         seasonRepository.save(seasonT27S1);
+         episodeRepository.save(episodeT27S1E1);
+         episodeRepository.save(episodeT27S1E2);
+         episodeRepository.save(episodeT27S1E3);
+         episodeRepository.save(episodeT27S1E4);
+         episodeRepository.save(episodeT27S1E5);
+         episodeRepository.save(episodeT27S1E6);
+         episodeRepository.save(episodeT27S1E7);
+         episodeRepository.save(episodeT27S1E8);
+         episodeRepository.save(episodeT27S1E9);
+         episodeRepository.save(episodeT27S1E10);
+         episodeRepository.save(episodeT27S1E11);
+         episodeRepository.save(episodeT27S1E12);
+         episodeRepository.save(episodeT27S1E13);
+         episodeRepository.save(episodeT27S1E14);
+         episodeRepository.save(episodeT27S1E15);
+         episodeRepository.save(episodeT27S1E16);
+         genreRepository.save(genreC27G1);
+         genreRepository.save(genreC27G2);
+         actorRepository.save(actorC27A1);
+         actorRepository.save(actorC27A2);
+         actorRepository.save(actorC27A3);
+        //endregion
+
+        //region Content 28
+        //-----------------Content 28----------------//
+         Content content28 = Content.builder()
+                 .title("Twenty Five Twenty One")
+                 .description("In a time when dreams seem out of reach, a teen fencer pursues big ambitions and meets a hardworking young man who seeks to rebuild his life.")
+                 .spokenLanguage("Korean")
+                 .releaseDate("12 Feb 2022")
+                 .imageUrl("https://www.patsonic.com/wp-content/uploads/2022/01/twenty-five-twenty-one-synopsis-featured.jpg")
+                 .trailerUrl("<iframe width=\"560\" height=\"315\" src=\"https://youtu.be/gYp4cKumTwU\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" allowfullscreen></iframe>")
+                 .isAgeRestricted(false)
+                 .contentType(ContentType.TV_SERIES)
+                 .runtime(70)
+                 .build();
+
+         Genre genreC28G1 = Genre.builder()
+                 .name("Romance")
+                 .content(content28)
+                 .build();
+
+         Genre genreC28G2 = Genre.builder()
+                 .name("Drama")
+                 .content(content28)
+                 .build();
+
+         Actor actorC28A1 = Actor.builder()
+                 .fullname("Nam Joo-hyuk")
+                 .imageUrl(null)
+                 .content(content28)
+                 .build();
+
+         Actor actorC28A2 = Actor.builder()
+                 .fullname("Kim Ji-yeon")
+                 .imageUrl(null)
+                 .content(content28)
+                 .build();
+
+         Actor actorC28A3 = Actor.builder()
+                 .fullname("Choi Hyun-wook")
+                 .imageUrl(null)
+                 .content(content28)
+                 .build();
+
+         TVSeries tvSeries28 = TVSeries.builder()
+                 .tvSeriesStatusType(TVSeriesStatusType.COMPLETED)
+                 .content(content28)
+                 .build();
+
+         Creator creatorT28C1 = Creator.builder()
+                 .fullname("Jung Ji-hyun")
+                 .imageUrl(null)
+                 .tvSeries(tvSeries28)
+                 .build();
+
+         Season seasonT28S1 = Season.builder()
+                 .seasonNo(1)
+                 .tvSeries(tvSeries28)
+                 .build();
+
+         Episode episodeT28S1E1 = Episode.builder()
+                 .episodeNo(1)
+                 .title("Episode #1")
+                 .description("When the IMF financial crisis threatens to slash Na Hee-do's dreams, she sets out to get herself transferred to another school with a fencing program. ")
+                 .releaseDate("12 Feb 2022")
+                 .imageUrl(null)
+                 .season(seasonT28S1)
+                 .build();
+
+         Episode episodeT28S1E2 = Episode.builder()
+                 .episodeNo(2)
+                 .title("Episode #2")
+                 .description("Though taken aback by Ko Yu-rim's cold attitude, Hee-do gives it her best in their first face-off. More of Back Yi-jin's situation comes into focus.")
+                 .releaseDate("13 Feb 2022")
+                 .imageUrl(null)
+                 .season(seasonT28S1)
+                 .build();
+
+         Episode episodeT28S1E3 = Episode.builder()
+                 .episodeNo(3)
+                 .title("Episode #3")
+                 .description("When a fortuitous opportunity presents itself, Hee-do begs her coach for extra training. An unanticipated visitor comes around hoping to see Yi-jin. ")
+                 .releaseDate("19 Feb 2022")
+                 .imageUrl(null)
+                 .season(seasonT28S1)
+                 .build();
+
+         Episode episodeT28S1E4 = Episode.builder()
+                 .episodeNo(4)
+                 .title("Episode #4")
+                 .description("In exchange for a favor, Hee-do carries out a daily errand for Moon Ji-woong. She happens across a drunk Yi-jin after he fails another job interview. ")
+                 .releaseDate("20 Feb 2022")
+                 .imageUrl(null)
+                 .season(seasonT28S1)
+                 .build();
+
+         Episode episodeT28S1E5 = Episode.builder()
+                 .episodeNo(5)
+                 .title("Episode #5")
+                 .description("Hee-do takes one giant leap closer to her dream. She's eager to tell Yi-jin the good news - but realizes he's disappeared without a trace.")
+                 .releaseDate("26 Feb 2022")
+                 .imageUrl(null)
+                 .season(seasonT28S1)
+                 .build();
+
+         Episode episodeT28S1E6 = Episode.builder()
+                 .episodeNo(6)
+                 .title("Episode #6")
+                 .description("Tensions run high between Hee-do and Yu-rim before an important event. Yi-jin takes on a new assignment and spots a familiar face in the crowd.")
+                 .releaseDate("27 Feb 2022")
+                 .imageUrl(null)
+                 .season(seasonT28S1)
+                 .build();
+
+        Episode episodeT28S1E7 = Episode.builder()
+                 .episodeNo(7)
+                 .title("Episode #7")
+                 .description("A frustrating media narrative dampens a monumental moment for Hee-do. Yi-jin chases down the only person who may be able to set things right.")
+                 .releaseDate("5 Mar 2022")
+                 .imageUrl(null)
+                 .season(seasonT28S1)
+                 .build();
+
+        Episode episodeT28S1E8 = Episode.builder()
+                 .episodeNo(8)
+                 .title("Episode #8")
+                 .description("Hee-do perceives a growing distance between herself and Yi-jin, even as he moves back into the neighborhood. Trouble at home adds to Yoo-rim's stress. ")
+                 .releaseDate("6 Mar 2022")
+                 .imageUrl(null)
+                 .season(seasonT28S1)
+                 .build();
+
+        Episode episodeT28S1E9 = Episode.builder()
+                 .episodeNo(9)
+                 .title("Episode #9")
+                 .description("As Yu-rim's perspective on Hee-do shifts, so does her behavior. While Hee-do avoids seeing Yi-jin, he volunteers for a special documentary project. ")
+                 .releaseDate("12 Mar 2022")
+                 .imageUrl(null)
+                 .season(seasonT28S1)
+                 .build();
+
+
+         Episode episodeT28S1E10 = Episode.builder()
+                 .episodeNo(10)
+                 .title("Episode #10")
+                 .description("Under the guise of work, Yi-jin takes Hee-do and Yu-rim on a weekend getaway to the ocean - and agrees to let Ji Seung-wan and Ji-woong tag along. ")
+                 .releaseDate("13 Mar 2022")
+                 .imageUrl(null)
+                 .season(seasonT28S1)
+                 .build();
+
+         Episode episodeT28S1E11 = Episode.builder()
+                 .episodeNo(11)
+                 .title("Episode #11")
+                 .description("Hee-do grows upset when her career-obsessed mother fails to keep a promise. Yi-jin helps out Ji-woong's plans for a grand gesture at a music festival.")
+                 .releaseDate("19 Mar 2022")
+                 .imageUrl(null)
+                 .season(seasonT28S1)
+                 .build();
+
+        Episode episodeT28S1E12 = Episode.builder()
+                 .episodeNo(12)
+                 .title("Episode #12")
+                 .description("Unable to hold back from putting an end to a teacher's abusive behavior, Seung Wan stands her ground. Hee Do and Yu Rim support a distraught teammate.")
+                 .releaseDate("20 Mar 2022")
+                 .imageUrl(null)
+                 .season(seasonT28S1)
+                 .build();
+
+       Episode episodeT28S1E13 = Episode.builder()
+                 .episodeNo(13)
+                 .title("Episode #13")
+                 .description("Warnings about allowing his personal ties affect his work weight heavily on Yi-jin. The school fencing team enter their last competition together.")
+                 .releaseDate("26 Mar 2022")
+                 .imageUrl(null)
+                 .season(seasonT28S1)
+                 .build();
+
+       Episode episodeT28S1E14 = Episode.builder()
+                 .episodeNo(14)
+                 .title("Episode #14")
+                 .description("Shouldering the burdens of a sudden misfortune in her family, Yu-rim arrives at a decision that places her in hot water with the public.")
+                 .releaseDate("27 Mar 2022")
+                 .imageUrl(null)
+                 .season(seasonT28S1)
+                 .build();
+
+       Episode episodeT28S1E15 = Episode.builder()
+                 .episodeNo(15)
+                 .title("Episode #15")
+                 .description("Hee-do once again finds herself opposite her most formidable opponent. Yi-jin is busier than ever after transferring to another department.")
+                 .releaseDate("2 Apr 2022")
+                 .imageUrl(null)
+                 .season(seasonT28S1)
+                 .build();
+
+       Episode episodeT28S1E16 = Episode.builder()
+                 .episodeNo(16)
+                 .title("Episode #16")
+                 .description("In an emotionally charged exchange, Hee-do and Yi-jin confront the state of their relationship. Hee-do accidentally leaves her diary on a bus.")
+                 .releaseDate("3 Apr 2022")
+                 .imageUrl(null)
+                 .season(seasonT28S1)
+                 .build();
+
+
+
+         tVSeriesRepository.save(tvSeries28);
+         creatorRepository.save(creatorT28C1);
+         seasonRepository.save(seasonT28S1);
+         episodeRepository.save(episodeT28S1E1);
+         episodeRepository.save(episodeT28S1E2);
+         episodeRepository.save(episodeT28S1E3);
+         episodeRepository.save(episodeT28S1E4);
+         episodeRepository.save(episodeT28S1E5);
+         episodeRepository.save(episodeT28S1E6);
+         episodeRepository.save(episodeT28S1E7);
+         episodeRepository.save(episodeT28S1E8);
+         episodeRepository.save(episodeT28S1E9);
+         episodeRepository.save(episodeT28S1E10);
+         episodeRepository.save(episodeT28S1E11);
+         episodeRepository.save(episodeT28S1E12);
+         episodeRepository.save(episodeT28S1E13);
+         episodeRepository.save(episodeT28S1E14);
+         episodeRepository.save(episodeT28S1E15);
+         episodeRepository.save(episodeT28S1E16);
+         genreRepository.save(genreC28G1);
+         genreRepository.save(genreC28G2);
+         actorRepository.save(actorC28A1);
+         actorRepository.save(actorC28A2);
+         actorRepository.save(actorC28A3);
+        //endregion
+
+
+
+
+
+        //region Content 32
+        //-----------------Content 32----------------//
+
+        Content content32 = Content.builder()
+                .title("The Gray Man")
+                .description("When a shadowy CIA agent uncovers damning agency secrets, he’s hunted across the globe by a sociopathic operative who’s put a bounty on his head. Ryan Gosling and Chris Evans star in this action thriller from the Russo brothers ")
+                .spokenLanguage("English")
+                .releaseDate("19 Mar 2022")
+                .imageUrl(null)
+                .trailerUrl(null)
+                .isAgeRestricted(false)
+                .contentType(ContentType.MOVIE)
+                .runtime(129)
+                .build();
+
+        Genre genreC32G1 = Genre.builder()
+                .name("Action")
+                .content(content32)
+                .build();
+
+        Genre genreC32G2 = Genre.builder()
+                .name("Adventure")
+                .content(content32)
+                .build();
+
+        Actor actorC32A1 = Actor.builder()
+                .fullname("Ryan Gosling")
+                .imageUrl(null)
+                .content(content32)
+                .build();
+
+        Actor actorC32A2 = Actor.builder()
+                .fullname("Chris Evans")
+                .imageUrl(null)
+                .content(content32)
+                .build();
+
+        Actor actorC32A3 = Actor.builder()
+                .fullname("Ana de Armas")
+                .imageUrl(null)
+                .content(content32)
+                .build();
+        Actor actorC32A4 = Actor.builder()
+                .fullname("Jessica Henwick")
+                .imageUrl(null)
+                .content(content32)
+                .build();
+
+        Actor actorC32A5 = Actor.builder()
+                .fullname("Regé-Jean Page")
+                .imageUrl(null)
+                .content(content32)
+                .build();
+
+        Actor actorC32A6 = Actor.builder()
+                .fullname("Wagner Moura")
+                .imageUrl(null)
+                .content(content32)
+                .build();
+
+        Actor actorC32A7 = Actor.builder()
+                .fullname("Julia Butters")
+                .imageUrl(null)
+                .content(content32)
+                .build();
+
+        Actor actorC32A8 = Actor.builder()
+                .fullname("Dhanush")
+                .imageUrl(null)
+                .content(content32)
+                .build();
+
+        Actor actorC32A9 = Actor.builder()
+                .fullname("Alfre Woodard")
+                .imageUrl(null)
+                .content(content32)
+                .build();
+
+        Actor actorC32A10 = Actor.builder()
+                .fullname("Billy Bob Thornton")
+                .imageUrl(null)
+                .content(content32)
+                .build();
+
+        Movie movie32 = Movie.builder()
+                .content(content32)
+                .build();
+
+
+        Writer writerM32W1 = Writer.builder()
+                .fullname("Joe Russo")
+                .imageUrl(null)
+                .movie(movie32)
+                .build();
+
+        Writer writerM32W2 = Writer.builder()
+                .fullname("Cristopher Markus")
+                .imageUrl(null)
+                .movie(movie32)
+                .build();
+
+        Writer writerM32W3 = Writer.builder()
+                .fullname("Stephen McFeely")
+                .imageUrl(null)
+                .movie(movie32)
+                .build();
+
+        Director directorM32D1 = Director.builder()
+                .fullname("Anthony Russo")
+                .imageUrl(null)
+                .movie(movie32)
+                .build();
+
+        Director directorM32D2 = Director.builder()
+                .fullname("Joe Russo")
+                .imageUrl(null)
+                .movie(movie32)
+                .build();
+
+        movieRepository.save(movie32);
+        genreRepository.save(genreC32G1);
+        genreRepository.save(genreC32G2);
+        actorRepository.save(actorC32A1);
+        actorRepository.save(actorC32A2);
+        actorRepository.save(actorC32A3);
+        actorRepository.save(actorC32A4);
+        actorRepository.save(actorC32A5);
+        actorRepository.save(actorC32A6);
+        actorRepository.save(actorC32A7);
+        actorRepository.save(actorC32A8);
+        actorRepository.save(actorC32A9);
+        actorRepository.save(actorC32A10);
+
+        writerRepository.save(writerM32W1);
+        writerRepository.save(writerM32W2);
+        writerRepository.save(writerM32W3);
+
+        directorRepository.save(directorM32D1);
+        directorRepository.save(directorM32D2);
+
+        //endregion
+
+        //region Content 33
+        //-----------------Content 33----------------//
+        Content content33 = Content.builder()
+                .title("Red Notice")
+                .description("An FBI profiler pursuing the world's most wanted art thief becomes his reluctant partner in crime to catch an elusive crook who's always one step ahead.")
+                .spokenLanguage("English")
+                .releaseDate("24 Nov 2021")
+                .imageUrl(null)
+                .trailerUrl(null)
+                .isAgeRestricted(false)
+                .contentType(ContentType.MOVIE)
+                .runtime(118)
+                .build();
+
+        Genre genreC33G1 = Genre.builder()
+                .name("Action")
+                .content(content33)
+                .build();
+
+        Genre genreC33G2 = Genre.builder()
+                .name("Adventure")
+                .content(content33)
+                .build();
+
+        Genre genreC33G3 = Genre.builder()
+                .name("Comedies")
+                .content(content33)
+                .build();
+
+        Genre genreC33G4 = Genre.builder()
+                .name("Crime")
+                .content(content33)
+                .build();
+
+        Actor actorC33A1 = Actor.builder()
+                .fullname("Dwayne Johnson")
+                .imageUrl(null)
+                .content(content33)
+                .build();
+
+        Actor actorC33A2 = Actor.builder()
+                .fullname("Ryan Reynolds")
+                .imageUrl(null)
+                .content(content33)
+                .build();
+
+        Actor actorC33A3 = Actor.builder()
+                .fullname("Gal Gadot")
+                .imageUrl(null)
+                .content(content33)
+                .build();
+        Actor actorC33A4 = Actor.builder()
+                .fullname("Ritu Arya")
+                .imageUrl(null)
+                .content(content33)
+                .build();
+
+        Actor actorC33A5 = Actor.builder()
+                .fullname("Chris Diamantopoulos")
+                .imageUrl(null)
+                .content(content33)
+                .build();
+
+        Movie movie33 = Movie.builder()
+                .content(content33)
+                .build();
+
+        Writer writerM33W1 = Writer.builder()
+                .fullname("Rawson Marshall Thurber")
+                .imageUrl(null)
+                .movie(movie33)
+                .build();
+
+        Director directorM33D1 = Director.builder()
+                .fullname("Rawson Marshall Thurber")
+                .imageUrl(null)
+                .movie(movie33)
+                .build();
+
+        movieRepository.save(movie33);
+        genreRepository.save(genreC33G1);
+        genreRepository.save(genreC33G2);
+        genreRepository.save(genreC33G3);
+        genreRepository.save(genreC33G4);
+
+        actorRepository.save(actorC33A1);
+        actorRepository.save(actorC33A2);
+        actorRepository.save(actorC33A3);
+        actorRepository.save(actorC33A4);
+        actorRepository.save(actorC33A5);
+
+        writerRepository.save(writerM33W1);
+
+        directorRepository.save(directorM33D1);
+
+
+        //endregion
+
+        //region Content 34
+        //-----------------Content 34----------------//
+
+        Content content34 = Content.builder()
+                .title("The Adam Project")
+                .description("After accidentally crash-landing in 2022, time-traveling fighter pilot Adam Reed teams up with his 12-year-old self on a mission to save the future.")
+                .spokenLanguage("English")
+                .releaseDate("16 Feb 2022")
+                .imageUrl(null)
+                .trailerUrl(null)
+                .isAgeRestricted(false)
+                .contentType(ContentType.MOVIE)
+                .runtime(106)
+                .build();
+
+        Genre genreC34G1 = Genre.builder()
+                .name("Action")
+                .content(content34)
+                .build();
+
+        Genre genreC34G2 = Genre.builder()
+                .name("Adventure")
+                .content(content34)
+                .build();
+
+
+        Genre genreC34G3 = Genre.builder()
+                .name("Sci-Fi")
+                .content(content34)
+                .build();
+
+        Genre genreC34G4 = Genre.builder()
+                .name("Comedies")
+                .content(content34)
+                .build();
+
+        Genre genreC34G5 = Genre.builder()
+                .name("Family")
+                .content(content34)
+                .build();
+
+
+        Actor actorC34A1 = Actor.builder()
+                .fullname("Ryan Reynolds")
+                .imageUrl(null)
+                .content(content34)
+                .build();
+
+        Actor actorC34A2 = Actor.builder()
+                .fullname("Mark Ruffalo")
+                .imageUrl(null)
+                .content(content34)
+                .build();
+
+        Actor actorC34A3 = Actor.builder()
+                .fullname("Zoe Saldaña")
+                .imageUrl(null)
+                .content(content34)
+                .build();
+        Actor actorC34A4 = Actor.builder()
+                .fullname("Walker Scobell")
+                .imageUrl(null)
+                .content(content34)
+                .build();
+
+        Actor actorC34A5 = Actor.builder()
+                .fullname("Catherine Keener")
+                .imageUrl(null)
+                .content(content34)
+                .build();
+
+        Actor actorC34A6 = Actor.builder()
+                .fullname("Alex Mallari Jr")
+                .imageUrl(null)
+                .content(content34)
+                .build();
+
+        Actor actorC34A7 = Actor.builder()
+                .fullname("Jennifer Garner")
+                .imageUrl(null)
+                .content(content34)
+                .build();
+
+        Movie movie34 = Movie.builder()
+                .content(content34)
+                .build();
+
+
+        Writer writerM34W1 = Writer.builder()
+                .fullname("Jonathan Tropper")
+                .imageUrl(null)
+                .movie(movie34)
+                .build();
+
+        Writer writerM34W2 = Writer.builder()
+                .fullname("T.S. Nowlin")
+                .imageUrl(null)
+                .movie(movie34)
+                .build();
+
+        Writer writerM34W3 = Writer.builder()
+                .fullname("Jennifer Flackett")
+                .imageUrl(null)
+                .movie(movie34)
+                .build();
+
+        Writer writerM34W4 = Writer.builder()
+                .fullname("Mark Levin")
+                .imageUrl(null)
+                .movie(movie34)
+                .build();
+
+        Director directorM34D1 = Director.builder()
+                .fullname("Shawn Levy")
+                .imageUrl(null)
+                .movie(movie34)
+                .build();
+
+        movieRepository.save(movie34);
+        genreRepository.save(genreC34G1);
+        genreRepository.save(genreC34G2);
+        genreRepository.save(genreC34G3);
+        genreRepository.save(genreC34G4);
+        genreRepository.save(genreC34G5);
+
+
+        actorRepository.save(actorC34A1);
+        actorRepository.save(actorC34A2);
+        actorRepository.save(actorC34A3);
+        actorRepository.save(actorC34A4);
+        actorRepository.save(actorC34A5);
+        actorRepository.save(actorC34A6);
+        actorRepository.save(actorC34A7);
+
+        writerRepository.save(writerM34W1);
+        writerRepository.save(writerM34W2);
+        writerRepository.save(writerM34W3);
+        writerRepository.save(writerM34W4);
+
+        directorRepository.save(directorM34D1);
+
+        //endregion
+
+        //region Content 35
+        //-----------------Content 35----------------//
+        Content content35 = Content.builder()
+                .title("Baywatch")
+                .description("To save their beach, elite lifeguard Mitch Buchannon and a former Olympian probe a criminal plot that threatens the future of the bay.")
+                .spokenLanguage("English")
+                .releaseDate("22 Aug 2017")
+                .imageUrl(null)
+                .trailerUrl(null)
+                .isAgeRestricted(false)
+                .contentType(ContentType.MOVIE)
+                .runtime(117)
+                .build();
+
+        Genre genreC35G1 = Genre.builder()
+                .name("Action")
+                .content(content35)
+                .build();
+
+        Genre genreC35G2 = Genre.builder()
+                .name("Adventure")
+                .content(content35)
+                .build();
+
+        Genre genreC35G3 = Genre.builder()
+                .name("Comedies")
+                .content(content35)
+                .build();
+
+        Actor actorC35A1 = Actor.builder()
+                .fullname("Dwayne Johnson")
+                .imageUrl(null)
+                .content(content35)
+                .build();
+
+        Actor actorC35A2 = Actor.builder()
+                .fullname("Zac Efron")
+                .imageUrl(null)
+                .content(content35)
+                .build();
+
+        Actor actorC35A3 = Actor.builder()
+                .fullname("Priyanka Chopra Jonas")
+                .imageUrl(null)
+                .content(content35)
+                .build();
+        Actor actorC35A4 = Actor.builder()
+                .fullname("Alexandra Daddario")
+                .imageUrl(null)
+                .content(content35)
+                .build();
+
+        Actor actorC35A5 = Actor.builder()
+                .fullname("Kelly Rohrbach")
+                .imageUrl(null)
+                .content(content35)
+                .build();
+
+        Actor actorC35A6 = Actor.builder()
+                .fullname("Ilfenesh Hadera")
+                .imageUrl(null)
+                .content(content35)
+                .build();
+
+        Actor actorC35A7 = Actor.builder()
+                .fullname("Jon Bass")
+                .imageUrl(null)
+                .content(content35)
+                .build();
+
+        Actor actorC35A8 = Actor.builder()
+                .fullname("Yahya Abdul-Mateen II")
+                .imageUrl(null)
+                .content(content35)
+                .build();
+
+        Actor actorC35A9 = Actor.builder()
+                .fullname("Hannibal Buress")
+                .imageUrl(null)
+                .content(content35)
+                .build();
+
+        Actor actorC35A10 = Actor.builder()
+                .fullname("Rob Huebel")
+                .imageUrl(null)
+                .content(content35)
+                .build();
+
+        Actor actorC35A11 = Actor.builder()
+                .fullname("Amin Joseph")
+                .imageUrl(null)
+                .content(content35)
+                .build();
+
+        Actor actorC35A12 = Actor.builder()
+                .fullname("Jack Kesy")
+                .imageUrl(null)
+                .content(content35)
+                .build();
+
+        Actor actorC35A13 = Actor.builder()
+                .fullname("Pamela Anderson")
+                .imageUrl(null)
+                .content(content35)
+                .build();
+
+        Actor actorC35A14 = Actor.builder()
+                .fullname("Belinda")
+                .imageUrl(null)
+                .content(content35)
+                .build();
+
+        Actor actorC35A15 = Actor.builder()
+                .fullname("Charlotte McKinney")
+                .imageUrl(null)
+                .content(content35)
+                .build();
+
+        Actor actorC35A16 = Actor.builder()
+                .fullname("David Hasselhof")
+                .imageUrl(null)
+                .content(content35)
+                .build();
+
+
+        Movie movie35 = Movie.builder()
+                .content(content35)
+                .build();
+
+        Writer writerM35W1 = Writer.builder()
+                .fullname("Jay Scherick")
+                .imageUrl(null)
+                .movie(movie35)
+                .build();
+
+        Writer writerM35W2 = Writer.builder()
+                .fullname("David Ronn")
+                .imageUrl(null)
+                .movie(movie35)
+                .build();
+
+        Writer writerM35W3 = Writer.builder()
+                .fullname("Thomas Lennon")
+                .imageUrl(null)
+                .movie(movie35)
+                .build();
+
+        Writer writerM35W4 = Writer.builder()
+                .fullname("Robert Ben Garant")
+                .imageUrl(null)
+                .movie(movie35)
+                .build();
+
+        Writer writerM35W5 = Writer.builder()
+                .fullname("Mark Swift")
+                .imageUrl(null)
+                .movie(movie35)
+                .build();
+
+        Writer writerM35W6 = Writer.builder()
+                .fullname("Damian Shannon")
+                .imageUrl(null)
+                .movie(movie35)
+                .build();
+
+        Director directorM35D1 = Director.builder()
+                .fullname("Seth Gordon")
+                .imageUrl(null)
+                .movie(movie35)
+                .build();
+
+        movieRepository.save(movie35);
+        genreRepository.save(genreC35G1);
+        genreRepository.save(genreC35G2);
+        genreRepository.save(genreC35G3);
+
+
+        actorRepository.save(actorC35A1);
+        actorRepository.save(actorC35A2);
+        actorRepository.save(actorC35A3);
+        actorRepository.save(actorC35A4);
+        actorRepository.save(actorC35A5);
+        actorRepository.save(actorC35A6);
+        actorRepository.save(actorC35A7);
+        actorRepository.save(actorC35A8);
+        actorRepository.save(actorC35A9);
+        actorRepository.save(actorC35A10);
+        actorRepository.save(actorC35A11);
+        actorRepository.save(actorC35A12);
+        actorRepository.save(actorC35A13);
+        actorRepository.save(actorC35A14);
+        actorRepository.save(actorC35A15);
+        actorRepository.save(actorC35A16);
+
+        writerRepository.save(writerM35W1);
+        writerRepository.save(writerM35W2);
+        writerRepository.save(writerM35W3);
+        writerRepository.save(writerM35W4);
+        writerRepository.save(writerM35W5);
+        writerRepository.save(writerM35W6);
+
+        directorRepository.save(directorM35D1);
+
+        //endregion
+
+        //region Content 36
+        //-----------------Content 36----------------//
+
+        Content content36 = Content.builder()
+                .title("Faster")
+                .description("A bank robber just released from prison goes on a rampage to avenge his dead brother and is pursued by two relentless cops and an eccentric hit man." )
+                .spokenLanguage("English")
+                .releaseDate("6 Apr 2010")
+                .imageUrl(null)
+                .trailerUrl(null)
+                .isAgeRestricted(false)
+                .contentType(ContentType.MOVIE)
+                .runtime(98)
+                .build();
+
+        Genre genreC36G1 = Genre.builder()
+                .name("Action")
+                .content(content36)
+                .build();
+
+        Genre genreC36G2 = Genre.builder()
+                .name("Adventure")
+                .content(content36)
+                .build();
+
+        Genre genreC36G3 = Genre.builder()
+                .name("Crime")
+                .content(content36)
+                .build();
+
+        Actor actorC36A1 = Actor.builder()
+                .fullname("Dwayne Johnson")
+                .imageUrl(null)
+                .content(content36)
+                .build();
+
+        Actor actorC36A2 = Actor.builder()
+                .fullname("Oliver Jackson-Cohen")
+                .imageUrl(null)
+                .content(content36)
+                .build();
+
+        Actor actorC36A3 = Actor.builder()
+                .fullname("Carla Gugino")
+                .imageUrl(null)
+                .content(content36)
+                .build();
+        Actor actorC36A4 = Actor.builder()
+                .fullname("Maggie Grace")
+                .imageUrl(null)
+                .content(content36)
+                .build();
+
+        Actor actorC36A5 = Actor.builder()
+                .fullname("Billy Bob Thornton")
+                .imageUrl(null)
+                .content(content36)
+                .build();
+
+        Actor actorC36A6 = Actor.builder()
+                .fullname("Moon Bloodgood")
+                .imageUrl(null)
+                .content(content36)
+                .build();
+
+        Actor actorC36A7 = Actor.builder()
+                .fullname("Adewale Akinnuoye-Agbaje")
+                .imageUrl(null)
+                .content(content36)
+                .build();
+
+        Actor actorC36A8 = Actor.builder()
+                .fullname("Tom Berenger")
+                .imageUrl(null)
+                .content(content36)
+                .build();
+
+        Actor actorC36A9 = Actor.builder()
+                .fullname("Matt Gerald")
+                .imageUrl(null)
+                .content(content36)
+                .build();
+
+        Actor actorC36A10 = Actor.builder()
+                .fullname("Rob Huebel")
+                .imageUrl(null)
+                .content(content36)
+                .build();
+
+
+        Movie movie36 = Movie.builder()
+                .content(content36)
+                .build();
+
+
+        Writer writerM36W1 = Writer.builder()
+                .fullname("Tony Gayton")
+                .imageUrl(null)
+                .movie(movie36)
+                .build();
+
+        Writer writerM36W2 = Writer.builder()
+                .fullname("Joe Gayton")
+                .imageUrl(null)
+                .movie(movie36)
+                .build();
+
+
+        Director directorM36D1 = Director.builder()
+                .fullname("George Tillman Jr")
+                .imageUrl(null)
+                .movie(movie36)
+                .build();
+
+        movieRepository.save(movie36);
+        genreRepository.save(genreC36G1);
+        genreRepository.save(genreC36G2);
+        genreRepository.save(genreC36G3);
+
+
+        actorRepository.save(actorC36A1);
+        actorRepository.save(actorC36A2);
+        actorRepository.save(actorC36A3);
+        actorRepository.save(actorC36A4);
+        actorRepository.save(actorC36A5);
+        actorRepository.save(actorC36A6);
+        actorRepository.save(actorC36A7);
+        actorRepository.save(actorC36A8);
+        actorRepository.save(actorC36A9);
+        actorRepository.save(actorC36A10);
+
+        writerRepository.save(writerM36W1);
+        writerRepository.save(writerM36W2);
+
+        directorRepository.save(directorM36D1);
+
+        //endregion
+
+        //region Content 37
+        //-----------------Content 37----------------//
+        Content content37 = Content.builder()
+                .title("DreamWorks Happy Holidays from Madagascar")
+                .description("Madagascar goes wild with holiday spirit in this set of Valentine's Day and Christmas-themed tales featuring everyone's favorite animal characters.")
+                .spokenLanguage("English")
+                .releaseDate("17 Apr 2005")
+                .imageUrl(null)
+                .trailerUrl(null)
+                .isAgeRestricted(false)
+                .contentType(ContentType.TV_SERIES)
+                .runtime(35)
+                .build();
+
+        Genre genreC37G1 = Genre.builder()
+                .name("Kids")
+                .content(content37)
+                .build();
+
+        Genre genreC37G2 = Genre.builder()
+                .name("Cartoons")
+                .content(content37)
+                .build();
+
+        Genre genreC37G3 = Genre.builder()
+                .name("Family")
+                .content(content37)
+                .build();
+
+        Genre genreC37G4 = Genre.builder()
+                .name("Comedy")
+                .content(content37)
+                .build();
+
+        Actor actorC37A1 = Actor.builder()
+                .fullname("Tom McGrath")
+                .imageUrl(null)
+                .content(content37)
+                .build();
+
+        Actor actorC37A2 = Actor.builder()
+                .fullname("Chris Miller")
+                .imageUrl(null)
+                .content(content37)
+                .build();
+
+        Actor actorC37A3 = Actor.builder()
+                .fullname("Christopher Knights")
+                .imageUrl(null)
+                .content(content37)
+                .build();
+
+        Actor actorC37A4 = Actor.builder()
+                .fullname("John DiMaggio")
+                .imageUrl(null)
+                .content(content37)
+                .build();
+
+        Actor actorC37A5 = Actor.builder()
+                .fullname("Ben Stiller")
+                .imageUrl(null)
+                .content(content37)
+                .build();
+
+        TVSeries tvSeries37 = TVSeries.builder()
+                .tvSeriesStatusType(TVSeriesStatusType.COMPLETED)
+                .content(content37)
+                .build();
+
+        Creator creatorT37C1 = Creator.builder()
+                .fullname("DreamWorks")
+                .imageUrl(null)
+                .tvSeries(tvSeries37)
+                .build();
+
+
+        Season seasonT37S1 = Season.builder()
+                .seasonNo(1)
+                .tvSeries(tvSeries37)
+                .build();
+
+        Episode episodeT37S1E1 = Episode.builder()
+                .episodeNo(1)
+                .title("Play All Three: Madagascar Short Stories")
+                .description("Romance is in the air after Julien discovers a magic perfume./ Private gets stuck on a shopping trip./ Santa crashes onto the island of Madagascar.")
+                .releaseDate(null)
+                .imageUrl(null)
+                .season(seasonT37S1)
+                .build();
+
+        Episode episodeT37S1E2 = Episode.builder()
+                .episodeNo(2)
+                .title("Madly Madagascar")
+                .description("Romance is in the air for Alex, Marty, Gloria and Melman after King Julien discovers a magical perfume and takes on the role as \\\"King of Love.\\")
+                .releaseDate(null)
+                .imageUrl(null)
+                .season(seasonT37S1)
+                .build();
+
+        Episode episodeT37S1E3 = Episode.builder()
+                .episodeNo(3)
+                .title("Madagascar Penguins in a Cristmas Caper")
+                .description("Just before Christmas, Private decides to go into the city for some last-minute shopping but along the way winds up stuffed into a Christmas stocking.")
+                .releaseDate(null)
+                .imageUrl(null)
+                .season(seasonT37S1)
+                .build();
+
+        Episode episodeT37S1E4 = Episode.builder()
+                .episodeNo(4)
+                .title("Merry Madagascar")
+                .description("When Santa and his reindeer crash onto the island of Madagascar, it's up to Alex, Marty, Gloria, Melman and those wacky penguins to save Christmas.")
+                .releaseDate(null)
+                .imageUrl(null)
+                .season(seasonT37S1)
+                .build();
+
+        tVSeriesRepository.save(tvSeries37);
+
+        creatorRepository.save(creatorT37C1);
+
+        seasonRepository.save(seasonT37S1);
+
+        episodeRepository.save(episodeT37S1E1);
+        episodeRepository.save(episodeT37S1E2);
+        episodeRepository.save(episodeT37S1E3);
+        episodeRepository.save(episodeT37S1E4);
+
+        genreRepository.save(genreC37G1);
+        genreRepository.save(genreC37G2);
+        genreRepository.save(genreC37G3);
+        genreRepository.save(genreC37G4);
+
+
+        actorRepository.save(actorC37A1);
+        actorRepository.save(actorC37A2);
+        actorRepository.save(actorC37A3);
+        actorRepository.save(actorC37A4);
+        actorRepository.save(actorC37A5);
+        //endregion
+
+        //region Content 38
+        //-----------------Content 38----------------//
+        Content content38 = Content.builder()
+                .title("Our Universe")
+                .description("Witness the remarkable story of our universe over billions of years and its inextricable link to life on Earth in this sweeping documentary series.")
+                .spokenLanguage("English")
+                .releaseDate("8 Jun 2022")
+                .imageUrl(null)
+                .trailerUrl(null)
+                .isAgeRestricted(false)
+                .contentType(ContentType.TV_SERIES)
+                .runtime(43)
+                .build();
+
+        Genre genreC38G1 = Genre.builder()
+                .name("Documentary")
+                .content(content38)
+                .build();
+
+        Genre genreC38G2 = Genre.builder()
+                .name("Science")
+                .content(content38)
+                .build();
+
+        Genre genreC38G3 = Genre.builder()
+                .name("Nature")
+                .content(content38)
+                .build();
+
+
+        Actor actorC38A1 = Actor.builder()
+                .fullname("Morgan Freeman")
+                .imageUrl(null)
+                .content(content38)
+                .build();
+
+
+        TVSeries tvSeries38 = TVSeries.builder()
+                .tvSeriesStatusType(TVSeriesStatusType.COMPLETED)
+                .content(content38)
+                .build();
+
+        Creator creatorT38C1 = Creator.builder()
+                .fullname("BBC")
+                .imageUrl(null)
+                .tvSeries(tvSeries38)
+                .build();
+
+
+        Season seasonT38S1 = Season.builder()
+                .seasonNo(1)
+                .tvSeries(tvSeries38)
+                .build();
+
+        Episode episodeT38S1E1 = Episode.builder()
+                .episodeNo(1)
+                .title("Chasing Starlight")
+                .description("A penetrating look at the sun as a vital source of energy and its impact on one cheetah’s search for food in the sprawling plains of the Serengeti.")
+                .releaseDate(null)
+                .imageUrl(null)
+                .season(seasonT38S1)
+                .build();
+
+        Episode episodeT38S1E2 = Episode.builder()
+                .episodeNo(2)
+                .title("The Cosmic Clock")
+                .description("From the womb to a final moment of peace, witness the steady ticking of the universe’s clock through the eyes of the chimpanzee.")
+                .releaseDate(null)
+                .imageUrl(null)
+                .season(seasonT38S1)
+                .build();
+
+        Episode episodeT38S1E3 = Episode.builder()
+                .episodeNo(3)
+                .title("Turning Seasons")
+                .description("Dive into the long year of the Alaskan brown bear through the Earth's seasonal cycle amid the frigid winter months and into the warmth of summer.")
+                .releaseDate(null)
+                .imageUrl(null)
+                .season(seasonT38S1)
+                .build();
+
+        Episode episodeT38S1E4 = Episode.builder()
+                .episodeNo(4)
+                .title("Elemental")
+                .description("The elements that constitute every living being were formed within the very first stars. Today, a green sea turtle searches the ocean for them.")
+                .releaseDate(null)
+                .imageUrl(null)
+                .season(seasonT38S1)
+                .build();
+
+        Episode episodeT38S1E5 = Episode.builder()
+                .episodeNo(5)
+                .title("Water World")
+                .description("The story of water's miraculous arrival onto our planet and its pivotal role in the survival — and amusement — of a herd of elephants.")
+                .releaseDate(null)
+                .imageUrl(null)
+                .season(seasonT38S1)
+                .build();
+
+        Episode episodeT38S1E6 = Episode.builder()
+                .episodeNo(6)
+                .title("Force of Attraction")
+                .description("Shaping our entire universe, gravity has set the stage for life. For two king penguins, it steered them toward their soulmates.")
+                .releaseDate(null)
+                .imageUrl(null)
+                .season(seasonT38S1)
+                .build();
+
+        tVSeriesRepository.save(tvSeries38);
+
+        creatorRepository.save(creatorT38C1);
+
+        seasonRepository.save(seasonT38S1);
+
+        episodeRepository.save(episodeT38S1E1);
+        episodeRepository.save(episodeT38S1E2);
+        episodeRepository.save(episodeT38S1E3);
+        episodeRepository.save(episodeT38S1E4);
+        episodeRepository.save(episodeT38S1E5);
+        episodeRepository.save(episodeT38S1E6);
+
+        genreRepository.save(genreC38G1);
+        genreRepository.save(genreC38G2);
+        genreRepository.save(genreC38G3);
+
+
+        actorRepository.save(actorC38A1);
+        //endregion
+
+        //region Content 39
+        //-----------------Content 39----------------//
+        Content content39 = Content.builder()
+                .title("Island of the Sea Wolves")
+                .description("Explore wild, wondrous Vancouver Island, where the ocean nurtures all life, from bald eagles who go fishing to sea wolves who swim in frigid waters.")
+                .spokenLanguage("English")
+                .releaseDate("8 Jul 2022")
+                .imageUrl(null)
+                .trailerUrl(null)
+                .isAgeRestricted(false)
+                .contentType(ContentType.TV_SERIES)
+                .runtime(45)
+                .build();
+
+        Genre genreC39G1 = Genre.builder()
+                .name("Documentary")
+                .content(content39)
+                .build();
+
+        Genre genreC39G2 = Genre.builder()
+                .name("Science")
+                .content(content39)
+                .build();
+
+        Genre genreC39G3 = Genre.builder()
+                .name("Nature")
+                .content(content39)
+                .build();
+
+        Actor actorC39A1 = Actor.builder()
+                .fullname("Will Arnett")
+                .imageUrl(null)
+                .content(content39)
+                .build();
+
+
+        TVSeries tvSeries39 = TVSeries.builder()
+                .tvSeriesStatusType(TVSeriesStatusType.COMPLETED)
+                .content(content39)
+                .build();
+
+        Creator creatorT39C1 = Creator.builder()
+                .fullname("BBC")
+                .imageUrl(null)
+                .tvSeries(tvSeries39)
+                .build();
+
+
+        Season seasonT39S1 = Season.builder()
+                .seasonNo(1)
+                .tvSeries(tvSeries39)
+                .build();
+
+        Episode episodeT39S1E1 = Episode.builder()
+                .episodeNo(1)
+                .title("Spring")
+                .description("On Vancouver Island, the ocean feeds new life in the spring. But for Cedar, a pregnant sea wolf ousted by her pack, food is hard to come by.")
+                .releaseDate(null)
+                .imageUrl(null)
+                .season(seasonT39S1)
+                .build();
+
+        Episode episodeT39S1E2 = Episode.builder()
+                .episodeNo(2)
+                .title("Summer")
+                .description("Summer arrives and the island's inhabitants battle for ebbing resources. But when Cedar approaches the alpha female's den, something remarkable happens.")
+                .releaseDate(null)
+                .imageUrl(null)
+                .season(seasonT39S1)
+                .build();
+
+        Episode episodeT39S1E3 = Episode.builder()
+                .episodeNo(3)
+                .title("Fall")
+                .description("A week after being left behind on the beach, wolf pup Blaze sets off to look for the pack. The animals spend fall fueling up for a harsh winter ahead.")
+                .releaseDate(null)
+                .imageUrl(null)
+                .season(seasonT39S1)
+                .build();
+
+        tVSeriesRepository.save(tvSeries39);
+
+        creatorRepository.save(creatorT39C1);
+
+        seasonRepository.save(seasonT39S1);
+
+        episodeRepository.save(episodeT39S1E1);
+        episodeRepository.save(episodeT39S1E2);
+        episodeRepository.save(episodeT39S1E3);
+
+        genreRepository.save(genreC39G1);
+        genreRepository.save(genreC39G2);
+        genreRepository.save(genreC39G3);
+
+
+        actorRepository.save(actorC39A1);
+        //endregion
+
+        //region Content 40
+        //-----------------Content 40----------------//
+        Content content40 = Content.builder()
+                .title("The Hidden Lives of Pets")
+                .description("Bow wows and purr-fect pets! Meet amazing creatures from around the world and dig into the latest science on our animal friends' senses and skills.")
+                .spokenLanguage("English")
+                .releaseDate("16 May 2022")
+                .imageUrl(null)
+                .trailerUrl(null)
+                .isAgeRestricted(false)
+                .contentType(ContentType.TV_SERIES)
+                .runtime(30)
+                .build();
+
+        Genre genreC40G1 = Genre.builder()
+                .name("Documentary")
+                .content(content40)
+                .build();
+
+        Genre genreC40G2 = Genre.builder()
+                .name("Science")
+                .content(content40)
+                .build();
+
+        Genre genreC40G3 = Genre.builder()
+                .name("Nature")
+                .content(content40)
+                .build();
+
+        Actor actorC40A1 = Actor.builder()
+                .fullname("Hugh Bonneville")
+                .imageUrl(null)
+                .content(content40)
+                .build();
+
+
+        TVSeries tvSeries40 = TVSeries.builder()
+                .tvSeriesStatusType(TVSeriesStatusType.COMPLETED)
+                .content(content40)
+                .build();
+
+        Creator creatorT40C1 = Creator.builder()
+                .fullname("BBC")
+                .imageUrl(null)
+                .tvSeries(tvSeries40)
+                .build();
+
+
+        Season seasonT40S1 = Season.builder()
+                .seasonNo(1)
+                .tvSeries(tvSeries40)
+                .build();
+
+        Episode episodeT40S1E1 = Episode.builder()
+                .episodeNo(1)
+                .title("Intelligence")
+                .description("A BASE jumping border collie, a bopping cockatoo and racing rats show that animal intelligence can get a big boost in the right enriched environment.")
+                .releaseDate(null)
+                .imageUrl(null)
+                .season(seasonT40S1)
+                .build();
+
+        Episode episodeT40S1E2 = Episode.builder()
+                .episodeNo(2)
+                .title("Communication")
+                .description("If we could talk to the animals... While chatty canine Bunny paves the way in pet communication, parrots have mastered the art of vocal expression.")
+                .releaseDate(null)
+                .imageUrl(null)
+                .season(seasonT40S1)
+                .build();
+
+        Episode episodeT40S1E3 = Episode.builder()
+                .episodeNo(3)
+                .title("Super Senses")
+                .description("Heat-seeking dogs. GPS-outfitted cats. Sporty goldfish with squad goals. Our super friends in the animal world possess so many hidden superpowers.")
+                .releaseDate(null)
+                .imageUrl(null)
+                .season(seasonT40S1)
+                .build();
+
+        Episode episodeT40S1E4 = Episode.builder()
+                .episodeNo(4)
+                .title("Athletes")
+                .description("Survival in the wild has led to these critters' ace athletic abilities. Just try to keep up with speedy greyster dogs — and endurance champ tortoises.")
+                .releaseDate(null)
+                .imageUrl(null)
+                .season(seasonT40S1)
+                .build();
+
+        tVSeriesRepository.save(tvSeries40);
+
+        creatorRepository.save(creatorT40C1);
+
+        seasonRepository.save(seasonT40S1);
+
+        episodeRepository.save(episodeT40S1E1);
+        episodeRepository.save(episodeT40S1E2);
+        episodeRepository.save(episodeT40S1E3);
+        episodeRepository.save(episodeT40S1E4);
+
+        genreRepository.save(genreC40G1);
+        genreRepository.save(genreC40G2);
+        genreRepository.save(genreC40G3);
+
+        actorRepository.save(actorC40A1);
+        //endregion
+
+        //region Content 41
+        //-----------------Content 41----------------//
+        Content content41 = Content.builder()
+                .title("MANvsBEE")
+                .description("Bumbling dad Trevor tries to get the best of a cunning bee while house-sitting a posh mansion — but only unleashes more chaos in this comedy series.")
+                .spokenLanguage("English")
+                .releaseDate("1 Apr 2022")
+                .imageUrl(null)
+                .trailerUrl(null)
+                .isAgeRestricted(false)
+                .contentType(ContentType.TV_SERIES)
+                .runtime(18)
+                .build();
+
+        Genre genreC41G1 = Genre.builder()
+                .name("Family")
+                .content(content41)
+                .build();
+
+        Genre genreC41G2 = Genre.builder()
+                .name("Comedy")
+                .content(content41)
+                .build();
+
+        Actor actorC41A1 = Actor.builder()
+                .fullname("Rowan Atkinson")
+                .imageUrl(null)
+                .content(content41)
+                .build();
+
+        Actor actorC41A2 = Actor.builder()
+                .fullname("William Davies")
+                .imageUrl(null)
+                .content(content41)
+                .build();
+
+
+        TVSeries tvSeries41 = TVSeries.builder()
+                .tvSeriesStatusType(TVSeriesStatusType.COMPLETED)
+                .content(content41)
+                .build();
+
+        Creator creatorT41C1 = Creator.builder()
+                .fullname("BBC")
+                .imageUrl(null)
+                .tvSeries(tvSeries41)
+                .build();
+
+
+        Season seasonT41S1 = Season.builder()
+                .seasonNo(1)
+                .tvSeries(tvSeries41)
+                .build();
+
+        Episode episodeT41S1E1 = Episode.builder()
+                .episodeNo(1)
+                .title("Chapter 1")
+                .description("Doting dad Trevor Bingley arrives at a couple's lavish home to house-sit while they're away. A bee follows closely behind — and the battle begins.")
+                .releaseDate(null)
+                .imageUrl(null)
+                .season(seasonT41S1)
+                .build();
+
+        Episode episodeT41S1E2 = Episode.builder()
+                .episodeNo(2)
+                .title("Chapter 2")
+                .description("Trevor tries to remember the codes to unlock the library and prevent further damage. Later, he must reschedule upcoming plans with his daughter.")
+                .releaseDate(null)
+                .imageUrl(null)
+                .season(seasonT41S1)
+                .build();
+
+        Episode episodeT41S1E3 = Episode.builder()
+                .episodeNo(3)
+                .title("Chapter 3")
+                .description("A police officer checks in on things. Cupcake ruins her prescription dog diet with peanut butter. Trevor releases the bee outside — but not for long.")
+                .releaseDate(null)
+                .imageUrl(null)
+                .season(seasonT41S1)
+                .build();
+
+
+        Episode episodeT41S1E4 = Episode.builder()
+                .episodeNo(4)
+                .title("Chapter 4")
+                .description("With Cupcake's help, Trevor finds a messy way back inside and deals major damage with a kitchen hand mixer before the police officer arrives again.")
+                .releaseDate(null)
+                .imageUrl(null)
+                .season(seasonT41S1)
+                .build();
+
+        Episode episodeT41S1E5 = Episode.builder()
+                .episodeNo(5)
+                .title("Chapter 5")
+                .description("Trevor cleans up with a shower under flashy lights and a groovy soundtrack. Later, the bee leads Trevor to the couple's grand piano.")
+                .releaseDate(null)
+                .imageUrl(null)
+                .season(seasonT41S1)
+                .build();
+
+        Episode episodeT41S1E6 = Episode.builder()
+                .episodeNo(6)
+                .title("Chapter 6")
+                .description("Trevor tries to repair more damaged art. After chatting with Maddy, Trevor becomes too preoccupied with the bee to notice art burglars have broken in.")
+                .releaseDate(null)
+                .imageUrl(null)
+                .season(seasonT41S1)
+                .build();
+
+        Episode episodeT41S1E7 = Episode.builder()
+                .episodeNo(7)
+                .title("Chapter 7")
+                .description("The burglars reveal themselves at an opportune time. Trevor must take Cupcake to the vet after his bee trap doesn't go as planned.")
+                .releaseDate(null)
+                .imageUrl(null)
+                .season(seasonT41S1)
+                .build();
+
+        Episode episodeT41S1E8 = Episode.builder()
+                .episodeNo(8)
+                .title("Chapter 8")
+                .description("Trevor gets behind the wheel of Christian's expensive car to head to the vet. Later, a desperate Trevor devises a way to get rid of the bee for good.")
+                .releaseDate(null)
+                .imageUrl(null)
+                .season(seasonT41S1)
+                .build();
+
+        Episode episodeT41S1E9 = Episode.builder()
+                .episodeNo(9)
+                .title("Chapter 9")
+                .description("With Nina and Christian on their way back home, Trevor goes in pursuit of his unrelenting rival with blazing fury.")
+                .releaseDate(null)
+                .imageUrl(null)
+                .season(seasonT41S1)
+                .build();
+
+        tVSeriesRepository.save(tvSeries41);
+
+        creatorRepository.save(creatorT41C1);
+
+        seasonRepository.save(seasonT41S1);
+
+        episodeRepository.save(episodeT41S1E1);
+        episodeRepository.save(episodeT41S1E2);
+        episodeRepository.save(episodeT41S1E3);
+        episodeRepository.save(episodeT41S1E4);
+        episodeRepository.save(episodeT41S1E5);
+        episodeRepository.save(episodeT41S1E6);
+        episodeRepository.save(episodeT41S1E7);
+        episodeRepository.save(episodeT41S1E8);
+        episodeRepository.save(episodeT41S1E9);
+
+
+        genreRepository.save(genreC41G1);
+        genreRepository.save(genreC41G2);
+
+
+        actorRepository.save(actorC41A1);
+        actorRepository.save(actorC41A2);
+        //endregion
+
+        //region Content 99
+        //-----------------Content 99----------------//
+        Content content99 = Content.builder()
+                .title("House of the Dragon")
+                .description("An internal succession war within House Targaryen at the height of its power, 172 years before the birth of Daenerys Targaryen.")
+                .spokenLanguage("English")
+                .releaseDate("21 Aug 2022")
+                .imageUrl("https://images3.alphacoders.com/124/1249834.jpg")
+                .trailerUrl("<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/DotnJ7tTA34\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" allowfullscreen></iframe>")
+                .isAgeRestricted(true)
+                .contentType(ContentType.TV_SERIES)
+                .runtime(57)
+                .build();
+
+        Genre genreC99G1 = Genre.builder()
+                .name("Action")
+                .content(content99)
+                .build();
+
+        Genre genreC99G2 = Genre.builder()
+                .name("Adventure")
+                .content(content99)
+                .build();
+
+        Genre genreC99G3 = Genre.builder()
+                .name("Drama")
+                .content(content99)
+                .build();
+
+        Actor actorC99A1 = Actor.builder()
+                .fullname("Rhys Ifans")
+                .imageUrl("https://upload.wikimedia.org/wikipedia/commons/5/51/Rhys_Ifans_2011_cropped_%28cropped%29.jpg")
+                .content(content99)
+                .build();
+
+        Actor actorC99A2 = Actor.builder()
+                .fullname("Matt Smith")
+                .imageUrl("https://upload.wikimedia.org/wikipedia/commons/b/b3/SDCC_2015_-_Matt_Smith.jpg")
+                .content(content99)
+                .build();
+
+        Actor actorC99A3 = Actor.builder()
+                .fullname("Fabien Frankel")
+                .imageUrl(null)
+                .content(content99)
+                .build();
+
+        TVSeries tvSeries99 = TVSeries.builder()
+                .tvSeriesStatusType(TVSeriesStatusType.ONGOING)
+                .content(content99)
+                .build();
+
+        Creator creatorT99C99C1 = Creator.builder()
+                .fullname("Ryan J. Condal")
+                .imageUrl("https://upload.wikimedia.org/wikipedia/commons/8/8a/RyanCondal.jpg")
+                .tvSeries(tvSeries99)
+                .build();
+
+        Creator creatorT99C99C2 = Creator.builder()
+                .fullname("George R.R. Martin")
+                .imageUrl("https://upload.wikimedia.org/wikipedia/commons/e/ed/Portrait_photoshoot_at_Worldcon_75%2C_Helsinki%2C_before_the_Hugo_Awards_%E2%80%93_George_R._R._Martin.jpg")
+                .tvSeries(tvSeries99)
+                .build();
+
+
+        Season seasonT99S1 = Season.builder()
+                .seasonNo(1)
+                .tvSeries(tvSeries99)
+                .build();
+
+        Episode episodeT99S1E1 = Episode.builder()
+                .episodeNo(1)
+                .title("The Heirs of the Dragon")
+                .description("Viserys hosts a tournament to celebrate the birth of his second child. Rhaenyra welcomes her uncle Daemon back to the Red Keep.")
+                .releaseDate("21 Aug 2022")
+                .imageUrl(null)
+                .season(seasonT99S1)
+                .build();
+
+        Episode episodeT99S1E2 = Episode.builder()
+                .episodeNo(2)
+                .title("The Rogue Prince")
+                .description("Rhaenyra oversteps at the Small Council. Viserys is urged to secure the succession through marriage. Daemon announces his intentions.")
+                .releaseDate("28 Aug 2022")
+                .imageUrl(null)
+                .season(seasonT99S1)
+                .build();
+
+        Episode episodeT99S1E3 = Episode.builder()
+                .episodeNo(3)
+                .title("Second of His Name")
+                .description("Daemon and the Sea Snake battle the Crabfeeder. The realm celebrates Aegon's second nameday. Rhaenyra faces the prospect of marriage.")
+                .releaseDate("4 Sep 2022")
+                .imageUrl(null)
+                .season(seasonT99S1)
+                .build();
+
+        Episode episodeT99S1E4 = Episode.builder()
+                .episodeNo(4)
+                .title("King of the Narrow Sea")
+                .description("Rhaenyra continues her search for a suitable match, Daemon returns to Kings Landing and stirs more trouble for the King. Rhaenyra learns a valuable lesson.")
+                .releaseDate("11 Sep 2022")
+                .imageUrl(null)
+                .season(seasonT99S1)
+                .build();
+
+        Episode episodeT99S1E5 = Episode.builder()
+                .episodeNo(5)
+                .title("We Light the Way")
+                .description("Daemon visits his wife in the Vale. Viserys and Rhaenyra broker agreements with the Velaryons. Alicent seeks the truth about the princess.")
+                .releaseDate("18 Sep 2022")
+                .imageUrl(null)
+                .season(seasonT99S1)
+                .build();
+
+        Episode episodeT99S1E6 = Episode.builder()
+                .episodeNo(6)
+                .title("The Princess and the Queen")
+                .description("Ten years later. Rhaenyra navigates Alicent's continued speculation about her children, while Daemon and Laena weigh an offer in Pentos.")
+                .releaseDate("25 Sep 2022")
+                .imageUrl(null)
+                .season(seasonT99S1)
+                .build();
+
+        Episode episodeT99S1E7 = Episode.builder()
+                .episodeNo(7)
+                .title("Driftmark")
+                .description("As the families gather on Driftmark for a funeral, Viserys calls for an end to infighting and Alicent demands justice.")
+                .releaseDate("2 Oct 2022")
+                .imageUrl(null)
+                .season(seasonT99S1)
+                .build();
+
+        Episode episodeT99S1E8 = Episode.builder()
+                .episodeNo(8)
+                .title("The Lord of the Tides")
+                .description("Six years later. With the Driftmark succession suddenly critical, Rhaenyra attempts to strike a bargain with Rhaenys.")
+                .releaseDate("9 Oct 2022")
+                .imageUrl(null)
+                .season(seasonT99S1)
+                .build();
+
+        Episode episodeT99S1E9 = Episode.builder()
+                .episodeNo(9)
+                .title("The Green Council")
+                .description("While Alicent enlists Cole and Aemond to track down Aegon, Otto gathers the great houses of Westeros to affirm their allegiance.")
+                .releaseDate("16 Oct 2022")
+                .imageUrl(null)
+                .season(seasonT99S1)
+                .build();
+
+        Episode episodeT99S1E10 = Episode.builder()
+                .episodeNo(10)
+                .title("The Black Queen")
+                .description("While mourning a tragic loss, Rhaenyra tries to hold the realm together, and Daemon prepares for war.")
+                .releaseDate("23 Oct 2022")
+                .imageUrl(null)
+                .season(seasonT99S1)
+                .build();
+
+
+        tVSeriesRepository.save(tvSeries99);
+        creatorRepository.save(creatorT99C99C1);
+        creatorRepository.save(creatorT99C99C2);
+        seasonRepository.save(seasonT99S1);
+        episodeRepository.save(episodeT99S1E1);
+        episodeRepository.save(episodeT99S1E2);
+        episodeRepository.save(episodeT99S1E3);
+        episodeRepository.save(episodeT99S1E4);
+        episodeRepository.save(episodeT99S1E5);
+        episodeRepository.save(episodeT99S1E6);
+        episodeRepository.save(episodeT99S1E7);
+        episodeRepository.save(episodeT99S1E8);
+        episodeRepository.save(episodeT99S1E9);
+        episodeRepository.save(episodeT99S1E10);
+
+        genreRepository.save(genreC99G1);
+        genreRepository.save(genreC99G2);
+        genreRepository.save(genreC99G3);
+        actorRepository.save(actorC99A1);
+        actorRepository.save(actorC99A2);
+        actorRepository.save(actorC99A3);
+
+        //endregion
+
+        //region Content 100
+        //-----------------Content 100----------------//
+        Content content100 = Content.builder()
+                .title("The Punisher")
+                .description("After his revenge on those who murdered his family, aimless Marine veteran Frank Castle finds a new meaning in life as a vigilante known as \"The Punisher\".")
+                .spokenLanguage("English")
+                .releaseDate("17 Nov 2017")
+                .imageUrl("https://images3.alphacoders.com/865/865776.jpg")
+                .trailerUrl("<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/sDp4AuNen0Y\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" allowfullscreen></iframe>")
+                .isAgeRestricted(true)
+                .contentType(ContentType.TV_SERIES)
+                .runtime(53)
+                .build();
+
+        Genre genreC100G1 = Genre.builder()
+                .name("Action")
+                .content(content100)
+                .build();
+
+        Genre genreC100G2 = Genre.builder()
+                .name("Crime")
+                .content(content100)
+                .build();
+
+        Genre genreC100G3 = Genre.builder()
+                .name("Drama")
+                .content(content100)
+                .build();
+
+        Actor actorC100A1 = Actor.builder()
+                .fullname("Jon Bernthal")
+                .imageUrl("https://upload.wikimedia.org/wikipedia/commons/c/c3/Crop_of_Jon_Bernthal_by_Gage_Skidmore_3.jpg")
+                .content(content100)
+                .build();
+
+        Actor actorC100A2 = Actor.builder()
+                .fullname("Amber Rose Revah")
+                .imageUrl(null)
+                .content(content100)
+                .build();
+
+        Actor actorC100A3 = Actor.builder()
+                .fullname("Ben Barnes")
+                .imageUrl("https://upload.wikimedia.org/wikipedia/commons/5/5e/Stuttgart_2021_-Comic_Con_Germany-_by-RaBoe_236.jpg")
+                .content(content100)
+                .build();
+
+        TVSeries tvSeries100 = TVSeries.builder()
+                .tvSeriesStatusType(TVSeriesStatusType.COMPLETED)
+                .content(content100)
+                .build();
+
+        Creator creatorT100C100C1 = Creator.builder()
+                .fullname("Steve Lightfoot")
+                .imageUrl(null)
+                .tvSeries(tvSeries100)
+                .build();
+
+
+        Season seasonT100S1 = Season.builder()
+                .seasonNo(1)
+                .tvSeries(tvSeries100)
+                .build();
+
+        Episode episodeT100S1E1 = Episode.builder()
+                .episodeNo(1)
+                .title("3 AM")
+                .description("Former Marine Frank Castle takes the law into his own hands while struggling to come to terms with his traumatic past.")
+                .releaseDate("17 Nov 2017")
+                .imageUrl(null)
+                .season(seasonT100S1)
+                .build();
+
+        Episode episodeT100S1E2 = Episode.builder()
+                .episodeNo(2)
+                .title("Two Dead Men")
+                .description("A mysterious phone call forces Frank's hand. Meanwhile, Madani goes digging for suspects and Curtis delivers a message.")
+                .releaseDate("17 Nov 2017")
+                .imageUrl(null)
+                .season(seasonT100S1)
+                .build();
+
+
+        Episode episodeT100S1E3 = Episode.builder()
+                .episodeNo(3)
+                .title("Kandahar")
+                .description("Frank skips the subtlety while interrogating Micro. Brutal memories of top-secret missions shed light on Frank's past.")
+                .releaseDate("17 Nov 2017")
+                .imageUrl(null)
+                .season(seasonT100S1)
+                .build();
+
+        Episode episodeT100S1E4 = Episode.builder()
+                .episodeNo(4)
+                .title("Resupply")
+                .description("Madani and Sam plan a delicate operation, Curtis tries to connect with Lewis, and Frank encourages Micro to get his hands dirty.")
+                .releaseDate("17 Nov 2017")
+                .imageUrl(null)
+                .season(seasonT100S1)
+                .build();
+
+        Episode episodeT100S1E5 = Episode.builder()
+                .episodeNo(5)
+                .title("Gunner")
+                .description("Frank and Micro go looking for answers from a reluctant witness. Madani and Sam learn of a looming investigation. Rawlins sees a ghost.")
+                .releaseDate("17 Nov 2017")
+                .imageUrl(null)
+                .season(seasonT100S1)
+                .build();
+
+        Episode episodeT100S1E6 = Episode.builder()
+                .episodeNo(6)
+                .title("The Judas Goat")
+                .description("With Frank in bad shape, Micro calls on Curtis for help. Madani and Russo continue to mix business with pleasure. Lewis stands up for his rights.")
+                .releaseDate("17 Nov 2017")
+                .imageUrl(null)
+                .season(seasonT100S1)
+                .build();
+
+        Episode episodeT100S1E7 = Episode.builder()
+                .episodeNo(7)
+                .title("Crosshairs")
+                .description("Lewis struggles with the ramifications of his actions. Frank and Micro pursue another face from the past. Madani and Sam go bug hunting.")
+                .releaseDate("17 Nov 2017")
+                .imageUrl(null)
+                .season(seasonT100S1)
+                .build();
+
+        Episode episodeT100S1E8 = Episode.builder()
+                .episodeNo(8)
+                .title("Cold Steel")
+                .description("Russo opens up to Madani about his past, Sarah shares her concerns about her son with Frank, and a decoy operation takes a turn.")
+                .releaseDate("17 Nov 2017")
+                .imageUrl(null)
+                .season(seasonT100S1)
+                .build();
+
+        Episode episodeT100S1E9 = Episode.builder()
+                .episodeNo(9)
+                .title("Front Toward Enemy")
+                .description("Following a deadly explosion, Karen lands in a bomber's crosshairs -- and Frank isn't happy about it. Meanwhile, Curtis makes a grisly discovery.")
+                .releaseDate("17 Nov 2017")
+                .imageUrl(null)
+                .season(seasonT100S1)
+                .build();
+
+        Episode episodeT100S1E10 = Episode.builder()
+                .episodeNo(10)
+                .title("Virtue of the Vicious")
+                .description("An attack on a high-profile politician is examined (and reexamined) through different perspectives. Madani faces a painful truth.")
+                .releaseDate("17 Nov 2017")
+                .imageUrl(null)
+                .season(seasonT100S1)
+                .build();
+
+        Episode episodeT100S1E11 = Episode.builder()
+                .episodeNo(11)
+                .title("Danger Close")
+                .description("As danger knocks on Sarah's door, Frank takes his quest for vengeance to the next level with some help from an unexpected ally.")
+                .releaseDate("17 Nov 2017")
+                .imageUrl(null)
+                .season(seasonT100S1)
+                .build();
+
+        Episode episodeT100S1E12 = Episode.builder()
+                .episodeNo(12)
+                .title("Home")
+                .description("Frank makes a damning confession. A shootout leaves Sarah wondering what to believe. Rawlins goes in for the kill, once and for all.")
+                .releaseDate("17 Nov 2017")
+                .imageUrl(null)
+                .season(seasonT100S1)
+                .build();
+
+        Episode episodeT100S1E13= Episode.builder()
+                .episodeNo(12)
+                .title("Memento Mori")
+                .description("As the authorities close in, an exhausted but unbroken Frank vows to put an end to the war that has consumed his life.")
+                .releaseDate("17 Nov 2017")
+                .imageUrl(null)
+                .season(seasonT100S1)
+                .build();
+
+        Season seasonT100S2 = Season.builder()
+                .seasonNo(2)
+                .tvSeries(tvSeries100)
+                .build();
+
+        Episode episodeT100S2E1 = Episode.builder()
+                .episodeNo(1)
+                .title("Roadhouse Blues")
+                .description("While driving through Michigan, Frank stops for a beer at a roadside bar. But staying out of trouble has never been his strong suit.")
+                .releaseDate("18 Jan 2019")
+                .imageUrl(null)
+                .season(seasonT100S2)
+                .build();
+
+        Episode episodeT100S2E2 = Episode.builder()
+                .episodeNo(2)
+                .title("Fight or Flight")
+                .description("Frank and a reluctant Rachel go on the run as a menacing adversary gives chase. Meanwhile, Madani pays Russo an unwelcome visit.")
+                .releaseDate("18 Jan 2019")
+                .imageUrl(null)
+                .season(seasonT100S2)
+                .build();
+
+
+        Episode episodeT100S2E3 = Episode.builder()
+                .episodeNo(3)
+                .title("Trouble the Water")
+                .description("As Pilgrim's past comes into focus, Frank and Rachel find themselves in police custody, where they're anything but safe.")
+                .releaseDate("18 Jan 2019")
+                .imageUrl(null)
+                .season(seasonT100S2)
+                .build();
+
+
+        Episode episodeT100S2E4 = Episode.builder()
+                .episodeNo(4)
+                .title("Scar Tissue")
+                .description("Rachel recalls the night everything changed and lets Frank in on the truth about her name. Russo sits down with a face from his childhood.")
+                .releaseDate("18 Jan 2019")
+                .imageUrl(null)
+                .season(seasonT100S2)
+                .build();
+
+        Episode episodeT100S2E5 = Episode.builder()
+                .episodeNo(5)
+                .title("One-Eyed Jacks")
+                .description("It's not a trap if you know it's coming: That's Frank's philosophy. Madani opens up and Pilgrim plans a visit to an unholy land.")
+                .releaseDate("18 Jan 2019")
+                .imageUrl(null)
+                .season(seasonT100S2)
+                .build();
+
+        Episode episodeT100S2E6 = Episode.builder()
+                .episodeNo(6)
+                .title("Nakazat")
+                .description("Amy (formerly Rachel) develops photographs that point to a conspiracy. Russo reads his own report. Madani's story about Russo comes under fire.")
+                .releaseDate("18 Jan 2019")
+                .imageUrl(null)
+                .season(seasonT100S2)
+                .build();
+
+        Episode episodeT100S2E7 = Episode.builder()
+                .episodeNo(7)
+                .title("One Bad Day")
+                .description("Madani's quest to ID Pilgrim hits a wall. Russo and his crew put their plan into action. Frank encounters someone from the past.")
+                .releaseDate("18 Jan 2019")
+                .imageUrl(null)
+                .season(seasonT100S2)
+                .build();
+
+        Episode episodeT100S2E8 = Episode.builder()
+                .episodeNo(8)
+                .title("My Brother's Keeper")
+                .description("Painful memories take ahold of Russo. Frank's frustration frightens those closest to him. Madani receives a visitor bearing a warning.")
+                .releaseDate("18 Jan 2019")
+                .imageUrl(null)
+                .season(seasonT100S2)
+                .build();
+
+        Episode episodeT100S2E9 = Episode.builder()
+                .episodeNo(9)
+                .title("Flustercluck")
+                .description("A big bounty inspires New York's worst to pursue the Punisher. A restless Amy seeks help from a fellow grifter. Russo and Krista consider the future.")
+                .releaseDate("18 Jan 2019")
+                .imageUrl(null)
+                .season(seasonT100S2)
+                .build();
+
+        Episode episodeT100S2E10 = Episode.builder()
+                .episodeNo(10)
+                .title("The Dark Hearts of Men")
+                .description("As Madani and Krista debate who's worth saving, Frank prepares to storm Russo's territory. A brutal encounter pushes Pilgrim back into old habits.")
+                .releaseDate("18 Jan 2019")
+                .imageUrl(null)
+                .season(seasonT100S2)
+                .build();
+
+        Episode episodeT100S2E11 = Episode.builder()
+                .episodeNo(11)
+                .title("The Abyss")
+                .description("Amy rushes to protect Frank, who lies defenseless in a hospital. Pilgrim gets some crushing news, and Karen Page calls in a favor.")
+                .releaseDate("18 Jan 2019")
+                .imageUrl(null)
+                .season(seasonT100S2)
+                .build();
+
+        Episode episodeT100S2E12 = Episode.builder()
+                .episodeNo(12)
+                .title("Collision Course")
+                .description("Buckle up -- Mahoney and Frank are about to take a ride to remember. Amy makes an entrance, Russo cashes out, and Madani comes clean to Krista.")
+                .releaseDate("18 Jan 2019")
+                .imageUrl(null)
+                .season(seasonT100S2)
+                .build();
+
+        Episode episodeT100S2E13 = Episode.builder()
+                .episodeNo(13)
+                .title("The Whirlwind")
+                .description("Frank, Pilgrim, Madani, Russo, Amy, Curt and the Schultz family. No bullet is left unspent as season two comes to an explosive conclusion.")
+                .releaseDate("18 Jan 2019")
+                .imageUrl(null)
+                .season(seasonT100S2)
+                .build();
+
+
+
+        tVSeriesRepository.save(tvSeries100);
+        creatorRepository.save(creatorT100C100C1);
+
+        seasonRepository.save(seasonT100S1);
+        episodeRepository.save(episodeT100S1E1);
+        episodeRepository.save(episodeT100S1E2);
+        episodeRepository.save(episodeT100S1E3);
+        episodeRepository.save(episodeT100S1E4);
+        episodeRepository.save(episodeT100S1E5);
+        episodeRepository.save(episodeT100S1E6);
+        episodeRepository.save(episodeT100S1E7);
+        episodeRepository.save(episodeT100S1E8);
+        episodeRepository.save(episodeT100S1E9);
+        episodeRepository.save(episodeT100S1E10);
+        episodeRepository.save(episodeT100S1E11);
+        episodeRepository.save(episodeT100S1E12);
+        episodeRepository.save(episodeT100S1E13);
+        seasonRepository.save(seasonT100S2);
+        episodeRepository.save(episodeT100S2E1);
+        episodeRepository.save(episodeT100S2E2);
+        episodeRepository.save(episodeT100S2E3);
+        episodeRepository.save(episodeT100S2E4);
+        episodeRepository.save(episodeT100S2E5);
+        episodeRepository.save(episodeT100S2E6);
+        episodeRepository.save(episodeT100S2E7);
+        episodeRepository.save(episodeT100S2E8);
+        episodeRepository.save(episodeT100S2E9);
+        episodeRepository.save(episodeT100S2E10);
+        episodeRepository.save(episodeT100S2E11);
+        episodeRepository.save(episodeT100S2E12);
+        episodeRepository.save(episodeT100S2E13);
+
+        genreRepository.save(genreC100G1);
+        genreRepository.save(genreC100G2);
+        genreRepository.save(genreC100G3);
+        actorRepository.save(actorC100A1);
+        actorRepository.save(actorC100A2);
+        actorRepository.save(actorC100A3);
+
+        //endregion
+
+        //region Content 101
+        //-----------------Content 101----------------//
+        Content content101 = Content.builder()
+                .title("Taboo")
+                .description("Adventurer James Keziah Delaney returns to London during the War of 1812 to rebuild his late father's shipping empire. However, both the government and his biggest competitor want his inheritance at any cost--even murder.")
+                .spokenLanguage("English")
+                .releaseDate("10 Jan 2017")
+                .imageUrl("https://images6.alphacoders.com/907/907236.jpg")
+                .trailerUrl("<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/W1fiijqrKuc\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" allowfullscreen></iframe>")
+                .isAgeRestricted(true)
+                .contentType(ContentType.TV_SERIES)
+                .runtime(59)
+                .build();
+
+        Genre genreC101G1 = Genre.builder()
+                .name("Drama")
+                .content(content101)
+                .build();
+
+        Genre genreC101G2 = Genre.builder()
+                .name("Mystery")
+                .content(content101)
+                .build();
+
+        Genre genreC101G3 = Genre.builder()
+                .name("Thriller")
+                .content(content101)
+                .build();
+
+        Actor actorC101A1 = Actor.builder()
+                .fullname("Tom Hardy")
+                .imageUrl("https://upload.wikimedia.org/wikipedia/commons/4/43/Tom_Hardy_by_Gage_Skidmore.jpg")
+                .content(content101)
+                .build();
+
+        Actor actorC101A2 = Actor.builder()
+                .fullname("David Hayman")
+                .imageUrl(null)
+                .content(content101)
+                .build();
+
+        Actor actorC101A3 = Actor.builder()
+                .fullname("Jonathan Pryce")
+                .imageUrl("https://upload.wikimedia.org/wikipedia/commons/7/7b/Jonathan_Pryce_Cannes_2018.jpg")
+                .content(content101)
+                .build();
+
+        TVSeries tvSeries101 = TVSeries.builder()
+                .tvSeriesStatusType(TVSeriesStatusType.COMPLETED)
+                .content(content101)
+                .build();
+
+        Creator creatorT101C101C1 = Creator.builder()
+                .fullname("Steven Knight")
+                .imageUrl("https://upload.wikimedia.org/wikipedia/commons/f/f9/Portrait_of_Steven_Knight_by_Taylor_Rooke%2C_March_5th_2020.jpg")
+                .tvSeries(tvSeries101)
+                .build();
+
+        Creator creatorT101C101C2 = Creator.builder()
+                .fullname("Chips Hardy")
+                .imageUrl(null)
+                .tvSeries(tvSeries101)
+                .build();
+
+        Creator creatorT101C101C3 = Creator.builder()
+                .fullname("Tom Hardy")
+                .imageUrl("https://upload.wikimedia.org/wikipedia/commons/4/43/Tom_Hardy_by_Gage_Skidmore.jpg")
+                .tvSeries(tvSeries101)
+                .build();
+
+
+        Season seasonT101S1 = Season.builder()
+                .seasonNo(1)
+                .tvSeries(tvSeries101)
+                .build();
+
+        Episode episodeT101S1E1 = Episode.builder()
+                .episodeNo(1)
+                .title("Episode #1.1")
+                .description("After being presumed dead, James Delaney resurfaces in London seeking revenge for the death of his father and inheriting the family shipping empire, which threatens the ambitions of his half-sister and the East India Company.")
+                .releaseDate("10 Jan 2017")
+                .imageUrl(null)
+                .season(seasonT101S1)
+                .build();
+
+        Episode episodeT101S1E2 = Episode.builder()
+                .episodeNo(2)
+                .title("Episode #1.2")
+                .description("Despite Delaney's return to London setting tongues wagging, he enlists allies in his quest to reclaim his legacy, while an unexpected arrival at the reading of the will disrupts his plans and reveals the nature of his inheritance.")
+                .releaseDate("17 Jan 2017")
+                .imageUrl(null)
+                .season(seasonT101S1)
+                .build();
+
+        Episode episodeT101S1E3 = Episode.builder()
+                .episodeNo(3)
+                .title("Episode #1.3")
+                .description("Delaney receives medical help from an unexpected source, before outwitting the East India Company, which turns its attentions to Delaney's new ally, Lorna.")
+                .releaseDate("24 Jan. 2017")
+                .imageUrl(null)
+                .season(seasonT101S1)
+                .build();
+
+        Episode episodeT101S1E4 = Episode.builder()
+                .episodeNo(4)
+                .title("Episode #1.4")
+                .description("The plot against Delaney puts Lorna in danger, Delaney enlists help for a scheme of his own, and an invitation to an opulent ball leads to unexpected consequences.")
+                .releaseDate("31 Jan. 2017")
+                .imageUrl(null)
+                .season(seasonT101S1)
+                .build();
+
+        Episode episodeT101S1E5 = Episode.builder()
+                .episodeNo(5)
+                .title("Episode #1.5")
+                .description("A duel at dawn takes a surprising turn, Zilpha is met with darkness, the East India Company is under investigation, and Delaney faces a race against time to keep his plot a secret.")
+                .releaseDate("7 Feb 2017")
+                .imageUrl(null)
+                .season(seasonT101S1)
+                .build();
+
+        Episode episodeT101S1E6 = Episode.builder()
+                .episodeNo(6)
+                .title("Episode #1.6")
+                .description("When his plot is betrayed and Zilpha takes drastic action against her husband, Delaney faces all out chaos, complicated further by a family revelation and the increasingly desperate East India Company.")
+                .releaseDate("14 Feb 2017")
+                .imageUrl(null)
+                .season(seasonT101S1)
+                .build();
+
+        Episode episodeT101S1E7 = Episode.builder()
+                .episodeNo(7)
+                .title("Episode #1.7")
+                .description("A tragic event leads to the betrayal of Delaney, who must use all of his wits and strength to salvage his plans.")
+                .releaseDate("21 Feb 2017")
+                .imageUrl(null)
+                .season(seasonT101S1)
+                .build();
+
+        Episode episodeT101S1E8 = Episode.builder()
+                .episodeNo(8)
+                .title("Episode #1.8")
+                .description("Delaney delivers an ultimatum, arrangements for immediate departure begin, while Strange has a final ace to play.")
+                .releaseDate("28 Feb. 2017")
+                .imageUrl(null)
+                .season(seasonT101S1)
+                .build();
+
+
+        tVSeriesRepository.save(tvSeries101);
+        creatorRepository.save(creatorT101C101C1);
+        creatorRepository.save(creatorT101C101C2);
+        creatorRepository.save(creatorT101C101C3);
+
+        seasonRepository.save(seasonT101S1);
+        episodeRepository.save(episodeT101S1E1);
+        episodeRepository.save(episodeT101S1E2);
+        episodeRepository.save(episodeT101S1E3);
+        episodeRepository.save(episodeT101S1E4);
+        episodeRepository.save(episodeT101S1E5);
+        episodeRepository.save(episodeT101S1E6);
+        episodeRepository.save(episodeT101S1E7);
+        episodeRepository.save(episodeT101S1E8);
+
+
+        genreRepository.save(genreC101G1);
+        genreRepository.save(genreC101G2);
+        genreRepository.save(genreC101G3);
+        actorRepository.save(actorC101A1);
+        actorRepository.save(actorC101A2);
+        actorRepository.save(actorC101A3);
+
+        //endregion
+
     }
 }

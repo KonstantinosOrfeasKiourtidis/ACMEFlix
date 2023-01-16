@@ -19,7 +19,6 @@ import javax.validation.constraints.Pattern;
 public class Creator extends BaseModel{
     @NotNull(message = "Creator's name cannot be null")
     @Column(length = 150, nullable = false)
-    @Pattern(regexp = "^[A-Za-z0-9\\. ]+$", message="Creator's fullname can only contain alphabetical symbols")
     private String fullname;
 
     private String imageUrl;

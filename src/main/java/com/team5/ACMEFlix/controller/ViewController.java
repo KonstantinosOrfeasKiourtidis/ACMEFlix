@@ -16,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,6 +50,11 @@ public class ViewController {
     @GetMapping("findViewingHoursByAccountId/{id}")
     public ResponseEntity<ApiResponse<AccountResourceViewingHours>> findViewingHoursByAccountId(@PathVariable("id") Long id){
         return new ResponseEntity<>(ApiResponse.<AccountResourceViewingHours>builder().data(viewService.findViewingHoursByAccountId(id)).build(), HttpStatus.OK);
+    }
+
+    @GetMapping("findAllViewingHistory")
+    public ResponseEntity<ApiResponse<List<AccountResourceViewingHistory>>> findAllViewingHistory() throws SQLException {
+        return new ResponseEntity<>(ApiResponse.<List<AccountResourceViewingHistory>>builder().data(viewService.findAllViewingHistory()).build(), HttpStatus.OK);
     }
 
     @PostMapping(path = "watchEpisode")

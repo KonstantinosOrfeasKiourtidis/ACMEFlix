@@ -21,17 +21,13 @@ public class EpisodeResource extends BaseResource {
 
     private String imageUrl;
 
-    @NotNull(message = "Episode's description cannot be null")
-    @Column(length = 255, nullable = false)
     private String description;
 
     @NotNull(message = "Episode's number cannot be null")
     @Min(0)
     private Integer episodeNo;
 
-    @NotNull(message = "Episode's release date cannot be null")
-    @Column(length = 20, nullable = false)
-    @Pattern(regexp = "^[A-Za-z0-9\\. ]+$", message="Episode's release date can only contain alphanumeric symbols")
+    @Column(length = 20)
     private String releaseDate;
 
 

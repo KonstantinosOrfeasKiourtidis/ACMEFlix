@@ -3,12 +3,11 @@ package com.team5.ACMEFlix.service;
 import com.team5.ACMEFlix.domain.Content;
 import com.team5.ACMEFlix.domain.Profile;
 import com.team5.ACMEFlix.domain.Rating;
-import com.team5.ACMEFlix.helpers.RatingForm;
+import com.team5.ACMEFlix.forms.RatingForm;
 import com.team5.ACMEFlix.repository.ContentRepository;
 import com.team5.ACMEFlix.repository.ProfileRepository;
 import com.team5.ACMEFlix.repository.RatingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,18 +26,6 @@ public class RatingService {
     @Autowired
     private ContentRepository contentRepository;
 
-    @Transactional(readOnly = true)
-    public List<Rating> findAllRatings() {
-        return ratingRepository.findAll();
-    }
-    @Transactional(readOnly = true)
-    public Optional<Rating> findRatingById(Long id) {
-        return ratingRepository.findById(id);
-    }
-    @Transactional
-    public List<Rating> findAllRatingsByProfileId(Long id) {
-        return ratingRepository.findRatingsByProfileId(id);
-    }
 
     @Transactional
     public Rating addRating(Rating rating) {
@@ -67,11 +54,6 @@ public class RatingService {
             ratingRepository.save(rating);
             return rating;
 
-    }
-
-    @Transactional
-    public List<Rating> findRatings(Long id) {
-         return ratingRepository.findRatingByContentId(id);
     }
 
     @Transactional

@@ -1,7 +1,5 @@
 package com.team5.ACMEFlix.transfer.resource;
 
-import com.team5.ACMEFlix.domain.Content;
-import com.team5.ACMEFlix.domain.Profile;
 import com.team5.ACMEFlix.transfer.BaseResource;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -13,11 +11,14 @@ import java.util.List;
 @Getter
 @Setter
 @ToString(callSuper = true)
-public class MyListResource extends BaseResource {
-
-    private Profile profile;
+public class MovieResource2 extends BaseResource {
 
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    private List<ContentResource> contents;
+    private List<WriterResource> writers;
+
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    private List<DirectorResource> directors;
+
 }

@@ -6,7 +6,6 @@ import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 
 @Data
 @SuperBuilder
@@ -21,7 +20,6 @@ public class Director extends BaseModel{
 
     @NotNull(message = "Director's fullname cannot be null")
     @Column(length = 150, nullable = false)
-    @Pattern(regexp = "^[A-Za-z0-9\\. ]+$", message="Director's fullname can only contain alphabetical symbols")
     private String fullname;
 
     private String imageUrl;

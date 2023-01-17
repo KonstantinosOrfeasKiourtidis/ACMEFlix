@@ -1,7 +1,6 @@
 package com.team5.ACMEFlix.domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.team5.ACMEFlix.domain.enumeration.CardType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -38,6 +37,10 @@ public class CreditCard extends BaseModel{
     @Column(length = 3, nullable = false)
     @Pattern(regexp = "^[0-9]*$", message="Credit cvc can only contain numeric symbols")
     private String cardCvc;
+
+    @NotNull(message = "Credit card expiration cannot be null")
+    @Column(length = 30, nullable = false)
+    private String cardExpirationDate;
 
     @NotNull(message = "Credit card type cannot be null")
     @Enumerated(EnumType.STRING)

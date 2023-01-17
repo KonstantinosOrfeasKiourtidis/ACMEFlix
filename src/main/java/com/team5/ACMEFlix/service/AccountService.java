@@ -3,18 +3,13 @@ package com.team5.ACMEFlix.service;
 import com.team5.ACMEFlix.domain.*;
 import com.team5.ACMEFlix.domain.enumeration.CardType;
 import com.team5.ACMEFlix.domain.enumeration.SubscriptionType;
-import com.team5.ACMEFlix.helpers.LoginForm;
-import com.team5.ACMEFlix.helpers.RegisterForm;
-import com.team5.ACMEFlix.helpers.SubscribeForm;
-import com.team5.ACMEFlix.mapper.AccountMapper;
-import com.team5.ACMEFlix.mapper.AddressMapper;
-import com.team5.ACMEFlix.mapper.CreditCardMapper;
+import com.team5.ACMEFlix.forms.RegisterForm;
+import com.team5.ACMEFlix.forms.SubscribeForm;
 import com.team5.ACMEFlix.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.validation.Valid;
 import java.util.*;
 
 @Service
@@ -25,6 +20,8 @@ public class AccountService {
     private  ProfileRepository profileRepository;
     @Autowired
     private  PaymentRepository paymentRepository;
+    @Autowired
+    private RatingRepository ratingRepository;
 
 
     @Transactional(readOnly = true)
@@ -80,6 +77,12 @@ public class AccountService {
             throw new NoSuchElementException("Account does not exist");
         }
         else{
+            Account account = accountRepository.findById(id).get();
+            List<Profile> profiles = account.getProfiles();
+            for (Profile profile : profiles){
+                ratingRepository.deleteAllByProfileId(profile.getId());
+
+            }
             accountRepository.deleteById(id);
         }
     }
@@ -92,6 +95,19 @@ public class AccountService {
                 throw new NoSuchElementException("Account does not exist");
             }
             else{
+                List<Account> accounts = accountRepository.findAllById(ids);
+
+                List<Profile> profiles = new ArrayList<>();
+                for (Account account : accounts){
+                    profiles.addAll(account.getProfiles());
+
+                }
+
+                for (Profile profile : profiles){
+                    ratingRepository.deleteAllByProfileId(profile.getId());
+
+                }
+
                 accountRepository.deleteById(id);
             }
         }
@@ -349,7 +365,6 @@ public class AccountService {
         account.setPhoneNo(registerForm.getPhoneNo());
 
         account.setPassword(registerForm.getPassword());
-        //account.setPassword(passwordEncoder.encode(registerForm.getPassword()));
 
 
 

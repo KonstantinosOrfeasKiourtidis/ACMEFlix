@@ -1,9 +1,6 @@
 package com.team5.ACMEFlix.controller;
 
-import com.team5.ACMEFlix.domain.Account;
-import com.team5.ACMEFlix.domain.Address;
 import com.team5.ACMEFlix.mapper.AddressMapper;
-import com.team5.ACMEFlix.mapper.AddressMapperImpl;
 import com.team5.ACMEFlix.service.AddressService;
 import com.team5.ACMEFlix.transfer.ApiResponse;
 import com.team5.ACMEFlix.transfer.resource.AddressResource;

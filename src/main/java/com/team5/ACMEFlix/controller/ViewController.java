@@ -1,12 +1,9 @@
 package com.team5.ACMEFlix.controller;
 
-import com.team5.ACMEFlix.domain.Content;
-import com.team5.ACMEFlix.domain.enumeration.ContentType;
-import com.team5.ACMEFlix.helpers.WatchEpisodeForm;
-import com.team5.ACMEFlix.helpers.WatchMovieForm;
+import com.team5.ACMEFlix.domain.View;
+import com.team5.ACMEFlix.forms.WatchEpisodeForm;
+import com.team5.ACMEFlix.forms.WatchMovieForm;
 import com.team5.ACMEFlix.mapper.*;
-import com.team5.ACMEFlix.service.MovieService;
-import com.team5.ACMEFlix.service.TVSeriesService;
 import com.team5.ACMEFlix.service.ViewService;
 import com.team5.ACMEFlix.transfer.ApiResponse;
 import com.team5.ACMEFlix.transfer.resource.*;
@@ -17,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -63,7 +59,7 @@ public class ViewController {
     }
 
     @PostMapping(path = "watchMovie")
-    public ResponseEntity<ApiResponse<ViewResource>> watchMovie(@Valid @RequestBody WatchMovieForm watchMovieForm){
-        return new ResponseEntity<>(ApiResponse.<ViewResource>builder().data(viewMapper.toResource(viewService.watchMovie(watchMovieForm))).build(), HttpStatus.CREATED);
+    public ResponseEntity<ApiResponse<View>> watchMovie(@Valid @RequestBody WatchMovieForm watchMovieForm){
+        return new ResponseEntity<>(ApiResponse.<View>builder().data(viewService.watchMovie(watchMovieForm)).build(), HttpStatus.CREATED);
     }
 }

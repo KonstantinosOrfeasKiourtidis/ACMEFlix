@@ -1,7 +1,6 @@
 package com.team5.ACMEFlix.controller;
 
-import com.team5.ACMEFlix.domain.Account;
-import com.team5.ACMEFlix.domain.Season;
+
 import com.team5.ACMEFlix.mapper.SeasonMapper;
 import com.team5.ACMEFlix.service.SeasonService;
 import com.team5.ACMEFlix.transfer.ApiResponse;

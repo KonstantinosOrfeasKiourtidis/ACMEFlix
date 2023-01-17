@@ -1,8 +1,6 @@
 package com.team5.ACMEFlix.transfer.resource;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.team5.ACMEFlix.domain.Rating;
 import com.team5.ACMEFlix.domain.enumeration.ContentType;
 import com.team5.ACMEFlix.domain.enumeration.TVSeriesStatusType;
 import com.team5.ACMEFlix.transfer.BaseResource;

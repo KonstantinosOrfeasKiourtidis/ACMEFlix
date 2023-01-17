@@ -1,4 +1,4 @@
-package com.team5.ACMEFlix.helpers;
+package com.team5.ACMEFlix.forms;
 
 import com.team5.ACMEFlix.domain.enumeration.SubscriptionType;
 import lombok.Getter;

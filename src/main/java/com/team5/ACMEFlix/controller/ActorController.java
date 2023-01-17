@@ -1,12 +1,8 @@
 package com.team5.ACMEFlix.controller;
 
-import com.team5.ACMEFlix.domain.Account;
-import com.team5.ACMEFlix.domain.Actor;
+
 import com.team5.ACMEFlix.mapper.ActorMapper;
-import com.team5.ACMEFlix.repository.ActorRepository;
-import com.team5.ACMEFlix.service.AccountService;
 import com.team5.ACMEFlix.service.ActorService;
-import com.team5.ACMEFlix.service.GenreService;
 import com.team5.ACMEFlix.transfer.ApiResponse;
 import com.team5.ACMEFlix.transfer.resource.ActorResource;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.Optional;
+
 
 @RestController
 @RequestMapping(path = "api/v1/content/actor")

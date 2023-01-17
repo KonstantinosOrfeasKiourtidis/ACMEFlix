@@ -1,10 +1,9 @@
 package com.team5.ACMEFlix.controller;
 
-import com.team5.ACMEFlix.domain.Actor;
-import com.team5.ACMEFlix.domain.CreditCard;
-import com.team5.ACMEFlix.domain.Rating;
-import com.team5.ACMEFlix.helpers.RatingForm;
+
+import com.team5.ACMEFlix.forms.RatingForm;
 import com.team5.ACMEFlix.mapper.RatingMapper;
+import com.team5.ACMEFlix.mapper.RatingMapper2;
 import com.team5.ACMEFlix.service.RatingService;
 import com.team5.ACMEFlix.transfer.ApiResponse;
 import com.team5.ACMEFlix.transfer.resource.RatingResource;
@@ -21,24 +20,12 @@ import java.util.List;
 public class RatingController {
     private final RatingService ratingService;
     private final RatingMapper ratingMapper;
+    private final RatingMapper2 ratingMapper2;
     @Autowired
-    private RatingController(RatingService ratingService, RatingMapper ratingMapper) {
+    private RatingController(RatingService ratingService, RatingMapper ratingMapper, RatingMapper2 ratingMapper2) {
         this.ratingService = ratingService;
         this.ratingMapper = ratingMapper;
-    }
-
-    @GetMapping
-    public ResponseEntity<ApiResponse<List<RatingResource>>> findAllRatings(){
-        return new ResponseEntity<>(ApiResponse.<List<RatingResource>>builder().data(ratingMapper.toResources(ratingService.findAllRatings())).build(), HttpStatus.OK);
-    }
-    @GetMapping("{id}")
-    public ResponseEntity<ApiResponse<RatingResource>> findRatingById(@PathVariable("id") Long id){
-        return new ResponseEntity<>(ApiResponse.<RatingResource>builder().data(ratingMapper.toResource(ratingService.findRatingById(id).get())).build(), HttpStatus.OK);
-    }
-
-    @GetMapping("findAllRatingsByProfileId/{id}")
-    public ResponseEntity<ApiResponse<List<RatingResource>>> findAllRatingsByProfileId(@PathVariable("id") Long id){
-        return new ResponseEntity<>(ApiResponse.<List<RatingResource>>builder().data(ratingMapper.toResources(ratingService.findAllRatingsByProfileId(id))).build(), HttpStatus.OK);
+        this.ratingMapper2 = ratingMapper2;
     }
 
 

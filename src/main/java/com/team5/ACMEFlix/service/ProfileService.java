@@ -4,15 +4,12 @@ import com.team5.ACMEFlix.domain.Account;
 import com.team5.ACMEFlix.domain.Profile;
 import com.team5.ACMEFlix.repository.AccountRepository;
 import com.team5.ACMEFlix.repository.ProfileRepository;
+import com.team5.ACMEFlix.repository.RatingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class ProfileService {
@@ -21,6 +18,8 @@ public class ProfileService {
     private ProfileRepository profileRepository;
     @Autowired
     private AccountRepository accountRepository;
+    @Autowired
+    private RatingRepository ratingRepository;
 
     @Transactional(readOnly = true)
     public List<Profile> findAllProfiles() {
@@ -75,6 +74,10 @@ public class ProfileService {
             throw new NoSuchElementException("Profile does not exist");
         }
         else{
+
+            ratingRepository.deleteAllByProfileId(id);
+
+
             profileRepository.deleteById(id);
         }
     }
@@ -86,6 +89,13 @@ public class ProfileService {
             if (!exists) {
                 throw new NoSuchElementException("Profile does not exist");
             } else {
+
+
+                    ratingRepository.deleteAllByProfileId(id);
+
+
+
+
                 profileRepository.deleteById(id);
             }
         }

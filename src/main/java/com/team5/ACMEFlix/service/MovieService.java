@@ -226,7 +226,7 @@ public class MovieService {
 
 
 
-                    for (int i = 0; i < writers.size(); i++) {
+                    for (int i = 0; i < writers.size()-1; i++) {
 
                         if (movie.getWriters().get(i).getFullname() != null &&
                                 movie.getWriters().get(i).getFullname().length() >0 &&

@@ -1,6 +1,6 @@
 package com.team5.ACMEFlix.controller;
 
-import com.team5.ACMEFlix.domain.Genre;
+
 import com.team5.ACMEFlix.mapper.GenreMapper;
 import com.team5.ACMEFlix.service.GenreService;
 import com.team5.ACMEFlix.transfer.ApiResponse;

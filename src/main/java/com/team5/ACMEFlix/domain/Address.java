@@ -1,7 +1,6 @@
 package com.team5.ACMEFlix.domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 import javax.persistence.*;

@@ -1,28 +1,17 @@
 package com.team5.ACMEFlix.controller;
 
 
-import com.team5.ACMEFlix.domain.Movie;
-import com.team5.ACMEFlix.domain.enumeration.ContentType;
+
 import com.team5.ACMEFlix.mapper.ContentMapper;
-import com.team5.ACMEFlix.mapper.MovieMapper;
-import com.team5.ACMEFlix.mapper.TVSeriesMapper;
-import com.team5.ACMEFlix.repository.ContentRepository;
 import com.team5.ACMEFlix.service.ContentService;
-import com.team5.ACMEFlix.service.EpisodeService;
-import com.team5.ACMEFlix.service.MovieService;
-import com.team5.ACMEFlix.service.TVSeriesService;
 import com.team5.ACMEFlix.transfer.ApiResponse;
 import com.team5.ACMEFlix.transfer.resource.ContentResource;
-import com.team5.ACMEFlix.transfer.resource.MovieResource;
-import com.team5.ACMEFlix.transfer.resource.TVSeriesResource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.validation.Valid;
 
 import java.util.*;

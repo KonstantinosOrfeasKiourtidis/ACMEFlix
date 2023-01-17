@@ -28,10 +28,6 @@ public class AccountResource2 extends BaseResource {
     @Pattern(regexp = "^[A-Za-z0-9]*$", message="Account's username can only contain alphanumeric symbols")
     private String username;
 
-    @NotNull(message = "Account's password cannot be null")
-    @Column(length = 50, nullable = false)
-    private String password;
-
     @NotNull(message = "Account's firstname cannot be null")
     @Column(length = 30, nullable = false)
     @Pattern(regexp = "^[A-Za-z ]+$", message="Account's firstname can only contain alphabetical symbols")
@@ -61,7 +57,7 @@ public class AccountResource2 extends BaseResource {
     private List<AddressResource> address;
 
     @ToString.Exclude
-    private List<CreditCardResource> creditCards;
+    private List<CreditCardResource2> creditCards;
 
     @ToString.Exclude
     private List<ProfileResource> profiles;

@@ -3,8 +3,8 @@ package com.team5.ACMEFlix.service;
 import com.team5.ACMEFlix.domain.*;
 import com.team5.ACMEFlix.domain.enumeration.ContentType;
 import com.team5.ACMEFlix.domain.enumeration.SubscriptionType;
-import com.team5.ACMEFlix.helpers.WatchEpisodeForm;
-import com.team5.ACMEFlix.helpers.WatchMovieForm;
+import com.team5.ACMEFlix.forms.WatchEpisodeForm;
+import com.team5.ACMEFlix.forms.WatchMovieForm;
 import com.team5.ACMEFlix.mapper.*;
 import com.team5.ACMEFlix.repository.*;
 import com.team5.ACMEFlix.transfer.resource.*;
@@ -72,10 +72,10 @@ public class ViewService {
         List<ContentResource> contentResourcesReturn = new ArrayList<>();
         for(ContentResource content: contentResources){
             if(content.getContentType().equals(ContentType.MOVIE)){
-                contentResources.add(contentMapper.movieToContentResource(movieService.findMovieByContentId(content.getId()).get()));
+                contentResourcesReturn.add(contentMapper.movieToContentResource(movieService.findMovieByContentId(content.getId()).get()));
             }
             else if(content.getContentType().equals(ContentType.TV_SERIES)){
-                contentResources.add(contentMapper.tvSerieToContentResource(tvSeriesService.findTVSeriesByContentId(content.getId()).get()));
+                contentResourcesReturn.add(contentMapper.tvSerieToContentResource(tvSeriesService.findTVSeriesByContentId(content.getId()).get()));
             }
         }
 

@@ -1,13 +1,11 @@
 package com.team5.ACMEFlix.controller;
 
 import com.team5.ACMEFlix.domain.Account;
-import com.team5.ACMEFlix.helpers.LoginForm;
-import com.team5.ACMEFlix.helpers.RegisterForm;
-import com.team5.ACMEFlix.helpers.SubscribeForm;
+import com.team5.ACMEFlix.forms.LoginForm;
+import com.team5.ACMEFlix.forms.RegisterForm;
+import com.team5.ACMEFlix.forms.SubscribeForm;
 import com.team5.ACMEFlix.mapper.AccountMapper;
 import com.team5.ACMEFlix.mapper.AccountMapper2;
-import com.team5.ACMEFlix.mapper.AddressMapper;
-import com.team5.ACMEFlix.mapper.CreditCardMapper;
 import com.team5.ACMEFlix.service.AccountService;
 import com.team5.ACMEFlix.transfer.ApiResponse;
 import com.team5.ACMEFlix.transfer.resource.AccountResource;
@@ -28,43 +26,44 @@ public class AccountController {
 
     private final AccountService accountService;
     private final AccountMapper accountMapper;
-    private final CreditCardMapper creditCardMapper;
-    private final AddressMapper addressMapper;
     private final AccountMapper2 accountMapper2;
 
     @Autowired
-    private AccountController(AccountService accountService, AccountMapper accountMapper, CreditCardMapper creditCardMapper, AddressMapper addressMapper, AccountMapper2 accountMapper2) {
+    private AccountController(AccountService accountService, AccountMapper accountMapper, AccountMapper2 accountMapper2) {
         this.accountService = accountService;
         this.accountMapper = accountMapper;
-        this.creditCardMapper = creditCardMapper;
-        this.addressMapper = addressMapper;
         this.accountMapper2 = accountMapper2;
     }
 
     @GetMapping
-    public ResponseEntity<ApiResponse<List<AccountResource>>> findAllAccounts(){
-        return  new ResponseEntity<>(ApiResponse.<List<AccountResource>>builder().data(accountMapper.toResources(accountService.findAllAccounts())).build(), HttpStatus.OK);
+    public ResponseEntity<ApiResponse<List<AccountResource2>>> findAllAccounts(){
+        return  new ResponseEntity<>(ApiResponse.<List<AccountResource2>>builder().data(accountMapper2.toResources(accountService.findAllAccounts())).build(), HttpStatus.OK);
+    }
+
+    @GetMapping("alternative")
+    public ResponseEntity<ApiResponse<List<AccountResource2>>> findAllAccountsAlternative(){
+        return  new ResponseEntity<>(ApiResponse.<List<AccountResource2>>builder().data(accountMapper2.toResources(accountService.findAllAccounts())).build(), HttpStatus.OK);
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<ApiResponse<AccountResource>> findAccountById(@PathVariable("id") Long id){
-        return new ResponseEntity<>(ApiResponse.<AccountResource>builder().data(accountMapper.toResource(accountService.findAccountById(id).get())).build(), HttpStatus.OK);
+    public ResponseEntity<ApiResponse<AccountResource2>> findAccountById(@PathVariable("id") Long id){
+        return new ResponseEntity<>(ApiResponse.<AccountResource2>builder().data(accountMapper2.toResource(accountService.findAccountById(id).get())).build(), HttpStatus.OK);
     }
 
     @GetMapping("findAccountByEmail/{email}")
-    public ResponseEntity<ApiResponse<AccountResource>> findAccountByEmail(@PathVariable("email") String email){
-        return new ResponseEntity<>(ApiResponse.<AccountResource>builder().data(accountMapper.toResource(accountService.findAccountByEmail(email).get())).build(), HttpStatus.OK);
+    public ResponseEntity<ApiResponse<AccountResource2>> findAccountByEmail(@PathVariable("email") String email){
+        return new ResponseEntity<>(ApiResponse.<AccountResource2>builder().data(accountMapper2.toResource(accountService.findAccountByEmail(email).get())).build(), HttpStatus.OK);
     }
 
     @PostMapping(path = "addAccount")
-    public ResponseEntity<ApiResponse<AccountResource2>> addAccount(@Valid @RequestBody AccountResource2 account){
-        return new ResponseEntity<>(ApiResponse.<AccountResource2>builder().data(accountMapper2.toResource(accountService.addAccount(accountMapper2.toDomain(account)))).build(), HttpStatus.CREATED);
+    public ResponseEntity<ApiResponse<AccountResource>> addAccount(@Valid @RequestBody AccountResource account){
+        return new ResponseEntity<>(ApiResponse.<AccountResource>builder().data(accountMapper.toResource(accountService.addAccount(accountMapper.toDomain(account)))).build(), HttpStatus.CREATED);
     }
 
     @PostMapping(path = "addAccounts")
-    public ResponseEntity<ApiResponse<List<AccountResource2>>> addAccounts(@Valid @RequestBody List<AccountResource2> accounts){
+    public ResponseEntity<ApiResponse<List<AccountResource>>> addAccounts(@Valid @RequestBody List<AccountResource> accounts){
 
-        return new ResponseEntity<>(ApiResponse.<List<AccountResource2>>builder().data(accountMapper2.toResources(accountService.addAccounts(accountMapper2.toDomains(accounts)))).build(), HttpStatus.CREATED);
+        return new ResponseEntity<>(ApiResponse.<List<AccountResource>>builder().data(accountMapper.toResources(accountService.addAccounts(accountMapper.toDomains(accounts)))).build(), HttpStatus.CREATED);
     }
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     @DeleteMapping(path = "deleteAccountById/{id}")
@@ -114,11 +113,6 @@ public class AccountController {
                          @Valid @RequestBody SubscribeForm subscribeForm){
         accountService.subscribe(id, subscribeForm);
     }
-
-
-
-
-
 
 
 }

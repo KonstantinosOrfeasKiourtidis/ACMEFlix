@@ -1,17 +1,14 @@
-package com.team5.ACMEFlix.helpers;
+package com.team5.ACMEFlix.forms;
 
-import com.team5.ACMEFlix.domain.Address;
-import com.team5.ACMEFlix.domain.CreditCard;
-import com.team5.ACMEFlix.transfer.resource.AddressResource;
-import com.team5.ACMEFlix.transfer.resource.CreditCardResource;
+
 import lombok.Getter;
-import lombok.Setter;
+
 
 import javax.persistence.Column;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
-import java.util.List;
+
 
 @Getter
 public class RegisterForm {

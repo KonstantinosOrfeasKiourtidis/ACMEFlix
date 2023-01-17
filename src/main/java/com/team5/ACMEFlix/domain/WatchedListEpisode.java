@@ -1,14 +1,11 @@
 package com.team5.ACMEFlix.domain;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
-import java.util.Date;
-import java.util.List;
+
 
 @Data
 @SuperBuilder

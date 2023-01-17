@@ -1,6 +1,5 @@
 package com.team5.ACMEFlix.scheduler;
 
-import com.team5.ACMEFlix.domain.BaseModel;
 import com.team5.ACMEFlix.service.DatabaseBackupService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

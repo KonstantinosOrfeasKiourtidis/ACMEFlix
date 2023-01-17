@@ -1,9 +1,5 @@
 package com.team5.ACMEFlix.transfer.resource;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.team5.ACMEFlix.domain.Content;
-import com.team5.ACMEFlix.domain.Director;
-import com.team5.ACMEFlix.domain.Writer;
 import com.team5.ACMEFlix.transfer.BaseResource;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;

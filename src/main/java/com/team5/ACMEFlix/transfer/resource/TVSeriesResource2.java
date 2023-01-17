@@ -14,7 +14,7 @@ import java.util.List;
 @Getter
 @Setter
 @ToString(callSuper = true)
-public class TVSeriesResource extends BaseResource {
+public class TVSeriesResource2 extends BaseResource {
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     private List<SeasonResource> seasons;
@@ -27,5 +27,5 @@ public class TVSeriesResource extends BaseResource {
     @Enumerated(EnumType.STRING)
     private TVSeriesStatusType tvSeriesStatusType;
 
-    private ContentResource content;
+
 }

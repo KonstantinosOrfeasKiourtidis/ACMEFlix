@@ -1,7 +1,5 @@
 package com.team5.ACMEFlix.controller;
 
-import com.team5.ACMEFlix.domain.TVSeries;
-import com.team5.ACMEFlix.domain.Writer;
 import com.team5.ACMEFlix.mapper.WriterMapper;
 import com.team5.ACMEFlix.service.WriterService;
 import com.team5.ACMEFlix.transfer.ApiResponse;
@@ -13,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.Optional;
+
 
 @RestController
 @RequestMapping(path = "api/v1/content/movie/writer")

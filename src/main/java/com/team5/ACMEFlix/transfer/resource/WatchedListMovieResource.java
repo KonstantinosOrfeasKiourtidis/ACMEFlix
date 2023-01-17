@@ -16,5 +16,5 @@ public class WatchedListMovieResource extends BaseResource {
     private ViewResource view;
 
 
-    private MovieResource movie;
+    private MovieResource2 movie;
 }

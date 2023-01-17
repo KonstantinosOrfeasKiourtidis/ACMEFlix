@@ -6,7 +6,6 @@ import com.team5.ACMEFlix.domain.Movie;
 import com.team5.ACMEFlix.domain.TVSeries;
 import com.team5.ACMEFlix.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,7 +18,6 @@ import java.util.Optional;
 public class ActorService {
     @Autowired
     private ActorRepository actorRepository;
-
     @Autowired
     private ContentRepository contentRepository;
     @Autowired

@@ -8,7 +8,6 @@ import com.team5.ACMEFlix.repository.ContentRepository;
 import com.team5.ACMEFlix.repository.CreatorRepository;
 import com.team5.ACMEFlix.repository.TVSeriesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

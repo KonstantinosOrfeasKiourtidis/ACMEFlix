@@ -1,7 +1,5 @@
 package com.team5.ACMEFlix.controller;
 
-import com.team5.ACMEFlix.domain.Account;
-import com.team5.ACMEFlix.domain.Episode;
 import com.team5.ACMEFlix.mapper.EpisodeMapper;
 import com.team5.ACMEFlix.service.EpisodeService;
 import com.team5.ACMEFlix.transfer.ApiResponse;

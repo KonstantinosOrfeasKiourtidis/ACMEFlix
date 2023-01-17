@@ -1,9 +1,6 @@
 package com.team5.ACMEFlix.controller;
 
-import com.team5.ACMEFlix.domain.Account;
-import com.team5.ACMEFlix.domain.Director;
 import com.team5.ACMEFlix.mapper.DirectorMapper;
-import com.team5.ACMEFlix.repository.DirectorRepository;
 import com.team5.ACMEFlix.service.DirectorService;
 import com.team5.ACMEFlix.transfer.ApiResponse;
 import com.team5.ACMEFlix.transfer.resource.DirectorResource;

@@ -61,6 +61,24 @@ public class ContentMapperImpl implements ContentMapper{
         contentResource.setContentType( contentDomain.getContentType() );
         contentResource.setRuntime( contentDomain.getRuntime() );
         contentResource.setRatings( ratingListToRatingResourceList( contentDomain.getRatings() ) );
+
+        List<Rating> ratings = contentDomain.getRatings();
+        float rating = 0;
+        for (Rating onlyRating: ratings){
+            rating += onlyRating.getRating();
+        }
+
+        if(Float.isNaN(rating) || !(rating > 0 || rating <=10) || rating == 0){
+            contentResource.setRating(0F);
+        }
+        else {
+            contentResource.setRating(rating/ratings.size());
+        }
+
+
+        contentResource.setProfileNo(ratings.size());
+
+
         return contentResource;
     }
 

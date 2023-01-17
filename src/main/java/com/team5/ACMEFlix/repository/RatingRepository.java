@@ -1,8 +1,8 @@
 package com.team5.ACMEFlix.repository;
 
-import com.team5.ACMEFlix.domain.Content;
 import com.team5.ACMEFlix.domain.Rating;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
@@ -22,4 +22,11 @@ public interface RatingRepository extends JpaRepository<Rating, Long> {
     @Query(value = "SELECT * FROM RATINGS WHERE PROFILE_ID = ?", nativeQuery = true)
 
     List<Rating> findRatingsByProfileId(Long id);
+    @Modifying
+    @Query(value = "DELETE FROM RATINGS WHERE PROFILE_ID = ?", nativeQuery = true)
+    void deleteAllByProfileId(Long id);
+
+    @Modifying
+    @Query(value = "DELETE FROM RATINGS WHERE PROFILE_ID IN (:id)", nativeQuery = true)
+    void deleteAllByProfileIds(List<Long> id);
 }

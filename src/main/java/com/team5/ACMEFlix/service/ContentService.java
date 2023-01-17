@@ -19,7 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
 import java.math.BigInteger;
 import java.util.*;
-import java.util.function.Function;
+
 
 @Service
 public class ContentService {
@@ -60,132 +60,16 @@ public class ContentService {
         Pageable paging = PageRequest.of(pageNo, pageSize);
 
          Page<Content> pageContents;
-         if(search !=null && genres== null && year ==null && isAgeRestricted==null && language==null && contentType == null){
-             pageContents = contentRepository.findAllByTitleContainingIgnoreCase(search, paging);
-         }
-        else if(search ==null && genres!= null && year ==null && isAgeRestricted==null && language==null && contentType == null){
 
-            pageContents = contentRepository.findContentsByGenres(genres, paging);
 
-        }
-         else if(search ==null && genres== null && year !=null && isAgeRestricted==null&& language==null && contentType == null){
-
-             pageContents = contentRepository.findAllByReleaseDateContainingIgnoreCase(year, paging);
-
-         }
-         else if(search ==null && genres== null && year ==null && isAgeRestricted!=null && language==null && contentType == null){
-
-             pageContents = contentRepository.findAllByIsAgeRestrictedEquals(isAgeRestricted, paging);
-
-         }
-         else if(search ==null && genres== null && year ==null && isAgeRestricted==null&& language!=null && contentType == null){
-
-             pageContents = contentRepository.findAllBySpokenLanguageContainingIgnoreCase(language, paging);
-
-         }
-
-         else if(search ==null && genres== null && year ==null && isAgeRestricted==null&& language==null && contentType != null){
-
-             pageContents = contentRepository.findAllByContentType(contentType, paging);
-
-         }
-         else if(search !=null && genres!= null && year !=null && isAgeRestricted!=null && language!=null && contentType != null){
-
-             pageContents = contentRepository.findContentsByEverything(search, genres, year, isAgeRestricted, language, contentType, paging);
-
-         }
-
-        else if(search == null || genres == null || year== null || isAgeRestricted==null && language==null || contentType == null)
-        {
-            pageContents = contentRepository.findAll(paging);
-
-        }
-
-        else {
-            System.out.println( "4 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-
-            pageContents = new Page<Content>() {
-                @Override
-                public int getTotalPages() {
-                    return 0;
-                }
-
-                @Override
-                public long getTotalElements() {
-                    return 0;
-                }
-
-                @Override
-                public <U> Page<U> map(Function<? super Content, ? extends U> converter) {
-                    return null;
-                }
-
-                @Override
-                public int getNumber() {
-                    return 0;
-                }
-
-                @Override
-                public int getSize() {
-                    return 0;
-                }
-
-                @Override
-                public int getNumberOfElements() {
-                    return 0;
-                }
-
-                @Override
-                public List<Content> getContent() {
-                    return null;
-                }
-
-                @Override
-                public boolean hasContent() {
-                    return false;
-                }
-
-                @Override
-                public Sort getSort() {
-                    return null;
-                }
-
-                @Override
-                public boolean isFirst() {
-                    return false;
-                }
-
-                @Override
-                public boolean isLast() {
-                    return false;
-                }
-
-                @Override
-                public boolean hasNext() {
-                    return false;
-                }
-
-                @Override
-                public boolean hasPrevious() {
-                    return false;
-                }
-
-                @Override
-                public Pageable nextPageable() {
-                    return null;
-                }
-
-                @Override
-                public Pageable previousPageable() {
-                    return null;
-                }
-
-                @Override
-                public Iterator<Content> iterator() {
-                    return null;
-                }
-            };
-        }
+        if(isAgeRestricted == null && (genres==null || Arrays.stream(genres).toList().isEmpty()) )
+            pageContents = contentRepository.findContentsByEverythingNoGenresAndNoIsAgeRestricted(search, year,  language, contentType, paging);
+        else if(isAgeRestricted == null)
+            pageContents = contentRepository.findContentsByEverythingNoIsAgeRestricted(search, genres, year,  language, contentType, paging);
+        else if((genres==null || Arrays.stream(genres).toList().isEmpty()))
+            pageContents = contentRepository.findContentsByEverythingNoGenre(search, year, isAgeRestricted, language, contentType, paging);
+        else
+            pageContents = contentRepository.findContentsByEverything(search, genres, year, isAgeRestricted, language, contentType, paging);
 
         contents = pageContents.getContent();
         return contents;
@@ -247,22 +131,22 @@ public class ContentService {
     @Transactional(readOnly = true)
     public List<ContentResource> findAllContentsByTitleAlternative(String search) {
         List<ContentResource> contentResourcesSearchResult = contentMapper.domainToResources(contentRepository.findContentByName(search));
-        List<MovieResource>  movieResources = new ArrayList<>();
-        List<TVSeriesResource>  tvSeriesResources = new ArrayList<>();
+        List<Movie>  movieResources = new ArrayList<>();
+        List<TVSeries>  tvSeriesResources = new ArrayList<>();
         for (ContentResource contentResource: contentResourcesSearchResult){
             if(contentResource.getContentType().equals(ContentType.MOVIE)){
 
-                movieResources.add(movieMapper.toResource(movieService.findMovieByContentId(contentResource.getId()).get()));
+                movieResources.add(movieService.findMovieByContentId(contentResource.getId()).get());
 
             }
             else if(contentResource.getContentType().equals(ContentType.TV_SERIES)){
-                tvSeriesResources.add(tvSeriesMapper.toResource(tvSeriesService.findTVSeriesByContentId(contentResource.getId()).get()));
+                tvSeriesResources.add(tvSeriesService.findTVSeriesByContentId(contentResource.getId()).get());
             }
         }
 
         List<ContentResource> contentResourcesReturn = new ArrayList<>();
-        contentResourcesReturn.addAll(contentMapper.tvSeriesToContentResources(tvSeriesMapper.toDomains(tvSeriesResources)));
-        contentResourcesReturn.addAll(contentMapper.moviesToContentResources(movieMapper.toDomains(movieResources)));
+        contentResourcesReturn.addAll(contentMapper.tvSeriesToContentResources(tvSeriesResources));
+        contentResourcesReturn.addAll(contentMapper.moviesToContentResources(movieResources));
 
         return contentResourcesReturn;
     }
@@ -374,14 +258,14 @@ public class ContentService {
 
         List<BigInteger> contentIds = entityManager.createNativeQuery(query).getResultList();
         List<ContentResource> contents = contentMapper.domainToResources(contentRepository.findAllContentsById(contentIds));
-        List<MovieResource> movies = new ArrayList<>();
-        List<TVSeriesResource> tvSeries = new ArrayList<>();
+        List<Movie> movies = new ArrayList<>();
+        List<TVSeries> tvSeries = new ArrayList<>();
         for (ContentResource content: contents){
             if(content.getContentType().equals(ContentType.MOVIE)){
-                movies.add(movieMapper.toResource(movieService.findMovieByContentId(content.getId()).get()));
+                movies.add(movieService.findMovieByContentId(content.getId()).get());
             }
             else if(content.getContentType().equals(ContentType.TV_SERIES)){
-                tvSeries.add(tvSeriesMapper.toResource(tvSeriesService.findTVSeriesByContentId(content.getId()).get()));
+                tvSeries.add(tvSeriesService.findTVSeriesByContentId(content.getId()).get());
             }
             else{
 
@@ -389,8 +273,8 @@ public class ContentService {
         }
 
         List<ContentResource> contentResourcesReturn = new ArrayList<>();
-        contentResourcesReturn.addAll(contentMapper.moviesToContentResources(movieMapper.toDomains(movies)));
-        contentResourcesReturn.addAll(contentMapper.tvSeriesToContentResources(tvSeriesMapper.toDomains(tvSeries)));
+        contentResourcesReturn.addAll(contentMapper.moviesToContentResources(movies));
+        contentResourcesReturn.addAll(contentMapper.tvSeriesToContentResources(tvSeries));
 
 
         return contentResourcesReturn;
@@ -399,14 +283,14 @@ public class ContentService {
     @Transactional(readOnly = true)
     public List<ContentResource> findAllContentByLanguage(String language) {
         List<ContentResource> contentResources = contentMapper.domainToResources(contentRepository.findContentByLanguage(language));
-        List<MovieResource> movies = new ArrayList<>();
-        List<TVSeriesResource> tvSeries = new ArrayList<>();
+        List<Movie> movies = new ArrayList<>();
+        List<TVSeries> tvSeries = new ArrayList<>();
         for (ContentResource content: contentResources){
             if(content.getContentType().equals(ContentType.MOVIE)){
-                movies.add(movieMapper.toResource(movieService.findMovieByContentId(content.getId()).get()));
+                movies.add(movieService.findMovieByContentId(content.getId()).get());
             }
             else if(content.getContentType().equals(ContentType.TV_SERIES)){
-                tvSeries.add(tvSeriesMapper.toResource(tvSeriesService.findTVSeriesByContentId(content.getId()).get()));
+                tvSeries.add(tvSeriesService.findTVSeriesByContentId(content.getId()).get());
             }
             else{
 
@@ -414,8 +298,8 @@ public class ContentService {
         }
 
         List<ContentResource> contentResourcesReturn = new ArrayList<>();
-        contentResourcesReturn.addAll(contentMapper.moviesToContentResources(movieMapper.toDomains(movies)));
-        contentResourcesReturn.addAll(contentMapper.tvSeriesToContentResources(tvSeriesMapper.toDomains(tvSeries)));
+        contentResourcesReturn.addAll(contentMapper.moviesToContentResources(movies));
+        contentResourcesReturn.addAll(contentMapper.tvSeriesToContentResources(tvSeries));
 
         return contentResourcesReturn;
     }
@@ -423,22 +307,22 @@ public class ContentService {
     public List<ContentResource> findAllContentByYear(String year) {
         List<ContentResource> contentResources = contentMapper.domainToResources(contentRepository.findContentByYear(year));
 
-        List<MovieResource> movies = new ArrayList<>();
-        List<TVSeriesResource> tvSeries = new ArrayList<>();
+        List<Movie> movies = new ArrayList<>();
+        List<TVSeries> tvSeries = new ArrayList<>();
         for (ContentResource content: contentResources){
             if(content.getContentType().equals(ContentType.MOVIE)){
-                movies.add(movieMapper.toResource(movieService.findMovieByContentId(content.getId()).get()));
+                movies.add(movieService.findMovieByContentId(content.getId()).get());
             }
             else if(content.getContentType().equals(ContentType.TV_SERIES)){
-                tvSeries.add(tvSeriesMapper.toResource(tvSeriesService.findTVSeriesByContentId(content.getId()).get()));
+                tvSeries.add(tvSeriesService.findTVSeriesByContentId(content.getId()).get());
             }
             else{
 
             }
         }
         List<ContentResource> contentResourcesReturn = new ArrayList<>();
-        contentResourcesReturn.addAll(contentMapper.moviesToContentResources(movieMapper.toDomains(movies)));
-        contentResourcesReturn.addAll(contentMapper.tvSeriesToContentResources(tvSeriesMapper.toDomains(tvSeries)));
+        contentResourcesReturn.addAll(contentMapper.moviesToContentResources(movies));
+        contentResourcesReturn.addAll(contentMapper.tvSeriesToContentResources(tvSeries));
 
         return contentResourcesReturn;
     }
@@ -449,14 +333,14 @@ public class ContentService {
 
         List<ContentResource> contents = contentMapper.domainToResources(contentRepository.findAllById(contentIds));
 
-        List<MovieResource> movies = new ArrayList<>();
-        List<TVSeriesResource> tvSeries = new ArrayList<>();
+        List<Movie> movies = new ArrayList<>();
+        List<TVSeries> tvSeries = new ArrayList<>();
         for (ContentResource content: contents){
             if(content.getContentType().equals(ContentType.MOVIE)){
-                movies.add(movieMapper.toResource(movieService.findMovieByContentId(content.getId()).get()));
+                movies.add(movieService.findMovieByContentId(content.getId()).get());
             }
             else if(content.getContentType().equals(ContentType.TV_SERIES)){
-                tvSeries.add(tvSeriesMapper.toResource(tvSeriesService.findTVSeriesByContentId(content.getId()).get()));
+                tvSeries.add(tvSeriesService.findTVSeriesByContentId(content.getId()).get());
             }
             else{
 
@@ -464,8 +348,8 @@ public class ContentService {
         }
 
         List<ContentResource> contentResourcesReturn = new ArrayList<>();
-        contentResourcesReturn.addAll(contentMapper.moviesToContentResources(movieMapper.toDomains(movies)));
-        contentResourcesReturn.addAll(contentMapper.tvSeriesToContentResources(tvSeriesMapper.toDomains(tvSeries)));
+        contentResourcesReturn.addAll(contentMapper.moviesToContentResources(movies));
+        contentResourcesReturn.addAll(contentMapper.tvSeriesToContentResources(tvSeries));
 
         Collections.sort(contentResourcesReturn, new Comparator<ContentResource>() {
             public int compare(ContentResource cr1, ContentResource cr2) {
@@ -878,7 +762,7 @@ public class ContentService {
                             !Objects.equals(tvSeriesFound.get().getSeasons(), contentResource.getSeasons())) {
                         List<Season> seasons = tvSeriesFound.get().getSeasons();
                         if (!seasons.isEmpty()) {
-                            for (int i = 0; i < seasons.size()-1; i++) {
+                            for (int i = 0; i < seasons.size(); i++) {
                                 if (contentResource.getSeasons().get(i).getSeasonNo() != null &&
                                         contentResource.getSeasons().get(i).getSeasonNo() >0 &&
                                         !Objects.equals(seasons.get(i).getSeasonNo(), contentResource.getSeasons().get(i).getSeasonNo())) {

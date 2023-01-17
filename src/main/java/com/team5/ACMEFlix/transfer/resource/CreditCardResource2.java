@@ -13,7 +13,7 @@ import javax.validation.constraints.Pattern;
 @Getter
 @Setter
 @ToString(callSuper = true)
-public class CreditCardResource extends BaseResource {
+public class CreditCardResource2 extends BaseResource {
     @NotNull(message = "Credit card number cannot be null")
     @Column(length = 16, nullable = false)
     @Pattern(regexp = "^[0-9]*$", message="Credit cards's number can only contain numeric symbols")
@@ -24,10 +24,6 @@ public class CreditCardResource extends BaseResource {
     @Pattern(regexp = "^[A-Za-z\\. ]+$", message="Credit card's name can only contain alphabetical symbols")
     private String cardName;
 
-    @NotNull(message = "Credit card cvc cannot be null")
-    @Column(length = 3, nullable = false)
-    @Pattern(regexp = "^[0-9]*$", message="Credit cvc can only contain numeric symbols")
-    private String cardCvc;
 
     @NotNull(message = "Credit card expiration cannot be null")
     @Column(length = 30, nullable = false)

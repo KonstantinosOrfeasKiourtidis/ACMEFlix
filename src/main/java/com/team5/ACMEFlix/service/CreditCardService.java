@@ -5,7 +5,6 @@ import com.team5.ACMEFlix.domain.CreditCard;
 import com.team5.ACMEFlix.repository.AccountRepository;
 import com.team5.ACMEFlix.repository.CreditCardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

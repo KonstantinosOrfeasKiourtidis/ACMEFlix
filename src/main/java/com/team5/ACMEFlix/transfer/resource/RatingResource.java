@@ -1,8 +1,7 @@
 package com.team5.ACMEFlix.transfer.resource;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.team5.ACMEFlix.domain.Content;
-import com.team5.ACMEFlix.domain.Profile;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.team5.ACMEFlix.transfer.BaseResource;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -30,5 +29,6 @@ public class RatingResource extends BaseResource {
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private ContentResource content;
 }

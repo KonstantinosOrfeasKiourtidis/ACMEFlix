@@ -34,6 +34,7 @@ public class ContentCreator implements CommandLineRunner {
     private final EpisodeRepository episodeRepository;
     private final SeasonRepository seasonRepository;
     private final CreatorRepository creatorRepository;
+    private final RatingRepository ratingRepository;
 
 
     @Override
@@ -78,6 +79,7 @@ public class ContentCreator implements CommandLineRunner {
                 .cardNo("1244563591912121")
                 .cardCvc("123")
                 .cardName("Dave Johnson")
+                .cardExpirationDate("12/2025")
                 .cardType(CardType.AMERICAN_EXPRESS)
                 .account(account1)
                 .build();
@@ -132,6 +134,7 @@ public class ContentCreator implements CommandLineRunner {
                 .cardNo("1244563591912121")
                 .cardCvc("456")
                 .cardName("Rachel Green")
+                .cardExpirationDate("05/2030")
                 .cardType(CardType.VISA)
                 .account(account2)
                 .build();
@@ -192,6 +195,7 @@ public class ContentCreator implements CommandLineRunner {
                 .cardNo("5586278084797458")
                 .cardCvc("551")
                 .cardName("Tomas Crane")
+                .cardExpirationDate("03/2027")
                 .cardType(CardType.MASTERCARD)
                 .account(account3)
                 .build();
@@ -200,6 +204,7 @@ public class ContentCreator implements CommandLineRunner {
                 .cardNo("6319087600983084")
                 .cardCvc("574")
                 .cardName("Rachel Green")
+                .cardExpirationDate("01/2040")
                 .cardType(CardType.VISA)
                 .account(account3)
                 .build();
@@ -266,6 +271,7 @@ public class ContentCreator implements CommandLineRunner {
                 .cardNo("6505241162470006")
                 .cardCvc("392")
                 .cardName("Kathleen Nelson")
+                .cardExpirationDate("03/2042")
                 .cardType(CardType.PAYPAL)
                 .account(account4)
                 .build();
@@ -291,21 +297,21 @@ public class ContentCreator implements CommandLineRunner {
         //endregion
 
         //region Account 5
-        //-----------------Account 5----------------//
+        //-----------------Account 4----------------//
         Account account5 = Account.builder()
-                .email("sam@hotmail.com")
-                .username("samir")
-                .firstname("Samir")
-                .lastname("Rangel")
-                .password("test")
-                .phoneNo("0489464334")
-                .subscriptionType(SubscriptionType.PREMIUM)
+                .email("aris95@hotmail.com")
+                .username("aris")
+                .firstname("Aristarxos")
+                .lastname("Aximastos")
+                .password("password")
+                .phoneNo("7826496165")
+                .subscriptionType(SubscriptionType.STANDARD)
                 .creationDate(new Date())
                 .subscriptionDate(new Date())
                 .build();
 
         Profile profileA5P1 = Profile.builder()
-                .firstname("Samir")
+                .firstname("Aris")
                 .imageUrl(null)
                 .ageRestricted(false)
                 .account(account5)
@@ -318,48 +324,332 @@ public class ContentCreator implements CommandLineRunner {
                 .account(account5)
                 .build();
 
-        Profile profileA5P3 = Profile.builder()
-                .firstname("Aamir")
-                .imageUrl(null)
-                .ageRestricted(false)
-                .account(account5)
-                .build();
-
 
         CreditCard creditCardA5C1 = CreditCard.builder()
-                .cardNo("4514169755894494")
-                .cardCvc("154")
-                .cardName("Samir Rangel")
-                .cardType(CardType.VISA)
-                .account(account5)
-                .build();
-
-        CreditCard creditCardA5C2 = CreditCard.builder()
-                .cardNo("6505212716586258")
-                .cardCvc("551")
-                .cardName("Aamir Rangel")
-                .cardType(CardType.PAYPAL)
+                .cardNo("6505241792470006")
+                .cardCvc("987")
+                .cardName("Aristarxos Aximastos")
+                .cardExpirationDate("07/2035")
+                .cardType(CardType.MASTERCARD)
                 .account(account5)
                 .build();
 
 
         Address addressA5A1 = Address.builder()
-                .country("Afghanistan")
-                .postalCode("121212")
-                .streetName("Kabul Kandahar")
-                .province("Kabul")
-                .streetNo("33")
+                .country("Greece")
+                .postalCode("15561")
+                .streetName("Voutsina")
+                .province("Holargos")
+                .streetNo("29")
                 .account(account5)
                 .build();
+
+
 
 
         accountRepository.save(account5);
         profileRepository.save(profileA5P1);
         profileRepository.save(profileA5P2);
-        profileRepository.save(profileA5P3);
         creditCardRepository.save(creditCardA5C1);
-        creditCardRepository.save(creditCardA5C2);
         addressRepository.save(addressA5A1);
+        //endregion
+
+        //region Account 6
+        //-----------------Account 6----------------//
+        Account account6 = Account.builder()
+                .email("john@hotmail.com")
+                .username("john")
+                .firstname("John")
+                .lastname("Papageorgiou")
+                .password("5678")
+                .phoneNo("04894544334")
+                .subscriptionType(SubscriptionType.PREMIUM)
+                .creationDate(new Date())
+                .subscriptionDate(new Date())
+                .build();
+
+        Profile profileA6P1 = Profile.builder()
+                .firstname("John")
+                .imageUrl(null)
+                .ageRestricted(false)
+                .account(account6)
+                .build();
+
+        Profile profileA6P2 = Profile.builder()
+                .firstname("KIDS")
+                .imageUrl(null)
+                .ageRestricted(true)
+                .account(account6)
+                .build();
+
+        Profile profileA6P3 = Profile.builder()
+                .firstname("Helen")
+                .imageUrl(null)
+                .ageRestricted(false)
+                .account(account6)
+                .build();
+
+
+        CreditCard creditCardA6C1 = CreditCard.builder()
+                .cardNo("4514143755894494")
+                .cardCvc("301")
+                .cardName("John Papageorgiou")
+                .cardExpirationDate("04/2032")
+                .cardType(CardType.VISA)
+                .account(account6)
+                .build();
+
+        CreditCard creditCardA6C2 = CreditCard.builder()
+                .cardNo("6505232716586258")
+                .cardCvc("777")
+                .cardName("Helen Papageorgiou")
+                .cardExpirationDate("03/2027")
+                .cardType(CardType.PAYPAL)
+                .account(account6)
+                .build();
+
+
+        Address addressA6A1 = Address.builder()
+                .country("Greece")
+                .postalCode("15561")
+                .streetName("Sarandaporou")
+                .province("Holargos")
+                .streetNo("72")
+                .account(account6)
+                .build();
+
+
+        accountRepository.save(account6);
+        profileRepository.save(profileA6P1);
+        profileRepository.save(profileA6P2);
+        profileRepository.save(profileA6P3);
+        creditCardRepository.save(creditCardA6C1);
+        creditCardRepository.save(creditCardA6C2);
+        addressRepository.save(addressA6A1);
+        //endregion
+
+        //region Account 7
+        //-----------------Account 7----------------//
+        Account account7 = Account.builder()
+                .email("maria75@hotmail.com")
+                .username("maria")
+                .firstname("Maria")
+                .lastname("Georgiou")
+                .password("9999")
+                .phoneNo("04694544334")
+                .subscriptionType(SubscriptionType.STANDARD)
+                .creationDate(new Date())
+                .subscriptionDate(new Date())
+                .build();
+
+        Profile profileA7P1 = Profile.builder()
+                .firstname("Maria")
+                .imageUrl(null)
+                .ageRestricted(false)
+                .account(account7)
+                .build();
+
+        Profile profileA7P2 = Profile.builder()
+                .firstname("KIDS")
+                .imageUrl(null)
+                .ageRestricted(true)
+                .account(account7)
+                .build();
+
+
+        CreditCard creditCardA7C1 = CreditCard.builder()
+                .cardNo("4514121755894494")
+                .cardCvc("444")
+                .cardName("Maria Georgiou")
+                .cardExpirationDate("02/2031")
+                .cardType(CardType.AMERICAN_EXPRESS)
+                .account(account7)
+                .build();
+
+
+        Address addressA7A1 = Address.builder()
+                .country("Greece")
+                .postalCode("15569")
+                .streetName("Sokratous")
+                .province("Halandri")
+                .streetNo("21")
+                .account(account7)
+                .build();
+
+
+        accountRepository.save(account7);
+        profileRepository.save(profileA7P1);
+        profileRepository.save(profileA7P2);
+        creditCardRepository.save(creditCardA7C1);
+        addressRepository.save(addressA7A1);
+        //endregion
+
+        //region Account 8
+        //-----------------Account 8----------------//
+        Account account8 = Account.builder()
+                .email("sotos@hotmail.com")
+                .username("sotos")
+                .firstname("Sotiris")
+                .lastname("Bikos")
+                .password("171717")
+                .phoneNo("04694894334")
+                .subscriptionType(SubscriptionType.PREMIUM)
+                .creationDate(new Date())
+                .subscriptionDate(new Date())
+                .build();
+
+        Profile profileA8P1 = Profile.builder()
+                .firstname("Sotos")
+                .imageUrl(null)
+                .ageRestricted(false)
+                .account(account8)
+                .build();
+
+        Profile profileA8P2 = Profile.builder()
+                .firstname("KIDS")
+                .imageUrl(null)
+                .ageRestricted(true)
+                .account(account8)
+                .build();
+
+
+        CreditCard creditCardA8C1 = CreditCard.builder()
+                .cardNo("4514121905894494")
+                .cardCvc("111")
+                .cardName("Sotos Bikos")
+                .cardExpirationDate("01/2080")
+                .cardType(CardType.VISA)
+                .account(account8)
+                .build();
+
+
+        Address addressA8A1 = Address.builder()
+                .country("Greece")
+                .postalCode("15569")
+                .streetName("Menalou")
+                .province("Vrilissia")
+                .streetNo("67")
+                .account(account8)
+                .build();
+
+
+        accountRepository.save(account8);
+        profileRepository.save(profileA8P1);
+        profileRepository.save(profileA8P2);
+        creditCardRepository.save(creditCardA8C1);
+        addressRepository.save(addressA8A1);
+        //endregion
+
+        //region Account 9
+        //-----------------Account 9----------------//
+        Account account9 = Account.builder()
+                .email("georgeTakis93@hotmail.com")
+                .username("george")
+                .firstname("George")
+                .lastname("Takis")
+                .password("888888")
+                .phoneNo("08994894334")
+                .subscriptionType(SubscriptionType.PREMIUM)
+                .creationDate(new Date())
+                .subscriptionDate(new Date())
+                .build();
+
+        Profile profileA9P1 = Profile.builder()
+                .firstname("George")
+                .imageUrl(null)
+                .ageRestricted(false)
+                .account(account9)
+                .build();
+
+        Profile profileA9P2 = Profile.builder()
+                .firstname("KIDS")
+                .imageUrl(null)
+                .ageRestricted(true)
+                .account(account9)
+                .build();
+
+
+        CreditCard creditCardA9C1 = CreditCard.builder()
+                .cardNo("4517621905894494")
+                .cardCvc("333")
+                .cardName("George Takis")
+                .cardExpirationDate("06/2057")
+                .cardType(CardType.VISA)
+                .account(account9)
+                .build();
+
+
+        Address addressA9A1 = Address.builder()
+                .country("Greece")
+                .postalCode("15580")
+                .streetName("Leof. Spaton")
+                .province("Spata")
+                .streetNo("7")
+                .account(account9)
+                .build();
+
+
+        accountRepository.save(account9);
+        profileRepository.save(profileA9P1);
+        profileRepository.save(profileA9P2);
+        creditCardRepository.save(creditCardA9C1);
+        addressRepository.save(addressA9A1);
+        //endregion
+
+        //region Account 10
+        //-----------------Account 10----------------//
+        Account account10 = Account.builder()
+                .email("georgeBilias95@hotmail.com")
+                .username("george")
+                .firstname("George")
+                .lastname("Bilias")
+                .password("333mypass")
+                .phoneNo("08994894334")
+                .subscriptionType(SubscriptionType.PREMIUM)
+                .creationDate(new Date())
+                .subscriptionDate(new Date())
+                .build();
+
+        Profile profileA10P1 = Profile.builder()
+                .firstname("George")
+                .imageUrl(null)
+                .ageRestricted(false)
+                .account(account10)
+                .build();
+
+        Profile profileA10P2 = Profile.builder()
+                .firstname("KIDS")
+                .imageUrl(null)
+                .ageRestricted(true)
+                .account(account10)
+                .build();
+
+
+        CreditCard creditCardA10C1 = CreditCard.builder()
+                .cardNo("4517781905894494")
+                .cardCvc("123")
+                .cardName("George Bilias")
+                .cardExpirationDate("08/2044")
+                .cardType(CardType.PAYPAL)
+                .account(account10)
+                .build();
+
+
+        Address addressA10A1 = Address.builder()
+                .country("Greece")
+                .postalCode("15564")
+                .streetName("Gravias")
+                .province("Marousi")
+                .streetNo("97")
+                .account(account10)
+                .build();
+
+
+        accountRepository.save(account10);
+        profileRepository.save(profileA10P1);
+        profileRepository.save(profileA10P2);
+        creditCardRepository.save(creditCardA10C1);
+        addressRepository.save(addressA10A1);
         //endregion
 
 
@@ -3971,9 +4261,6 @@ public class ContentCreator implements CommandLineRunner {
         //endregion
 
 
-
-
-
         //region Content 32
         //-----------------Content 32----------------//
 
@@ -5336,6 +5623,954 @@ public class ContentCreator implements CommandLineRunner {
         actorRepository.save(actorC41A2);
         //endregion
 
+
+
+        Content content42 = Content.builder()
+                .title("Pulp Fiction")
+                .description("The lives of two mob hitmen, a boxer, a gangster and his wife, and a pair of diner bandits intertwine in four tales of violence and redemption")
+                .spokenLanguage("English")
+                .releaseDate("14 Oct 1994")
+                .imageUrl(null)
+                .trailerUrl(null)
+                .isAgeRestricted(false)
+                .contentType(ContentType.MOVIE)
+                .runtime(129)
+                .build();
+
+        Genre genreC42G1 = Genre.builder()
+                .name("Comedy")
+                .content(content42)
+                .build();
+
+        Genre genreC42G2 = Genre.builder()
+                .name("Drama")
+                .content(content42)
+                .build();
+
+        Actor actorC42A1 = Actor.builder()
+                .fullname("Uma Thurman")
+                .imageUrl(null)
+                .content(content42)
+                .build();
+
+        Actor actorC42A2 = Actor.builder()
+                .fullname("John Travolta")
+                .imageUrl(null)
+                .content(content42)
+                .build();
+
+        Actor actorC42A3 = Actor.builder()
+                .fullname("Samuel L. Jackson")
+                .imageUrl(null)
+                .content(content42)
+                .build();
+
+        Movie movie42 = Movie.builder()
+                .content(content42)
+                .build();
+
+
+        Writer writerM42W1 = Writer.builder()
+                .fullname("Quentin Tarantino")
+                .imageUrl(null)
+                .movie(movie42)
+                .build();
+
+        Director director422D1 = Director.builder()
+                .fullname("Quentin Tarantino")
+                .imageUrl(null)
+                .movie(movie42)
+                .build();
+
+        movieRepository.save(movie42);
+        genreRepository.save(genreC42G1);
+        genreRepository.save(genreC42G2);
+        actorRepository.save(actorC42A1);
+        actorRepository.save(actorC42A2);
+        actorRepository.save(actorC42A3);
+
+        writerRepository.save(writerM42W1);
+
+        directorRepository.save(director422D1);
+
+        //endregion
+
+
+        Content content43 = Content.builder()
+                .title("A Clockwork Orange")
+                .description("A Clockwork Orange is a 1971 dystopian crime film adapted, produced, and directed by Stanley Kubrick, based on Anthony Burgess's 1962 novel of the same name.")
+                                .spokenLanguage("English")
+                                .releaseDate("19 Dec 1971")
+                                .imageUrl(null)
+                                .trailerUrl(null)
+                                .isAgeRestricted(true)
+                                .contentType(ContentType.MOVIE)
+                                .runtime(118)
+                                .build();
+
+        Genre genreC43G1 = Genre.builder()
+                .name("Crime")
+                .content(content43)
+                .build();
+
+        Actor actorC43A1 = Actor.builder()
+                .fullname("Malcolm McDowell")
+                .imageUrl(null)
+                .content(content43)
+                .build();
+
+        Actor actorC43A2 = Actor.builder()
+                .fullname("Patrick Magee")
+                .imageUrl(null)
+                .content(content43)
+                .build();
+
+        Actor actorC43A3 = Actor.builder()
+                .fullname("Adrienne Corri")
+                .imageUrl(null)
+                .content(content43)
+                .build();
+
+        Movie movie43 = Movie.builder()
+                .content(content43)
+                .build();
+
+        Writer writerM43W1 = Writer.builder()
+                .fullname("Stanley Kubrick")
+                .imageUrl(null)
+                .movie(movie43)
+                .build();
+
+        Director directorM43D1 = Director.builder()
+                .fullname("Stanley Kubrick")
+                .imageUrl(null)
+                .movie(movie43)
+                .build();
+
+        movieRepository.save(movie43);
+        genreRepository.save(genreC43G1);
+
+        actorRepository.save(actorC43A1);
+        actorRepository.save(actorC43A2);
+        actorRepository.save(actorC43A3);
+
+        writerRepository.save(writerM43W1);
+
+        directorRepository.save(directorM43D1);
+
+
+        //endregion
+
+        Content content44 = Content.builder()
+                .title("Cast Away")
+                .description("A FedEx executive undergoes a physical and emotional transformation after crash landing on a deserted island")
+                .spokenLanguage("English")
+                .releaseDate("22 Dec 2000")
+                .imageUrl(null)
+                .trailerUrl(null)
+                .isAgeRestricted(false)
+                .contentType(ContentType.MOVIE)
+                .runtime(106)
+                .build();
+
+        Genre genreC44G1 = Genre.builder()
+                .name("Drama")
+                .content(content44)
+                .build();
+
+        Genre genreC44G2 = Genre.builder()
+                .name("Mystery")
+                .content(content44)
+                .build();
+
+        Actor actorC44A1 = Actor.builder()
+                .fullname("Tom Hanks")
+                .imageUrl(null)
+                .content(content44)
+                .build();
+
+        Actor actorC44A2 = Actor.builder()
+                .fullname("Helen Hunt")
+                .imageUrl(null)
+                .content(content44)
+                .build();
+
+        Actor actorC44A3 = Actor.builder()
+                .fullname("Nick Searcy")
+                .imageUrl(null)
+                .content(content44)
+                .build();
+
+        Movie movie44 = Movie.builder()
+                .content(content44)
+                .build();
+
+        Writer writerM44W1 = Writer.builder()
+                .fullname("William Broyles Jr")
+                .imageUrl(null)
+                .movie(movie44)
+                .build();
+
+        Director directorM44D1 = Director.builder()
+                .fullname("Robert Zemeckis")
+                .imageUrl(null)
+                .movie(movie44)
+                .build();
+
+        movieRepository.save(movie44);
+        genreRepository.save(genreC44G1);
+        genreRepository.save(genreC44G2);
+
+        actorRepository.save(actorC44A1);
+        actorRepository.save(actorC44A2);
+        actorRepository.save(actorC44A3);
+
+        writerRepository.save(writerM44W1);
+
+        directorRepository.save(directorM44D1);
+
+        //endregion
+
+        Content content45 = Content.builder()
+                .title("Forrest Gump")
+                .description("The presidencies of Kennedy and Johnson, the Vietnam War, the Watergate scandal and other historical events unfold from the perspective of an Alabama man with an IQ of 75, whose only desire is to be reunited with his childhood sweetheart.")
+                                .spokenLanguage("English")
+                                .releaseDate("23 Jun 1994")
+                                .imageUrl(null)
+                                .trailerUrl(null)
+                                .isAgeRestricted(false)
+                                .contentType(ContentType.MOVIE)
+                                .runtime(117)
+                                .build();
+
+        Genre genreC45G1 = Genre.builder()
+                .name("Comedy")
+                .content(content45)
+                .build();
+
+        Genre genreC45G2 = Genre.builder()
+                .name("Drama")
+                .content(content45)
+                .build();
+
+        Actor actorC45A1 = Actor.builder()
+                .fullname("Tom Hanks")
+                .imageUrl(null)
+                .content(content45)
+                .build();
+
+        Actor actorC45A2 = Actor.builder()
+                .fullname("Robin Wright")
+                .imageUrl(null)
+                .content(content45)
+                .build();
+
+        Actor actorC45A3 = Actor.builder()
+                .fullname("Gary Sinise")
+                .imageUrl(null)
+                .content(content45)
+                .build();
+
+        Movie movie45 = Movie.builder()
+                .content(content45)
+                .build();
+
+        Writer writerM45W1 = Writer.builder()
+                .fullname("Eric Roth")
+                .imageUrl(null)
+                .movie(movie45)
+                .build();
+
+
+        Director directorM45D1 = Director.builder()
+                .fullname("Robert Zemeckis")
+                .imageUrl(null)
+                .movie(movie45)
+                .build();
+
+        movieRepository.save(movie45);
+        genreRepository.save(genreC45G1);
+        genreRepository.save(genreC45G2);
+
+
+        actorRepository.save(actorC45A1);
+        actorRepository.save(actorC45A2);
+        actorRepository.save(actorC45A3);
+
+        writerRepository.save(writerM45W1);
+
+        directorRepository.save(directorM45D1);
+
+        //endregion
+
+
+        Content content46 = Content.builder()
+                .title("Die Welle")
+                .description("A high school teacher's experiment to demonstrate to his students what life is like under a dictatorship spins horribly out of control when he forms a social unit with a life of its own" )
+                .spokenLanguage("German")
+                .releaseDate("18 January 2008")
+                .imageUrl(null)
+                .trailerUrl(null)
+                .isAgeRestricted(false)
+                .contentType(ContentType.MOVIE)
+                .runtime(98)
+                .build();
+
+        Genre genreC46G1 = Genre.builder()
+                .name("Thriller")
+                .content(content46)
+                .build();
+
+        Genre genreC46G2 = Genre.builder()
+                .name("Drama")
+                .content(content46)
+                .build();
+
+        Actor actorC46A1 = Actor.builder()
+                .fullname("Jürgen Vogel")
+                .imageUrl(null)
+                .content(content46)
+                .build();
+
+        Actor actorC46A2 = Actor.builder()
+                .fullname("Frederick Lau")
+                .imageUrl(null)
+                .content(content46)
+                .build();
+
+        Actor actorC46A3 = Actor.builder()
+                .fullname("Max Riemelt")
+                .imageUrl(null)
+                .content(content46)
+                .build();
+
+        Movie movie46 = Movie.builder()
+                .content(content46)
+                .build();
+
+
+        Writer writerM46W1 = Writer.builder()
+                .fullname("Ron Jones")
+                .imageUrl(null)
+                .movie(movie46)
+                .build();
+
+        Director directorM46D1 = Director.builder()
+                .fullname("Dennis Gansel")
+                .imageUrl(null)
+                .movie(movie46)
+                .build();
+
+        movieRepository.save(movie46);
+        genreRepository.save(genreC46G1);
+        genreRepository.save(genreC46G2);
+
+        actorRepository.save(actorC46A1);
+        actorRepository.save(actorC46A2);
+        actorRepository.save(actorC46A3);
+
+        writerRepository.save(writerM46W1);
+
+        directorRepository.save(directorM46D1);
+
+        //endregion
+
+
+
+        Content content47 = Content.builder()
+                .title("Breaking Bad")
+                .description("A chemistry teacher diagnosed with inoperable lung cancer turns to manufacturing and selling methamphetamine with a former student in order to secure his family's future.")
+                .spokenLanguage("English")
+                .releaseDate(" 20 Jan 2008")
+                .imageUrl(null)
+                .trailerUrl(null)
+                .isAgeRestricted(false)
+                .contentType(ContentType.TV_SERIES)
+                .runtime(35)
+                .build();
+
+        Genre genreC47G1 = Genre.builder()
+                .name("Crime")
+                .content(content47)
+                .build();
+
+        Genre genreC47G2 = Genre.builder()
+                .name("Drama")
+                .content(content47)
+                .build();
+
+        Actor actorC47A1 = Actor.builder()
+                .fullname("Bryan Cranston")
+                .imageUrl(null)
+                .content(content47)
+                .build();
+
+        Actor actorC47A2 = Actor.builder()
+                .fullname("Anna Gunn")
+                .imageUrl(null)
+                .content(content47)
+                .build();
+
+        Actor actorC47A3 = Actor.builder()
+                .fullname("Aaron Paul")
+                .imageUrl(null)
+                .content(content47)
+                .build();
+
+        Actor actorC47A4 = Actor.builder()
+                .fullname("Bob Odenkirk")
+                .imageUrl(null)
+                .content(content47)
+                .build();
+
+        Actor actorC47A5 = Actor.builder()
+                .fullname("Giancarlo Esposito")
+                .imageUrl(null)
+                .content(content47)
+                .build();
+
+        TVSeries tvSeries47 = TVSeries.builder()
+                .tvSeriesStatusType(TVSeriesStatusType.COMPLETED)
+                .content(content47)
+                .build();
+
+        Creator creatorT47C1 = Creator.builder()
+                .fullname("High Bridge Entertainment")
+                .imageUrl(null)
+                .tvSeries(tvSeries47)
+                .build();
+
+
+        Season seasonT47S1 = Season.builder()
+                .seasonNo(1)
+                .tvSeries(tvSeries47)
+                .build();
+
+        Episode episodeT47S1E1 = Episode.builder()
+                .episodeNo(1)
+                .title("Pilot")
+                .description("Diagnosed with terminal lung cancer, chemistry teacher Walter White teams up with former student Jesse Pinkman to cook and sell crystal meth.")
+                .releaseDate(null)
+                .imageUrl(null)
+                .season(seasonT47S1)
+                .build();
+
+        Episode episodeT47S1E2 = Episode.builder()
+                .episodeNo(2)
+                .title("Cat's in the Bag...")
+                .description("After their first drug deal goes terribly wrong, Walt and Jesse are forced to deal with a corpse and a prisoner. Meanwhile, Skyler grows suspicious of Walt's activities.44")
+                .releaseDate(null)
+                .imageUrl(null)
+                .season(seasonT47S1)
+                .build();
+
+        Episode episodeT47S1E3 = Episode.builder()
+                .episodeNo(3)
+                .title("...And the Bag's in the River")
+                .description("Walt and Jesse clean up after the bathtub incident before Walt decides what course of action to take with their prisoner Krazy-8.")
+                .releaseDate(null)
+                .imageUrl(null)
+                .season(seasonT47S1)
+                .build();
+
+        Episode episodeT47S1E4 = Episode.builder()
+                .episodeNo(4)
+                .title("Cancer Man")
+                .description("Walt tells the rest of his family about his cancer. Jesse tries to make amends with his own parents.")
+                .releaseDate(null)
+                .imageUrl(null)
+                .season(seasonT47S1)
+                .build();
+
+        tVSeriesRepository.save(tvSeries47);
+
+        creatorRepository.save(creatorT47C1);
+
+        seasonRepository.save(seasonT47S1);
+
+        episodeRepository.save(episodeT47S1E1);
+        episodeRepository.save(episodeT47S1E2);
+        episodeRepository.save(episodeT47S1E3);
+        episodeRepository.save(episodeT47S1E4);
+
+        genreRepository.save(genreC47G1);
+        genreRepository.save(genreC47G2);
+
+        actorRepository.save(actorC47A1);
+        actorRepository.save(actorC47A2);
+        actorRepository.save(actorC47A3);
+        actorRepository.save(actorC47A4);
+        actorRepository.save(actorC47A5);
+
+        //endregion
+
+        Content content48 = Content.builder()
+                .title("Better Call Saul")
+                .description("The trials and tribulations of criminal lawyer Jimmy McGill in the years leading up to his fateful run-in with Walter White and Jesse Pinkman.")
+                .spokenLanguage("English")
+                .releaseDate(" 8 February 2015")
+                .imageUrl(null)
+                .trailerUrl(null)
+                .isAgeRestricted(false)
+                .contentType(ContentType.TV_SERIES)
+                .runtime(43)
+                .build();
+
+        Genre genreC48G1 = Genre.builder()
+                .name("Crime")
+                .content(content48)
+                .build();
+
+        Genre genreC48G2 = Genre.builder()
+                .name("Drama")
+                .content(content48)
+                .build();
+
+        Actor actorC48A1 = Actor.builder()
+                .fullname("Bob Odenkirk")
+                .imageUrl(null)
+                .content(content48)
+                .build();
+
+        Actor actorC48A2 = Actor.builder()
+                .fullname("Jonathan Banks")
+                .imageUrl(null)
+                .content(content47)
+                .build();
+
+        Actor actorC48A3 = Actor.builder()
+                .fullname("Rhea Seehorn")
+                .imageUrl(null)
+                .content(content47)
+                .build();
+
+
+
+        TVSeries tvSeries48 = TVSeries.builder()
+                .tvSeriesStatusType(TVSeriesStatusType.COMPLETED)
+                .content(content48)
+                .build();
+
+        Creator creatorT48C1 = Creator.builder()
+                .fullname("High Bridge Productions")
+                .imageUrl(null)
+                .tvSeries(tvSeries48)
+                .build();
+
+
+        Season seasonT48S1 = Season.builder()
+                .seasonNo(1)
+                .tvSeries(tvSeries48)
+                .build();
+
+        Episode episodeT48S1E1 = Episode.builder()
+                .episodeNo(1)
+                .title("Uno")
+                .description("Struggling public defender Jimmy McGill constructs an elaborate yet questionable plan for winning back a pair of wealthy potential clients.")
+                .releaseDate(null)
+                .imageUrl(null)
+                .season(seasonT48S1)
+                .build();
+
+        Episode episodeT48S1E2 = Episode.builder()
+                .episodeNo(2)
+                .title("Mijo")
+                .description("Jimmy's latest scam has gone horribly wrong and he's face-to-face with violent criminals and being forced to talk his way out of a life-threatening situation.")
+                .releaseDate(null)
+                .imageUrl(null)
+                .season(seasonT48S1)
+                .build();
+
+        Episode episodeT48S1E3 = Episode.builder()
+                .episodeNo(3)
+                .title("Nacho")
+                .description("Jimmy must prove that Nacho is innocent when he is wrongly suspected of kidnapping.")
+                .releaseDate(null)
+                .imageUrl(null)
+                .season(seasonT48S1)
+                .build();
+
+        Episode episodeT48S1E4 = Episode.builder()
+                .episodeNo(4)
+                .title("Hero")
+                .description("Jimmy makes a bold move against Hamlin in an effort to attract potential clients.")
+                .releaseDate(null)
+                .imageUrl(null)
+                .season(seasonT48S1)
+                .build();
+
+        Episode episodeT48S1E5 = Episode.builder()
+                .episodeNo(5)
+                .title("Alpine Shepherd Boy")
+                .description("After a strange encounter with the police, Chuck ends up in the hospital. Jimmy meets up with a series of unruly clients.")
+                .releaseDate(null)
+                .imageUrl(null)
+                .season(seasonT48S1)
+                .build();
+
+        Episode episodeT48S1E6 = Episode.builder()
+                .episodeNo(6)
+                .title("Five-O")
+                .description("Mike's days as a police officer in Philadelphia catch up to him when he's questioned about a tragic event from his past.")
+                .releaseDate(null)
+                .imageUrl(null)
+                .season(seasonT48S1)
+                .build();
+
+        tVSeriesRepository.save(tvSeries48);
+
+        creatorRepository.save(creatorT48C1);
+
+        seasonRepository.save(seasonT48S1);
+
+        episodeRepository.save(episodeT48S1E1);
+        episodeRepository.save(episodeT48S1E2);
+        episodeRepository.save(episodeT48S1E3);
+        episodeRepository.save(episodeT48S1E4);
+        episodeRepository.save(episodeT48S1E5);
+        episodeRepository.save(episodeT48S1E6);
+
+        genreRepository.save(genreC48G1);
+        genreRepository.save(genreC48G2);
+
+        actorRepository.save(actorC48A1);
+        actorRepository.save(actorC48A2);
+        actorRepository.save(actorC48A3);
+
+
+        //endregion
+
+        Content content49 = Content.builder()
+                .title("Sons Of Anarchy")
+                .description("A biker struggles to balance being a father and being involved in an outlaw motorcycle club.")
+                .spokenLanguage("English")
+                .releaseDate("3 September 2008")
+                .imageUrl(null)
+                .trailerUrl(null)
+                .isAgeRestricted(false)
+                .contentType(ContentType.TV_SERIES)
+                .runtime(45)
+                .build();
+
+        Genre genreC49G1 = Genre.builder()
+                .name("Crime")
+                .content(content49)
+                .build();
+
+        Genre genreC49G2 = Genre.builder()
+                .name("Drama")
+                .content(content49)
+                .build();
+
+        Genre genreC49G3 = Genre.builder()
+                .name("Thriller")
+                .content(content49)
+                .build();
+
+        Actor actorC49A1 = Actor.builder()
+                .fullname("Charlie Hunnam")
+                .imageUrl(null)
+                .content(content49)
+                .build();
+
+        Actor actorC49A2 = Actor.builder()
+                .fullname("Katey Sagal")
+                .imageUrl(null)
+                .content(content49)
+                .build();
+
+        Actor actorC49A3 = Actor.builder()
+                .fullname("Mark Boone Junior")
+                .imageUrl(null)
+                .content(content49)
+                .build();
+
+        Actor actorC49A4 = Actor.builder()
+                .fullname("Kim Coates")
+                .imageUrl(null)
+                .content(content49)
+                .build();
+
+        TVSeries tvSeries49 = TVSeries.builder()
+                .tvSeriesStatusType(TVSeriesStatusType.COMPLETED)
+                .content(content49)
+                .build();
+
+        Creator creatorT49C1 = Creator.builder()
+                .fullname("Fox 21")
+                .imageUrl(null)
+                .tvSeries(tvSeries49)
+                .build();
+
+
+        Season seasonT49S1 = Season.builder()
+                .seasonNo(1)
+                .tvSeries(tvSeries49)
+                .build();
+
+        Episode episodeT49S1E1 = Episode.builder()
+                .episodeNo(1)
+                .title("Pilot")
+                .description("A rival gang steals the Sons' stockpile of assault rifles, while Jax's ex-wife's drug overdose leads to an emergency c-section and life-threatening surgery for their baby.")
+                .releaseDate(null)
+                .imageUrl(null)
+                .season(seasonT49S1)
+                .build();
+
+        Episode episodeT49S1E2 = Episode.builder()
+                .episodeNo(2)
+                .title("Seeds")
+                .description("The club deals with the aftermath of their firearms warehouse attack as a new Deputy Chief of Police poses a new threat to SAMCRO.")
+                .releaseDate(null)
+                .imageUrl(null)
+                .season(seasonT49S1)
+                .build();
+
+        Episode episodeT49S1E3 = Episode.builder()
+                .episodeNo(3)
+                .title("Fun Town")
+                .description("When a daughter of a Charming family is assaulted during a carnival, SAMCRO seeks justice and races against authorities to capture the assailant.")
+                .releaseDate(null)
+                .imageUrl(null)
+                .season(seasonT49S1)
+                .build();
+
+        tVSeriesRepository.save(tvSeries49);
+
+        creatorRepository.save(creatorT49C1);
+
+        seasonRepository.save(seasonT49S1);
+
+        episodeRepository.save(episodeT49S1E1);
+        episodeRepository.save(episodeT49S1E2);
+        episodeRepository.save(episodeT49S1E3);
+
+        genreRepository.save(genreC49G1);
+        genreRepository.save(genreC49G2);
+        genreRepository.save(genreC49G3);
+
+        actorRepository.save(actorC49A1);
+        actorRepository.save(actorC49A2);
+        actorRepository.save(actorC49A3);
+        actorRepository.save(actorC49A4);
+
+        //endregion
+
+        Content content50 = Content.builder()
+                .title("Vikings: Valhalla")
+                .description("Follow-up series to 'Vikings' set 100 years afterward and centering on the adventures of Leif Erikson, Freydis, Harald Hardrada and the Norman King William the Conqueror.")
+                .spokenLanguage("English")
+                .releaseDate("25 February 2022")
+                .imageUrl(null)
+                .trailerUrl(null)
+                .isAgeRestricted(false)
+                .contentType(ContentType.TV_SERIES)
+                .runtime(30)
+                .build();
+
+        Genre genreC50G1 = Genre.builder()
+                .name("Action")
+                .content(content50)
+                .build();
+
+        Genre genreC50G2 = Genre.builder()
+                .name("Adventure")
+                .content(content50)
+                .build();
+
+        Genre genreC50G3 = Genre.builder()
+                .name("Drama")
+                .content(content50)
+                .build();
+
+        Actor actorC50A1 = Actor.builder()
+                .fullname("Sam Corlett")
+                .imageUrl(null)
+                .content(content50)
+                .build();
+
+
+        TVSeries tvSeries50 = TVSeries.builder()
+                .tvSeriesStatusType(TVSeriesStatusType.COMPLETED)
+                .content(content50)
+                .build();
+
+        Creator creatorT50C1 = Creator.builder()
+                .fullname("Netflix Streaming Services")
+                .imageUrl(null)
+                .tvSeries(tvSeries50)
+                .build();
+
+
+        Season seasonT50S1 = Season.builder()
+                .seasonNo(1)
+                .tvSeries(tvSeries50)
+                .build();
+
+        Episode episodeT50S1E1 = Episode.builder()
+                .episodeNo(1)
+                .title("The Web of Fate")
+                .description("Olaf lands in a terrible position after Forkbeard invades Kattegat. In hiding, Freydis and Harald must decide whether to fight for the throne or flee.")
+                .releaseDate(null)
+                .imageUrl(null)
+                .season(seasonT50S1)
+                .build();
+
+        Episode episodeT50S1E2 = Episode.builder()
+                .episodeNo(2)
+                .title("Towers of Faith")
+                .description("Freydis founds a new home. Harald formulates a new plan to take back Norway, but Leif's not on board. A new threat appears in London.")
+                .releaseDate(null)
+                .imageUrl(null)
+                .season(seasonT50S1)
+                .build();
+
+        Episode episodeT50S1E3 = Episode.builder()
+                .episodeNo(3)
+                .title("Pieces of the Gods")
+                .description("While preparing for a journey to Constantinople, Harald assembles an unlikely crew, each with their own motives. Emma suspects Godwin of treachery.")
+                .releaseDate(null)
+                .imageUrl(null)
+                .season(seasonT50S1)
+                .build();
+
+        Episode episodeT50S1E4 = Episode.builder()
+                .episodeNo(4)
+                .title("The Thaw")
+                .description("The travellers makes a deadly miscalculation on the way to Constantinople. Olaf sets off after Harald, and Emma's paranoia pushes her over the edge.")
+                .releaseDate(null)
+                .imageUrl(null)
+                .season(seasonT50S1)
+                .build();
+
+        tVSeriesRepository.save(tvSeries50);
+
+        creatorRepository.save(creatorT50C1);
+
+        seasonRepository.save(seasonT50S1);
+
+        episodeRepository.save(episodeT50S1E1);
+        episodeRepository.save(episodeT50S1E2);
+        episodeRepository.save(episodeT50S1E3);
+        episodeRepository.save(episodeT50S1E4);
+
+        genreRepository.save(genreC50G1);
+        genreRepository.save(genreC50G2);
+        genreRepository.save(genreC50G3);
+
+        actorRepository.save(actorC50A1);
+
+        //endregion
+
+        Content content51 = Content.builder()
+                .title("Top Boy")
+                .description("Two London drug dealers ply their lucrative trade at a public housing estate in East London.")
+                .spokenLanguage("English")
+                .releaseDate("31 October 2011")
+                .imageUrl(null)
+                .trailerUrl(null)
+                .isAgeRestricted(false)
+                .contentType(ContentType.TV_SERIES)
+                .runtime(18)
+                .build();
+
+        Genre genreC51G1 = Genre.builder()
+                .name("Crime")
+                .content(content51)
+                .build();
+
+        Genre genreC51G2 = Genre.builder()
+                .name("Drama")
+                .content(content51)
+                .build();
+
+        Actor actorC51A1 = Actor.builder()
+                .fullname("Ashley Walters")
+                .imageUrl(null)
+                .content(content51)
+                .build();
+
+        Actor actorC51A2 = Actor.builder()
+                .fullname("Kane Robinson")
+                .imageUrl(null)
+                .content(content51)
+                .build();
+
+
+        TVSeries tvSeries51 = TVSeries.builder()
+                .tvSeriesStatusType(TVSeriesStatusType.COMPLETED)
+                .content(content51)
+                .build();
+
+        Creator creatorT51C1 = Creator.builder()
+                .fullname("DreamCrew")
+                .imageUrl(null)
+                .tvSeries(tvSeries51)
+                .build();
+
+
+        Season seasonT51S1 = Season.builder()
+                .seasonNo(1)
+                .tvSeries(tvSeries51)
+                .build();
+
+        Episode episodeT51S1E1 = Episode.builder()
+                .episodeNo(1)
+                .title("Chapter 1")
+                .description("Young people living on the edge and, for the most part, living out of sight in East London today based around inner-city drug and gang culture.")
+                .releaseDate(null)
+                .imageUrl(null)
+                .season(seasonT51S1)
+                .build();
+
+        Episode episodeT51S1E2 = Episode.builder()
+                .episodeNo(2)
+                .title("Chapter 2")
+                .description("Raikes gives Sully and Dushane two weeks to retrieve the stash stolen by rival Kamale and they find a mysterious present of guns to help them.")
+                .releaseDate(null)
+                .imageUrl(null)
+                .season(seasonT51S1)
+                .build();
+
+        Episode episodeT51S1E3 = Episode.builder()
+                .episodeNo(3)
+                .title("Chapter 3")
+                .description("After Heather has shown him the flat she hopes to buy with her drugs money Ra'Nell welcomes his mother home. Sully visits his daughter but Chris bars Dushane from his house as a liability. ")
+                .releaseDate(null)
+                .imageUrl(null)
+                .season(seasonT51S1)
+                .build();
+
+
+        Episode episodeT51S1E4 = Episode.builder()
+                .episodeNo(4)
+                .title("Chapter 4")
+                .description("Dushane is shocked that Sully still has the gun which killed three people but he refuses to go along with Raikes' plan to sell him out as a liability.")
+                .releaseDate(null)
+                .imageUrl(null)
+                .season(seasonT51S1)
+                .build();
+
+        tVSeriesRepository.save(tvSeries51);
+
+        creatorRepository.save(creatorT51C1);
+
+        seasonRepository.save(seasonT51S1);
+
+        episodeRepository.save(episodeT51S1E1);
+        episodeRepository.save(episodeT51S1E2);
+        episodeRepository.save(episodeT51S1E3);
+        episodeRepository.save(episodeT51S1E4);
+
+        genreRepository.save(genreC51G1);
+        genreRepository.save(genreC51G2);
+
+
+        actorRepository.save(actorC51A1);
+        actorRepository.save(actorC51A2);
+
+
+
         //region Content 99
         //-----------------Content 99----------------//
         Content content99 = Content.builder()
@@ -6043,6 +7278,129 @@ public class ContentCreator implements CommandLineRunner {
         actorRepository.save(actorC101A3);
 
         //endregion
+
+
+        //region Rating 1
+        //-----------------Rating 1----------------//
+        Rating rating1 = Rating.builder()
+                .rating(7.4f)
+                .profile(profileA1P1)
+                .content(content1)
+                .build();
+
+        ratingRepository.save(rating1);
+        //endregion
+
+        //region Rating 2
+        //-----------------Rating 2----------------//
+        Rating rating2 = Rating.builder()
+                .rating(6.6f)
+                .profile(profileA1P3)
+                .content(content1)
+                .build();
+
+        ratingRepository.save(rating2);
+        //endregion
+
+        //region Rating 3
+        //-----------------Rating 3----------------//
+        Rating rating3 = Rating.builder()
+                .rating(6.8f)
+                .profile(profileA1P1)
+                .content(content2)
+                .build();
+
+        ratingRepository.save(rating3);
+        //endregion
+
+        //region Rating 4
+        //-----------------Rating 4----------------//
+        Rating rating4 = Rating.builder()
+                .rating(6.5f)
+                .profile(profileA3P1)
+                .content(content2)
+                .build();
+
+        ratingRepository.save(rating4);
+        //endregion
+
+        //region Rating 5
+        //-----------------Rating 5----------------//
+        Rating rating5 = Rating.builder()
+                .rating(6.5f)
+                .profile(profileA1P1)
+                .content(content3)
+                .build();
+
+        ratingRepository.save(rating5);
+        //endregion
+
+        //region Rating 6
+        //-----------------Rating 6----------------//
+        Rating rating6 = Rating.builder()
+                .rating(7.2f)
+                .profile(profileA2P1)
+                .content(content3)
+                .build();
+
+        ratingRepository.save(rating6);
+        //endregion
+
+        //region Rating 7
+        //-----------------Rating 7----------------//
+        Rating rating7 = Rating.builder()
+                .rating(5.2f)
+                .profile(profileA3P1)
+                .content(content3)
+                .build();
+
+        ratingRepository.save(rating7);
+        //endregion
+
+        //region Rating 8
+        //-----------------Rating 8----------------//
+        Rating rating8 = Rating.builder()
+                .rating(7.0f)
+                .profile(profileA5P1)
+                .content(content4)
+                .build();
+
+        ratingRepository.save(rating8);
+        //endregion
+
+        //region Rating 9
+        //-----------------Rating 9----------------//
+        Rating rating9 = Rating.builder()
+                .rating(6.3f)
+                .profile(profileA2P1)
+                .content(content4)
+                .build();
+
+        ratingRepository.save(rating9);
+        //endregion
+
+        //region Rating 10
+        //-----------------Rating 10----------------//
+        Rating rating10 = Rating.builder()
+                .rating(8.8f)
+                .profile(profileA1P3)
+                .content(content6)
+                .build();
+
+        ratingRepository.save(rating10);
+        //endregion
+
+        //region Rating 11
+        //-----------------Rating 11----------------//
+        Rating rating11 = Rating.builder()
+                .rating(8.2f)
+                .profile(profileA6P2)
+                .content(content6)
+                .build();
+
+        ratingRepository.save(rating11);
+        //endregion
+
 
     }
 }

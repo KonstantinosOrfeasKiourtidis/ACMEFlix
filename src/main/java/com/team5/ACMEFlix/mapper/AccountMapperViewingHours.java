@@ -1,7 +1,6 @@
 package com.team5.ACMEFlix.mapper;
 
 import com.team5.ACMEFlix.domain.Account;
-import com.team5.ACMEFlix.transfer.resource.AccountResource2;
 import com.team5.ACMEFlix.transfer.resource.AccountResourceViewingHours;
 import org.mapstruct.Mapper;
 

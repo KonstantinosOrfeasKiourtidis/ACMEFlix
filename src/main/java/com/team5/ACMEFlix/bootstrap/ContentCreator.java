@@ -35,6 +35,9 @@ public class ContentCreator implements CommandLineRunner {
     private final SeasonRepository seasonRepository;
     private final CreatorRepository creatorRepository;
     private final RatingRepository ratingRepository;
+    private final ViewRepository viewRepository;
+    private final WatchListMovieRepository watchListMovieRepository;
+    private final WatchListEpisodeRepository watchListEpisodeRepository;
 
 
     @Override
@@ -2754,6 +2757,1145 @@ public class ContentCreator implements CommandLineRunner {
         actorRepository.save(actorC12A3);
 
         //endregion
+
+        //region Content 13
+        //-----------------Content 13----------------//
+        Content content13 = Content.builder()
+                .title("Arcane")
+                .description("Set in utopian Piltover and the oppressed underground of Zaun, the story follows the origins of two iconic League champions-and the power that will tear them apart.")
+                .spokenLanguage("English")
+                .releaseDate("6 November 2021")
+                .imageUrl("https://www.maxmag.gr/wp-content/uploads/2021/12/IMDb.jpg")
+                .trailerUrl("<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/watch?v=fXmAurh012s&ab_channel=Netflix\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" allowfullscreen></iframe>")
+                .isAgeRestricted(false)
+                .contentType(ContentType.TV_SERIES)
+                .runtime(40)
+                .build();
+
+        Genre genreC13G1 = Genre.builder()
+                .name("Animation")
+                .content(content13)
+                .build();
+
+        Genre genreC13G2 = Genre.builder()
+                .name("Action")
+                .content(content13)
+                .build();
+
+        Genre genreC13G3 = Genre.builder()
+                .name("Adventure")
+                .content(content13)
+                .build();
+
+        Actor actorC13A1 = Actor.builder()
+                .fullname("Hailee Steinfeld")
+                .imageUrl("https://upload.wikimedia.org/wikipedia/commons/a/a5/Cillian_Murphy_Press_Conference_The_Party_Berlinale_2017_02cr.jpg")
+                .content(content13)
+                .build();
+
+        Actor actorC13A2 = Actor.builder()
+                .fullname("Kevin Alejandro")
+                .imageUrl("https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Kevin_Alejandro_by_Gage_Skidmore.jpg/220px-Kevin_Alejandro_by_Gage_Skidmore.jpg")
+                .content(content13)
+                .build();
+
+        Actor actorC13A3 = Actor.builder()
+                .fullname("Jason Spisak")
+                .imageUrl("https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Jason_Spisak_2014.jpg/1024px-Jason_Spisak_2014.jpg")
+                .content(content13)
+                .build();
+
+        TVSeries tvSeries3 = TVSeries.builder()
+                .tvSeriesStatusType(TVSeriesStatusType.ONGOING)
+                .content(content13)
+                .build();
+
+        Creator creatorT3C1 = Creator.builder()
+                .fullname("Christian Linke")
+                .imageUrl("https://m.media-amazon.com/images/M/MV5BNmFkMGFmOTgtYjhjZC00ODAzLTk4NDYtNTA0NjkyYjMyNjMxXkEyXkFqcGdeQXVyOTc2OTczOTI@._V1_.jpg")
+                .tvSeries(tvSeries2)
+                .build();
+
+
+        Season seasonT3S1 = Season.builder()
+                .seasonNo(1)
+                .tvSeries(tvSeries3)
+                .build();
+
+        Episode episodeT3S1E1 = Episode.builder()
+                .episodeNo(1)
+                .title("Welcome to the Playground")
+                .description("Orphaned sisters Vi and Powder bring trouble to Zaun's underground streets in the wake of a heist in posh Piltover.")
+                .releaseDate("6 Nov. 2021")
+                .imageUrl(null)
+                .season(seasonT3S1)
+                .build();
+
+        Episode episodeT3S1E2 = Episode.builder()
+                .episodeNo(2)
+                .title("Some Mysteries Are Better Left Unsolved")
+                .description("Idealistic inventor Jayce attempts to harness magic through science --- despite his mentor's warning. Criminal kingpin Silco tests a powerful substance.")
+                .releaseDate("6 Nov. 2021")
+                .imageUrl(null)
+                .season(seasonT3S1)
+                .build();
+
+        Episode episodeT3S1E3 = Episode.builder()
+                .episodeNo(3)
+                .title("The Base Violence Necessary for Change")
+                .description("An epic showdown between old rivals results in a fateful moment for Zaun. Jayce and Viktor risk it all for their research.")
+                .releaseDate("6 Nov. 2021")
+                .imageUrl(null)
+                .season(seasonT3S1)
+                .build();
+
+        Episode episodeT3S1E4 = Episode.builder()
+                .episodeNo(4)
+                .title("Happy Progress Day!")
+                .description("With Piltover prospering from their tech, Jayce and Viktor weigh their next move. A familiar face re-emerges from Zaun to wreak havoc.")
+                .releaseDate("13 Nov. 2021")
+                .imageUrl(null)
+                .season(seasonT3S1)
+                .build();
+
+        Episode episodeT3S1E5 = Episode.builder()
+                .episodeNo(5)
+                .title("Everybody Wants to Be My Enemy")
+                .description("Rogue enforcer Caitlyn tours the undercity alongside Vi to track down Silco. Jayce puts a target on his back trying to root out Piltover corruption.")
+                .releaseDate("13 Nov. 2021")
+                .imageUrl(null)
+                .season(seasonT3S1)
+                .build();
+
+        Episode episodeT3S1E6 = Episode.builder()
+                .episodeNo(6)
+                .title("When These Walls Come Tumbling Down")
+                .description("An eager protege undermines his mentor on the council as a magical tech rapidly evolves. With authorities in pursuit, Jinx must face her past.")
+                .releaseDate("13 Nov. 2021")
+                .imageUrl(null)
+                .season(seasonT3S1)
+                .build();
+
+        Episode episodeT3S1E7 = Episode.builder()
+                .episodeNo(7)
+                .title("The Boy Savior")
+                .description("Caitlyn and Vi meet an ally in Zaun's streets and head into a frenzied battle with a common foe. Viktor makes a dire decision.")
+                .releaseDate("20 Nov. 2021")
+                .imageUrl(null)
+                .season(seasonT3S1)
+                .build();
+
+        Episode episodeT3S1E8 = Episode.builder()
+                .episodeNo(8)
+                .title("Oil and Water")
+                .description("Disowned heir Mel and her visiting mother trade combat tactics. Caitlyn and Vi forge an unlikely alliance. Jinx undergoes a startling change.")
+                .releaseDate("20 Nov. 2021")
+                .imageUrl(null)
+                .season(seasonT3S1)
+                .build();
+
+        Episode episodeT3S1E9 = Episode.builder()
+                .episodeNo(9)
+                .title("The Monster You Created")
+                .description("Perilously close to war, the leaders of Piltover and Zaun reach an ultimatum. But a fateful standoff changes both cities forever.")
+                .releaseDate("20 Nov. 2021")
+                .imageUrl(null)
+                .season(seasonT3S1)
+                .build();
+
+        tVSeriesRepository.save(tvSeries3);
+        creatorRepository.save(creatorT3C1);
+        seasonRepository.save(seasonT3S1);
+        episodeRepository.save(episodeT3S1E1);
+        episodeRepository.save(episodeT3S1E2);
+        episodeRepository.save(episodeT3S1E3);
+        episodeRepository.save(episodeT3S1E4);
+        episodeRepository.save(episodeT3S1E5);
+        episodeRepository.save(episodeT3S1E6);
+        episodeRepository.save(episodeT3S1E7);
+        episodeRepository.save(episodeT3S1E8);
+        episodeRepository.save(episodeT3S1E9);
+        genreRepository.save(genreC13G1);
+        genreRepository.save(genreC13G2);
+        genreRepository.save(genreC13G3);
+        actorRepository.save(actorC13A1);
+        actorRepository.save(actorC13A2);
+        actorRepository.save(actorC13A3);
+
+        //endregion
+
+        //region Content 14
+        //-----------------Content 14----------------//
+        Content content14 = Content.builder()
+                .title("1899")
+                .description("Multinational immigrants traveling from the old continent to the new encounter a nightmarish riddle aboard a second ship adrift on the open sea.")
+                .spokenLanguage("English")
+                .releaseDate("12 September 2022")
+                .imageUrl("https://upload.wikimedia.org/wikipedia/en/thumb/5/59/1899NetflixPosterEnglish.jpg/220px-1899NetflixPosterEnglish.jpg")
+                .trailerUrl("<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/watch?v=ulOOON_KYHs&ab_channel=Netflix\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" allowfullscreen></iframe>")
+                .isAgeRestricted(false)
+                .contentType(ContentType.TV_SERIES)
+                .runtime(40)
+                .build();
+
+        Genre genreC14G1 = Genre.builder()
+                .name("Drama")
+                .content(content14)
+                .build();
+
+        Genre genreC14G2 = Genre.builder()
+                .name("Mystery")
+                .content(content14)
+                .build();
+
+        Actor actorC14A1 = Actor.builder()
+                .fullname("Emily Beecham")
+                .imageUrl("https://en.wikipedia.org/wiki/Emily_Beecham#/media/File:Emily_Beecham_2017_2b.jpg")
+                .content(content14)
+                .build();
+
+        Actor actorC14A2 = Actor.builder()
+                .fullname("Aneurin Barnard")
+                .imageUrl(null)
+                .content(content14)
+                .build();
+
+        Actor actorC14A3 = Actor.builder()
+                .fullname("Andreas Pietschmann")
+                .imageUrl("https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/MJK30683_Andreas_Pietschmann_%28Berlinale_2017%29.jpg/800px-MJK30683_Andreas_Pietschmann_%28Berlinale_2017%29.jpg")
+                .content(content14)
+                .build();
+
+        TVSeries tvSeries4 = TVSeries.builder()
+                .tvSeriesStatusType(TVSeriesStatusType.COMPLETED)
+                .content(content14)
+                .build();
+
+        Creator creatorT4C1 = Creator.builder()
+                .fullname("Baran bo Odar")
+                .imageUrl("https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/AV0A2925_Jantje_Friese_und_Baran_bo_Odar_%28Dark%29_%28cropped%292.jpg/1024px-AV0A2925_Jantje_Friese_und_Baran_bo_Odar_%28Dark%29_%28cropped%292.jpg")
+                .tvSeries(tvSeries4)
+                .build();
+
+        Creator creatorT4C2 = Creator.builder()
+                .fullname("Jantje Friese")
+                .imageUrl("https://upload.wikimedia.org/wikipedia/commons/9/95/Grimmepreis_2018_027_%28cropped%29_-_Jantje_Friese.jpg")
+                .tvSeries(tvSeries4)
+                .build();
+
+        Season seasonT4S1 = Season.builder()
+                .seasonNo(1)
+                .tvSeries(tvSeries4)
+                .build();
+
+        Episode episodeT4S1E1 = Episode.builder()
+                .episodeNo(1)
+                .title("The Ship")
+                .description("Passengers on an immigrant ship traveling to the new continent get caught in a mysterious riddle when they find a second vessel adrift on the open sea.")
+                .releaseDate("17 Nov. 2022")
+                .imageUrl(null)
+                .season(seasonT4S1)
+                .build();
+
+        Episode episodeT4S1E2 = Episode.builder()
+                .episodeNo(2)
+                .title("The Boy")
+                .description("The captain experiences inexplicable glimpses of the past. A strange man follows Maura to her cabin where a boy is hiding. An insect leads to a tragedy on deck.")
+                .releaseDate("17 Nov. 2022")
+                .imageUrl(null)
+                .season(seasonT4S1)
+                .build();
+
+        Episode episodeT4S1E3 = Episode.builder()
+                .episodeNo(3)
+                .title("The Fog")
+                .description("A girl and other passengers suffer a terrible fate. Olek frees Ling Yi from a box. The captain makes a discovery that challenges his trust in Maura.")
+                .releaseDate("17 Nov. 2022")
+                .imageUrl(null)
+                .season(seasonT4S1)
+                .build();
+
+        Episode episodeT4S1E4 = Episode.builder()
+                .episodeNo(4)
+                .title("The Fight")
+                .description("Several crew members and passengers search the ship for the boy after locking up the captain, Olek, Jerome and Ramiro . Krester's secret is revealed.")
+                .releaseDate("17 Nov. 2022")
+                .imageUrl(null)
+                .season(seasonT4S1)
+                .build();
+
+        Episode episodeT4S1E5 = Episode.builder()
+                .episodeNo(5)
+                .title("The Calling")
+                .description("Maura has terrible flashbacks and makes a shocking move. A sound leads some passengers to jump overboard. Maura makes a discovery about her father.")
+                .releaseDate("17 Nov. 2022")
+                .imageUrl(null)
+                .season(seasonT4S1)
+                .build();
+
+        Episode episodeT4S1E6 = Episode.builder()
+                .episodeNo(6)
+                .title("The Pyramid")
+                .description("Tove has scary flashbacks and wants to kill the boy. Daniel follows Maura and the captain into a strange place. Maura's father appears with a message.")
+                .releaseDate("17 Nov. 2022")
+                .imageUrl(null)
+                .season(seasonT4S1)
+                .build();
+
+        Episode episodeT4S1E7 = Episode.builder()
+                .episodeNo(7)
+                .title("The Storm")
+                .description("Daniel asks Maura for something she doesn't understand. Olek and Ling Yi steer the ship before a tragedy occurs. Elliot's identity comes to light.")
+                .releaseDate("17 Nov. 2022")
+                .imageUrl(null)
+                .season(seasonT4S1)
+                .build();
+
+        Episode episodeT4S1E8 = Episode.builder()
+                .episodeNo(8)
+                .title("The Key")
+                .description("Maura tells the passengers an unbelievable truth. Then, their memories shift and Daniel changes a code. Maura faces an unexpected reality.")
+                .releaseDate("17 Nov. 2022")
+                .imageUrl(null)
+                .season(seasonT4S1)
+                .build();
+
+        tVSeriesRepository.save(tvSeries4);
+        creatorRepository.save(creatorT4C1);
+        creatorRepository.save(creatorT4C2);
+        seasonRepository.save(seasonT4S1);
+        episodeRepository.save(episodeT4S1E1);
+        episodeRepository.save(episodeT4S1E2);
+        episodeRepository.save(episodeT4S1E3);
+        episodeRepository.save(episodeT4S1E4);
+        episodeRepository.save(episodeT4S1E5);
+        episodeRepository.save(episodeT4S1E6);
+        episodeRepository.save(episodeT4S1E7);
+        episodeRepository.save(episodeT4S1E8);
+        genreRepository.save(genreC14G1);
+        genreRepository.save(genreC14G2);
+        actorRepository.save(actorC14A1);
+        actorRepository.save(actorC14A2);
+        actorRepository.save(actorC14A3);
+
+        //endregion
+
+        //region Content 15
+        //-----------------Content 15----------------//
+        Content content15 = Content.builder()
+                .title("Black Mirror")
+                .description("An anthology series exploring a twisted, high-tech multiverse where humanity's greatest innovations and darkest instincts collide.")
+                .spokenLanguage("English")
+                .releaseDate("4 December 2011")
+                .imageUrl("https://m.media-amazon.com/images/M/MV5BYTM3YWVhMDMtNjczMy00NGEyLWJhZDctYjNhMTRkNDE0ZTI1XkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_.jpg")
+                .trailerUrl("<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/watch?v=V0XOApF5nLU&ab_channel=BrainPilot\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" allowfullscreen></iframe>")
+                .isAgeRestricted(false)
+                .contentType(ContentType.TV_SERIES)
+                .runtime(50)
+                .build();
+
+        Genre genreC15G1 = Genre.builder()
+                .name("Sci-Fi")
+                .content(content15)
+                .build();
+
+        Genre genreC15G2 = Genre.builder()
+                .name("Mystery")
+                .content(content15)
+                .build();
+
+        Genre genreC15G3 = Genre.builder()
+                .name("Drama")
+                .content(content15)
+                .build();
+
+        Actor actorC15A1 = Actor.builder()
+                .fullname("Daniel Lapaine")
+                .imageUrl("https://upload.wikimedia.org/wikipedia/commons/f/f6/Daniel_Lapaine.jpg")
+                .content(content15)
+                .build();
+
+        Actor actorC15A2 = Actor.builder()
+                .fullname("Hannah John-Kamen")
+                .imageUrl("https://upload.wikimedia.org/wikipedia/commons/4/4b/Hannah_John-Kamen_Ant-Man_%26_The_Wasp_premiere.jpg")
+                .content(content15)
+                .build();
+
+        Actor actorC15A3 = Actor.builder()
+                .fullname("Michaela Coel")
+                .imageUrl("https://upload.wikimedia.org/wikipedia/commons/d/d7/Michaela_Coel_Peabody_Awards%2C_June_2021.png")
+                .content(content15)
+                .build();
+
+        TVSeries tvSeries5 = TVSeries.builder()
+                .tvSeriesStatusType(TVSeriesStatusType.ONGOING)
+                .content(content15)
+                .build();
+
+        Creator creatorT5C1 = Creator.builder()
+                .fullname("Charlie Brooker")
+                .imageUrl("https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Charlie_Brooker.jpg/1024px-Charlie_Brooker.jpg")
+                .tvSeries(tvSeries5)
+                .build();
+
+
+
+        Season seasonT5S1 = Season.builder()
+                .seasonNo(1)
+                .tvSeries(tvSeries5)
+                .build();
+
+        Episode episodeT5S1E1 = Episode.builder()
+                .episodeNo(1)
+                .title("The National Anthem")
+                .description("Prime Minister Michael Callow faces a shocking dilemma when Princess Susannah, a much-loved member of the Royal Family, is kidnapped.")
+                .releaseDate("4 Dec. 2011")
+                .imageUrl(null)
+                .season(seasonT5S1)
+                .build();
+
+        Episode episodeT5S1E2 = Episode.builder()
+                .episodeNo(2)
+                .title("Fifteen Million Merits")
+                .description("In a world where people's lives consist of riding exercise bikes to gain credits, Bing tries to help a woman get on to a singing competition show.")
+                .releaseDate("11 Dec. 2011")
+                .imageUrl(null)
+                .season(seasonT5S1)
+                .build();
+
+        Episode episodeT5S1E3 = Episode.builder()
+                .episodeNo(3)
+                .title("The Entire History of You")
+                .description("In the near future, everyone has access to a memory implant that records everything they do, see and hear. You need never forget a face again - but is that always a good thing?")
+                .releaseDate("18 Dec. 2011")
+                .imageUrl(null)
+                .season(seasonT5S1)
+                .build();
+
+        Season seasonT5S2 = Season.builder()
+                .seasonNo(2)
+                .tvSeries(tvSeries5)
+                .build();
+
+        Episode episodeT5S2E1 = Episode.builder()
+                .episodeNo(1)
+                .title("Be Right Back")
+                .description("After learning about a new service that lets people stay in touch with the deceased, a lonely, grieving Martha reconnects with her late lover.")
+                .releaseDate("11 Feb. 2013")
+                .imageUrl(null)
+                .season(seasonT5S2)
+                .build();
+
+        Episode episodeT5S2E2 = Episode.builder()
+                .episodeNo(2)
+                .title("White Bear")
+                .description("Victoria wakes up and cannot remember anything about her life. Everyone she encounters refuses to communicate with her, and they all seem to know something she doesn't. But what?")
+                .releaseDate("18 Feb. 2013")
+                .imageUrl(null)
+                .season(seasonT5S2)
+                .build();
+
+        Episode episodeT5S2E3 = Episode.builder()
+                .episodeNo(3)
+                .title("The Waldo Moment")
+                .description("A failed comedian who voices a popular cartoon bear named Waldo finds himself mixing in politics when TV executives want Waldo to run for office.")
+                .releaseDate("25 Feb. 2013")
+                .imageUrl(null)
+                .season(seasonT5S2)
+                .build();
+
+        Episode episodeT5S2E4 = Episode.builder()
+                .episodeNo(4)
+                .title("White Christmas")
+                .description("Three interconnected tales of technology run amok during the Christmas season are told by two men at a remote outpost in a frozen wilderness.")
+                .releaseDate("16 Dec. 2014")
+                .imageUrl(null)
+                .season(seasonT5S2)
+                .build();
+
+        Season seasonT5S3 = Season.builder()
+                .seasonNo(3)
+                .tvSeries(tvSeries5)
+                .build();
+
+        Episode episodeT5S3E1 = Episode.builder()
+                .episodeNo(1)
+                .title("Nosedive")
+                .description("A woman desperate to boost her social media score hits the jackpot when she's invited to a swanky wedding, but the trip doesn't go as planned.")
+                .releaseDate("21 Oct. 2016")
+                .imageUrl(null)
+                .season(seasonT5S3)
+                .build();
+
+        Episode episodeT5S3E2 = Episode.builder()
+                .episodeNo(2)
+                .title("Playtest")
+                .description("An American traveler short on cash signs up to test a revolutionary new gaming system, but soon can't tell where the hot game ends and reality begins.")
+                .releaseDate("21 Oct. 2016")
+                .imageUrl(null)
+                .season(seasonT5S3)
+                .build();
+
+        Episode episodeT5S3E3 = Episode.builder()
+                .episodeNo(3)
+                .title("Shut Up and Dance")
+                .description("When withdrawn Kenny stumbles headlong into an online trap, he is quickly forced into an uneasy alliance with shifty Hector, both at the mercy of persons unknown.")
+                .releaseDate("21 Oct. 2016")
+                .imageUrl(null)
+                .season(seasonT5S3)
+                .build();
+
+        Episode episodeT5S3E4 = Episode.builder()
+                .episodeNo(4)
+                .title("San Junipero")
+                .description("When Yorkie and Kelly visit San Junipero, a fun-loving beach town full of surf, sun and sex, their lives are changed.")
+                .releaseDate("21 Oct. 2016")
+                .imageUrl(null)
+                .season(seasonT5S3)
+                .build();
+
+        Episode episodeT5S3E5 = Episode.builder()
+                .episodeNo(5)
+                .title("Men Against Fire")
+                .description("Future soldiers Stripe and Raiman must protect frightened villagers from an infestation of vicious feral mutants.")
+                .releaseDate("21 Oct. 2016")
+                .imageUrl(null)
+                .season(seasonT5S3)
+                .build();
+
+        Episode episodeT5S3E6 = Episode.builder()
+                .episodeNo(6)
+                .title("Hated in the Nation")
+                .description("In near-future London, police detective Karin Parke, and her tech-savvy sidekick Blue, investigate a string of mysterious deaths with a sinister link to social media.")
+                .releaseDate("21 Oct. 2016")
+                .imageUrl(null)
+                .season(seasonT5S3)
+                .build();
+
+        Season seasonT5S4 = Season.builder()
+                .seasonNo(4)
+                .tvSeries(tvSeries5)
+                .build();
+
+        Episode episodeT5S4E1 = Episode.builder()
+                .episodeNo(1)
+                .title("USS Callister")
+                .description("Capt. Robert Daly presides over his crew with wisdom and courage. But a new recruit will soon discover nothing on this spaceship is what it seems.")
+                .releaseDate("29 Dec. 2017")
+                .imageUrl(null)
+                .season(seasonT5S4)
+                .build();
+
+        Episode episodeT5S4E2 = Episode.builder()
+                .episodeNo(2)
+                .title("Arkangel")
+                .description("After nearly losing her daughter, a mother invests in a new technology that allows her to keep track of her.")
+                .releaseDate("29 Dec. 2017")
+                .imageUrl(null)
+                .season(seasonT5S4)
+                .build();
+
+        Episode episodeT5S4E3 = Episode.builder()
+                .episodeNo(3)
+                .title("Crocodile")
+                .description("An insurance agent investigates a minor traffic incident using a device that manifests peoples' memories, but one of her witnesses has something to hide.")
+                .releaseDate("29 Dec. 2017")
+                .imageUrl(null)
+                .season(seasonT5S4)
+                .build();
+
+        Episode episodeT5S4E4 = Episode.builder()
+                .episodeNo(4)
+                .title("Hang the DJ")
+                .description("Paired up by a dating program that puts an expiration date on all relationships, Frank and Amy soon begin to question the system's logic.")
+                .releaseDate("29 Dec. 2017")
+                .imageUrl(null)
+                .season(seasonT5S4)
+                .build();
+
+        Episode episodeT5S4E5 = Episode.builder()
+                .episodeNo(5)
+                .title("Metalhead")
+                .description("In the post-apocalyptic landscape of the Scottish Moors, a woman attempts to survive the land full of dogs.")
+                .releaseDate("29 Dec. 2017")
+                .imageUrl(null)
+                .season(seasonT5S4)
+                .build();
+
+        Episode episodeT5S4E6 = Episode.builder()
+                .episodeNo(6)
+                .title("Black Museum")
+                .description("A woman enters the Black Museum, where the proprietor tells his stories relating to the artifacts.")
+                .releaseDate("29 Dec. 2017")
+                .imageUrl(null)
+                .season(seasonT5S4)
+                .build();
+
+        Season seasonT5S5 = Season.builder()
+                .seasonNo(5)
+                .tvSeries(tvSeries5)
+                .build();
+
+        Episode episodeT5S5E1 = Episode.builder()
+                .episodeNo(1)
+                .title("Striking Vipers")
+                .description("Two estranged college friends reunite in later life, triggering a series of events that could alter their lives forever.")
+                .releaseDate("5 Jun. 2019")
+                .imageUrl(null)
+                .season(seasonT5S5)
+                .build();
+
+        Episode episodeT5S5E2 = Episode.builder()
+                .episodeNo(2)
+                .title("Smithereens")
+                .description("A cab driver with an agenda becomes the centre of attention on a day that rapidly spirals out of control.")
+                .releaseDate("5 Jun. 2019")
+                .imageUrl(null)
+                .season(seasonT5S5)
+                .build();
+
+        Episode episodeT5S5E3 = Episode.builder()
+                .episodeNo(3)
+                .title("Rachel, Jack and Ashley Too")
+                .description("A lonely teenager yearns to connect with her favorite pop star - whose charmed existence isn't quite as rosy as it appears...")
+                .releaseDate("5 Jun. 2019")
+                .imageUrl(null)
+                .season(seasonT5S5)
+                .build();
+
+
+        tVSeriesRepository.save(tvSeries5);
+        creatorRepository.save(creatorT5C1);
+        seasonRepository.save(seasonT5S1);
+        episodeRepository.save(episodeT5S1E1);
+        episodeRepository.save(episodeT5S1E2);
+        episodeRepository.save(episodeT5S1E3);
+        seasonRepository.save(seasonT5S2);
+        episodeRepository.save(episodeT5S2E1);
+        episodeRepository.save(episodeT5S2E2);
+        episodeRepository.save(episodeT5S2E3);
+        episodeRepository.save(episodeT5S2E4);
+        seasonRepository.save(seasonT5S3);
+        episodeRepository.save(episodeT5S3E1);
+        episodeRepository.save(episodeT5S3E2);
+        episodeRepository.save(episodeT5S3E3);
+        episodeRepository.save(episodeT5S3E4);
+        episodeRepository.save(episodeT5S3E5);
+        episodeRepository.save(episodeT5S3E6);
+        seasonRepository.save(seasonT5S4);
+        episodeRepository.save(episodeT5S4E1);
+        episodeRepository.save(episodeT5S4E2);
+        episodeRepository.save(episodeT5S4E3);
+        episodeRepository.save(episodeT5S4E4);
+        episodeRepository.save(episodeT5S4E5);
+        episodeRepository.save(episodeT5S4E6);
+        seasonRepository.save(seasonT5S5);
+        episodeRepository.save(episodeT5S5E1);
+        episodeRepository.save(episodeT5S5E2);
+        episodeRepository.save(episodeT5S5E3);
+        genreRepository.save(genreC15G1);
+        genreRepository.save(genreC15G2);
+        genreRepository.save(genreC15G3);
+        actorRepository.save(actorC15A1);
+        actorRepository.save(actorC15A2);
+        actorRepository.save(actorC15A3);
+
+        //endregion
+
+        //region Content 16
+        //-----------------Content 16----------------//
+        Content content16 = Content.builder()
+                .title("Bleach")
+                .description("High school student Ichigo Kurosaki, who has the ability to see ghosts, gains soul reaper powers from Rukia Kuchiki and sets out to save the world from \"Hollows\".")
+                .spokenLanguage("Japanese")
+                .releaseDate("5 October 2004")
+                .imageUrl("https://upload.wikimedia.org/wikipedia/en/7/72/Bleachanime.png")
+                .trailerUrl("<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/watch?v=1sygUhb8Q2Y&ab_channel=vizmedia\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" allowfullscreen></iframe>")
+                .isAgeRestricted(false)
+                .contentType(ContentType.TV_SERIES)
+                .runtime(22)
+                .build();
+
+        Genre genreC16G1 = Genre.builder()
+                .name("Animation")
+                .content(content16)
+                .build();
+
+        Genre genreC16G2 = Genre.builder()
+                .name("Adventure")
+                .content(content16)
+                .build();
+
+        Genre genreC16G3 = Genre.builder()
+                .name("Action")
+                .content(content16)
+                .build();
+
+        Actor actorC16A1 = Actor.builder()
+                .fullname("Johnny Yong Bosch")
+                .imageUrl("https://upload.wikimedia.org/wikipedia/commons/0/01/Johnny_Yong_Bosch.jpg")
+                .content(content16)
+                .build();
+
+        Actor actorC16A2 = Actor.builder()
+                .fullname("Hannah John-Kamen")
+                .imageUrl("https://upload.wikimedia.org/wikipedia/commons/0/0b/Michelle_Ruff.jpg")
+                .content(content16)
+                .build();
+
+        Actor actorC16A3 = Actor.builder()
+                .fullname("Michaela Coel")
+                .imageUrl("https://upload.wikimedia.org/wikipedia/commons/4/49/41st_Annie_Awards%2C_Stephanie_Sheh%2C_2014.jpg")
+                .content(content16)
+                .build();
+
+        TVSeries tvSeries6 = TVSeries.builder()
+                .tvSeriesStatusType(TVSeriesStatusType.ONGOING)
+                .content(content16)
+                .build();
+
+        Creator creatorT6C1 = Creator.builder()
+                .fullname("Tite Kubo")
+                .imageUrl("https://pbs.twimg.com/media/DXAHLFFVQAAWqUU.jpg")
+                .tvSeries(tvSeries6)
+                .build();
+
+        Season seasonT6S1 = Season.builder()
+                .seasonNo(1)
+                .tvSeries(tvSeries6)
+                .build();
+
+        Episode episodeT6S1E1 = Episode.builder()
+                .episodeNo(1)
+                .title("Shinigami ni natchatta hi")
+                .description("Fifteen-year-old Ichigo Kurosaki has the uncanny ability to see ghosts, but that seems pretty run-of-the-mill once Shinigami Rukia Kuchiki enters his life.")
+                .releaseDate("5 Oct. 2004")
+                .imageUrl(null)
+                .season(seasonT6S1)
+                .build();
+
+        Episode episodeT6S1E2 = Episode.builder()
+                .episodeNo(2)
+                .title("Shinigami no oshigoto")
+                .description("Ichigo runs into Rukia at school, where she's posing as a transfer student. Now that he's got most of her powers, she wants him to take over her Shinigami duties?")
+                .releaseDate("12 Oct. 2004")
+                .imageUrl(null)
+                .season(seasonT6S1)
+                .build();
+
+        Episode episodeT6S1E3 = Episode.builder()
+                .episodeNo(3)
+                .title("Ani no omoi, imouto no omoi")
+                .description("Ichigo learns that not all souls pass peacefully to the Soul Society. Some linger, only to become Hollows.")
+                .releaseDate("19 Oct. 2004")
+                .imageUrl(null)
+                .season(seasonT6S1)
+                .build();
+
+        Episode episodeT6S1E4 = Episode.builder()
+                .episodeNo(4)
+                .title("Noroi no inko")
+                .description("Chad, Ichigo's friend and classmate, brings a cursed bird to school that is really the soul of a young boy who lived a tragic life.")
+                .releaseDate("26 Oct. 2004")
+                .imageUrl(null)
+                .season(seasonT6S1)
+                .build();
+
+        Episode episodeT6S1E5 = Episode.builder()
+                .episodeNo(5)
+                .title("Mienai teki o nagure!")
+                .description("Rukia and Chad take on Shurîkâ, a vicious Hollow who's beaten many Shinigami and committed many crimes.")
+                .releaseDate("2 Nov. 2004")
+                .imageUrl(null)
+                .season(seasonT6S1)
+                .build();
+
+        Episode episodeT6S1E6 = Episode.builder()
+                .episodeNo(6)
+                .title("Shitô! Ichigo VS Ichigo")
+                .description("At a Shinigami supply shop, Rukia picks up a mod soul to take over Ichigo's body while he's pulling Shinigami duty.")
+                .releaseDate("9 Nov. 2004")
+                .imageUrl(null)
+                .season(seasonT6S1)
+                .build();
+
+        Episode episodeT6S1E7 = Episode.builder()
+                .episodeNo(7)
+                .title("Nuigurumi kara konnichiwa")
+                .description("Rukia and Ichigo track the mod soul in Ichigo's body to a local elementary school.")
+                .releaseDate("16 Nov. 2004")
+                .imageUrl(null)
+                .season(seasonT6S1)
+                .build();
+
+        Episode episodeT6S1E8 = Episode.builder()
+                .episodeNo(8)
+                .title("6-gatsu 17 nichi, ame no kioku")
+                .description("On the anniversary of his mother's death, Ichigo intends to take the day off from Shinigami duties and visit her grave with the rest of his family.")
+                .releaseDate("23 Nov. 2004")
+                .imageUrl(null)
+                .season(seasonT6S1)
+                .build();
+
+        Episode episodeT6S1E9 = Episode.builder()
+                .episodeNo(9)
+                .title("Taosenai teki")
+                .description("Ichigo faces Gurando fisshâ, a Hollow that uses a lure in the shape of a girl?")
+                .releaseDate("30 Nov. 2004")
+                .imageUrl(null)
+                .season(seasonT6S1)
+                .build();
+
+        Episode episodeT6S1E10 = Episode.builder()
+                .episodeNo(10)
+                .title("Burari reijô totsugeki no tabi!")
+                .description("When television hero Don Kan'onji schedules a live recording of his hit show \"Spirit Hunter\" at a local abandoned hospital, Ichigo is surprised to see that an actual demi-Hollow is being summoned for the show.")
+                .releaseDate("27 Dec. 2004")
+                .imageUrl(null)
+                .season(seasonT6S1)
+                .build();
+
+        Episode episodeT6S1E11 = Episode.builder()
+                .episodeNo(11)
+                .title("Densetsu no kuinshî")
+                .description("Ichigo is unaware that one of his classmates, Uryû Ishida, possesses spiritual power of his own.")
+                .releaseDate("14 Dec. 2004")
+                .imageUrl(null)
+                .season(seasonT6S1)
+                .build();
+
+        Episode episodeT6S1E12 = Episode.builder()
+                .episodeNo(12)
+                .title("Yasashî migiude")
+                .description("In order to prove how useless Shinigamis are, Uryû releases bait to draw Hollows to their town. Whoever gets rid of the most wins the challenge.")
+                .releaseDate("21 Dec. 2004")
+                .imageUrl(null)
+                .season(seasonT6S1)
+                .build();
+
+        Episode episodeT6S1E13 = Episode.builder()
+                .episodeNo(13)
+                .title("Hana to horô")
+                .description("Orihime is paid a visit by a Hollow at school and discovers her own spiritual powers?")
+                .releaseDate("28 Dec. 2004")
+                .imageUrl(null)
+                .season(seasonT6S1)
+                .build();
+
+        Episode episodeT6S1E14 = Episode.builder()
+                .episodeNo(14)
+                .title("Senaka awase no shitô!")
+                .description("In the midst of their battle, Ichigo finds out that Uryû is a Quincy, a group with a long-standing rivalry with Shinigamis.")
+                .releaseDate("11 Jan. 2005")
+                .imageUrl(null)
+                .season(seasonT6S1)
+                .build();
+
+        Episode episodeT6S1E15 = Episode.builder()
+                .episodeNo(15)
+                .title("Kon no uhauha dai sakusen")
+                .description("Rukia worries that news of Ichigo's battle with Menos Grande will attract the attention of the Soul Society.")
+                .releaseDate("18 Jan. 2005")
+                .imageUrl(null)
+                .season(seasonT6S1)
+                .build();
+
+        Episode episodeT6S1E16 = Episode.builder()
+                .episodeNo(16)
+                .title("Abarai Renji, kenzan!")
+                .description("Rukia, wandering the streets at night, runs into two Shinigami from the Soul Society, Renji Abarai and her brother, Byakuya Kuchiki.")
+                .releaseDate("25 Jan. 2005")
+                .imageUrl(null)
+                .season(seasonT6S1)
+                .build();
+
+        Episode episodeT6S1E17 = Episode.builder()
+                .episodeNo(17)
+                .title("Ichigo, shisu!")
+                .description("Ichigo fights Renji Abarai, a lieutenant from the Soul Society. When it looks like Ichigo might win, Byakuya Kuchiki steps in and deals a fierce blow?")
+                .releaseDate("1 Feb. 2005")
+                .imageUrl(null)
+                .season(seasonT6S1)
+                .build();
+
+        Episode episodeT6S1E18 = Episode.builder()
+                .episodeNo(18)
+                .title("Torimodose! Shinigami no chikara!")
+                .description("Summer vacation begins, but it's all work for Ichigo, who starts training with Urahara in order to enter the Soul Society and save Rukia.")
+                .releaseDate("8 Feb. 2005")
+                .imageUrl(null)
+                .season(seasonT6S1)
+                .build();
+
+        Episode episodeT6S1E19 = Episode.builder()
+                .episodeNo(19)
+                .title("Ichigo, Horô ni ochiru!")
+                .description("In the Soul Society, Rukia learns that in 25 days, she'll be taken to the Central Execution Grounds to face her punishment.")
+                .releaseDate("15 Feb. 2005")
+                .imageUrl(null)
+                .season(seasonT6S1)
+                .build();
+
+        Episode episodeT6S1E20 = Episode.builder()
+                .episodeNo(20)
+                .title("Ichimaru Gin no kage")
+                .description("Ichigo completes lesson three of Urahara's training and learns the name of his zanpaku-to.")
+                .releaseDate("22 Feb. 2005")
+                .imageUrl(null)
+                .season(seasonT6S1)
+                .build();
+
+        Season seasonT6S2 = Season.builder()
+                .seasonNo(2)
+                .tvSeries(tvSeries6)
+                .build();
+
+        Episode episodeT6S2E1 = Episode.builder()
+                .episodeNo(1)
+                .title("Totsunyû! Shinigami no sekai")
+                .description("Ichigo and the others manage to make it through to the Soul Society?")
+                .releaseDate("1 Mar. 2005")
+                .imageUrl(null)
+                .season(seasonT6S2)
+                .build();
+
+        Episode episodeT6S2E2 = Episode.builder()
+                .episodeNo(2)
+                .title("Shinigami no oshigoto")
+                .description("Ichigo runs into Rukia at school, where she's posing as a transfer student. Now that he's got most of her powers, she wants him to take over her Shinigami duties?")
+                .releaseDate("8 Mar. 2005")
+                .imageUrl(null)
+                .season(seasonT6S2)
+                .build();
+
+        Episode episodeT6S2E3 = Episode.builder()
+                .episodeNo(3)
+                .title("Rukia shokei, 14-ka mae")
+                .description("An arrogant, boar-riding bully named Ganju challenges Ichigo and friends to a fight?")
+                .releaseDate("15 Mar. 2005")
+                .imageUrl(null)
+                .season(seasonT6S2)
+                .build();
+
+        Episode episodeT6S2E4 = Episode.builder()
+                .episodeNo(4)
+                .title("Kesshû! Gotei 13-tai")
+                .description("Kûkaku Shiba's plan is to catapult Ichigo and the others over the walls of the Seireitei with her very own creation, the Flower Crane Cannon.")
+                .releaseDate("22 Mar. 2005")
+                .imageUrl(null)
+                .season(seasonT6S2)
+                .build();
+
+        Episode episodeT6S2E5 = Episode.builder()
+                .episodeNo(5)
+                .title("Kyodai hôdan de chûô toppa?")
+                .description("Ichigo, Chad, Ishida and Orihime concentrate on controlling their spirit energy for their flight into the Seireitei.")
+                .releaseDate("29 Mar. 2005")
+                .imageUrl(null)
+                .season(seasonT6S2)
+                .build();
+
+        Episode episodeT6S2E6 = Episode.builder()
+                .episodeNo(6)
+                .title("Kessei! Saiaku no taggu")
+                .description("On their flight into the Seireitei, Ichigo and the others are separated.")
+                .releaseDate("5 Apr. 2005")
+                .imageUrl(null)
+                .season(seasonT6S2)
+                .build();
+
+        Episode episodeT6S2E7 = Episode.builder()
+                .episodeNo(7)
+                .title("Hissatsu no ichigeki o hanate!")
+                .description("Within the Seireitei, a full-fledged search for the intruders--the \"ryoka\"--is put into action. Rukia is transferred to the Repentance Cell to await her execution?")
+                .releaseDate("12 Apr. 2005")
+                .imageUrl(null)
+                .season(seasonT6S2)
+                .build();
+
+        Episode episodeT6S2E8 = Episode.builder()
+                .episodeNo(8)
+                .title("Nerawareta Orihime")
+                .description("Forced to stay alert and on their toes, Ichigo and his fellow ryoka continue to be hunted by Shinigami.")
+                .releaseDate("19 Apr. 2005")
+                .imageUrl(null)
+                .season(seasonT6S2)
+                .build();
+
+        Episode episodeT6S2E9 = Episode.builder()
+                .episodeNo(9)
+                .title("Toppaseyo! Shinigami hôi-mô")
+                .description("News of the intruders' surprising strength spreads among the Shinigami, and the captains are eager for information.")
+                .releaseDate("26 Apr. 2005")
+                .imageUrl(null)
+                .season(seasonT6S2)
+                .build();
+
+        Episode episodeT6S2E10 = Episode.builder()
+                .episodeNo(10)
+                .title("Tachihadakaru Renji")
+                .description("Hanataro leads Ichigo and Ganju toward the Repentance Cell where Rukia is being held?")
+                .releaseDate("3 May 2005")
+                .imageUrl(null)
+                .season(seasonT6S2)
+                .build();
+
+        Episode episodeT6S2E11 = Episode.builder()
+                .episodeNo(11)
+                .title("Kiru tame no kakugo")
+                .description("Renji and Ichigo engage in battle?")
+                .releaseDate("10 May 2005")
+                .imageUrl(null)
+                .season(seasonT6S2)
+                .build();
+
+        Episode episodeT6S2E12 = Episode.builder()
+                .episodeNo(12)
+                .title("Hoshi to norainu")
+                .description("Renji faces defeat, and in his last moments recalls his childhood with Rukia in the Rukongai district of the Soul Society.")
+                .releaseDate("17 May 2005")
+                .imageUrl(null)
+                .season(seasonT6S2)
+                .build();
+
+        Episode episodeT6S2E13 = Episode.builder()
+                .episodeNo(13)
+                .title("Kiseki! Nazo no shin hîrô")
+                .description("In the world of the living, Ichigo's sisters Karin and Yuzu are recruited by television personality Don Kanonji to learn how to fight bad spirits.")
+                .releaseDate("26 May 2005")
+                .imageUrl(null)
+                .season(seasonT6S2)
+                .build();
+
+        Episode episodeT6S2E14 = Episode.builder()
+                .episodeNo(14)
+                .title("Yoake no sangeki")
+                .description("Word of Renji's defeat spreads, and all-out war is declared against the ryoka.")
+                .releaseDate("1 Jun. 2005")
+                .imageUrl(null)
+                .season(seasonT6S2)
+                .build();
+
+        Episode episodeT6S2E15 = Episode.builder()
+                .episodeNo(15)
+                .title("Aizen ansatsu! Shinobiyoru yami")
+                .description("A prominent captain of Soul Society's Shinigami is found dead, and Shinigami turn against one another in a flurry of suspicion and accusation.")
+                .releaseDate("7 Jun. 2005")
+                .imageUrl(null)
+                .season(seasonT6S2)
+                .build();
+
+        Episode episodeT6S2E16 = Episode.builder()
+                .episodeNo(16)
+                .title("Zaraki Kenpachi, semaru!")
+                .description("Ichigo, Ganju and Hanatarô climb the great staircase of the Senzaikyu--the White Tower--only to sense an unprecedented amount of reiatsu.")
+                .releaseDate("14 Jun. 2005")
+                .imageUrl(null)
+                .season(seasonT6S2)
+                .build();
+
+        Episode episodeT6S2E17 = Episode.builder()
+                .episodeNo(17)
+                .title("Ken no riyû")
+                .description("Chad's journey to the Senzaikyu is interrupted by the captain of Squad 8.")
+                .releaseDate("21 Jun. 2005")
+                .imageUrl(null)
+                .season(seasonT6S2)
+                .build();
+
+        Episode episodeT6S2E18 = Episode.builder()
+                .episodeNo(18)
+                .title("Zettai zetsumei! Orareta Zangetsu")
+                .description("Ichigo, still battling Captain Zaraki, senses a loss of Chad's reiatsu and fears the worst.")
+                .releaseDate("28 Jun. 2005")
+                .imageUrl(null)
+                .season(seasonT6S2)
+                .build();
+
+        Episode episodeT6S2E19 = Episode.builder()
+                .episodeNo(19)
+                .title("Fujimi no otoko")
+                .description("Lying weak with sword wounds on the ground, Ichigo is greeted by a vision of an embodied version of his zanpaku-to.")
+                .releaseDate("5 Jul. 2005")
+                .imageUrl(null)
+                .season(seasonT6S2)
+                .build();
+
+        Episode episodeT6S2E20 = Episode.builder()
+                .episodeNo(20)
+                .title("Ganju no mita Shinigami")
+                .description("Ganju and Hanatarô continue toward the Senzaikyu to save Rukia.")
+                .releaseDate("12 Jul. 2005")
+                .imageUrl(null)
+                .season(seasonT6S2)
+                .build();
+
+        Episode episodeT6S2E21 = Episode.builder()
+                .episodeNo(21)
+                .title("Saikai, Ichigo to Rukia")
+                .description("Sensing great reiatsu near the Repentance Cell, Ichigo defies Yoruichi's orders and flees to assist Ganju and Hanatarô.")
+                .releaseDate("19 Jul. 2005")
+                .imageUrl(null)
+                .season(seasonT6S2)
+                .build();
+
+        tVSeriesRepository.save(tvSeries6);
+        creatorRepository.save(creatorT6C1);
+        seasonRepository.save(seasonT6S1);
+        episodeRepository.save(episodeT6S1E1);
+        episodeRepository.save(episodeT6S1E2);
+        episodeRepository.save(episodeT6S1E3);
+        episodeRepository.save(episodeT6S1E4);
+        episodeRepository.save(episodeT6S1E5);
+        episodeRepository.save(episodeT6S1E6);
+        episodeRepository.save(episodeT6S1E7);
+        episodeRepository.save(episodeT6S1E8);
+        episodeRepository.save(episodeT6S1E9);
+        episodeRepository.save(episodeT6S1E10);
+        episodeRepository.save(episodeT6S1E11);
+        episodeRepository.save(episodeT6S1E12);
+        episodeRepository.save(episodeT6S1E13);
+        episodeRepository.save(episodeT6S1E14);
+        episodeRepository.save(episodeT6S1E15);
+        episodeRepository.save(episodeT6S1E16);
+        episodeRepository.save(episodeT6S1E17);
+        episodeRepository.save(episodeT6S1E18);
+        episodeRepository.save(episodeT6S1E19);
+        episodeRepository.save(episodeT6S1E20);
+        seasonRepository.save(seasonT6S2);
+        episodeRepository.save(episodeT6S2E1);
+        episodeRepository.save(episodeT6S2E2);
+        episodeRepository.save(episodeT6S2E3);
+        episodeRepository.save(episodeT6S2E4);
+        episodeRepository.save(episodeT6S2E5);
+        episodeRepository.save(episodeT6S2E6);
+        episodeRepository.save(episodeT6S2E7);
+        episodeRepository.save(episodeT6S2E8);
+        episodeRepository.save(episodeT6S2E9);
+        episodeRepository.save(episodeT6S2E10);
+        episodeRepository.save(episodeT6S2E11);
+        episodeRepository.save(episodeT6S2E12);
+        episodeRepository.save(episodeT6S2E13);
+        episodeRepository.save(episodeT6S2E14);
+        episodeRepository.save(episodeT6S2E15);
+        episodeRepository.save(episodeT6S2E16);
+        episodeRepository.save(episodeT6S2E17);
+        episodeRepository.save(episodeT6S2E18);
+        episodeRepository.save(episodeT6S2E19);
+        episodeRepository.save(episodeT6S2E20);
+        episodeRepository.save(episodeT6S2E21);
+        genreRepository.save(genreC16G1);
+        genreRepository.save(genreC16G2);
+        genreRepository.save(genreC16G3);
+        actorRepository.save(actorC16A1);
+        actorRepository.save(actorC16A2);
+        actorRepository.save(actorC16A3);
+
+        //endregion
+
+
+
+
 
 
         //region Content 19
@@ -7280,6 +8422,19 @@ public class ContentCreator implements CommandLineRunner {
         //endregion
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
         //region Rating 1
         //-----------------Rating 1----------------//
         Rating rating1 = Rating.builder()
@@ -7399,6 +8554,457 @@ public class ContentCreator implements CommandLineRunner {
                 .build();
 
         ratingRepository.save(rating11);
+        //endregion
+
+        //region Rating 12
+        //-----------------Rating 12----------------//
+        Rating rating12 = Rating.builder()
+                .rating(6.6f)
+                .profile(profileA7P1)
+                .content(content7)
+                .build();
+
+        ratingRepository.save(rating12);
+        //endregion
+
+        //region Rating 13
+        //-----------------Rating 13----------------//
+        Rating rating13 = Rating.builder()
+                .rating(5.4f)
+                .profile(profileA3P2)
+                .content(content7)
+                .build();
+
+        ratingRepository.save(rating13);
+        //endregion
+
+
+        //region Rating 14
+        //-----------------Rating 14----------------//
+        Rating rating14 = Rating.builder()
+                .rating(7f)
+                .profile(profileA5P2)
+                .content(content8)
+                .build();
+
+        ratingRepository.save(rating14);
+        //endregion
+
+        //region Rating 15
+        //-----------------Rating 15----------------//
+        Rating rating15 = Rating.builder()
+                .rating(7f)
+                .profile(profileA8P2)
+                .content(content8)
+                .build();
+
+        ratingRepository.save(rating15);
+        //endregion
+
+        //region Rating 16
+        //-----------------Rating 16----------------//
+        Rating rating16 = Rating.builder()
+                .rating(6.6f)
+                .profile(profileA2P1)
+                .content(content8)
+                .build();
+
+        ratingRepository.save(rating16);
+        //endregion
+
+        //region Rating 17
+        //-----------------Rating 17----------------//
+        Rating rating17 = Rating.builder()
+                .rating(5f)
+                .profile(profileA6P1)
+                .content(content9)
+                .build();
+
+        ratingRepository.save(rating17);
+        //endregion
+
+        //region Rating 18
+        //-----------------Rating 18----------------//
+        Rating rating18 = Rating.builder()
+                .rating(6.7f)
+                .profile(profileA4P2)
+                .content(content9)
+                .build();
+
+        ratingRepository.save(rating18);
+        //endregion
+
+        //region Rating 19
+        //-----------------Rating 19----------------//
+        Rating rating19 = Rating.builder()
+                .rating(4.5f)
+                .profile(profileA8P2)
+                .content(content10)
+                .build();
+
+        ratingRepository.save(rating19);
+        //endregion
+
+        //region Rating 20
+        //-----------------Rating 20----------------//
+        Rating rating20 = Rating.builder()
+                .rating(7.2f)
+                .profile(profileA3P1)
+                .content(content10)
+                .build();
+
+        ratingRepository.save(rating20);
+        //endregion
+
+
+
+
+        //region View 1
+        //-----------------View 1----------------//
+        View view1 = View.builder()
+                .profile(profileA1P1)
+                .content(content1)
+                .timeWatchedInMinutes(50f)
+                .watchedDate(new Date())
+                .build();
+
+        WatchedListMovie watchedListMovieV1M1 = WatchedListMovie.builder()
+                .movie(movie1)
+                .view(view1)
+                .build();
+
+        viewRepository.save(view1);
+        watchListMovieRepository.save(watchedListMovieV1M1);
+        //endregion
+
+        //region View 2
+        //-----------------View 2----------------//
+        View view2 = View.builder()
+                .profile(profileA1P1)
+                .content(content2)
+                .timeWatchedInMinutes(72f)
+                .watchedDate(new Date())
+                .build();
+
+        WatchedListMovie watchedListMovieV2M1 = WatchedListMovie.builder()
+                .movie(movie2)
+                .view(view2)
+                .build();
+
+        viewRepository.save(view2);
+        watchListMovieRepository.save(watchedListMovieV2M1);
+        //endregion
+
+        //region View 3
+        //-----------------View 3----------------//
+        View view3 = View.builder()
+                .profile(profileA5P1)
+                .content(content3)
+                .timeWatchedInMinutes(10f)
+                .watchedDate(new Date())
+                .build();
+
+        WatchedListMovie watchedListMovieV3M1 = WatchedListMovie.builder()
+                .movie(movie3)
+                .view(view3)
+                .build();
+
+        viewRepository.save(view3);
+        watchListMovieRepository.save(watchedListMovieV3M1);
+        //endregion
+
+
+        //region View 4
+        //-----------------View 4----------------//
+        View view4 = View.builder()
+                .profile(profileA8P1)
+                .content(content4)
+                .timeWatchedInMinutes(30f)
+                .watchedDate(new Date())
+                .build();
+
+        WatchedListMovie watchedListMovieV4M1 = WatchedListMovie.builder()
+                .movie(movie4)
+                .view(view4)
+                .build();
+
+        viewRepository.save(view4);
+        watchListMovieRepository.save(watchedListMovieV4M1);
+        //endregion
+
+
+        //region View 5
+        //-----------------View 5----------------//
+        View view5 = View.builder()
+                .profile(profileA5P1)
+                .content(content4)
+                .timeWatchedInMinutes(50f)
+                .watchedDate(new Date())
+                .build();
+
+        WatchedListMovie watchedListMovieV5M1 = WatchedListMovie.builder()
+                .movie(movie4)
+                .view(view5)
+                .build();
+
+        viewRepository.save(view5);
+        watchListMovieRepository.save(watchedListMovieV5M1);
+        //endregion
+
+        //region View 6
+        //-----------------View 6----------------//
+        View view6 = View.builder()
+                .profile(profileA7P1)
+                .content(content7)
+                .timeWatchedInMinutes(50f)
+                .watchedDate(new Date())
+                .build();
+
+        WatchedListEpisode watchedListEpisodeV6 = WatchedListEpisode.builder()
+                .episode(episodeT1S1E3)
+                .view(view6)
+                .build();
+
+        viewRepository.save(view6);
+        watchListEpisodeRepository.save(watchedListEpisodeV6);
+        //endregion
+
+        //region View 7
+        //-----------------View 7----------------//
+        View view7 = View.builder()
+                .profile(profileA10P1)
+                .content(content12)
+                .timeWatchedInMinutes(45f)
+                .watchedDate(new Date())
+                .build();
+
+        WatchedListEpisode watchedListEpisodeV7 = WatchedListEpisode.builder()
+                .episode(episodeT2S1E5)
+                .view(view7)
+                .build();
+
+        viewRepository.save(view7);
+        watchListEpisodeRepository.save(watchedListEpisodeV7);
+        //endregion
+
+        //-----------------View 8----------------//
+        View view8 = View.builder()
+                .profile(profileA4P1)
+                .content(content12)
+                .timeWatchedInMinutes(20f)
+                .watchedDate(new Date())
+                .build();
+
+        WatchedListEpisode watchedListEpisodeV8 = WatchedListEpisode.builder()
+                .episode(episodeT2S1E4)
+                .view(view8)
+                .build();
+
+        viewRepository.save(view8);
+        watchListEpisodeRepository.save(watchedListEpisodeV8);
+        //endregion
+
+        //-----------------View 9----------------//
+        View view9 = View.builder()
+                .profile(profileA2P2)
+                .content(content12)
+                .timeWatchedInMinutes(45f)
+                .watchedDate(new Date())
+                .build();
+
+        WatchedListEpisode watchedListEpisodeV9 = WatchedListEpisode.builder()
+                .episode(episodeT2S1E1)
+                .view(view9)
+                .build();
+
+        viewRepository.save(view9);
+        watchListEpisodeRepository.save(watchedListEpisodeV9);
+        //endregion
+
+        //-----------------View10----------------//
+        View view10 = View.builder()
+                .profile(profileA5P2)
+                .content(content34)
+                .timeWatchedInMinutes(70f)
+                .watchedDate(new Date())
+                .build();
+
+        WatchedListMovie watchedListMovieV10 = WatchedListMovie.builder()
+                .movie(movie34)
+                .view(view10)
+                .build();
+
+        viewRepository.save(view10);
+        watchListMovieRepository.save(watchedListMovieV10);
+        //endregion
+
+        //-----------------View11----------------//
+        View view11 = View.builder()
+                .profile(profileA3P2)
+                .content(content35)
+                .timeWatchedInMinutes(62f)
+                .watchedDate(new Date())
+                .build();
+
+        WatchedListMovie watchedListMovieV11 = WatchedListMovie.builder()
+                .movie(movie35)
+                .view(view11)
+                .build();
+
+        viewRepository.save(view11);
+        watchListMovieRepository.save(watchedListMovieV11);
+        //endregion
+
+        //-----------------View12----------------//
+        View view12 = View.builder()
+                .profile(profileA6P2)
+                .content(content8)
+                .timeWatchedInMinutes(62f)
+                .watchedDate(new Date())
+                .build();
+
+        WatchedListMovie watchedListMovieV12 = WatchedListMovie.builder()
+                .movie(movie7)
+                .view(view12)
+                .build();
+
+        viewRepository.save(view12);
+        watchListMovieRepository.save(watchedListMovieV12);
+        //endregion
+
+        //-----------------View13----------------//
+        View view13 = View.builder()
+                .profile(profileA3P2)
+                .content(content21)
+                .timeWatchedInMinutes(32f)
+                .watchedDate(new Date())
+                .build();
+
+        WatchedListMovie watchedListMovieV13 = WatchedListMovie.builder()
+                .movie(movie21)
+                .view(view13)
+                .build();
+
+        viewRepository.save(view13);
+        watchListMovieRepository.save(watchedListMovieV13);
+        //endregion
+
+
+        //-----------------View14----------------//
+        View view14 = View.builder()
+                .profile(profileA1P2)
+                .content(content10)
+                .timeWatchedInMinutes(75f)
+                .watchedDate(new Date())
+                .build();
+
+        WatchedListMovie watchedListMovieV14 = WatchedListMovie.builder()
+                .movie(movie9)
+                .view(view14)
+                .build();
+
+        viewRepository.save(view14);
+        watchListMovieRepository.save(watchedListMovieV14);
+        //endregion
+           //-----------------View15----------------//
+        View view15 = View.builder()
+                .profile(profileA1P2)
+                .content(content10)
+                .timeWatchedInMinutes(100f)
+                .watchedDate(new Date())
+                .build();
+
+        WatchedListMovie watchedListMovieV15 = WatchedListMovie.builder()
+                .movie(movie9)
+                .view(view15)
+                .build();
+
+        viewRepository.save(view15);
+        watchListMovieRepository.save(watchedListMovieV15);
+        //endregion
+             //-----------------View16----------------//
+        View view16 = View.builder()
+                .profile(profileA7P2)
+                .content(content11)
+                .timeWatchedInMinutes(79f)
+                .watchedDate(new Date())
+                .build();
+
+        WatchedListMovie watchedListMovieV16 = WatchedListMovie.builder()
+                .movie(movie10)
+                .view(view16)
+                .build();
+
+        viewRepository.save(view16);
+        watchListMovieRepository.save(watchedListMovieV16);
+        //endregion
+
+        //-----------------View17----------------//
+        View view17 = View.builder()
+                .profile(profileA3P2)
+                .content(content42)
+                .timeWatchedInMinutes(54f)
+                .watchedDate(new Date())
+                .build();
+
+        WatchedListMovie watchedListMovieV17 = WatchedListMovie.builder()
+                .movie(movie42)
+                .view(view17)
+                .build();
+
+        viewRepository.save(view17);
+        watchListMovieRepository.save(watchedListMovieV17);
+        //endregion
+
+        //-----------------View18----------------//
+        View view18 = View.builder()
+                .profile(profileA6P2)
+                .content(content32)
+                .timeWatchedInMinutes(64f)
+                .watchedDate(new Date())
+                .build();
+
+        WatchedListMovie watchedListMovieV18 = WatchedListMovie.builder()
+                .movie(movie32)
+                .view(view18)
+                .build();
+
+        viewRepository.save(view18);
+        watchListMovieRepository.save(watchedListMovieV18);
+        //endregion
+
+        //-----------------View19----------------//
+        View view19 = View.builder()
+                .profile(profileA8P1)
+                .content(content23)
+                .timeWatchedInMinutes(24f)
+                .watchedDate(new Date())
+                .build();
+
+        WatchedListMovie watchedListMovieV19 = WatchedListMovie.builder()
+                .movie(movie23)
+                .view(view19)
+                .build();
+
+        viewRepository.save(view19);
+        watchListMovieRepository.save(watchedListMovieV19);
+        //endregion
+
+        //-----------------View20----------------//
+        View view20 = View.builder()
+                .profile(profileA1P3)
+                .content(content101)
+                .timeWatchedInMinutes(45f)
+                .watchedDate(new Date())
+                .build();
+
+        WatchedListEpisode watchedListEpisodeV20 = WatchedListEpisode.builder()
+                .episode(episodeT101S1E8)
+                .view(view20)
+                .build();
+
+        viewRepository.save(view20);
+        watchListEpisodeRepository.save(watchedListEpisodeV20);
         //endregion
 
 

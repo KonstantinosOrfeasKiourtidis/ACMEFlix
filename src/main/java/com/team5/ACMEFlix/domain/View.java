@@ -1,6 +1,7 @@
 package com.team5.ACMEFlix.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
@@ -19,7 +20,9 @@ import java.util.Date;
 @Entity
 @Table(name = "VIEWS")
 @SequenceGenerator(name = "idGenerator", sequenceName = "VIEW_SEQ", initialValue = 1, allocationSize = 1)
+@JsonIgnoreProperties({"Content"})
 public class View extends BaseModel{
+
 
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @ToString.Exclude
@@ -37,6 +40,7 @@ public class View extends BaseModel{
     private Date watchedDate = new Date();
 
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    @JsonIgnore
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @ManyToOne(targetEntity=Content.class, fetch = FetchType.LAZY, optional = false)

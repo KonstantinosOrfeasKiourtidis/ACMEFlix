@@ -68,7 +68,7 @@ public interface ViewRepository extends JpaRepository<View, Long> {
             "CONTENTS.ID AS id, CONTENTS.TITLE AS title, CONTENTS.DESCRIPTION AS description, CONTENTS.CONTENT_TYPE AS contentType, " +
             "CONTENTS.IMAGE_URL AS imageUrl, CONTENTS.IS_AGE_RESTRICTED AS isAgeRestricted, CONTENTS.RELEASE_DATE AS releaseDate, " +
             "CONTENTS.RUNTIME AS runtime, CONTENTS.SPOKEN_LANGUAGE AS spokenLanguage, CONTENTS.TRAILER_URL AS trailerUrl, TV_SERIES.ID AS tvSeriesId, " +
-            "SEASONS.SEASON_NO AS seasonNo, EPISODES.TITLE AS episodeTitle, EPISODES.DESCRIPTION AS episodeDescription, EPISODES.ID AS episodeId, " +
+            "SEASONS.SEASON_NO AS seasonNo, EPISODES.TITLE AS episodeTitle, EPISODES.DESCRIPTION AS episodeDescription, EPISODES.ID AS episodeId, EPISODES.EPISODE_NO AS episodeNo, " +
             "EPISODES.RELEASE_DATE AS episodeReleaseDate, EPISODES.IMAGE_URL AS episodeImageUrl, " +
             "VIEWS.TIME_WATCHED_IN_MINUTES AS timeWatchedInMinutes, VIEWS.WATCHED_DATE AS watchedDate, PROFILES.ID AS profileId " +
             "FROM VIEWS " +

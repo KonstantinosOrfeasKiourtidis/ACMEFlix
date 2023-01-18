@@ -54,8 +54,8 @@ public class ViewController {
     }
 
     @PostMapping(path = "watchEpisode")
-    public ResponseEntity<ApiResponse<ViewResource>> watchEpisode(@Valid @RequestBody WatchEpisodeForm watchEpisodeForm){
-        return new ResponseEntity<>(ApiResponse.<ViewResource>builder().data(viewMapper.toResource(viewService.watchEpisode(watchEpisodeForm))).build(), HttpStatus.CREATED);
+    public ResponseEntity<ApiResponse<View>> watchEpisode(@Valid @RequestBody WatchEpisodeForm watchEpisodeForm){
+        return new ResponseEntity<>(ApiResponse.<View>builder().data(viewService.watchEpisode(watchEpisodeForm)).build(), HttpStatus.CREATED);
     }
 
     @PostMapping(path = "watchMovie")

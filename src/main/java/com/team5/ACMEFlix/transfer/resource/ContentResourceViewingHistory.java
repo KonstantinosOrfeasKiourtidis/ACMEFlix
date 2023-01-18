@@ -35,8 +35,8 @@ public class ContentResourceViewingHistory extends BaseResource {
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private Integer episodeNo;
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
-    private Integer SeasonNo;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private Integer seasonNo;
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private String episodeTitle;
     @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -57,5 +57,4 @@ public class ContentResourceViewingHistory extends BaseResource {
 
     private Float viewingHours;
     private Date watchedDate;
-
 }

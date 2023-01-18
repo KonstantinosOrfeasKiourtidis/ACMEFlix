@@ -8656,6 +8656,61 @@ public class ContentCreator implements CommandLineRunner {
         ratingRepository.save(rating20);
         //endregion
 
+        //region Rating 21
+        //-----------------Rating 21----------------//
+        Rating rating21 = Rating.builder()
+                .rating(8.4f)
+                .profile(profileA2P2)
+                .content(content13)
+                .build();
+
+        ratingRepository.save(rating21);
+        //endregion
+
+        //region Rating 22
+        //-----------------Rating 22----------------//
+        Rating rating22 = Rating.builder()
+                .rating(6.2f)
+                .profile(profileA2P1)
+                .content(content13)
+                .build();
+
+        ratingRepository.save(rating22);
+        //endregion
+
+        //region Rating 23
+        //-----------------Rating 23----------------//
+        Rating rating23 = Rating.builder()
+                .rating(7.2f)
+                .profile(profileA1P3)
+                .content(content15)
+                .build();
+
+        ratingRepository.save(rating23);
+        //endregion
+
+        //region Rating 24
+        //-----------------Rating 24----------------//
+        Rating rating24 = Rating.builder()
+                .rating(5.4f)
+                .profile(profileA3P2)
+                .content(content14)
+                .build();
+
+        ratingRepository.save(rating24);
+        //endregion
+
+        //region Rating 25
+        //-----------------Rating 25----------------//
+        Rating rating25 = Rating.builder()
+                .rating(6.2f)
+                .profile(profileA4P1)
+                .content(content15)
+                .build();
+
+        ratingRepository.save(rating25);
+        //endregion
+
 
 
 
@@ -9006,6 +9061,93 @@ public class ContentCreator implements CommandLineRunner {
         viewRepository.save(view20);
         watchListEpisodeRepository.save(watchedListEpisodeV20);
         //endregion
+
+        //-----------------View21----------------//
+        View view21 = View.builder()
+                .profile(profileA4P2)
+                .content(content13)
+                .timeWatchedInMinutes(30f)
+                .watchedDate(new Date())
+                .build();
+
+        WatchedListEpisode watchedListEpisodeV21 = WatchedListEpisode.builder()
+                .episode(episodeT3S1E2)
+                .view(view21)
+                .build();
+
+        viewRepository.save(view21);
+        watchListEpisodeRepository.save(watchedListEpisodeV21);
+        //endregion
+
+        //-----------------View22----------------//
+        View view22 = View.builder()
+                .profile(profileA1P3)
+                .content(content101)
+                .timeWatchedInMinutes(45f)
+                .watchedDate(new Date())
+                .build();
+
+        WatchedListEpisode watchedListEpisodeV22 = WatchedListEpisode.builder()
+                .episode(episodeT101S1E8)
+                .view(view22)
+                .build();
+
+        viewRepository.save(view22);
+        watchListEpisodeRepository.save(watchedListEpisodeV22);
+        //endregion
+
+        //-----------------View23----------------//
+        View view23 = View.builder()
+                .profile(profileA5P2)
+                .content(content15)
+                .timeWatchedInMinutes(15f)
+                .watchedDate(new Date())
+                .build();
+
+        WatchedListEpisode watchedListEpisodeV23 = WatchedListEpisode.builder()
+                .episode(episodeT5S1E2)
+                .view(view23)
+                .build();
+
+        viewRepository.save(view23);
+        watchListEpisodeRepository.save(watchedListEpisodeV23);
+        //endregion
+
+        //-----------------View24----------------//
+        View view24 = View.builder()
+                .profile(profileA1P3)
+                .content(content9)
+                .timeWatchedInMinutes(80f)
+                .watchedDate(new Date())
+                .build();
+
+        WatchedListMovie WatchedListMovieV24 = WatchedListMovie.builder()
+                .movie(movie8)
+                .view(view24)
+                .build();
+
+        viewRepository.save(view24);
+        watchListMovieRepository.save(WatchedListMovieV24);
+
+        //endregion
+
+        //-----------------View25----------------//
+        View view25 = View.builder()
+                .profile(profileA4P2)
+                .content(content6)
+                .timeWatchedInMinutes(180f)
+                .watchedDate(new Date())
+                .build();
+
+        WatchedListMovie WatchedListMovieV25 = WatchedListMovie.builder()
+                .movie(movie6)
+                .view(view25)
+                .build();
+
+        viewRepository.save(view25);
+        watchListMovieRepository.save(WatchedListMovieV25);
+        //endregion
+
 
 
     }

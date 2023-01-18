@@ -17,7 +17,8 @@ import java.util.Date;
 @ToString(callSuper = true)
 public class ViewResource extends BaseResource {
 
-    private ProfileResource profile;
+
+//    private ProfileResource profile;
 
     @NotNull(message = "View's time watched cannot be null")
     @Min(1)

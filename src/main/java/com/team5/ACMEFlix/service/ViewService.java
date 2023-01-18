@@ -66,11 +66,18 @@ public class ViewService {
     @Transactional(readOnly = true)
     public List<ContentResource> findTop10MostViewedContent() {
         List<Long> contentIds= viewRepository.findTop10MostViewedContent();
-        List<Content> contents = contentRepository.findAllById(contentIds);
+        List<Content> contents = new ArrayList<>();
+        for(Long id : contentIds){
+            contents.add(contentRepository.findById(id).get());
+        }
+
+
+
         List<ContentResource> contentResources = contentMapper.domainToResources(contents);
 
         List<ContentResource> contentResourcesReturn = new ArrayList<>();
         for(ContentResource content: contentResources){
+
             if(content.getContentType().equals(ContentType.MOVIE)){
                 contentResourcesReturn.add(contentMapper.movieToContentResource(movieService.findMovieByContentId(content.getId()).get()));
             }

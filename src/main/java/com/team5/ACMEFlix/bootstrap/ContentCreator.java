@@ -8963,7 +8963,7 @@ public class ContentCreator implements CommandLineRunner {
         //endregion
            //-----------------View15----------------//
         View view15 = View.builder()
-                .profile(profileA1P2)
+                .profile(profileA3P2)
                 .content(content10)
                 .timeWatchedInMinutes(100f)
                 .watchedDate(new Date())
@@ -9081,7 +9081,7 @@ public class ContentCreator implements CommandLineRunner {
 
         //-----------------View22----------------//
         View view22 = View.builder()
-                .profile(profileA1P3)
+                .profile(profileA8P1)
                 .content(content101)
                 .timeWatchedInMinutes(45f)
                 .watchedDate(new Date())

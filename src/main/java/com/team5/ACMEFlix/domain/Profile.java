@@ -29,7 +29,7 @@ public class Profile extends BaseModel{
     @Column(nullable = false)
     private Boolean ageRestricted;
 
-    @JsonBackReference
+
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @ManyToOne(targetEntity=Account.class, fetch = FetchType.LAZY, optional = false)

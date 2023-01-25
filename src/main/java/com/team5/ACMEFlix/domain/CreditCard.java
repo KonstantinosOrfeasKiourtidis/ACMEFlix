@@ -47,7 +47,7 @@ public class CreditCard extends BaseModel{
     @Column(length = 20, nullable = false)
     private CardType cardType;
 
-    @JsonBackReference
+
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @ManyToOne(targetEntity=Account.class, fetch = FetchType.LAZY, optional = false)

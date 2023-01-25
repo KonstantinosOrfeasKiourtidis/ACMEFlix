@@ -233,7 +233,7 @@ public class ViewService {
         accountResourceViewingHours.setCreationDate(accountFound.get().getSubscriptionDate());
         accountResourceViewingHours.setEmail(accountFound.get().getEmail());
 
-        List<Profile> profiles = profileRepository.findProfileByByAccountId(id);
+        List<Profile> profiles = profileRepository.findProfilesByAccount_Id(id);
         List<ProfileResourceViewingHours> profileResourceViewingHoursReturn = new ArrayList<>();
 
         for (int i = 0; i < profiles.size(); i++) {

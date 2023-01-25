@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
@@ -27,6 +29,7 @@ public class View extends BaseModel{
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @ManyToOne(targetEntity=Profile.class, fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name="profile_id")
     private Profile profile;

@@ -45,7 +45,6 @@ public class Address extends BaseModel{
     @Pattern(regexp = "^[A-Za-z ]+$", message="Address's province can only contain alphabetical symbols")
     private String province;
 
-    @JsonBackReference
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @ManyToOne(targetEntity=Account.class, fetch = FetchType.LAZY, optional = false)

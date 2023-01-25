@@ -1,9 +1,5 @@
 package com.team5.ACMEFlix.controller;
 
-import com.team5.ACMEFlix.domain.Account;
-import com.team5.ACMEFlix.forms.LoginForm;
-import com.team5.ACMEFlix.forms.RegisterForm;
-import com.team5.ACMEFlix.forms.SubscribeForm;
 import com.team5.ACMEFlix.mapper.AccountMapper;
 import com.team5.ACMEFlix.mapper.AccountMapper2;
 import com.team5.ACMEFlix.service.AccountService;
@@ -40,11 +36,6 @@ public class AccountController {
         return  new ResponseEntity<>(ApiResponse.<List<AccountResource2>>builder().data(accountMapper2.toResources(accountService.findAllAccounts())).build(), HttpStatus.OK);
     }
 
-    @GetMapping("alternative")
-    public ResponseEntity<ApiResponse<List<AccountResource2>>> findAllAccountsAlternative(){
-        return  new ResponseEntity<>(ApiResponse.<List<AccountResource2>>builder().data(accountMapper2.toResources(accountService.findAllAccounts())).build(), HttpStatus.OK);
-    }
-
     @GetMapping("{id}")
     public ResponseEntity<ApiResponse<AccountResource2>> findAccountById(@PathVariable("id") Long id){
         return new ResponseEntity<>(ApiResponse.<AccountResource2>builder().data(accountMapper2.toResource(accountService.findAccountById(id).get())).build(), HttpStatus.OK);
@@ -76,19 +67,7 @@ public class AccountController {
         accountService.deleteAccountsByIds(ids);
     }
 
-    @ResponseStatus(code = HttpStatus.NO_CONTENT)
-    @PutMapping(path = "updateAccountById/{id}")
-    public void updateAccountByIdPut(
-            @PathVariable("id") Long id,
-            @RequestParam(required = false) String email,
-            @RequestParam(required = false) String firstname,
-            @RequestParam(required = false) String lastname,
-            @RequestParam(required = false) String phoneNo,
-            @RequestParam(required = false) String username,
-            @RequestParam(required = false) String password
-    ){
-        accountService.updateAccountByIdPut(id, email, firstname, lastname, phoneNo, username, password);
-    }
+
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     @PatchMapping(path = "updateAccountById/{id}")
     public void updateAccountByIdPatch(
@@ -96,22 +75,6 @@ public class AccountController {
             @Valid @RequestBody AccountResource account
     ){
         accountService.updateAccountByIdPatch(id, accountMapper.toDomain(account));
-    }
-
-    @PostMapping(path = "login")
-    public ResponseEntity<ApiResponse<Account>> login(@Valid @RequestBody LoginForm loginForm){
-        return new ResponseEntity<>(ApiResponse.<Account>builder().data( accountService.login(loginForm.getEmail(), loginForm.getPassword()).get()).build(), HttpStatus.OK);
-    }
-
-    @PostMapping(path = "register")
-    public ResponseEntity<ApiResponse<Account>> register(@Valid @RequestBody RegisterForm registerForm){
-        return new ResponseEntity<>(ApiResponse.<Account>builder().data( accountService.register(registerForm)).build(), HttpStatus.CREATED);
-    }
-    @ResponseStatus(code = HttpStatus.NO_CONTENT)
-    @PatchMapping(path = "subscribe/{id}")
-    public void subscribe(@PathVariable Long id,
-                         @Valid @RequestBody SubscribeForm subscribeForm){
-        accountService.subscribe(id, subscribeForm);
     }
 
 

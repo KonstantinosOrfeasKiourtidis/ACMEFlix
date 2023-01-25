@@ -4,7 +4,6 @@ import com.team5.ACMEFlix.domain.Account;
 import com.team5.ACMEFlix.domain.Profile;
 import com.team5.ACMEFlix.repository.AccountRepository;
 import com.team5.ACMEFlix.repository.ProfileRepository;
-import com.team5.ACMEFlix.repository.RatingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,8 +17,7 @@ public class ProfileService {
     private ProfileRepository profileRepository;
     @Autowired
     private AccountRepository accountRepository;
-    @Autowired
-    private RatingRepository ratingRepository;
+
 
     @Transactional(readOnly = true)
     public List<Profile> findAllProfiles() {
@@ -29,14 +27,11 @@ public class ProfileService {
     public Optional<Profile> findProfileById(Long id) {
         return profileRepository.findById(id);
     }
-    @Transactional(readOnly = true)
-    public Optional<Profile> findProfileByAccountId(Long id) {
-        return profileRepository.findById(id);
-    }
+
 
     @Transactional(readOnly = true)
     public List<Profile> findAllProfilesByAccountId(Long id) {
-        return profileRepository.findProfileByByAccountId(id);
+        return profileRepository.findProfilesByAccount_Id(id);
     }
 
     @Transactional
@@ -75,7 +70,7 @@ public class ProfileService {
         }
         else{
 
-            ratingRepository.deleteAllByProfileId(id);
+
 
 
             profileRepository.deleteById(id);
@@ -90,39 +85,11 @@ public class ProfileService {
                 throw new NoSuchElementException("Profile does not exist");
             } else {
 
-
-                    ratingRepository.deleteAllByProfileId(id);
-
-
-
-
                 profileRepository.deleteById(id);
             }
         }
     }
-    @Transactional
-    public void updateProfileByIdPut(Long id, String firstname, Boolean ageRestricted, String imageUrl) {
-        Profile profile = profileRepository.findById(id).orElseThrow(() -> new NoSuchElementException(
-                "Profile doesnt not exists"
-        ));
 
-
-        if(firstname !=null && firstname.length() >0 &&
-                !Objects.equals(profile.getFirstname(), firstname)){
-            profile.setFirstname(firstname);
-        }
-
-        if(ageRestricted !=null &&
-                !Objects.equals(profile.getAgeRestricted(), ageRestricted)){
-            profile.setAgeRestricted(ageRestricted);
-        }
-
-        if(imageUrl !=null && imageUrl.length() >0 &&
-                !Objects.equals(profile.getImageUrl(), imageUrl)){
-            profile.setImageUrl(imageUrl);
-        }
-
-    }
     @Transactional
     public void updateProfileByIdPatch(Long id, Profile profile) {
         Profile foundProfile = profileRepository.findById(id).orElseThrow(() -> new NoSuchElementException(

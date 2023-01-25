@@ -16,10 +16,6 @@ public class GlobalExceptionHandler {
 
     private static final String URI_PATH_STR = "uri=";
 
-//    @ExceptionHandler(Exception.class)
-//    public final ResponseEntity<?> handleException(final Exception ex, final WebRequest webRequest){
-//        return new ResponseEntity<>(ApiResponse.builder().apiError(getApiError(ex, HttpStatus.INTERNAL_SERVER_ERROR, webRequest, "General Error")).build(),   HttpStatus.INTERNAL_SERVER_ERROR);
-//    }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public final ResponseEntity<?> handleValidException(final Exception ex, final WebRequest webRequest){

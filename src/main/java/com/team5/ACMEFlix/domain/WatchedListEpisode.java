@@ -3,6 +3,8 @@ package com.team5.ACMEFlix.domain;
 
 import lombok.*;
 import lombok.experimental.SuperBuilder;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 
@@ -19,6 +21,7 @@ import javax.persistence.*;
 public class WatchedListEpisode extends BaseModel {
 
     @OneToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "view_id", referencedColumnName = "id")
     private View view;
 

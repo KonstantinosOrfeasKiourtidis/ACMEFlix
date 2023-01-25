@@ -4,7 +4,6 @@ package com.team5.ACMEFlix.transfer.resource;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.team5.ACMEFlix.domain.enumeration.SubscriptionType;
-import com.team5.ACMEFlix.transfer.BaseResource;
 import lombok.*;
 
 import javax.persistence.*;

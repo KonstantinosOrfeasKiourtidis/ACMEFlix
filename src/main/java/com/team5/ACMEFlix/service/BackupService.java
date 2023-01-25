@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 @Service
-public class DatabaseBackupService {
+public class BackupService {
 
     @Autowired
     private BackupRepository backupRepository;

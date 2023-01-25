@@ -9,7 +9,6 @@ import java.util.List;
 
 @Repository
 public interface ProfileRepository extends JpaRepository<Profile, Long> {
-    @Query(value = "SELECT * FROM PROFILES WHERE ACCOUNT_ID = ?", nativeQuery = true)
-    List<Profile> findProfileByByAccountId(Long id);
+    List<Profile> findProfilesByAccount_Id(Long id);
 
 }

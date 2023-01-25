@@ -1,10 +1,8 @@
 package com.team5.ACMEFlix.transfer.resource;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.team5.ACMEFlix.domain.enumeration.ContentType;
 import com.team5.ACMEFlix.domain.enumeration.TVSeriesStatusType;
-import com.team5.ACMEFlix.transfer.BaseResource;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

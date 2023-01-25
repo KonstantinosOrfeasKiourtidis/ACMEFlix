@@ -62,19 +62,19 @@ public class Account extends BaseModel{
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm:ss.SSS")
     private Date subscriptionDate;
 
-    @JsonManagedReference
+
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @OneToMany(targetEntity=Address.class, fetch = FetchType.LAZY, mappedBy = "account", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Address> address;
 
-    @JsonManagedReference
+
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @OneToMany(targetEntity=CreditCard.class, fetch = FetchType.LAZY, mappedBy = "account", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CreditCard> creditCards;
 
-    @JsonManagedReference
+
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @OneToMany(targetEntity=Profile.class, fetch = FetchType.LAZY, mappedBy = "account", cascade = CascadeType.ALL, orphanRemoval = true)

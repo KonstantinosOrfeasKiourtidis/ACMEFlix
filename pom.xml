@@ -67,11 +67,6 @@
 			<artifactId>h2</artifactId>
 			<scope>runtime</scope>
 		</dependency>
-<!--		<dependency>-->
-<!--			<groupId>com.mysql</groupId>-->
-<!--			<artifactId>mysql-connector-j</artifactId>-->
-<!--			<scope>runtime</scope>-->
-<!--		</dependency>-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-configuration-processor</artifactId>
@@ -199,12 +194,12 @@
 								<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
 							</manifest>
 							<manifestEntries>
-								<Copyright>(c)Code.Hub 2022</Copyright>
+								<Copyright>(c)ACMEFlix 2023</Copyright>
 								<Specification-Title>${project.name}</Specification-Title>
 								<Specification-Version>${project.version}</Specification-Version>
-								<Specification-Vendor>ACMEFlix by Team5</Specification-Vendor>
+								<Specification-Vendor>ACMEFlix by ByteBusters</Specification-Vendor>
 								<Implementation-Title>${project.groupId}.${project.artifactId}</Implementation-Title>
-								<Implementation-Vendor>ACMEFlix by Team5</Implementation-Vendor>
+								<Implementation-Vendor>ACMEFlix by ByteBusters</Implementation-Vendor>
 							</manifestEntries>
 						</archive>
 					</configuration>

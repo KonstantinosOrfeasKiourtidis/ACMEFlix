@@ -37,11 +37,6 @@ public class ProfileController {
         return new ResponseEntity<>(ApiResponse.<ProfileResource>builder().data(profileMapper.toResource(profileService.findProfileById(id).get())).build(), HttpStatus.OK);
     }
 
-    @GetMapping("findProfileByAccountId/{id}")
-    public ResponseEntity<ApiResponse<ProfileResource>> findProfileByAccountId(@PathVariable("id") Long id){
-        return new ResponseEntity<>(ApiResponse.<ProfileResource>builder().data(profileMapper.toResource(profileService.findProfileByAccountId(id).get())).build(), HttpStatus.OK);
-    }
-
     @GetMapping("findAllProfilesByAccountId/{id}")
     public ResponseEntity<ApiResponse<List<ProfileResource>>> findAllProfilesByAccountId(@PathVariable("id") Long id){
         return new ResponseEntity<>(ApiResponse.<List<ProfileResource>>builder().data(profileMapper.toResources(profileService.findAllProfilesByAccountId(id))).build(), HttpStatus.OK);
@@ -65,17 +60,6 @@ public class ProfileController {
     @DeleteMapping(path = "deleteProfilesByIds/{ids}")
     public void deleteProfilesByIds(@PathVariable("ids") List<Long> ids){
         profileService.deleteProfilesByIds(ids);
-    }
-
-    @ResponseStatus(code = HttpStatus.NO_CONTENT)
-    @PutMapping(path = "updateProfileById/{id}")
-    public void updateProfileByIdPut(
-            @PathVariable("id") Long id,
-            @RequestParam(required = false) String firstname,
-            @RequestParam(required = false) Boolean ageRestricted,
-            @RequestParam(required = false) String imageUrl
-    ){
-        profileService.updateProfileByIdPut(id, firstname, ageRestricted, imageUrl);
     }
 
     @ResponseStatus(code = HttpStatus.NO_CONTENT)

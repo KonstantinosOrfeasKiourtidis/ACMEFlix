@@ -5730,6 +5730,292 @@ public class ContentCreator implements CommandLineRunner {
         ratingRepository.save(rating4);
         //endregion
 
+        //region Rating 5
+        //-----------------Rating 5----------------//
+        Rating rating5 = Rating.builder()
+                .rating(6.5)
+                .profile(profileA1P1)
+                .content(movie3)
+                .build();
+
+        ratingRepository.save(rating5);
+        //endregion
+
+        //region Rating 6
+        //-----------------Rating 6----------------//
+        Rating rating6 = Rating.builder()
+                .rating(7.2)
+                .profile(profileA5P1)
+                .content(movie4)
+                .build();
+
+        ratingRepository.save(rating6);
+        //endregion
+
+        //region Rating 7
+        //-----------------Rating 7----------------//
+        Rating rating7 = Rating.builder()
+                .rating(6.3)
+                .profile(profileA2P2)
+                .content(movie5)
+                .build();
+
+        ratingRepository.save(rating7);
+        //endregion
+
+        //region Rating 8
+        //-----------------Rating 8----------------//
+        Rating rating8 = Rating.builder()
+                .rating(6.3)
+                .profile(profileA2P2)
+                .content(movie5)
+                .build();
+
+        ratingRepository.save(rating8);
+        //endregion
+
+        //region Rating 9
+        //-----------------Rating 9----------------//
+        Rating rating9 = Rating.builder()
+                .rating(8.2)
+                .profile(profileA3P1)
+                .content(tvSeries1)
+                .build();
+
+        ratingRepository.save(rating9);
+        //endregion
+
+        //region Rating 10
+        //-----------------Rating 10----------------//
+        Rating rating10 = Rating.builder()
+                .rating(6.1)
+                .profile(profileA3P1)
+                .content(tvSeries1)
+                .build();
+
+        ratingRepository.save(rating10);
+        //endregion
+
+        //region Rating 11
+        //-----------------Rating 11----------------//
+        Rating rating11 = Rating.builder()
+                .rating(6.7)
+                .profile(profileA5P1)
+                .content(tvSeries2)
+                .build();
+
+        ratingRepository.save(rating11);
+        //endregion
+
+        //region Rating 12
+        //-----------------Rating 12----------------//
+        Rating rating12 = Rating.builder()
+                .rating(4.5)
+                .profile(profileA3P1)
+                .content(movie5)
+                .build();
+
+        ratingRepository.save(rating12);
+        //endregion
+
+        //region Rating 13
+        //-----------------Rating 13----------------//
+        Rating rating13 = Rating.builder()
+                .rating(6.7)
+                .profile(profileA4P2)
+                .content(movie6)
+                .build();
+
+        ratingRepository.save(rating13);
+        //endregion
+
+        //region Rating 14
+        //-----------------Rating 14----------------//
+        Rating rating14 = Rating.builder()
+                .rating(4.5)
+                .profile(profileA4P1)
+                .content(tvSeries1)
+                .build();
+
+        ratingRepository.save(rating14);
+        //endregion
+
+        //region Rating 15
+        //-----------------Rating 15----------------//
+        Rating rating15 = Rating.builder()
+                .rating(5.5)
+                .profile(profileA1P1)
+                .content(movie8)
+                .build();
+
+        ratingRepository.save(rating15);
+        //endregion
+
+        //region Rating 16
+        //-----------------Rating 16----------------//
+        Rating rating16 = Rating.builder()
+                .rating(6.2)
+                .profile(profileA3P2)
+                .content(movie11)
+                .build();
+
+        ratingRepository.save(rating16);
+        //endregion
+
+        //region Rating 17
+        //-----------------Rating 17----------------//
+        Rating rating17 = Rating.builder()
+                .rating(6.6)
+                .profile(profileA4P2)
+                .content(movie11)
+                .build();
+
+        ratingRepository.save(rating17);
+        //endregion
+
+        //region Rating 18
+        //-----------------Rating 18----------------//
+        Rating rating18 = Rating.builder()
+                .rating(4.7)
+                .profile(profileA2P1)
+                .content(tvSeries2)
+                .build();
+
+        ratingRepository.save(rating18);
+        //endregion
+
+        //region Rating 19
+        //-----------------Rating 19----------------//
+        Rating rating19 = Rating.builder()
+                .rating(7.4)
+                .profile(profileA5P1)
+                .content(tvSeries2)
+                .build();
+
+        ratingRepository.save(rating19);
+        //endregion
+
+        //region Rating 20
+        //-----------------Rating 20----------------//
+        Rating rating20 = Rating.builder()
+                .rating(5.5)
+                .profile(profileA1P2)
+                .content(tvSeries3)
+                .build();
+
+        ratingRepository.save(rating20);
+        //endregion
+
+        //region Rating 21
+        //-----------------Rating 21----------------//
+        Rating rating21 = Rating.builder()
+                .rating(6.1)
+                .profile(profileA3P3)
+                .content(tvSeries3)
+                .build();
+
+        ratingRepository.save(rating21);
+        //endregion
+
+        //region Rating 22
+        //-----------------Rating 22----------------//
+        Rating rating22 = Rating.builder()
+                .rating(3.2)
+                .profile(profileA4P2)
+                .content(tvSeries4)
+                .build();
+
+        ratingRepository.save(rating22);
+        //endregion
+
+        //region Rating 23
+        //-----------------Rating 23----------------//
+        Rating rating23 = Rating.builder()
+                .rating(6.2)
+                .profile(profileA1P2)
+                .content(tvSeries4)
+                .build();
+
+        ratingRepository.save(rating23);
+        //endregion
+
+        //region Rating 24
+        //-----------------Rating 24----------------//
+        Rating rating24 = Rating.builder()
+                .rating(7.6)
+                .profile(profileA5P2)
+                .content(tvSeries5)
+                .build();
+
+        ratingRepository.save(rating24);
+        //endregion
+
+        //region Rating 25
+        //-----------------Rating 25----------------//
+        Rating rating25 = Rating.builder()
+                .rating(3.4)
+                .profile(profileA3P2)
+                .content(tvSeries5)
+                .build();
+
+        ratingRepository.save(rating25);
+        //endregion
+
+        //region Rating 26
+        //-----------------Rating 26----------------//
+        Rating rating26 = Rating.builder()
+                .rating(6.8)
+                .profile(profileA2P2)
+                .content(tvSeries6)
+                .build();
+
+        ratingRepository.save(rating26);
+        //endregion
+
+        //region Rating 27
+        //-----------------Rating 27----------------//
+        Rating rating27 = Rating.builder()
+                .rating(3.4)
+                .profile(profileA1P2)
+                .content(tvSeries6)
+                .build();
+
+        ratingRepository.save(rating27);
+        //endregion
+
+        //region Rating 28
+        //-----------------Rating 28----------------//
+        Rating rating28 = Rating.builder()
+                .rating(6.7)
+                .profile(profileA5P2)
+                .content(movie14)
+                .build();
+
+        ratingRepository.save(rating28);
+        //endregion
+
+        //region Rating 29
+        //-----------------Rating 29----------------//
+        Rating rating29 = Rating.builder()
+                .rating(7.7)
+                .profile(profileA3P1)
+                .content(movie18)
+                .build();
+
+        ratingRepository.save(rating29);
+        //endregion
+
+        //region Rating 30
+        //-----------------Rating 30----------------//
+        Rating rating30 = Rating.builder()
+                .rating(6.5)
+                .profile(profileA3P1)
+                .content(movie20)
+                .build();
+
+        ratingRepository.save(rating30);
+        //endregion
+
         //region WatchListMovie 1
         //-----------------WatchListMovie 1----------------//
         WatchedListMovie watchListMovie1 = WatchedListMovie.builder()
@@ -5769,6 +6055,162 @@ public class ContentCreator implements CommandLineRunner {
         watchListMovieRepository.save(watchListMovie3);
         //endregion
 
+        //region WatchListMovie 4
+        //-----------------WatchListMovie 4----------------//
+        WatchedListMovie watchListMovie4 = WatchedListMovie.builder()
+                .profile(profileA3P1)
+                .content(movie14)
+                .timeWatchedInMinutes(18f)
+                .watchedDate(new Date())
+                .movie(movie14)
+                .build();
+
+        watchListMovieRepository.save(watchListMovie4);
+        //endregion
+
+        //region WatchListMovie 5
+        //-----------------WatchListMovie 5----------------//
+        WatchedListMovie watchListMovie5 = WatchedListMovie.builder()
+                .profile(profileA4P1)
+                .content(movie18)
+                .timeWatchedInMinutes(32f)
+                .watchedDate(new Date())
+                .movie(movie18)
+                .build();
+
+        watchListMovieRepository.save(watchListMovie5);
+        //endregion
+
+        //region WatchListMovie 6
+        //-----------------WatchListMovie 6----------------//
+        WatchedListMovie watchListMovie6 = WatchedListMovie.builder()
+                .profile(profileA3P1)
+                .content(movie5)
+                .timeWatchedInMinutes(35f)
+                .watchedDate(new Date())
+                .movie(movie5)
+                .build();
+
+        watchListMovieRepository.save(watchListMovie6);
+        //endregion
+
+        //region WatchListMovie 7
+        //-----------------WatchListMovie 7----------------//
+        WatchedListMovie watchListMovie7 = WatchedListMovie.builder()
+                .profile(profileA1P1)
+                .content(movie5)
+                .timeWatchedInMinutes(15f)
+                .watchedDate(new Date())
+                .movie(movie5)
+                .build();
+
+        watchListMovieRepository.save(watchListMovie7);
+        //endregion
+
+        //region WatchListMovie 8
+        //-----------------WatchListMovie 8----------------//
+        WatchedListMovie watchListMovie8 = WatchedListMovie.builder()
+                .profile(profileA1P1)
+                .content(movie7)
+                .timeWatchedInMinutes(15f)
+                .watchedDate(new Date())
+                .movie(movie7)
+                .build();
+
+        watchListMovieRepository.save(watchListMovie8);
+        //endregion
+
+        //region WatchListMovie 9
+        //-----------------WatchListMovie 9----------------//
+        WatchedListMovie watchListMovie9 = WatchedListMovie.builder()
+                .profile(profileA3P1)
+                .content(movie7)
+                .timeWatchedInMinutes(25f)
+                .watchedDate(new Date())
+                .movie(movie7)
+                .build();
+
+        watchListMovieRepository.save(watchListMovie9);
+        //endregion
+
+        //region WatchListMovie 10
+        //-----------------WatchListMovie 10----------------//
+        WatchedListMovie watchListMovie10 = WatchedListMovie.builder()
+                .profile(profileA4P1)
+                .content(movie9)
+                .timeWatchedInMinutes(65f)
+                .watchedDate(new Date())
+                .movie(movie9)
+                .build();
+
+        watchListMovieRepository.save(watchListMovie10);
+        //endregion
+
+        //region WatchListMovie 11
+        //-----------------WatchListMovie 11----------------//
+        WatchedListMovie watchListMovie11 = WatchedListMovie.builder()
+                .profile(profileA5P1)
+                .content(movie10)
+                .timeWatchedInMinutes(45f)
+                .watchedDate(new Date())
+                .movie(movie10)
+                .build();
+
+        watchListMovieRepository.save(watchListMovie11);
+        //endregion
+
+        //region WatchListMovie 12
+        //-----------------WatchListMovie 12----------------//
+        WatchedListMovie watchListMovie12 = WatchedListMovie.builder()
+                .profile(profileA2P1)
+                .content(movie11)
+                .timeWatchedInMinutes(55f)
+                .watchedDate(new Date())
+                .movie(movie11)
+                .build();
+
+        watchListMovieRepository.save(watchListMovie12);
+        //endregion
+
+        //region WatchListMovie 13
+        //-----------------WatchListMovie 13----------------//
+        WatchedListMovie watchListMovie13 = WatchedListMovie.builder()
+                .profile(profileA3P1)
+                .content(movie12)
+                .timeWatchedInMinutes(25f)
+                .watchedDate(new Date())
+                .movie(movie12)
+                .build();
+
+        watchListMovieRepository.save(watchListMovie13);
+        //endregion
+
+        //region WatchListMovie 14
+        //-----------------WatchListMovie 14----------------//
+        WatchedListMovie watchListMovie14 = WatchedListMovie.builder()
+                .profile(profileA5P1)
+                .content(movie16)
+                .timeWatchedInMinutes(45f)
+                .watchedDate(new Date())
+                .movie(movie16)
+                .build();
+
+        watchListMovieRepository.save(watchListMovie14);
+        //endregion
+
+        //region WatchListMovie 15
+        //-----------------WatchListMovie 15----------------//
+        WatchedListMovie watchListMovie15 = WatchedListMovie.builder()
+                .profile(profileA1P1)
+                .content(movie16)
+                .timeWatchedInMinutes(65f)
+                .watchedDate(new Date())
+                .movie(movie16)
+                .build();
+
+        watchListMovieRepository.save(watchListMovie15);
+        //endregion
+
         //region WatchListEpisode 1
         //-----------------WatchListEpisode 1----------------//
         WatchedListEpisode watchListEpisode1 = WatchedListEpisode.builder()
@@ -5795,6 +6237,174 @@ public class ContentCreator implements CommandLineRunner {
         watchListEpisodeRepository.save(watchListEpisode2);
         //endregion
 
+        //region WatchListEpisode 3
+        //-----------------WatchListEpisode 3----------------//
+        WatchedListEpisode watchListEpisode3 = WatchedListEpisode.builder()
+                .profile(profileA2P1)
+                .content(tvSeries2)
+                .timeWatchedInMinutes(34f)
+                .watchedDate(new Date())
+                .episode(episodeT101S1E2)
+                .build();
+
+        watchListEpisodeRepository.save(watchListEpisode3);
+        //endregion
+
+        //region WatchListEpisode 4
+        //-----------------WatchListEpisode 4----------------//
+        WatchedListEpisode watchListEpisode4 = WatchedListEpisode.builder()
+                .profile(profileA5P1)
+                .content(tvSeries2)
+                .timeWatchedInMinutes(14f)
+                .watchedDate(new Date())
+                .episode(episodeT101S1E2)
+                .build();
+
+        watchListEpisodeRepository.save(watchListEpisode4);
+        //endregion
+
+        //region WatchListEpisode 5
+        //-----------------WatchListEpisode 5----------------//
+        WatchedListEpisode watchListEpisode5 = WatchedListEpisode.builder()
+                .profile(profileA6P1)
+                .content(tvSeries3)
+                .timeWatchedInMinutes(4f)
+                .watchedDate(new Date())
+                .episode(episodeT2S1E1)
+                .build();
+
+        watchListEpisodeRepository.save(watchListEpisode5);
+        //endregion
+
+        //region WatchListEpisode 6
+        //-----------------WatchListEpisode 6----------------//
+        WatchedListEpisode watchListEpisode6 = WatchedListEpisode.builder()
+                .profile(profileA7P2)
+                .content(tvSeries3)
+                .timeWatchedInMinutes(14f)
+                .watchedDate(new Date())
+                .episode(episodeT2S1E5)
+                .build();
+
+        watchListEpisodeRepository.save(watchListEpisode6);
+        //endregion
+
+        //region WatchListEpisode 7
+        //-----------------WatchListEpisode 7----------------//
+        WatchedListEpisode watchListEpisode7 = WatchedListEpisode.builder()
+                .profile(profileA8P2)
+                .content(tvSeries3)
+                .timeWatchedInMinutes(24f)
+                .watchedDate(new Date())
+                .episode(episodeT2S6E5)
+                .build();
+
+        watchListEpisodeRepository.save(watchListEpisode7);
+        //endregion
+
+        //region WatchListEpisode 8
+        //-----------------WatchListEpisode 8----------------//
+        WatchedListEpisode watchListEpisode8 = WatchedListEpisode.builder()
+                .profile(profileA1P2)
+                .content(tvSeries4)
+                .timeWatchedInMinutes(25f)
+                .watchedDate(new Date())
+                .episode(episodeT3S1E8)
+                .build();
+
+        watchListEpisodeRepository.save(watchListEpisode8);
+        //endregion
+
+        //region WatchListEpisode 9
+        //-----------------WatchListEpisode 9----------------//
+        WatchedListEpisode watchListEpisode9 = WatchedListEpisode.builder()
+                .profile(profileA3P2)
+                .content(tvSeries4)
+                .timeWatchedInMinutes(17f)
+                .watchedDate(new Date())
+                .episode(episodeT3S1E5)
+                .build();
+
+        watchListEpisodeRepository.save(watchListEpisode9);
+        //endregion
+
+        //region WatchListEpisode 10
+        //-----------------WatchListEpisode 10----------------//
+        WatchedListEpisode watchListEpisode10 = WatchedListEpisode.builder()
+                .profile(profileA5P2)
+                .content(tvSeries4)
+                .timeWatchedInMinutes(29f)
+                .watchedDate(new Date())
+                .episode(episodeT3S1E1)
+                .build();
+
+        watchListEpisodeRepository.save(watchListEpisode10);
+        //endregion
+
+        //region WatchListEpisode 11
+        //-----------------WatchListEpisode 11----------------//
+        WatchedListEpisode watchListEpisode11 = WatchedListEpisode.builder()
+                .profile(profileA8P2)
+                .content(tvSeries5)
+                .timeWatchedInMinutes(19f)
+                .watchedDate(new Date())
+                .episode(episodeT4S1E2)
+                .build();
+
+        watchListEpisodeRepository.save(watchListEpisode11);
+        //endregion
+
+        //region WatchListEpisode 12
+        //-----------------WatchListEpisode 12----------------//
+        WatchedListEpisode watchListEpisode12 = WatchedListEpisode.builder()
+                .profile(profileA9P2)
+                .content(tvSeries5)
+                .timeWatchedInMinutes(39f)
+                .watchedDate(new Date())
+                .episode(episodeT4S1E8)
+                .build();
+
+        watchListEpisodeRepository.save(watchListEpisode11);
+        //endregion
+
+        //region WatchListEpisode 13
+        //-----------------WatchListEpisode 13----------------//
+        WatchedListEpisode watchListEpisode13 = WatchedListEpisode.builder()
+                .profile(profileA3P2)
+                .content(tvSeries6)
+                .timeWatchedInMinutes(31f)
+                .watchedDate(new Date())
+                .episode(episodeT5S1E1)
+                .build();
+
+        watchListEpisodeRepository.save(watchListEpisode13);
+        //endregion
+
+        //region WatchListEpisode 14
+        //-----------------WatchListEpisode 14----------------//
+        WatchedListEpisode watchListEpisode14 = WatchedListEpisode.builder()
+                .profile(profileA6P2)
+                .content(tvSeries6)
+                .timeWatchedInMinutes(11f)
+                .watchedDate(new Date())
+                .episode(episodeT5S5E3)
+                .build();
+
+        watchListEpisodeRepository.save(watchListEpisode14);
+        //endregion
+
+        //region WatchListEpisode 15
+        //-----------------WatchListEpisode 15----------------//
+        WatchedListEpisode watchListEpisode15 = WatchedListEpisode.builder()
+                .profile(profileA8P2)
+                .content(tvSeries10)
+                .timeWatchedInMinutes(18f)
+                .watchedDate(new Date())
+                .episode(episodeT49S1E2)
+                .build();
+
+        watchListEpisodeRepository.save(watchListEpisode15);
+        //endregion
 
     }
 }

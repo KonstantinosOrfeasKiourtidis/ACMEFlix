@@ -3,7 +3,6 @@ package com.team5.ACMEFlix.service;
 import com.team5.ACMEFlix.domain.Content;
 import com.team5.ACMEFlix.domain.Profile;
 import com.team5.ACMEFlix.domain.Rating;
-import com.team5.ACMEFlix.forms.RatingForm;
 import com.team5.ACMEFlix.repository.ContentRepository;
 import com.team5.ACMEFlix.repository.ProfileRepository;
 import com.team5.ACMEFlix.repository.RatingRepository;
@@ -27,6 +26,16 @@ public class RatingService {
     private ContentRepository contentRepository;
 
 
+    @Transactional(readOnly = true)
+    public List<Rating> findAllRatings() {
+        return ratingRepository.findAll();
+    }
+
+    @Transactional(readOnly = true)
+    public Optional<Rating> findRatingById(Long id) {
+        return ratingRepository.findById(id);
+    }
+
     @Transactional
     public Rating addRating(Rating rating) {
 
@@ -47,7 +56,7 @@ public class RatingService {
                 throw new IllegalStateException("The profile does not exist");
             }
             Optional<Content> contentExists = contentRepository.findById(rating.getContent().getId());
-            if(!profileExists.isPresent()){
+            if(!contentExists.isPresent()){
                 throw new IllegalStateException("The content does not exist");
             }
 
@@ -76,7 +85,7 @@ public class RatingService {
                 throw new NoSuchElementException("The profile does not exist");
             }
             Optional<Content> contentExists = contentRepository.findById(rating.getContent().getId());
-            if(!profileExists.isPresent()){
+            if(!contentExists.isPresent()){
                 throw new NoSuchElementException("The content does not exist");
             }
 
@@ -107,72 +116,6 @@ public class RatingService {
                 ratingRepository.deleteById(id);
             }
         }
-    }
-
-    @Transactional
-    public void deleteRatingByContentIdAndProfileId(RatingForm ratingForm) {
-        if(ratingForm.getProfile_id() == null){
-            throw new IllegalStateException("The rating must include a profile id");
-        }
-
-        if(ratingForm.getContent_id() == null){
-            throw new IllegalStateException("The rating must include a content id");
-        }
-
-        Optional<Profile> profileExists = profileRepository.findById(ratingForm.getProfile_id());
-        if(!profileExists.isPresent()){
-            throw new NoSuchElementException("The profile does not exist");
-        }
-        Optional<Content> contentExists = contentRepository.findById(ratingForm.getProfile_id());
-        if(!profileExists.isPresent()){
-            throw new NoSuchElementException("The content does not exist");
-        }
-
-        Optional<Rating> ratingExists = ratingRepository.findRatingByProfileIdAndContentId(ratingForm.getProfile_id() , ratingForm.getContent_id());
-        if(ratingExists.isPresent()){
-            ratingRepository.deleteById(ratingExists.get().getId());
-        }
-    }
-
-    @Transactional
-    public void rate(RatingForm ratingForm) {
-
-        if(!(ratingForm.getRating() > 0 && ratingForm.getRating() <= 10)){
-            throw new IllegalStateException("The rating must be between 1 and 10");
-        }
-
-        if(ratingForm.getProfile_id() == null){
-            throw new IllegalStateException("The rating must include a profile id");
-        }
-
-        if(ratingForm.getContent_id() == null){
-            throw new IllegalStateException("The rating must include a content id");
-        }
-
-        Optional<Profile> profileExists = profileRepository.findById(ratingForm.getProfile_id());
-        if(!profileExists.isPresent()){
-            throw new NoSuchElementException("The profile does not exist");
-        }
-        Optional<Content> contentExists = contentRepository.findById(ratingForm.getContent_id());
-        if(!profileExists.isPresent()){
-            throw new NoSuchElementException("The content does not exist");
-        }
-
-
-
-        Optional<Rating> ratingExists = ratingRepository.findRatingByProfileIdAndContentId(ratingForm.getProfile_id() ,ratingForm.getContent_id());
-        if(ratingExists.isPresent()){
-            ratingExists.get().setRating(ratingForm.getRating());
-        }
-        else{
-            Rating rating = new Rating();
-            rating.setRating(ratingForm.getRating());
-            rating.setProfile(profileExists.get());
-            rating.setContent(contentExists.get());
-            ratingRepository.save(rating);
-        }
-
-
     }
 
     @Transactional

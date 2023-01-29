@@ -35,19 +35,9 @@ public class DirectorController {
         return new ResponseEntity<>(ApiResponse.<DirectorResource>builder().data(directorMapper.toResource(directorService.findDirectorById(id).get())).build(), HttpStatus.OK);
     }
 
-    @GetMapping("findAllDirectorsByContentId/{id}")
+    @GetMapping("findAllDirectorsByMovieId/{id}")
     public ResponseEntity<ApiResponse<List<DirectorResource>>> findAllDirectorsByContentId(@PathVariable("id") Long id){
-        return  new ResponseEntity<>(ApiResponse.<List<DirectorResource>>builder().data(directorMapper.toResources(directorService.findAllDirectorsByContentId(id))).build(), HttpStatus.OK);
-    }
-
-    @PostMapping(path = "addDirectorByContentId/{id}")
-    public ResponseEntity<ApiResponse<DirectorResource>> addDirectorByContentId(@PathVariable("id") Long id, @Valid @RequestBody DirectorResource director){
-        return new ResponseEntity<>(ApiResponse.<DirectorResource>builder().data(directorMapper.toResource(directorService.addDirectorByContentId(id, directorMapper.toDomain(director)))).build(), HttpStatus.CREATED);
-    }
-
-    @PostMapping(path = "addDirectorsByContentId/{id}")
-    public ResponseEntity<ApiResponse<List<DirectorResource>>> addDirectorsByContentId(@PathVariable("id") Long id, @Valid @RequestBody List<DirectorResource> directors){
-        return  new ResponseEntity<>(ApiResponse.<List<DirectorResource>>builder().data(directorMapper.toResources(directorService.addDirectosrByContentId(id, directorMapper.toDomains(directors)))).build(), HttpStatus.OK);
+        return  new ResponseEntity<>(ApiResponse.<List<DirectorResource>>builder().data(directorMapper.toResources(directorService.findAllDirectorsByMovieId(id))).build(), HttpStatus.OK);
     }
 
     @PostMapping(path = "addDirectorByMovieId/{id}")

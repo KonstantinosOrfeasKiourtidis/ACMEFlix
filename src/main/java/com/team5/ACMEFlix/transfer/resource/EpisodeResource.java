@@ -3,7 +3,6 @@ package com.team5.ACMEFlix.transfer.resource;
 
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
 import javax.persistence.Column;
 import javax.validation.constraints.Min;
@@ -11,7 +10,6 @@ import javax.validation.constraints.NotNull;
 
 @Getter
 @Setter
-@ToString(callSuper = true)
 public class EpisodeResource extends BaseResource {
     @NotNull(message = "Episode's title cannot be null")
     @Column(length = 50, nullable = false)

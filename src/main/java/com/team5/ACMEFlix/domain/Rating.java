@@ -1,7 +1,5 @@
 package com.team5.ACMEFlix.domain;
 
-
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.OnDelete;
@@ -25,9 +23,8 @@ public class Rating extends BaseModel {
     @Min(0)
     @Max(10)
     @NotNull(message = "Rating cannot be null")
-    private Float rating;
+    private Double rating;
 
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @OnDelete(action = OnDeleteAction.CASCADE)
@@ -35,7 +32,6 @@ public class Rating extends BaseModel {
     @JoinColumn(name="profile_id")
     private Profile profile;
 
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @ManyToOne(targetEntity=Content.class, fetch = FetchType.LAZY, optional = false)

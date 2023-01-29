@@ -2,14 +2,12 @@ package com.team5.ACMEFlix.transfer.resource;
 
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
 import javax.persistence.Column;
 import javax.validation.constraints.NotNull;
 
 @Getter
 @Setter
-@ToString(callSuper = true)
 public class CreatorResource extends BaseResource {
     @NotNull(message = "Creator's name cannot be null")
     @Column(length = 150, nullable = false)

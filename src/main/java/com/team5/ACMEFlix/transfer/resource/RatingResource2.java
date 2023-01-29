@@ -10,12 +10,14 @@ import javax.validation.constraints.NotNull;
 
 @Getter
 @Setter
-public class RatingResource extends BaseResource {
+public class RatingResource2 extends BaseResource {
     @Min(0)
     @Max(10)
     @NotNull(message = "Rating cannot be null")
     private Double rating;
 
     private ProfileResource profile;
+
+    private ContentResource content;
 
 }

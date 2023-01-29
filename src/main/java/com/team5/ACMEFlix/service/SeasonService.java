@@ -1,11 +1,8 @@
 package com.team5.ACMEFlix.service;
 
-import com.team5.ACMEFlix.domain.Content;
 import com.team5.ACMEFlix.domain.Episode;
 import com.team5.ACMEFlix.domain.Season;
 import com.team5.ACMEFlix.domain.TVSeries;
-import com.team5.ACMEFlix.domain.enumeration.ContentType;
-import com.team5.ACMEFlix.repository.ContentRepository;
 import com.team5.ACMEFlix.repository.EpisodeRepository;
 import com.team5.ACMEFlix.repository.SeasonRepository;
 import com.team5.ACMEFlix.repository.TVSeriesRepository;
@@ -24,8 +21,6 @@ public class SeasonService {
     @Autowired
     private SeasonRepository seasonRepository;
     @Autowired
-    private ContentRepository contentRepository;
-    @Autowired
     private TVSeriesRepository tVSeriesRepository;
     @Autowired
     private EpisodeRepository episodeRepository;
@@ -40,8 +35,8 @@ public class SeasonService {
     }
 
     @Transactional(readOnly = true)
-    public List<Season> findAllSeasonsByContentId(Long id) {
-        Optional<TVSeries> tvSeries = tVSeriesRepository.findTVSeriesByContentId(id);
+    public List<Season> findAllSeasonsByTVSeriesId(Long id) {
+        Optional<TVSeries> tvSeries = tVSeriesRepository.findById(id);
         if(!tvSeries.isPresent()){
             throw new NoSuchElementException("TV Series does not exist");
         }
@@ -57,7 +52,6 @@ public class SeasonService {
             throw new NoSuchElementException("TV Series does not exist");
         }
         else{
-            System.out.println(tvSeriesExists.get() + "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
             season.setTvSeries(tvSeriesExists.get());
             season.getEpisodes()
                     .forEach(e -> e.setSeason(season));
@@ -79,58 +73,6 @@ public class SeasonService {
                         .forEach(e -> e.setSeason(season));
                 seasonRepository.save(season);
             }
-        }
-        return seasons;
-    }
-
-    @Transactional
-    public Season addSeasonByContentId(Long id, Season season) {
-        Optional<Content> contentExists = contentRepository.findById(id);
-        if(!contentExists.isPresent()){
-            throw new NoSuchElementException("Content does not exist");
-        }
-        else if(!contentExists.get().getContentType().equals(ContentType.TV_SERIES)){
-            throw new IllegalStateException("Content is not a tv series");
-        }
-        else{
-            Optional<TVSeries> tvSeriesExists = tVSeriesRepository.findTVSeriesByContentId(id);
-            if(!tvSeriesExists.isPresent()){
-                throw new NoSuchElementException("TV Series does not exist");
-            }
-            else {
-                season.setTvSeries(tvSeriesExists.get());
-                season.getEpisodes()
-                        .forEach(e -> e.setSeason(season));
-                seasonRepository.save(season);
-            }
-
-        }
-        return season;
-    }
-    @Transactional
-    public List<Season> addSeasonsByContentId(Long id, List<Season> seasons) {
-        Optional<Content> contentExists = contentRepository.findById(id);
-        if(!contentExists.isPresent()){
-            throw new NoSuchElementException("Content does not exist");
-        }
-        else if(!contentExists.get().getContentType().equals(ContentType.TV_SERIES)){
-            throw new IllegalStateException("Content is not a tv series");
-        }
-        else {
-            Optional<TVSeries> tvSeriesExists = tVSeriesRepository.findTVSeriesByContentId(id);
-            if (!tvSeriesExists.isPresent()) {
-                throw new NoSuchElementException("TV Series does not exist");
-            } else {
-                for (Season season : seasons) {
-                    season.setTvSeries(tvSeriesExists.get());
-                    season.getEpisodes()
-                            .forEach(e -> e.setSeason(season));
-                    seasonRepository.save(season);
-                }
-
-            }
-
-
         }
         return seasons;
     }

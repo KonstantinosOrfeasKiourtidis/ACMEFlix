@@ -35,19 +35,9 @@ public class WriterController {
         return  new ResponseEntity<>(ApiResponse.<WriterResource>builder().data(writerMapper.toResource(writerService.findWriterById(id).get())).build(), HttpStatus.OK);
     }
 
-    @GetMapping("findAllWritersByContentId/{id}")
+    @GetMapping("findAllWritersByMovieId/{id}")
     public ResponseEntity<ApiResponse<List<WriterResource>>> findAllWritersByContentId(@PathVariable("id") Long id){
-        return  new ResponseEntity<>(ApiResponse.<List<WriterResource>>builder().data(writerMapper.toResources(writerService.findAllWritersByContentId(id))).build(), HttpStatus.OK);
-    }
-
-    @PostMapping(path = "addWriterByContentId/{id}")
-    public ResponseEntity<ApiResponse<WriterResource>> addWriterByContentId(@PathVariable("id") Long id, @Valid @RequestBody WriterResource writer){
-        return  new ResponseEntity<>(ApiResponse.<WriterResource>builder().data(writerMapper.toResource(writerService.addWriterByContentId(id, writerMapper.toDomain(writer)))).build(), HttpStatus.CREATED);
-    }
-
-    @PostMapping(path = "addWritersByContentId/{id}")
-    public ResponseEntity<ApiResponse<List<WriterResource>>> addWritersByContentId(@PathVariable("id") Long id, @Valid @RequestBody List<WriterResource> writers){
-        return  new ResponseEntity<>(ApiResponse.<List<WriterResource>>builder().data(writerMapper.toResources(writerService.addWritersByContentId(id, writerMapper.toDomains(writers)))).build(), HttpStatus.CREATED);
+        return  new ResponseEntity<>(ApiResponse.<List<WriterResource>>builder().data(writerMapper.toResources(writerService.findAllWritersByMovieId(id))).build(), HttpStatus.OK);
     }
 
     @PostMapping(path = "addWriterByMovieId/{id}")

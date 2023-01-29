@@ -1,12 +1,8 @@
 package com.team5.ACMEFlix.transfer.resource;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.team5.ACMEFlix.domain.enumeration.ContentType;
-import com.team5.ACMEFlix.domain.enumeration.TVSeriesStatusType;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
 import javax.persistence.*;
 import javax.validation.constraints.Max;
@@ -17,7 +13,6 @@ import java.util.List;
 
 @Getter
 @Setter
-@ToString(callSuper = true)
 public class ContentResource extends BaseResource {
     @NotNull(message = "Content's title cannot be null")
     @Column(length = 50, nullable = false)
@@ -43,12 +38,8 @@ public class ContentResource extends BaseResource {
     @NotNull(message = "Content's age restriction cannot be null")
     private Boolean isAgeRestricted;
 
-    @ToString.Exclude
-    @EqualsAndHashCode.Exclude
     private List<GenreResource> genres;
 
-    @ToString.Exclude
-    @EqualsAndHashCode.Exclude
     private List<ActorResource> actors;
 
     @NotNull(message = "Content's type cannot be null")
@@ -60,23 +51,11 @@ public class ContentResource extends BaseResource {
     @Min(0)
     private Integer runtime;
 
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    private List<SeasonResource> seasons;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    private List<CreatorResource> creators;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    private TVSeriesStatusType tvSeriesStatusType;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    private List<WriterResource> writers;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    private List<DirectorResource> directors;
-
     @Min(0)
     @Max(10)
-    private Float rating;
+    private Double rating;
 
     private Integer profileNo;
 
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private List<RatingResource> ratings;
 }

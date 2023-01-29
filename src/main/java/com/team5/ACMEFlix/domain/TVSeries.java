@@ -1,6 +1,5 @@
 package com.team5.ACMEFlix.domain;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.team5.ACMEFlix.domain.enumeration.TVSeriesStatusType;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
@@ -18,15 +17,13 @@ import java.util.List;
 @Entity
 @Table(name = "TV_SERIES")
 @SequenceGenerator(name = "idGenerator", sequenceName = "TV_SERIES_SEQ", initialValue = 1, allocationSize = 1)
-public class TVSeries extends BaseModel {
+public class TVSeries extends Content {
 
-    @JsonManagedReference
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @OneToMany(targetEntity=Season.class, fetch = FetchType.LAZY, mappedBy = "tvSeries", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Season> seasons;
 
-    @JsonManagedReference
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @OneToMany(targetEntity=Creator.class, fetch = FetchType.LAZY, mappedBy = "tvSeries", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -37,7 +34,4 @@ public class TVSeries extends BaseModel {
     @Column(length = 20, nullable = false)
     private TVSeriesStatusType tvSeriesStatusType;
 
-    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "content_id", referencedColumnName = "id")
-    private Content content;
 }

@@ -34,19 +34,9 @@ public class  CreatorController {
         return new ResponseEntity<>(ApiResponse.<CreatorResource>builder().data(creatorMapper.toResource(creatorService.findCreatorById(id).get())).build(), HttpStatus.OK);
     }
 
-    @GetMapping("findAllCreatorsByContentId/{id}")
+    @GetMapping("findAllCreatorsByTVSeriesId/{id}")
     public ResponseEntity<ApiResponse<List<CreatorResource>>>findAllCreatorsByContentId(@PathVariable("id") Long id){
-        return new ResponseEntity<>(ApiResponse.<List<CreatorResource>>builder().data(creatorMapper.toResources(creatorService.findAllCreatorsByContentId(id))).build(), HttpStatus.OK);
-    }
-
-    @PostMapping(path = "addCreatorByContentId/{id}")
-    public ResponseEntity<ApiResponse<CreatorResource>> addCreatorByContentId(@PathVariable("id") Long id, @Valid @RequestBody CreatorResource creator){
-        return new ResponseEntity<>(ApiResponse.<CreatorResource>builder().data(creatorMapper.toResource(creatorService.addCreatorByContentId(id, creatorMapper.toDomain(creator)))).build(), HttpStatus.CREATED);
-    }
-
-    @PostMapping(path = "addCreatorsByContentId/{id}")
-    public ResponseEntity<ApiResponse<List<CreatorResource>>> addCreatorsByContentId(@PathVariable("id") Long id, @Valid @RequestBody List<CreatorResource> creators){
-        return  new ResponseEntity<>(ApiResponse.<List<CreatorResource>>builder().data(creatorMapper.toResources(creatorService.addCreatorsByContentId(id, creatorMapper.toDomains(creators)))).build(), HttpStatus.CREATED);
+        return new ResponseEntity<>(ApiResponse.<List<CreatorResource>>builder().data(creatorMapper.toResources(creatorService.findAllCreatorsByTVSeriesId(id))).build(), HttpStatus.OK);
     }
 
     @PostMapping(path = "addCreatorByTVSeriesId/{id}")

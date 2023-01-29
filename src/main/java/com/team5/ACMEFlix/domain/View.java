@@ -23,10 +23,9 @@ import java.util.Date;
 @Table(name = "VIEWS")
 @SequenceGenerator(name = "idGenerator", sequenceName = "VIEW_SEQ", initialValue = 1, allocationSize = 1)
 @JsonIgnoreProperties({"Content"})
+@Inheritance(strategy = InheritanceType.JOINED)
 public class View extends BaseModel{
 
-
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @OnDelete(action = OnDeleteAction.CASCADE)
@@ -42,7 +41,6 @@ public class View extends BaseModel{
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm:ss.SSS")
     private Date watchedDate = new Date();
 
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @JsonIgnore
     @ToString.Exclude
     @EqualsAndHashCode.Exclude

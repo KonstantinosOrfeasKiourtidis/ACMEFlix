@@ -31,8 +31,8 @@ public class EpisodeService {
         return episodeRepository.findById(id);
     }
     @Transactional(readOnly = true)
-    public List<Episode> findAllEpisodesByContentId(Long id) {
-        Optional<TVSeries> tvSeries = tVSeriesRepository.findTVSeriesByContentId(id);
+    public List<Episode> findAllEpisodesByTVSeriesId(Long id) {
+        Optional<TVSeries> tvSeries = tVSeriesRepository.findById(id);
         if(!tvSeries.isPresent()){
             throw new NoSuchElementException("TV Series does not exist");
         }
@@ -49,23 +49,10 @@ public class EpisodeService {
 
     @Transactional(readOnly = true)
     public List<Episode> findAllEpisodesByTitle(String search) {
-        return episodeRepository.findEpisodesByName(search);
+        return episodeRepository.findEpisodesByTitleContainingIgnoreCase(search);
 
     }
 
-    @Transactional(readOnly = true)
-    public List<Long> findAllEpisodesByEpisodeName(String search, List<Long> contentIds) {
-        List<Episode> episodes = episodeRepository.findEpisodesByName(search);
-        for (Episode episode : episodes){
-            if(!contentIds.contains(episode.getSeason().getTvSeries().getContent().getId())) {
-                contentIds.add(episode.getSeason().getTvSeries().getContent().getId());
-
-            }
-        }
-
-        return contentIds;
-
-    }
 
     @Transactional
     public Episode addEpisodeBySeasonId(Long id, Episode episode) {

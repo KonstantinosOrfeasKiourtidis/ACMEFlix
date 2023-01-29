@@ -1,6 +1,5 @@
 package com.team5.ACMEFlix.domain;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.team5.ACMEFlix.domain.enumeration.ContentType;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
@@ -20,6 +19,7 @@ import java.util.List;
 @Entity
 @Table(name = "CONTENTS", indexes = {@Index(columnList = "title")})
 @SequenceGenerator(name = "idGenerator", sequenceName = "CONTENTS_SEQ", initialValue = 1, allocationSize = 1)
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Content extends BaseModel {
 
     @NotNull(message = "Content's title cannot be null")
@@ -48,13 +48,11 @@ public class Content extends BaseModel {
     @NotNull(message = "Content's age restriction cannot be null")
     private Boolean isAgeRestricted;
 
-    @JsonManagedReference
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @OneToMany(targetEntity=Genre.class, fetch = FetchType.LAZY, mappedBy = "content", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Genre> genres;
 
-    @JsonManagedReference
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @OneToMany(targetEntity=Actor.class, fetch = FetchType.LAZY, mappedBy = "content", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -69,7 +67,6 @@ public class Content extends BaseModel {
     @Min(0)
     private Integer runtime;
 
-    @JsonManagedReference
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @OneToMany(targetEntity=Rating.class, fetch = FetchType.LAZY, mappedBy = "content", cascade = CascadeType.ALL, orphanRemoval = true)

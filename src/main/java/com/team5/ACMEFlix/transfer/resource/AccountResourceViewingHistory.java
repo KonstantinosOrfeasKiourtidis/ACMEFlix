@@ -1,23 +1,26 @@
 package com.team5.ACMEFlix.transfer.resource;
 
-
-
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.team5.ACMEFlix.domain.enumeration.SubscriptionType;
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import java.util.Date;
 import java.util.List;
 
+@NoArgsConstructor
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
-public class AccountResourceViewingHistory extends BaseResource {
+@ToString(callSuper = true)
+public class AccountResourceViewingHistory extends BaseResource{
     @NotNull(message = "Account's email cannot be null")
     @Column(length = 50, nullable = false, unique = true)
     @Email
@@ -38,10 +41,6 @@ public class AccountResourceViewingHistory extends BaseResource {
     @Pattern(regexp = "^[A-Za-z ]+$", message="Account's lastname can only contain alphabetical symbols")
     private String lastname;
 
-    @Column(length = 14)
-    @Pattern(regexp = "^[0-9]*$", message="Account's phone Number can only contain numeric symbols")
-    private String phoneNo;
-
     @NotNull(message = "Subscription type cannot be null")
     @Enumerated(EnumType.STRING)
     @Column(length = 20, nullable = false)
@@ -53,9 +52,6 @@ public class AccountResourceViewingHistory extends BaseResource {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm:ss.SSS")
     private Date subscriptionDate;
 
-
+    @ToString.Exclude
     private List<ProfileResourceViewingHistory> profiles;
-
 }
-
-

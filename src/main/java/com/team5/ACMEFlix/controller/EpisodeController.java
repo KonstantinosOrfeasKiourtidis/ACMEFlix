@@ -35,9 +35,9 @@ public class EpisodeController {
         return new ResponseEntity<>(ApiResponse.<EpisodeResource>builder().data(episodeMapper.toResource(episodeService.findEpisodeById(id).get())).build(), HttpStatus.OK);
     }
 
-    @GetMapping("findAllEpisodesByContentId/{id}")
+    @GetMapping("findAllEpisodesByTVSeriesId/{id}")
     public ResponseEntity<ApiResponse<List<EpisodeResource>>> findAllEpisodesByContentId(@PathVariable("id") Long id){
-        return  new ResponseEntity<>(ApiResponse.<List<EpisodeResource>>builder().data(episodeMapper.toResources(episodeService.findAllEpisodesByContentId(id))).build(), HttpStatus.OK);
+        return  new ResponseEntity<>(ApiResponse.<List<EpisodeResource>>builder().data(episodeMapper.toResources(episodeService.findAllEpisodesByTVSeriesId(id))).build(), HttpStatus.OK);
     }
 
     @GetMapping("findAllEpisodesByTitle")

@@ -51,25 +51,6 @@ public class ActorController {
         return  new ResponseEntity<>(ApiResponse.<List<ActorResource>>builder().data(actorMapper.toResources(actorService.addActorsByContentId(id, actorMapper.toDomains(actors)))).build(), HttpStatus.CREATED);
     }
 
-    @PostMapping(path = "addActorByMovieId/{id}")
-    public ResponseEntity<ApiResponse<ActorResource>> addActorByMovieId(@PathVariable("id") Long id, @Valid @RequestBody ActorResource actor){
-        return new ResponseEntity<>(ApiResponse.<ActorResource>builder().data(actorMapper.toResource(actorService.addActorByMovieId(id, actorMapper.toDomain(actor)))).build(), HttpStatus.CREATED);
-    }
-
-    @PostMapping(path = "addActorsByMovieId/{id}")
-    public ResponseEntity<ApiResponse<List<ActorResource>>> addActorsByMovieId(@PathVariable("id") Long id, @Valid @RequestBody List<ActorResource> actors){
-        return  new ResponseEntity<>(ApiResponse.<List<ActorResource>>builder().data(actorMapper.toResources(actorService.addActorsByMovieId(id, actorMapper.toDomains(actors)))).build(), HttpStatus.CREATED);
-    }
-
-    @PostMapping(path = "addActorByTVSeriesId/{id}")
-    public ResponseEntity<ApiResponse<ActorResource>> addActorByTVSeriesId(@PathVariable("id") Long id, @Valid @RequestBody ActorResource actor){
-        return new ResponseEntity<>(ApiResponse.<ActorResource>builder().data(actorMapper.toResource(actorService.addActorByTVSeriesId(id, actorMapper.toDomain(actor)))).build(), HttpStatus.CREATED);
-    }
-
-    @PostMapping(path = "addActorsByTVSeriesId/{id}")
-    public ResponseEntity<ApiResponse<List<ActorResource>>> addActorsByTVSeriesId(@PathVariable("id") Long id, @Valid @RequestBody List<ActorResource> actors){
-        return  new ResponseEntity<>(ApiResponse.<List<ActorResource>>builder().data(actorMapper.toResources(actorService.addActorsByTVSeriesId(id, actorMapper.toDomains(actors)))).build(), HttpStatus.CREATED);
-    }
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     @DeleteMapping(path = "deleteActorById/{id}")
     public void deleteActorById(@PathVariable("id") Long id){

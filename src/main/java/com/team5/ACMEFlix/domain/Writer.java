@@ -1,12 +1,10 @@
 package com.team5.ACMEFlix.domain;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 
 @Data
 @SuperBuilder
@@ -25,7 +23,6 @@ public class Writer extends BaseModel{
 
     private String imageUrl;
 
-    @JsonBackReference
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @ManyToOne(targetEntity=Movie.class, fetch = FetchType.LAZY, optional = false)

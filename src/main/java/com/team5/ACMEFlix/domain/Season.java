@@ -1,7 +1,5 @@
 package com.team5.ACMEFlix.domain;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
@@ -25,13 +23,11 @@ public class Season extends BaseModel{
     @Min(1)
     private Integer seasonNo;
 
-    @JsonManagedReference
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @OneToMany(targetEntity=Episode.class, fetch = FetchType.LAZY, mappedBy = "season", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Episode> episodes;
 
-    @JsonBackReference
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @ManyToOne(targetEntity=TVSeries.class, fetch = FetchType.LAZY, optional = false)

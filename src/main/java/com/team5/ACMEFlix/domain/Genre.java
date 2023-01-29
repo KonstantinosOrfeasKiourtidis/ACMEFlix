@@ -1,6 +1,5 @@
 package com.team5.ACMEFlix.domain;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 import javax.persistence.*;
@@ -20,8 +19,6 @@ public class Genre extends BaseModel{
     @Column(length = 20, nullable = false)
     private String name;
 
-
-    @JsonBackReference
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @ManyToOne(targetEntity=Content.class, fetch = FetchType.LAZY, optional = false)

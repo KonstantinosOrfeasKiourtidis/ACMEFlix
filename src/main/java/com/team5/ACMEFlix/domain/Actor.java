@@ -1,6 +1,5 @@
 package com.team5.ACMEFlix.domain;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 import javax.persistence.*;
@@ -22,7 +21,6 @@ public class Actor extends BaseModel{
 
     private String imageUrl;
 
-    @JsonBackReference
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @ManyToOne(targetEntity=Content.class, fetch = FetchType.LAZY, optional = false)

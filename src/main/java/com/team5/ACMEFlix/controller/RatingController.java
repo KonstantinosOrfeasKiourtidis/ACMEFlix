@@ -1,12 +1,11 @@
 package com.team5.ACMEFlix.controller;
 
-
-import com.team5.ACMEFlix.forms.RatingForm;
 import com.team5.ACMEFlix.mapper.RatingMapper;
 import com.team5.ACMEFlix.mapper.RatingMapper2;
 import com.team5.ACMEFlix.service.RatingService;
 import com.team5.ACMEFlix.transfer.ApiResponse;
 import com.team5.ACMEFlix.transfer.resource.RatingResource;
+import com.team5.ACMEFlix.transfer.resource.RatingResource2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,19 +27,29 @@ public class RatingController {
         this.ratingMapper2 = ratingMapper2;
     }
 
+    @GetMapping
+    public ResponseEntity<ApiResponse<List<RatingResource>>> findAllRatings(){
+        return  new ResponseEntity<>(ApiResponse.<List<RatingResource>>builder().data(ratingMapper.toResources(ratingService.findAllRatings())).build(), HttpStatus.OK);
+    }
+
+    @GetMapping("{id}")
+    public ResponseEntity<ApiResponse<RatingResource>> findRatingById(@PathVariable("id") Long id){
+        return new ResponseEntity<>(ApiResponse.<RatingResource>builder().data(ratingMapper.toResource(ratingService.findRatingById(id).get())).build(), HttpStatus.OK);
+    }
 
     @PostMapping(path = "addRating")
     public ResponseEntity<ApiResponse<RatingResource>> addRating(
-            @Valid @RequestBody RatingResource rating
+            @Valid @RequestBody RatingResource2 rating
     ){
-        return new ResponseEntity<>(ApiResponse.<RatingResource>builder().data(ratingMapper.toResource(ratingService.addRating(ratingMapper.toDomain(rating)))).build(), HttpStatus.CREATED);
+
+        return new ResponseEntity<>(ApiResponse.<RatingResource>builder().data(ratingMapper.toResource(ratingService.addRating(ratingMapper2.toDomain(rating)))).build(), HttpStatus.CREATED);
     }
 
     @PostMapping(path = "addRatings")
     public ResponseEntity<ApiResponse<List<RatingResource>>> addRatings(
-            @Valid @RequestBody List<RatingResource> ratings
+            @Valid @RequestBody List<RatingResource2> ratings
     ){
-        return new ResponseEntity<>(ApiResponse.<List<RatingResource>>builder().data(ratingMapper.toResources(ratingService.addRatings(ratingMapper.toDomains(ratings)))).build(), HttpStatus.CREATED);
+        return new ResponseEntity<>(ApiResponse.<List<RatingResource>>builder().data(ratingMapper.toResources(ratingService.addRatings(ratingMapper2.toDomains(ratings)))).build(), HttpStatus.CREATED);
     }
 
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
@@ -60,26 +69,11 @@ public class RatingController {
     }
 
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
-    @DeleteMapping(path = "deleteRatingByContentIdAndProfileId")
-    public void deleteRatingByContentIdAndProfileId(
-            @Valid @RequestBody RatingForm ratingForm
-    ){
-        ratingService.deleteRatingByContentIdAndProfileId(ratingForm);
-    }
-    @ResponseStatus(code = HttpStatus.NO_CONTENT)
-    @PatchMapping(path = "rate")
-    public void rate(
-            @Valid @RequestBody RatingForm ratingForm
-    ){
-        ratingService.rate(ratingForm);
-    }
-
-    @ResponseStatus(code = HttpStatus.NO_CONTENT)
     @PatchMapping(path = "updateRatingById/{id}")
     public void updateRatingById(
             @PathVariable("id") Long id,
-            @Valid @RequestBody RatingResource rating
+            @Valid @RequestBody RatingResource2 rating
     ){
-        ratingService.updateRatingById(id, ratingMapper.toDomain(rating));
+        ratingService.updateRatingById(id, ratingMapper2.toDomain(rating));
     }
 }

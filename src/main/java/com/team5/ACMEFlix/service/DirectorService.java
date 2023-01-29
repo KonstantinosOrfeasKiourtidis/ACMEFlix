@@ -1,10 +1,7 @@
 package com.team5.ACMEFlix.service;
 
-import com.team5.ACMEFlix.domain.Content;
 import com.team5.ACMEFlix.domain.Director;
 import com.team5.ACMEFlix.domain.Movie;
-import com.team5.ACMEFlix.domain.enumeration.ContentType;
-import com.team5.ACMEFlix.repository.ContentRepository;
 import com.team5.ACMEFlix.repository.DirectorRepository;
 import com.team5.ACMEFlix.repository.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +19,6 @@ public class DirectorService {
     @Autowired
     private DirectorRepository directorRepository;
     @Autowired
-    private ContentRepository contentRepository;
-    @Autowired
     private MovieRepository movieRepository;
 
     @Transactional(readOnly = true)
@@ -35,8 +30,8 @@ public class DirectorService {
         return directorRepository.findById(id);
     }
     @Transactional(readOnly = true)
-    public List<Director> findAllDirectorsByContentId(Long id) {
-        Optional<Movie> movie = movieRepository.findMovieByContentId(id);
+    public List<Director> findAllDirectorsByMovieId(Long id) {
+        Optional<Movie> movie = movieRepository.findById(id);
         if(!movie.isPresent()){
             throw new NoSuchElementException("Movie does not exist");
         }
@@ -45,64 +40,21 @@ public class DirectorService {
         }
     }
     @Transactional
-    public Director addDirectorByContentId(Long id, Director director) {
-        Optional<Content> contentExists = contentRepository.findById(id);
-        if(!contentExists.isPresent()){
-            throw new NoSuchElementException("Content does not exist");
-        }
-        else if(!contentExists.get().getContentType().equals(ContentType.MOVIE)){
-            throw new IllegalStateException("Content is not a movie");
-        }
-        else{
-            Optional<Movie> movieExists = movieRepository.findMovieByContentId(id);
-            if(!movieExists.isPresent()){
-                throw new IllegalStateException("Movie does not exist");
-            }
-            else {
-                director.setMovie(movieExists.get());
-                directorRepository.save(director);
-            }
-
-        }
-        return director;
-    }
-    @Transactional
-    public List<Director> addDirectosrByContentId(Long id, List<Director> directors) {
-        Optional<Content> contentExists = contentRepository.findById(id);
-        if(!contentExists.isPresent()){
-            throw new NoSuchElementException("Content does not exist");
-        }
-        else if(!contentExists.get().getContentType().equals(ContentType.MOVIE)){
-            throw new IllegalStateException("Content is not a movie");
-        }
-        else {
-            Optional<Movie> movieExists = movieRepository.findMovieByContentId(id);
-            if(!movieExists.isPresent()){
-                throw new NoSuchElementException("Movie does not exist");
-            } else {
-                for (Director director : directors) {
-                    director.setMovie(movieExists.get());
-                    directorRepository.save(director);
-                }
-
-            }
-
-
-        }
-        return directors;
-    }
-    @Transactional
     public Director addDirectorByMovieId(Long id, Director director) {
+
         Optional<Movie> movieExists = movieRepository.findById(id);
         if(!movieExists.isPresent()){
-            throw new NoSuchElementException("Movie does not exist");
+            throw new IllegalStateException("Movie does not exist");
         }
-        else{
+        else {
             director.setMovie(movieExists.get());
             directorRepository.save(director);
         }
+
+
         return director;
     }
+
     @Transactional
     public List<Director> addDirectorsByMovieId(Long id, List<Director> directors) {
         Optional<Movie> movieExists = movieRepository.findById(id);

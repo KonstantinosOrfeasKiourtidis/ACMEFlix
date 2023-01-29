@@ -8,8 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityManager;
-import java.math.BigInteger;
 import java.util.*;
 
 @Service
@@ -17,8 +15,6 @@ public class TVSeriesService {
 
     @Autowired
     private TVSeriesRepository tVSeriesRepository;
-    @Autowired
-    private EntityManager entityManager;
 
     @Transactional(readOnly = true)
     public List<TVSeries> findAllTVSeries() {
@@ -28,50 +24,6 @@ public class TVSeriesService {
     @Transactional(readOnly = true)
     public Optional<TVSeries> findTVSeriesById(Long id) {
         return tVSeriesRepository.findById(id);
-    }
-    public Optional<TVSeries> findTVSeriesByContentId(Long id) {
-        return tVSeriesRepository.findTVSeriesByContentId(id);
-    }
-
-    @Transactional(readOnly = true)
-    public List<TVSeries> findAllTVSeriesFamilyFriendly() {
-        return tVSeriesRepository.findTVSeriesByFamilyFriendly();
-
-    }
-
-    @Transactional(readOnly = true)
-    public List<TVSeries> findAllTVSeriesByTitle(String search) {
-        List<Long> contentIds = tVSeriesRepository.findTVSeriesByName(search);
-        List<TVSeries> tvSeries = tVSeriesRepository.findAllTVSeriesByContentId(contentIds);
-        return tvSeries;
-    }
-
-    @Transactional(readOnly = true)
-    public List<TVSeries> getAllTVSeriesByCreators(String[] creator) {
-        String query;
-        query = "SELECT CREATORS.TV_SERIES_ID FROM CREATORS GROUP BY CREATORS.TV_SERIES_ID ";
-
-        for (int i = 0; i < creator.length; i++) {
-            if(i == 0){
-                query += "HAVING ";
-            }
-
-            query+= "GROUP_CONCAT(CREATORS.FULLNAME) LIKE '%"+ creator[i] + "%'";
-            if(i != creator.length-1){
-                query += " AND ";
-            }
-        }
-
-        List<BigInteger> movieIds = entityManager.createNativeQuery(query).getResultList();
-
-        List<TVSeries> tvSeries = tVSeriesRepository.findAllTVSeriesById(movieIds);
-
-        return tvSeries;
-    }
-
-    @Transactional(readOnly = true)
-    public List<TVSeries> findAllTVSeriesByTVSeriesStatusType(String statusType) {
-        return tVSeriesRepository.findTVSeriesByStatusType(statusType);
     }
 
     @Transactional
@@ -83,10 +35,10 @@ public class TVSeriesService {
         tvSerie.getSeasons()
                 .forEach(s -> s.getEpisodes()
                         .forEach(e -> e.setSeason(s)));
-        tvSerie.getContent().getActors()
-                .forEach(a -> a.setContent(tvSerie.getContent()));
-        tvSerie.getContent().getGenres()
-                .forEach(g -> g.setContent(tvSerie.getContent()));
+        tvSerie.getActors()
+                .forEach(a -> a.setContent(tvSerie));
+        tvSerie.getGenres()
+                .forEach(g -> g.setContent(tvSerie));
 
         tVSeriesRepository.save(tvSerie);
         return tvSerie;
@@ -102,14 +54,37 @@ public class TVSeriesService {
             tvSerie.getSeasons()
                     .forEach(s -> s.getEpisodes()
                             .forEach(e -> e.setSeason(s)));
-            tvSerie.getContent().getActors()
-                    .forEach(a -> a.setContent(tvSerie.getContent()));
-            tvSerie.getContent().getGenres()
-                    .forEach(g -> g.setContent(tvSerie.getContent()));
+            tvSerie.getActors()
+                    .forEach(a -> a.setContent(tvSerie));
+            tvSerie.getGenres()
+                    .forEach(g -> g.setContent(tvSerie));
 
             tVSeriesRepository.save(tvSerie);
         }
         return tvSeries;
+    }
+
+    @Transactional
+    public void deleteTVSeriesById(Long id) {
+        boolean exists = tVSeriesRepository.existsById(id);
+        if(!exists){
+            throw new NoSuchElementException("TV Series does not exist");
+        }
+        else{
+            tVSeriesRepository.deleteById(id);
+        }
+    }
+    @Transactional
+    public void deleteTVSeriesByIds(List<Long> ids) {
+        for (Long id : ids){
+            boolean exists = tVSeriesRepository.existsById(id);
+            if(!exists){
+                throw new NoSuchElementException("TV Series does not exist");
+            }
+            else{
+                tVSeriesRepository.deleteById(id);
+            }
+        }
     }
 
     @Transactional
@@ -121,88 +96,88 @@ public class TVSeriesService {
         else{
 
 
-            if (tvSeries.getContent().getTitle() != null &&
-                    tvSeries.getContent().getTitle().length() >0 &&
-                    !Objects.equals(tvSeriesFound.get().getContent().getTitle(), tvSeries.getContent().getTitle())) {tvSeriesFound.get().getContent().setTitle(tvSeries.getContent().getTitle());
+            if (tvSeries.getTitle() != null &&
+                    tvSeries.getTitle().length() >0 &&
+                    !Objects.equals(tvSeriesFound.get().getTitle(), tvSeries.getTitle())) {tvSeriesFound.get().setTitle(tvSeries.getTitle());
             }
 
-            if (tvSeries.getContent().getDescription() != null &&
-                    tvSeries.getContent().getDescription().length() >0 &&
-                    !Objects.equals(tvSeriesFound.get().getContent().getDescription(), tvSeries.getContent().getDescription())) {
-                tvSeriesFound.get().getContent().setDescription(tvSeries.getContent().getDescription());
+            if (tvSeries.getDescription() != null &&
+                    tvSeries.getDescription().length() >0 &&
+                    !Objects.equals(tvSeriesFound.get().getDescription(), tvSeries.getDescription())) {
+                tvSeriesFound.get().setDescription(tvSeries.getDescription());
             }
 
-            if (tvSeries.getContent().getContentType() != null &&
-                    (tvSeries.getContent().getContentType().equals(ContentType.MOVIE) ||
-                            tvSeries.getContent().getContentType().equals(ContentType.TV_SERIES))&&
-                    !Objects.equals(tvSeriesFound.get().getContent().getContentType(), tvSeries.getContent().getContentType())) {tvSeriesFound.get().getContent().setContentType(tvSeries.getContent().getContentType());
+            if (tvSeries.getContentType() != null &&
+                    (tvSeries.getContentType().equals(ContentType.MOVIE) ||
+                            tvSeries.getContentType().equals(ContentType.TV_SERIES))&&
+                    !Objects.equals(tvSeriesFound.get().getContentType(), tvSeries.getContentType())) {tvSeriesFound.get().setContentType(tvSeries.getContentType());
             }
 
-            if (tvSeries.getContent().getRuntime() != null &&
-                    tvSeries.getContent().getRuntime() >0 &&
-                    !Objects.equals(tvSeriesFound.get().getContent().getRuntime(), tvSeries.getContent().getRuntime())) {
-                tvSeriesFound.get().getContent().setRuntime(tvSeries.getContent().getRuntime());
+            if (tvSeries.getRuntime() != null &&
+                    tvSeries.getRuntime() >0 &&
+                    !Objects.equals(tvSeriesFound.get().getRuntime(), tvSeries.getRuntime())) {
+                tvSeriesFound.get().setRuntime(tvSeries.getRuntime());
             }
 
-            if (tvSeries.getContent().getReleaseDate() != null &&
-                    tvSeries.getContent().getReleaseDate().length() >0 &&
-                    !Objects.equals(tvSeriesFound.get().getContent().getReleaseDate(), tvSeries.getContent().getReleaseDate())) {
-                tvSeriesFound.get().getContent().setReleaseDate(tvSeries.getContent().getReleaseDate());
+            if (tvSeries.getReleaseDate() != null &&
+                    tvSeries.getReleaseDate().length() >0 &&
+                    !Objects.equals(tvSeriesFound.get().getReleaseDate(), tvSeries.getReleaseDate())) {
+                tvSeriesFound.get().setReleaseDate(tvSeries.getReleaseDate());
             }
 
-            if (tvSeries.getContent().getTrailerUrl() != null &&
-                    tvSeries.getContent().getTrailerUrl().length() >0 &&
-                    !Objects.equals(tvSeriesFound.get().getContent().getTrailerUrl(), tvSeries.getContent().getTrailerUrl())) {
-                tvSeriesFound.get().getContent().setTrailerUrl(tvSeries.getContent().getTrailerUrl());
+            if (tvSeries.getTrailerUrl() != null &&
+                    tvSeries.getTrailerUrl().length() >0 &&
+                    !Objects.equals(tvSeriesFound.get().getTrailerUrl(), tvSeries.getTrailerUrl())) {
+                tvSeriesFound.get().setTrailerUrl(tvSeries.getTrailerUrl());
             }
 
-            if (tvSeries.getContent().getImageUrl() != null &&
-                    tvSeries.getContent().getImageUrl().length() >0 &&
-                    !Objects.equals(tvSeriesFound.get().getContent().getImageUrl(), tvSeries.getContent().getImageUrl())) {
-                tvSeriesFound.get().getContent().setImageUrl(tvSeries.getContent().getImageUrl());
+            if (tvSeries.getImageUrl() != null &&
+                    tvSeries.getImageUrl().length() >0 &&
+                    !Objects.equals(tvSeriesFound.get().getImageUrl(), tvSeries.getImageUrl())) {
+                tvSeriesFound.get().setImageUrl(tvSeries.getImageUrl());
             }
 
-            if (tvSeries.getContent().getSpokenLanguage() != null &&
-                    tvSeries.getContent().getSpokenLanguage().length() >0 &&
-                    !Objects.equals(tvSeriesFound.get().getContent().getSpokenLanguage(), tvSeries.getContent().getSpokenLanguage())) {
-                tvSeriesFound.get().getContent().setSpokenLanguage(tvSeries.getContent().getSpokenLanguage());
+            if (tvSeries.getSpokenLanguage() != null &&
+                    tvSeries.getSpokenLanguage().length() >0 &&
+                    !Objects.equals(tvSeriesFound.get().getSpokenLanguage(), tvSeries.getSpokenLanguage())) {
+                tvSeriesFound.get().setSpokenLanguage(tvSeries.getSpokenLanguage());
             }
 
-            if (tvSeries.getContent().getIsAgeRestricted() != null &&
-                    !Objects.equals(tvSeriesFound.get().getContent().getIsAgeRestricted(), tvSeries.getContent().getIsAgeRestricted())) {
-                tvSeriesFound.get().getContent().setIsAgeRestricted(tvSeries.getContent().getIsAgeRestricted());
+            if (tvSeries.getIsAgeRestricted() != null &&
+                    !Objects.equals(tvSeriesFound.get().getIsAgeRestricted(), tvSeries.getIsAgeRestricted())) {
+                tvSeriesFound.get().setIsAgeRestricted(tvSeries.getIsAgeRestricted());
             }
 
 
-            if (tvSeries.getContent().getActors() != null &&
-                    !Objects.equals(tvSeriesFound.get().getContent().getActors(), tvSeries.getContent().getActors())) {
-                List<Actor> actors = tvSeriesFound.get().getContent().getActors();
+            if (tvSeries.getActors() != null &&
+                    !Objects.equals(tvSeriesFound.get().getActors(), tvSeries.getActors())) {
+                List<Actor> actors = tvSeriesFound.get().getActors();
                 if (!actors.isEmpty()) {
                     for (int i = 0; i < actors.size(); i++) {
-                        if (tvSeries.getContent().getActors().get(i).getFullname() != null &&
-                                tvSeries.getContent().getActors().get(i).getFullname().length() >0 &&
-                                !Objects.equals(actors.get(i).getFullname(), tvSeries.getContent().getActors().get(i).getFullname())) {
-                            actors.get(i).setFullname(tvSeries.getContent().getActors().get(i).getFullname());
+                        if (tvSeries.getActors().get(i).getFullname() != null &&
+                                tvSeries.getActors().get(i).getFullname().length() >0 &&
+                                !Objects.equals(actors.get(i).getFullname(), tvSeries.getActors().get(i).getFullname())) {
+                            actors.get(i).setFullname(tvSeries.getActors().get(i).getFullname());
                         }
 
-                        if (tvSeries.getContent().getActors().get(i).getImageUrl() != null &&
-                                tvSeries.getContent().getActors().get(i).getImageUrl().length() >0 &&
-                                !Objects.equals(actors.get(i).getImageUrl(), tvSeries.getContent().getActors().get(i).getImageUrl())) {
-                            actors.get(i).setImageUrl(tvSeries.getContent().getActors().get(i).getImageUrl());
+                        if (tvSeries.getActors().get(i).getImageUrl() != null &&
+                                tvSeries.getActors().get(i).getImageUrl().length() >0 &&
+                                !Objects.equals(actors.get(i).getImageUrl(), tvSeries.getActors().get(i).getImageUrl())) {
+                            actors.get(i).setImageUrl(tvSeries.getActors().get(i).getImageUrl());
                         }
                     }
                 }
             }
 
-            if (tvSeries.getContent().getGenres() != null &&
-                    !Objects.equals(tvSeriesFound.get().getContent().getGenres(), tvSeries.getContent().getGenres())) {
-                List<Genre> genres = tvSeriesFound.get().getContent().getGenres();
+            if (tvSeries.getGenres() != null &&
+                    !Objects.equals(tvSeriesFound.get().getGenres(), tvSeries.getGenres())) {
+                List<Genre> genres = tvSeriesFound.get().getGenres();
                 if (!genres.isEmpty()) {
                     for (int i = 0; i < genres.size(); i++) {
-                        if (tvSeries.getContent().getGenres().get(i).getName() != null &&
-                                tvSeries.getContent().getGenres().get(i).getName().length() >0 &&
-                                !Objects.equals(genres.get(i).getName(), tvSeries.getContent().getGenres().get(i).getName())) {
-                            genres.get(i).setName(tvSeries.getContent().getGenres().get(i).getName());
+                        if (tvSeries.getGenres().get(i).getName() != null &&
+                                tvSeries.getGenres().get(i).getName().length() >0 &&
+                                !Objects.equals(genres.get(i).getName(), tvSeries.getGenres().get(i).getName())) {
+                            genres.get(i).setName(tvSeries.getGenres().get(i).getName());
                         }
 
                     }
@@ -244,7 +219,7 @@ public class TVSeriesService {
                     !Objects.equals(tvSeriesFound.get().getSeasons(), tvSeries.getSeasons())) {
                 List<Season> seasons = tvSeriesFound.get().getSeasons();
                 if (!seasons.isEmpty()) {
-                    for (int i = 0; i < seasons.size()-1; i++) {
+                    for (int i = 0; i < seasons.size(); i++) {
                         if (tvSeries.getSeasons().get(i).getSeasonNo() != null &&
                                 tvSeries.getSeasons().get(i).getSeasonNo() >0 &&
                                 !Objects.equals(seasons.get(i).getSeasonNo(), tvSeries.getSeasons().get(i).getSeasonNo())) {

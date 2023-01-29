@@ -13,8 +13,6 @@ import java.util.*;
 public class AccountService {
     @Autowired
     private  AccountRepository accountRepository;
-    @Autowired
-    private RatingRepository ratingRepository;
 
 
     @Transactional(readOnly = true)
@@ -83,18 +81,6 @@ public class AccountService {
                 throw new NoSuchElementException("Account does not exist");
             }
             else{
-                List<Account> accounts = accountRepository.findAllById(ids);
-
-                List<Profile> profiles = new ArrayList<>();
-                for (Account account : accounts){
-                    profiles.addAll(account.getProfiles());
-
-                }
-
-                for (Profile profile : profiles){
-                    ratingRepository.deleteAllByProfileId(profile.getId());
-
-                }
 
                 accountRepository.deleteById(id);
             }

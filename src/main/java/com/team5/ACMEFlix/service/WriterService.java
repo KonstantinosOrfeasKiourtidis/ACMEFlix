@@ -1,11 +1,8 @@
 package com.team5.ACMEFlix.service;
 
 
-import com.team5.ACMEFlix.domain.Content;
 import com.team5.ACMEFlix.domain.Movie;
 import com.team5.ACMEFlix.domain.Writer;
-import com.team5.ACMEFlix.domain.enumeration.ContentType;
-import com.team5.ACMEFlix.repository.ContentRepository;
 import com.team5.ACMEFlix.repository.MovieRepository;
 import com.team5.ACMEFlix.repository.WriterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +19,6 @@ public class WriterService {
     @Autowired
     private WriterRepository writerRepository;
     @Autowired
-    private ContentRepository contentRepository;
-    @Autowired
     private MovieRepository movieRepository;
 
     @Transactional(readOnly = true)
@@ -35,8 +30,8 @@ public class WriterService {
         return writerRepository.findById(id);
     }
     @Transactional(readOnly = true)
-    public List<Writer> findAllWritersByContentId(Long id) {
-        Optional<Movie> movie = movieRepository.findMovieByContentId(id);
+    public List<Writer> findAllWritersByMovieId(Long id) {
+        Optional<Movie> movie = movieRepository.findById(id);
         if(!movie.isPresent()){
             throw new NoSuchElementException("Movie does not exist");
         }
@@ -45,54 +40,6 @@ public class WriterService {
         }
     }
 
-    @Transactional
-    public Writer addWriterByContentId(Long id, Writer writer) {
-        Optional<Content> contentExists = contentRepository.findById(id);
-        if(!contentExists.isPresent()){
-            throw new NoSuchElementException("Content does not exist");
-        }
-        else if(!contentExists.get().getContentType().equals(ContentType.MOVIE)){
-            throw new IllegalStateException("Content is not a movie");
-        }
-        else{
-            Optional<Movie> movieExists = movieRepository.findMovieByContentId(id);
-            if(!movieExists.isPresent()){
-                throw new NoSuchElementException("Movie does not exist");
-            }
-            else {
-                writer.setMovie(movieExists.get());
-                writerRepository.save(writer);
-            }
-
-        }
-        return writer;
-    }
-    @Transactional
-    public List<Writer> addWritersByContentId(Long id, List<Writer> writers) {
-
-        Optional<Content> contentExists = contentRepository.findById(id);
-        if(!contentExists.isPresent()){
-            throw new NoSuchElementException("Content does not exist");
-        }
-        else if(!contentExists.get().getContentType().equals(ContentType.MOVIE)){
-            throw new IllegalStateException("Content is not a movie");
-        }
-        else {
-            Optional<Movie> movieExists = movieRepository.findMovieByContentId(id);
-            if(!movieExists.isPresent()){
-                throw new NoSuchElementException("Movie does not exist");
-            } else {
-                for (Writer writer : writers) {
-                    writer.setMovie(movieExists.get());
-                    writerRepository.save(writer);
-                }
-
-            }
-
-
-        }
-        return writers;
-    }
     @Transactional
     public Writer addWriterByMovieId(Long id, Writer writer) {
         Optional<Movie> movieExists = movieRepository.findById(id);

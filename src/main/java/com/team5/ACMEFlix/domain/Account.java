@@ -1,7 +1,6 @@
 package com.team5.ACMEFlix.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.team5.ACMEFlix.domain.enumeration.SubscriptionType;
 import lombok.*;
 import lombok.experimental.SuperBuilder;

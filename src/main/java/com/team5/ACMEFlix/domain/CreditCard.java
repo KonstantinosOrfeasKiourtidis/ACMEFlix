@@ -1,6 +1,5 @@
 package com.team5.ACMEFlix.domain;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.team5.ACMEFlix.domain.enumeration.CardType;
 import lombok.AllArgsConstructor;
 import lombok.Data;

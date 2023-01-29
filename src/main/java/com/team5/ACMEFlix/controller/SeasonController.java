@@ -34,9 +34,9 @@ public class SeasonController {
         return new ResponseEntity<>(ApiResponse.<SeasonResource>builder().data(seasonMapper.toResource(seasonService.findSeasonById(id).get())).build(), HttpStatus.OK);
     }
 
-    @GetMapping("findAllSeasonsByContentId/{id}")
+    @GetMapping("findAllSeasonsByTVSeriesId/{id}")
     public ResponseEntity<ApiResponse<List<SeasonResource>>> findAllSeasonsByContentId(@PathVariable("id") Long id){
-        return  new ResponseEntity<>(ApiResponse.<List<SeasonResource>>builder().data(seasonMapper.toResources(seasonService.findAllSeasonsByContentId(id))).build(), HttpStatus.OK);
+        return  new ResponseEntity<>(ApiResponse.<List<SeasonResource>>builder().data(seasonMapper.toResources(seasonService.findAllSeasonsByTVSeriesId(id))).build(), HttpStatus.OK);
 
     }
 
@@ -50,15 +50,6 @@ public class SeasonController {
         return  new ResponseEntity<>(ApiResponse.<List<SeasonResource>>builder().data(seasonMapper.toResources(seasonService.addSeasonsByTVSeriesId(id, seasonMapper.toDomains(seasons)))).build(), HttpStatus.CREATED);
     }
 
-    @PostMapping(path = "addSeasonByContentId/{id}")
-    public ResponseEntity<ApiResponse<SeasonResource>> addSeasonByContentId(@PathVariable("id") Long id, @Valid @RequestBody SeasonResource season){
-        return new ResponseEntity<>(ApiResponse.<SeasonResource>builder().data(seasonMapper.toResource(seasonService.addSeasonByContentId(id, seasonMapper.toDomain(season)))).build(), HttpStatus.CREATED);
-    }
-
-    @PostMapping(path = "addSeasonsByContentId/{id}")
-    public ResponseEntity<ApiResponse<List<SeasonResource>>> addSeasonsByContentId(@PathVariable("id") Long id, @Valid @RequestBody List<SeasonResource> seasons){
-        return  new ResponseEntity<>(ApiResponse.<List<SeasonResource>>builder().data(seasonMapper.toResources(seasonService.addSeasonsByContentId(id, seasonMapper.toDomains(seasons)))).build(), HttpStatus.CREATED);
-    }
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     @DeleteMapping(path = "deleteSeasonById/{id}")
     public void deleteSeasonById(@PathVariable("id") Long id){

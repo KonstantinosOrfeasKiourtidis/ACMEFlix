@@ -2,7 +2,6 @@ package com.team5.ACMEFlix.transfer.resource;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.team5.ACMEFlix.domain.enumeration.ContentType;
-import com.team5.ACMEFlix.domain.enumeration.TVSeriesStatusType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,8 +14,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ContentResourceViewingHistory extends BaseResource {
-
+public class ContentResourceViewingHistory extends BaseResource{
     private String title;
     private String description;
     private String spokenLanguage;
@@ -44,14 +42,6 @@ public class ContentResourceViewingHistory extends BaseResource {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private String episodeImageUrl;
 
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    private List<CreatorResource> creators;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    private TVSeriesStatusType tvSeriesStatusType;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    private List<WriterResource> writers;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    private List<DirectorResource> directors;
 
     private Float viewingHours;
     private Date watchedDate;

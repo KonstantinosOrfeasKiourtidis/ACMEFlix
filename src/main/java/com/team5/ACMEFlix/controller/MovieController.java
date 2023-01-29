@@ -1,13 +1,10 @@
 package com.team5.ACMEFlix.controller;
 
-import com.team5.ACMEFlix.mapper.ContentMapper;
 import com.team5.ACMEFlix.mapper.MovieMapper;
 import com.team5.ACMEFlix.service.MovieService;
 import com.team5.ACMEFlix.transfer.ApiResponse;
-import com.team5.ACMEFlix.transfer.resource.ContentResource;
 import com.team5.ACMEFlix.transfer.resource.MovieResource;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,41 +18,19 @@ public class MovieController {
 
     private final MovieService movieService;
     private final MovieMapper movieMapper;
-    private final ContentMapper contentMapper;
     @Autowired
-    private MovieController(MovieService movieService, MovieMapper movieMapper, ContentMapper contentMapper) {
+    private MovieController(MovieService movieService, MovieMapper movieMapper) {
         this.movieService = movieService;
         this.movieMapper = movieMapper;
-        this.contentMapper = contentMapper;
     }
     @GetMapping
-    public ResponseEntity<ApiResponse<List<ContentResource>>> findAllMovies(){
-        return  new ResponseEntity<>(ApiResponse.<List<ContentResource>>builder().data(contentMapper.moviesToContentResources(movieService.findAllMovies())).build(), HttpStatus.OK);
+    public ResponseEntity<ApiResponse<List<MovieResource>>> findAllMovies(){
+        return  new ResponseEntity<>(ApiResponse.<List<MovieResource>>builder().data(movieMapper.toResources(movieService.findAllMovies())).build(), HttpStatus.OK);
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<ApiResponse<ContentResource>> findMovieById(@PathVariable("id") Long id){
-        return new ResponseEntity<>(ApiResponse.<ContentResource>builder().data(contentMapper.movieToContentResource(movieService.findMovieById(id).get())).build(), HttpStatus.OK);
-    }
-
-    @GetMapping("findAllMoviesFamilyFriendly")
-    public ResponseEntity<ApiResponse<List<ContentResource>>> findAllMoviesFamilyFriendly(){
-        return  new ResponseEntity<>(ApiResponse.<List<ContentResource>>builder().data(contentMapper.moviesToContentResources(movieService.findAllMoviesFamilyFriendly())).build(), HttpStatus.OK);
-    }
-
-    @GetMapping("findAllMoviesByTitle")
-    public ResponseEntity<ApiResponse<List<ContentResource>>> findAllMoviesByTitle(@Param("search") String search){
-        return  new ResponseEntity<>(ApiResponse.<List<ContentResource>>builder().data(contentMapper.moviesToContentResources(movieService.findAllMoviesByTitle(search))).build(), HttpStatus.OK);
-    }
-
-    @GetMapping("findAllMoviesByDirectors")
-    public ResponseEntity<ApiResponse<List<ContentResource>>> findAllMoviesByDirectors(@Param("director") String[] director){
-        return  new ResponseEntity<>(ApiResponse.<List<ContentResource>>builder().data(contentMapper.moviesToContentResources(movieService.findAllMoviesByDirectors(director))).build(), HttpStatus.OK);
-    }
-
-    @GetMapping("findAllMoviesByWriters")
-    public ResponseEntity<ApiResponse<List<ContentResource>>> findAllMoviesByWriters(@Param("writer") String[] writer){
-        return  new ResponseEntity<>(ApiResponse.<List<ContentResource>>builder().data(contentMapper.moviesToContentResources(movieService.findAllMoviesByWriters(writer))).build(), HttpStatus.OK);
+    public ResponseEntity<ApiResponse<MovieResource>> findMovieById(@PathVariable("id") Long id){
+        return new ResponseEntity<>(ApiResponse.<MovieResource>builder().data(movieMapper.toResource(movieService.findMovieById(id).get())).build(), HttpStatus.OK);
     }
 
     @PostMapping(path = "addMovie")
@@ -67,6 +42,18 @@ public class MovieController {
     public ResponseEntity<ApiResponse<List<MovieResource>>> addMovies(@Valid @RequestBody List<MovieResource> movies){
         return  new ResponseEntity<>(ApiResponse.<List<MovieResource>>builder().data(movieMapper.toResources(movieService.addMovies(movieMapper.toDomains(movies)))).build(), HttpStatus.CREATED);
     }
+
+    @ResponseStatus(code = HttpStatus.NO_CONTENT)
+    @DeleteMapping(path = "deleteMovieById/{id}")
+    public void deleteMovieById(@PathVariable("id") Long id){
+        movieService.deleteMovieById(id);
+    }
+    @ResponseStatus(code = HttpStatus.NO_CONTENT)
+    @DeleteMapping(path = "deleteMoviesByIds/{ids}")
+    public void deleteMoviesByIds(@PathVariable("ids") List<Long> ids){
+        movieService.deleteMoviesByIds(ids);
+    }
+
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     @PatchMapping(path = "updateMovieById/{id}")
     public void updateMovieById(

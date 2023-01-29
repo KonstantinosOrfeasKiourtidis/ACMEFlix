@@ -6,7 +6,9 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -16,7 +18,7 @@ import java.util.List;
 @Getter
 @Setter
 @ToString(callSuper = true)
-public class AccountResourceViewingHours extends BaseResource {
+public class AccountViewingHours extends BaseResource{
     @NotNull(message = "Account's email cannot be null")
     @Column(length = 50, nullable = false, unique = true)
     @Email
@@ -37,10 +39,6 @@ public class AccountResourceViewingHours extends BaseResource {
     @Pattern(regexp = "^[A-Za-z ]+$", message="Account's lastname can only contain alphabetical symbols")
     private String lastname;
 
-    @Column(length = 14)
-    @Pattern(regexp = "^[0-9]*$", message="Account's phone Number can only contain numeric symbols")
-    private String phoneNo;
-
     @NotNull(message = "Subscription type cannot be null")
     @Enumerated(EnumType.STRING)
     @Column(length = 20, nullable = false)
@@ -52,9 +50,6 @@ public class AccountResourceViewingHours extends BaseResource {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm:ss.SSS")
     private Date subscriptionDate;
 
-
     @ToString.Exclude
-    private List<ProfileResourceViewingHours> profiles;
-
+    private List<ProfileViewingHours> profiles;
 }
-

@@ -1,0 +1,4098 @@
+{
+	"info": {
+		"_postman_id": "fb1e9e50-5437-47a9-a07d-666510c02e63",
+		"name": "ACMEFlix",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21222879"
+	},
+	"item": [
+		{
+			"name": "Accounts",
+			"item": [
+				{
+					"name": "Account",
+					"item": [
+						{
+							"name": "CREATE",
+							"item": [
+								{
+									"name": "AddAccount",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"id\": null,\r\n    \"email\": \"9@hotmail.com\",\r\n    \"username\": \"Dave\",\r\n    \"firstname\": \"David\",\r\n    \"lastname\": \"Johnson\",\r\n    \"password\": \"fdsfdsf\",\r\n    \"phoneNo\": \"2101234567\",\r\n    \"subscriptionType\": \"NO_SUBSCRIPTION\",\r\n    \"subscriptionDate\": null,\r\n     \"address\": [\r\n        {\r\n            \"id\": null,\r\n            \"streetName\": \"Main Street\",\r\n            \"streetNo\": \"32\",\r\n            \"postalCode\": \"123456\",\r\n            \"country\": \"United States\",\r\n            \"province\": \"Texas\"\r\n        }\r\n    ],\r\n    \"creditCards\": [\r\n    ],\r\n    \"profiles\": [\r\n    ]\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8080/api/v1/account/addAccount",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"account",
+												"addAccount"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "AddAccounts",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "[\r\n    {\r\n        \"id\": null,\r\n        \"email\": \"test@hotmail.com\",\r\n        \"username\": \"Dave\",\r\n        \"firstname\": \"David\",\r\n        \"lastname\": \"Johnson\",\r\n        \"password\": \"fdsfdsf\",\r\n        \"phoneNo\": \"2101234567\",\r\n        \"subscriptionType\": \"PREMIUM\",\r\n        \"subscriptionDate\": null,\r\n        \"address\": [\r\n            {\r\n                \"id\": null,\r\n                \"streetName\": \"Main Street\",\r\n                \"streetNo\": \"32\",\r\n                \"postalCode\": \"123456\",\r\n                \"country\": \"United States\",\r\n                \"province\": \"Texas\"\r\n            }\r\n        ],\r\n        \"creditCards\": [\r\n        ],\r\n        \"profiles\": [\r\n            {\r\n                \"id\": null,\r\n                \"firstname\": \"test\",\r\n                \"imageUrl\": null,\r\n                \"ageRestricted\": false\r\n            },\r\n            {\r\n                \"id\": null,\r\n                \"firstname\": \"anothertest\",\r\n                \"imageUrl\": null,\r\n                \"ageRestricted\": true\r\n            }\r\n        ]\r\n    },\r\n    {\r\n        \"id\": null,\r\n        \"email\": \"test2@hotmail.com\",\r\n        \"username\": \"Dave\",\r\n        \"firstname\": \"David\",\r\n        \"lastname\": \"Johnson\",\r\n        \"password\": \"fdsfdsf\",\r\n        \"phoneNo\": \"2101234567\",\r\n        \"subscriptionType\": \"NO_SUBSCRIPTION\",\r\n        \"subscriptionDate\": null,\r\n        \"address\": [\r\n            {\r\n                \"id\": null,\r\n                \"streetName\": \"Main Street\",\r\n                \"streetNo\": \"32\",\r\n                \"postalCode\": \"123456\",\r\n                \"country\": \"United States\",\r\n                \"province\": \"Texas\"\r\n            }\r\n        ],\r\n        \"creditCards\": [\r\n        ],\r\n        \"profiles\": [\r\n        {\r\n            \"id\": null,\r\n            \"firstname\": \"David\",\r\n            \"imageUrl\": null,\r\n            \"ageRestricted\": false\r\n        },\r\n        {\r\n            \"id\": null,\r\n            \"firstname\": \"KIDS\",\r\n            \"imageUrl\": null,\r\n            \"ageRestricted\": true\r\n        }\r\n        ]\r\n    }\r\n]\r\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8080/api/v1/account/addAccounts",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"account",
+												"addAccounts"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "DELETE",
+							"item": [
+								{
+									"name": "DeleteAccountById",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8080/api/v1/account/deleteAccountById/3",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"account",
+												"deleteAccountById",
+												"3"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "DeleteAccountsByIds",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8080/api/v1/account/deleteAccountsByIds/5,6",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"account",
+												"deleteAccountsByIds",
+												"5,6"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "UPDATE",
+							"item": [
+								{
+									"name": "UpdateAccountPatch",
+									"request": {
+										"method": "PATCH",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"id\": null,\r\n    \"email\": \"10@hotmail.com\",\r\n    \"username\": \"Dave\",\r\n    \"firstname\": \"David\",\r\n    \"lastname\": \"Johnson\",\r\n    \"password\": \"fdsfdsf\",\r\n    \"phoneNo\": \"2101234567\",\r\n    \"subscriptionType\": \"NO_SUBSCRIPTION\",\r\n    \"subscriptionDate\": null,\r\n     \"address\": [\r\n        {\r\n            \"id\": null,\r\n            \"streetName\": \"Main Street\",\r\n            \"streetNo\": \"32\",\r\n            \"postalCode\": \"123456\",\r\n            \"country\": \"United States\",\r\n            \"province\": \"Texas\"\r\n        }\r\n    ],\r\n    \"creditCards\": [\r\n    ],\r\n    \"profiles\": [\r\n    ]\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8080/api/v1/account/updateAccountById/2",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"account",
+												"updateAccountById",
+												"2"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "READ",
+							"item": [
+								{
+									"name": "FindAllAccounts",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8080/api/v1/account",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"account"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "FindAccountById",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8080/api/v1/account/1",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"account",
+												"1"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "FindAccountByEmail",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8080/api/v1/account/findAccountByEmail/dave@hotmail.com",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"account",
+												"findAccountByEmail",
+												"dave@hotmail.com"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Profile",
+					"item": [
+						{
+							"name": "CREATE",
+							"item": [
+								{
+									"name": "AddProfileAccountId",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"id\": null,\r\n    \"firstname\": \"maximos\",\r\n    \"imageUrl\": null,\r\n    \"ageRestricted\": false\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8080/api/v1/account/profile/addProfileByAccountId/1",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"account",
+												"profile",
+												"addProfileByAccountId",
+												"1"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "AddProfilesByAccountId",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "[\r\n    {\r\n        \"id\": null,\r\n        \"firstname\": \"test\",\r\n        \"imageUrl\": null,\r\n        \"ageRestricted\": false\r\n    },\r\n    {\r\n        \"id\": null,\r\n        \"firstname\": \"test\",\r\n        \"imageUrl\": null,\r\n        \"ageRestricted\": true\r\n    }\r\n]",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8080/api/v1/account/profile/addProfilesByAccountId/1",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"account",
+												"profile",
+												"addProfilesByAccountId",
+												"1"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "DELETE",
+							"item": [
+								{
+									"name": "DeleteProfileById",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8080/api/v1/account/profile/deleteProfileById/4",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"account",
+												"profile",
+												"deleteProfileById",
+												"4"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "DeleteProfilesByIds",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8080/api/v1/account/profile/deleteProfilesByIds/2,3",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"account",
+												"profile",
+												"deleteProfilesByIds",
+												"2,3"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "UPDATE",
+							"item": [
+								{
+									"name": "UpdateProfileById",
+									"request": {
+										"method": "PATCH",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"firstname\": \"test\",\r\n    \"ageRestricted\": false\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8080/api/v1/account/profile/updateProfileById/1",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"account",
+												"profile",
+												"updateProfileById",
+												"1"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "READ",
+							"item": [
+								{
+									"name": "FindAllProfiles",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8080/api/v1/account/profile",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"account",
+												"profile"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "FindProfileById",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8080/api/v1/account/profile/1",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"account",
+												"profile",
+												"1"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "FindAllProfilesByAccountId",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8080/api/v1/account/profile/findAllProfilesByAccountId/1",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"account",
+												"profile",
+												"findAllProfilesByAccountId",
+												"1"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Address",
+					"item": [
+						{
+							"name": "CREATE",
+							"item": [
+								{
+									"name": "AddAddressByAccountId",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"id\": null,\r\n    \"streetName\": \"Main Street\",\r\n    \"streetNo\": \"32\",\r\n    \"postalCode\": \"123456\",\r\n    \"country\": \"Athens\",\r\n    \"province\": \"Texas\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8080/api/v1/account/address/addAddressByAccountId/1",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"account",
+												"address",
+												"addAddressByAccountId",
+												"1"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "AddAddressesByAccountId",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "[\r\n    {\r\n        \"id\": null,\r\n        \"streetName\": \"hola\",\r\n        \"streetNo\": \"32\",\r\n        \"postalCode\": \"123456\",\r\n        \"country\": \"United States\",\r\n        \"province\": \"Texas\"\r\n    },\r\n    {\r\n        \"id\": null,\r\n        \"streetName\": \"halandri\",\r\n        \"streetNo\": \"32\",\r\n        \"postalCode\": \"123456\",\r\n        \"country\": \"United States\",\r\n        \"province\": \"Texas\"\r\n    }\r\n]",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8080/api/v1/account/address/addAddressesByAccountId/1",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"account",
+												"address",
+												"addAddressesByAccountId",
+												"1"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "DELETE",
+							"item": [
+								{
+									"name": "DeleteAddressById",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8080/api/v1/account/address/deleteAddressById/2",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"account",
+												"address",
+												"deleteAddressById",
+												"2"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "DeleteAddressesByIds",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8080/api/v1/account/address/deleteAddressesByIds/1,5",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"account",
+												"address",
+												"deleteAddressesByIds",
+												"1,5"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "UPDATE",
+							"item": [
+								{
+									"name": "UpdateAddressPatch",
+									"request": {
+										"method": "PATCH",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"streetName\": \"omonoia\",\r\n    \"streetNo\": \"32\",\r\n    \"postalCode\": \"123456\",\r\n    \"country\": \"United States\",\r\n    \"province\": \"larissa\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8080/api/v1/account/address/updateAddressById/8",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"account",
+												"address",
+												"updateAddressById",
+												"8"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "READ",
+							"item": [
+								{
+									"name": "FindAllAddresses",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8080/api/v1/account/address",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"account",
+												"address"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "FindAddressById",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8080/api/v1/account/address/8",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"account",
+												"address",
+												"8"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "FindAllAddressesByAccountId",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8080/api/v1/account/address/findAllAddressesByAccountId/1",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"account",
+												"address",
+												"findAllAddressesByAccountId",
+												"1"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Credit Card",
+					"item": [
+						{
+							"name": "CREATE",
+							"item": [
+								{
+									"name": "AddCreditCardByAccountId",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"id\": null,\r\n    \"cardNo\": \"1244563591912121\",\r\n    \"cardName\": \"lorem\",\r\n    \"cardCvc\": \"123\",\r\n    \"cardExpirationDate\": \"08/2024\",\r\n    \"cardType\": \"AMERICAN_EXPRESS\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8080/api/v1/account/creditcard/addCreditCardByAccountId/1",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"account",
+												"creditcard",
+												"addCreditCardByAccountId",
+												"1"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "AddCreditCardsByAccountId",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "[\r\n    {\r\n        \"id\": null,\r\n        \"cardNo\": \"1244563591912121\",\r\n        \"cardName\": \"test\",\r\n        \"cardCvc\": \"123\",\r\n        \"cardExpirationDate\": \"08/2024\",\r\n        \"cardType\": \"AMERICAN_EXPRESS\"\r\n    },\r\n    {\r\n        \"id\": null,\r\n        \"cardNo\": \"1244563591912121\",\r\n        \"cardName\": \"test\",\r\n        \"cardCvc\": \"123\",\r\n        \"cardExpirationDate\": \"08/2024\",\r\n        \"cardType\": \"AMERICAN_EXPRESS\"\r\n    }\r\n]",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8080/api/v1/account/creditcard/addCreditCardsByAccountId/1",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"account",
+												"creditcard",
+												"addCreditCardsByAccountId",
+												"1"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "DELETE",
+							"item": [
+								{
+									"name": "DeleteCreditCardById",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8080/api/v1/account/creditcard/deleteCreditCardById/1",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"account",
+												"creditcard",
+												"deleteCreditCardById",
+												"1"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "DeleteCreditCardsByIds",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8080/api/v1/account/creditcard/deleteCreditCardsByIds/2,5",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"account",
+												"creditcard",
+												"deleteCreditCardsByIds",
+												"2,5"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "UPDATE",
+							"item": [
+								{
+									"name": "UpdateCreditCardById",
+									"request": {
+										"method": "PATCH",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"cardNo\": \"1244563591912121\",\r\n    \"cardName\": \"loremipsum\",\r\n    \"cardCvc\": \"123\",\r\n    \"cardExpirationDate\": \"08/2024\",\r\n    \"cardType\": \"AMERICAN_EXPRESS\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8080/api/v1/account/creditcard/updateCreditCardById/9",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"account",
+												"creditcard",
+												"updateCreditCardById",
+												"9"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "READ",
+							"item": [
+								{
+									"name": "FindAllCreditCards",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8080/api/v1/account/creditcard",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"account",
+												"creditcard"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "FindCreditCardById",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8080/api/v1/account/creditcard/9",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"account",
+												"creditcard",
+												"9"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "FindAllCreditCardsByAccountId",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8080/api/v1/account/creditcard/findAllCreditCardsByAccountId/1",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"account",
+												"creditcard",
+												"findAllCreditCardsByAccountId",
+												"1"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Contents",
+			"item": [
+				{
+					"name": "Content",
+					"item": [
+						{
+							"name": "READ",
+							"item": [
+								{
+									"name": "AdvancedSearch",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8080/api/v1/content/advancedSearch?pageNo=0&pageSize=2&search=&genres=&isAgeRestricted=&contentType=&language&year",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"content",
+												"advancedSearch"
+											],
+											"query": [
+												{
+													"key": "pageNo",
+													"value": "0"
+												},
+												{
+													"key": "pageSize",
+													"value": "2"
+												},
+												{
+													"key": "search",
+													"value": ""
+												},
+												{
+													"key": "genres",
+													"value": "Drama",
+													"disabled": true
+												},
+												{
+													"key": "genres",
+													"value": "Comedy",
+													"disabled": true
+												},
+												{
+													"key": "genres",
+													"value": "Crime",
+													"disabled": true
+												},
+												{
+													"key": "language",
+													"value": "English",
+													"disabled": true
+												},
+												{
+													"key": "year",
+													"value": "2022",
+													"disabled": true
+												},
+												{
+													"key": "isAgeRestricted",
+													"value": "false",
+													"disabled": true
+												},
+												{
+													"key": "contentType",
+													"value": "Movie",
+													"disabled": true
+												},
+												{
+													"key": "genres",
+													"value": ""
+												},
+												{
+													"key": "isAgeRestricted",
+													"value": ""
+												},
+												{
+													"key": "contentType",
+													"value": ""
+												},
+												{
+													"key": "language",
+													"value": null
+												},
+												{
+													"key": "year",
+													"value": null
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "FindAllContents",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8080/api/v1/content",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"content"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "FindContentById",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8080/api/v1/content/1",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"content",
+												"1"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Movie",
+					"item": [
+						{
+							"name": "CREATE",
+							"item": [
+								{
+									"name": "AddMovies",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "[\r\n    {\r\n        \"id\": null,\r\n        \"writers\": [\r\n            {\r\n                \"id\": null,\r\n                \"fullname\": \"Rian Johnson\",\r\n                \"imageUrl\": null\r\n            }\r\n        ],\r\n        \"directors\": [\r\n            {\r\n                \"id\": null,\r\n                \"fullname\": \"Rian Johnson\",\r\n                \"imageUrl\": null\r\n            }\r\n        ],\r\n        \"title\": \"Glass Onion: A Knives Out Mystery\",\r\n        \"description\": \"Famed Southern detective Benoit Blanc travels to Greece for his latest case.\",\r\n        \"spokenLanguage\": \"English\",\r\n        \"releaseDate\": \"23 Dec 2022\",\r\n        \"imageUrl\": \"https://images2.alphacoders.com/128/1287184.jpg\",\r\n        \"trailerUrl\": \"<iframe width=\\\"560\\\" height=\\\"315\\\" src=\\\"https://www.youtube.com/embed/-xR_lBtEvSc\\\" title=\\\"YouTube video player\\\" frameborder=\\\"0\\\" allow=\\\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\\\" allowfullscreen></iframe>\",\r\n        \"isAgeRestricted\": false,\r\n        \"genres\": [\r\n            {\r\n                \"id\": null,\r\n                \"name\": \"Comedy\"\r\n            },\r\n            {\r\n                \"id\": null,\r\n                \"name\": \"Drama\"\r\n            },\r\n            {\r\n                \"id\": null,\r\n                \"name\": \"Crime\"\r\n            }\r\n        ],\r\n        \"actors\": [\r\n            {\r\n                \"id\": null,\r\n                \"fullname\": \"Daniel Craig\",\r\n                \"imageUrl\": \"https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Daniel_Craig_in_2021.jpg/330px-Daniel_Craig_in_2021.jpg\"\r\n            },\r\n            {\r\n                \"id\": null,\r\n                \"fullname\": \"Edward Norton\",\r\n                \"imageUrl\": \"https://upload.wikimedia.org/wikipedia/commons/3/35/Ed_Norton_Shankbone_Metropolitan_Opera_2009.jpg\"\r\n            },\r\n            {\r\n                \"id\": null,\r\n                \"fullname\": \"Kate Hudson\",\r\n                \"imageUrl\": \"https://upload.wikimedia.org/wikipedia/commons/6/61/Kate_Hudson_%288033413872%29_%28cropped%29.jpg\"\r\n            }\r\n        ],\r\n        \"contentType\": \"MOVIE\",\r\n        \"runtime\": 140\r\n    }\r\n    ,\r\n    {\r\n        \"id\": null,\r\n        \"writers\": [\r\n            {\r\n                \"id\": null,\r\n                \"fullname\": \"Rian Johnson\",\r\n                \"imageUrl\": null\r\n            }\r\n        ],\r\n        \"directors\": [\r\n            {\r\n                \"id\": null,\r\n                \"fullname\": \"Rian Johnson\",\r\n                \"imageUrl\": null\r\n            }\r\n        ],\r\n        \"title\": \"fdadfafa\",\r\n        \"description\": \"Famed Southern detective Benoit Blanc travels to Greece for his latest case.\",\r\n        \"spokenLanguage\": \"English\",\r\n        \"releaseDate\": \"23 Dec 2022\",\r\n        \"imageUrl\": \"https://images2.alphacoders.com/128/1287184.jpg\",\r\n        \"trailerUrl\": \"<iframe width=\\\"560\\\" height=\\\"315\\\" src=\\\"https://www.youtube.com/embed/-xR_lBtEvSc\\\" title=\\\"YouTube video player\\\" frameborder=\\\"0\\\" allow=\\\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\\\" allowfullscreen></iframe>\",\r\n        \"isAgeRestricted\": false,\r\n        \"genres\": [\r\n            {\r\n                \"id\": null,\r\n                \"name\": \"Comedy\"\r\n            },\r\n            {\r\n                \"id\": null,\r\n                \"name\": \"Drama\"\r\n            },\r\n            {\r\n                \"id\": null,\r\n                \"name\": \"Crime\"\r\n            }\r\n        ],\r\n        \"actors\": [\r\n            {\r\n                \"id\": null,\r\n                \"fullname\": \"Daniel Craig\",\r\n                \"imageUrl\": \"https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Daniel_Craig_in_2021.jpg/330px-Daniel_Craig_in_2021.jpg\"\r\n            },\r\n            {\r\n                \"id\": null,\r\n                \"fullname\": \"Edward Norton\",\r\n                \"imageUrl\": \"https://upload.wikimedia.org/wikipedia/commons/3/35/Ed_Norton_Shankbone_Metropolitan_Opera_2009.jpg\"\r\n            },\r\n            {\r\n                \"id\": null,\r\n                \"fullname\": \"Kate Hudson\",\r\n                \"imageUrl\": \"https://upload.wikimedia.org/wikipedia/commons/6/61/Kate_Hudson_%288033413872%29_%28cropped%29.jpg\"\r\n            }\r\n        ],\r\n        \"contentType\": \"MOVIE\",\r\n        \"runtime\": 140\r\n    }\r\n]",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8080/api/v1/content/movie/addMovies",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"content",
+												"movie",
+												"addMovies"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "AddMovie",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": " {\r\n    \"id\": null,\r\n    \"writers\": [\r\n        {\r\n            \"id\": null,\r\n            \"fullname\": \"Rian Johnson\",\r\n            \"imageUrl\": null\r\n        }\r\n    ],\r\n    \"directors\": [\r\n        {\r\n            \"id\": null,\r\n            \"fullname\": \"Rian Johnson\",\r\n            \"imageUrl\": null\r\n        }\r\n    ],\r\n    \"title\": \"Test\",\r\n    \"description\": \"Famed Southern detective Benoit Blanc travels to Greece for his latest case.\",\r\n    \"spokenLanguage\": \"English\",\r\n    \"releaseDate\": \"23 Dec 2022\",\r\n    \"imageUrl\": \"https://images2.alphacoders.com/128/1287184.jpg\",\r\n    \"trailerUrl\": \"<iframe width=\\\"560\\\" height=\\\"315\\\" src=\\\"https://www.youtube.com/embed/-xR_lBtEvSc\\\" title=\\\"YouTube video player\\\" frameborder=\\\"0\\\" allow=\\\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\\\" allowfullscreen></iframe>\",\r\n    \"isAgeRestricted\": false,\r\n    \"genres\": [\r\n        {\r\n            \"id\": null,\r\n            \"name\": \"Comedy\"\r\n        },\r\n        {\r\n            \"id\": null,\r\n            \"name\": \"Drama\"\r\n        },\r\n        {\r\n            \"id\": null,\r\n            \"name\": \"Crime\"\r\n        }\r\n    ],\r\n    \"actors\": [\r\n        {\r\n            \"id\": null,\r\n            \"fullname\": \"Daniel Craig\",\r\n            \"imageUrl\": \"https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Daniel_Craig_in_2021.jpg/330px-Daniel_Craig_in_2021.jpg\"\r\n        },\r\n        {\r\n            \"id\": null,\r\n            \"fullname\": \"Edward Norton\",\r\n            \"imageUrl\": \"https://upload.wikimedia.org/wikipedia/commons/3/35/Ed_Norton_Shankbone_Metropolitan_Opera_2009.jpg\"\r\n        },\r\n        {\r\n            \"id\": null,\r\n            \"fullname\": \"Kate Hudson\",\r\n            \"imageUrl\": \"https://upload.wikimedia.org/wikipedia/commons/6/61/Kate_Hudson_%288033413872%29_%28cropped%29.jpg\"\r\n        }\r\n    ],\r\n    \"contentType\": \"MOVIE\",\r\n    \"runtime\": 140\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8080/api/v1/content/movie/addMovie",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"content",
+												"movie",
+												"addMovie"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "DELETE",
+							"item": [
+								{
+									"name": "DeleteMovieById",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8080/api/v1/content/movie/deleteMovieById/1",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"content",
+												"movie",
+												"deleteMovieById",
+												"1"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "DeleteMoviesByIds",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8080/api/v1/content/movie/deleteMoviesByIds/2,3",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"content",
+												"movie",
+												"deleteMoviesByIds",
+												"2,3"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "UPDATE",
+							"item": [
+								{
+									"name": "UpdateMovieById",
+									"request": {
+										"method": "PATCH",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"id\": null,\r\n    \"title\": \"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\",\r\n    \"description\": \"Famed Southern detective Benoit Blanc travels to Greece for his latest case.\",\r\n    \"spokenLanguage\": \"English\",\r\n    \"releaseDate\": \"23 Dec 2022\",\r\n    \"imageUrl\": \"https://images2.alphacoders.com/128/1287184.jpg\",\r\n    \"trailerUrl\": \"<iframe width=\\\"560\\\" height=\\\"315\\\" src=\\\"https://www.youtube.com/embed/-xR_lBtEvSc\\\" title=\\\"YouTube video player\\\" frameborder=\\\"0\\\" allow=\\\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\\\" allowfullscreen></iframe>\",\r\n    \"isAgeRestricted\": false,\r\n    \"genres\": [\r\n        {\r\n            \"id\": null,\r\n            \"name\": \"TEST\"\r\n        },\r\n        {\r\n            \"id\": null,\r\n            \"name\": \"Drama\"\r\n        },\r\n        {\r\n            \"id\": null,\r\n            \"name\": \"Crime\"\r\n        }\r\n    ],\r\n    \"actors\": [\r\n        {\r\n            \"id\": null,\r\n            \"fullname\": \"Daniel Craig\",\r\n            \"imageUrl\": \"https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Daniel_Craig_in_2021.jpg/330px-Daniel_Craig_in_2021.jpg\"\r\n        },\r\n        {\r\n            \"id\": null,\r\n            \"fullname\": \"Edward Norton\",\r\n            \"imageUrl\": \"https://upload.wikimedia.org/wikipedia/commons/3/35/Ed_Norton_Shankbone_Metropolitan_Opera_2009.jpg\"\r\n        },\r\n        {\r\n            \"id\": null,\r\n            \"fullname\": \"Kate Hudson\",\r\n            \"imageUrl\": \"https://upload.wikimedia.org/wikipedia/commons/6/61/Kate_Hudson_%288033413872%29_%28cropped%29.jpg\"\r\n        }\r\n    ],\r\n    \"contentType\": \"MOVIE\",\r\n    \"runtime\": 140,\r\n    \"writers\": [\r\n        {\r\n            \"id\": null,\r\n            \"fullname\": \"vale kati\",\r\n            \"imageUrl\": null\r\n        }\r\n    ],\r\n    \"directors\": [\r\n        {\r\n            \"id\": null,\r\n            \"fullname\": \"Test Johnson\",\r\n            \"imageUrl\": null\r\n        }\r\n    ]\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8080/api/v1/content/movie/updateMovieById/1",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"content",
+												"movie",
+												"updateMovieById",
+												"1"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "READ",
+							"item": [
+								{
+									"name": "FindAllMovies",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8080/api/v1/content/movie",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"content",
+												"movie"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "FindMovieById",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8080/api/v1/content/movie/1",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"content",
+												"movie",
+												"1"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "TV Series",
+					"item": [
+						{
+							"name": "CREATE",
+							"item": [
+								{
+									"name": "AddTVSeries",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "[\r\n    {\r\n        \"id\": null,\r\n        \"seasons\": [\r\n            {\r\n                \"id\": null,\r\n                \"seasonNo\": 1,\r\n                \"episodes\": [\r\n                    {\r\n                        \"id\": null,\r\n                        \"title\": \"Winter Is Coming\",\r\n                        \"imageUrl\": null,\r\n                        \"description\": \"Eddard Stark is torn between his family and an old friend when asked to serve at the side of King Robert Baratheon; Viserys plans to wed his sister to a nomadic warlord in exchange for an army.\",\r\n                        \"episodeNo\": 1,\r\n                        \"releaseDate\": \"17 Apr. 2011\"\r\n                    },\r\n                    {\r\n                        \"id\": null,\r\n                        \"title\": \"The Kingsroad\",\r\n                        \"imageUrl\": null,\r\n                        \"description\": \"While Bran recovers from his fall, Ned takes only his daughters to Kings Landing. Jon Snow goes with his uncle Benjen to the Wall. Tyrion joins them.\",\r\n                        \"episodeNo\": 2,\r\n                        \"releaseDate\": \"24 Apr. 2011\"\r\n                    },\r\n                    {\r\n                        \"id\": null,\r\n                        \"title\": \"Lord Snowg\",\r\n                        \"imageUrl\": null,\r\n                        \"description\": \"Jon begins his training with the Nights Watch; Ned confronts his past and future at Kings Landing; Daenerys finds herself at odds with Viserys.\",\r\n                        \"episodeNo\": 3,\r\n                        \"releaseDate\": \"1 May 2011\"\r\n                    },\r\n                    {\r\n                        \"id\": null,\r\n                        \"title\": \"Cripples, Bastards, and Broken Things\",\r\n                        \"imageUrl\": null,\r\n                        \"description\": \"Eddard investigates Jon Arryns murder. Jon befriends Samwell Tarly, a coward who has come to join the Nights Watch.\",\r\n                        \"episodeNo\": 4,\r\n                        \"releaseDate\": \"8 May 2011\"\r\n                    },\r\n                    {\r\n                        \"id\": null,\r\n                        \"title\": \"The Wolf and the Lion\",\r\n                        \"imageUrl\": null,\r\n                        \"description\": \"Catelyn has captured Tyrion and plans to bring him to her sister, Lysa Arryn, at the Vale, to be tried for his, supposed, crimes against Bran. Robert plans to have Daenerys killed, but Eddard refuses to be a part of it and quits.\",\r\n                        \"episodeNo\": 5,\r\n                        \"releaseDate\": \"15 May 2011\"\r\n                    },\r\n                    {\r\n                        \"id\": null,\r\n                        \"title\": \"A Golden Crown\",\r\n                        \"imageUrl\": null,\r\n                        \"description\": \"While recovering from his battle with Jaime, Eddard is forced to run the kingdom while Robert goes hunting. Tyrion demands a trial by combat for his freedom. Viserys is losing his patience with Drogo.\",\r\n                        \"episodeNo\": 6,\r\n                        \"releaseDate\": \"22 May 2011\"\r\n                    },\r\n                    {\r\n                        \"id\": null,\r\n                        \"title\": \"You Win or You Die\",\r\n                        \"imageUrl\": null,\r\n                        \"description\": \"Robert has been injured while hunting and is dying. Jon and the others finally take their vows to the Nights Watch. A man, sent by Robert, is captured for trying to poison Daenerys. Furious, Drogo vows to attack the Seven Kingdoms.\",\r\n                        \"episodeNo\": 7,\r\n                        \"releaseDate\": \"29 May 2011\"\r\n                    },\r\n                    {\r\n                        \"id\": null,\r\n                        \"title\": \"The Pointy End\",\r\n                        \"imageUrl\": null,\r\n                        \"description\": \"The Lannisters press their advantage over the Starks; Robb rallies his fathers northern allies and heads south to war; The White Walkers attack the Wall; Tyrion returns to his father with some new friends.\",\r\n                        \"episodeNo\": 8,\r\n                        \"releaseDate\": \"5 Jun. 2011\"\r\n                    },\r\n                    {\r\n                        \"id\": null,\r\n                        \"title\": \"Baelor\",\r\n                        \"imageUrl\": null,\r\n                        \"description\": \"Robb goes to war against the Lannisters. Jon finds himself struggling on deciding if his place is with Robb or the Nights Watch. Drogo has fallen ill from a fresh battle wound. Daenerys is desperate to save him.\",\r\n                        \"episodeNo\": 9,\r\n                        \"releaseDate\": \"12 Jun. 2011\"\r\n                    },\r\n                    {\r\n                        \"id\": null,\r\n                        \"title\": \"Fire and Blood\",\r\n                        \"imageUrl\": null,\r\n                        \"description\": \"Robb vows to get revenge on the Lannisters. Jon must officially decide if his place is with Robb or the Nights Watch. Daenerys says her final goodbye to Drogo.\",\r\n                        \"episodeNo\": 10,\r\n                        \"releaseDate\": \"19 Jun. 2011\"\r\n                    }\r\n                ]\r\n            },\r\n            {\r\n                \"id\": null,\r\n                \"seasonNo\": 2,\r\n                \"episodes\": [\r\n                    {\r\n                        \"id\": null,\r\n                        \"title\": \"The North Remembers\",\r\n                        \"imageUrl\": null,\r\n                        \"description\": \"Tyrion arrives at Kings Landing to take his fathers place as Hand of the King. Stannis Baratheon plans to take the Iron Throne for his own. Robb tries to decide his next move in the war. The Nights Watch arrive at the house of Craster.\",\r\n                        \"episodeNo\": 1,\r\n                        \"releaseDate\": \"1 Apr. 2012\"\r\n                    },\r\n                    {\r\n                        \"id\": null,\r\n                        \"title\": \"The Night Lands\",\r\n                        \"imageUrl\": null,\r\n                        \"description\": \"Arya makes friends with Gendry. Tyrion tries to take control of the Small Council. Theon arrives at his home, Pyke, in order to persuade his father into helping Robb with the war. Jon tries to investigate Crasters secret.\",\r\n                        \"episodeNo\": 2,\r\n                        \"releaseDate\": \"8 Apr. 2012\"\r\n                    },\r\n                    {\r\n                        \"id\": null,\r\n                        \"title\": \"What Is Dead May Never Die\",\r\n                        \"imageUrl\": null,\r\n                        \"description\": \"Tyrion tries to see who he can trust in the Small Council. Catelyn visits Renly to try and persuade him to join Robb in the war. Theon must decide if his loyalties lie with his own family or with Robb.\",\r\n                        \"episodeNo\": 3,\r\n                        \"releaseDate\": \"15 Apr. 2012\"\r\n                    },\r\n                    {\r\n                        \"id\": null,\r\n                        \"title\": \"Garden of Boness\",\r\n                        \"imageUrl\": null,\r\n                        \"description\": \"Lord Baelish arrives at Renlys camp just before he faces off against Stannis. Daenerys and her company are welcomed into the city of Qarth. Arya, Gendry, and Hot Pie find themselves imprisoned at Harrenhal.\",\r\n                        \"episodeNo\": 4,\r\n                        \"releaseDate\": \"22 Apr. 2012\"\r\n                    },\r\n                    {\r\n                        \"id\": null,\r\n                        \"title\": \"The Ghost of Harrenhal\",\r\n                        \"imageUrl\": null,\r\n                        \"description\": \"Tyrion investigates a secret weapon that King Joffrey plans to use against Stannis. Meanwhile, as a token for saving his life, Jaqen Hghar offers to kill three people that Arya chooses.\",\r\n                        \"episodeNo\": 5,\r\n                        \"releaseDate\": \"29 Apr. 2012\"\r\n                    },\r\n                    {\r\n                        \"id\": null,\r\n                        \"title\": \"The Old Gods and the New\",\r\n                        \"imageUrl\": null,\r\n                        \"description\": \"Theon seizes control of Winterfell. Jon captures a wildling, named Ygritte. The people of Kings Landing begin to turn against King Joffrey. Daenerys looks to buy ships to sail for the Seven Kingdoms.\",\r\n                        \"episodeNo\": 6,\r\n                        \"releaseDate\": \"6 May 2012\"\r\n                    },\r\n                    {\r\n                        \"id\": null,\r\n                        \"title\": \"A Man Without Honor\",\r\n                        \"imageUrl\": null,\r\n                        \"description\": \"Bran and Rickon have escaped Winterfell. Theon tries to hunt them down. Daenerys dragons have been stolen. Jon travels through the wilderness with Ygritte as his prisoner. Sansa has bled and is now ready to have Joffreys children.\",\r\n                        \"episodeNo\": 7,\r\n                        \"releaseDate\": \"13 May 2012\"\r\n                    },\r\n                    {\r\n                        \"id\": null,\r\n                        \"title\": \"The Prince of Winterfell\",\r\n                        \"imageUrl\": null,\r\n                        \"description\": \"Stannis is just days from Kings Landing. Tyrion prepares for his arrival. Jon and Qhorin are taken prisoner by the wildlings. Catelyn is arrested for releasing Jaime. Arya, Gendry, and Hot Pie plan to escape from Harrenhal.\",\r\n                        \"episodeNo\": 8,\r\n                        \"releaseDate\": \"20 May 2012\"\r\n                    },\r\n                    {\r\n                        \"id\": null,\r\n                        \"title\": \"Blackwater\",\r\n                        \"imageUrl\": null,\r\n                        \"description\": \"Stannis Baratheons fleet and army arrive at Kings Landing and the battle for the city begins. Cersei plans for her and her childrens future.\",\r\n                        \"episodeNo\": 9,\r\n                        \"releaseDate\": \"27 May 2012\"\r\n                    },\r\n                    {\r\n                        \"id\": null,\r\n                        \"title\": \"Valar Morghulis\",\r\n                        \"imageUrl\": null,\r\n                        \"description\": \"Joffrey puts Sansa aside for Margaery Tyrell. Robb marries Talisa Maegyr. Jon prepares to meet Mance Rayder. Arya says farewell to Jaqen Hghar. Daenerys tries to rescue her dragons.\",\r\n                        \"episodeNo\": 10,\r\n                        \"releaseDate\": \"3 Jun. 2012\"\r\n                    }\r\n                ]\r\n            }\r\n        ],\r\n        \"creators\": [\r\n            {\r\n                \"id\": null,\r\n                \"fullname\": \"David Benioff\",\r\n                \"imageUrl\": null\r\n            },\r\n            {\r\n                \"id\": null,\r\n                \"fullname\": \"D.B. Weiss\",\r\n                \"imageUrl\": null\r\n            }\r\n        ],\r\n        \"tvSeriesStatusType\": \"COMPLETED\",\r\n        \"title\": \"Game of Thrones\",\r\n        \"description\": \"Nine noble families fight for control over the lands of Westeros, while an ancient enemy returns after being dormant for millennia.\",\r\n        \"spokenLanguage\": \"English\",\r\n        \"releaseDate\": \"17 Apr 2011\",\r\n        \"imageUrl\": \"https://images.alphacoders.com/478/478372.jpg\",\r\n        \"trailerUrl\": \"<iframe width=\\\"560\\\" height=\\\"315\\\" src=\\\"https://www.youtube.com/embed/KPLWWIOCOOQ\\\" title=\\\"YouTube video player\\\" frameborder=\\\"0\\\" allow=\\\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\\\" allowfullscreen></iframe>\",\r\n        \"isAgeRestricted\": true,\r\n        \"genres\": [\r\n            {\r\n                \"id\": null,\r\n                \"name\": \"Action\"\r\n            },\r\n            {\r\n                \"id\": null,\r\n                \"name\": \"Adventure\"\r\n            },\r\n            {\r\n                \"id\": null,\r\n                \"name\": \"Drama\"\r\n            }\r\n        ],\r\n        \"actors\": [\r\n            {\r\n                \"id\": null,\r\n                \"fullname\": \"Emilia Clarke\",\r\n                \"imageUrl\": \"https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Emilia_Clarke_Dior_Rose_des_Vents.jpg/900px-Emilia_Clarke_Dior_Rose_des_Vents.jpg\"\r\n            },\r\n            {\r\n                \"id\": null,\r\n                \"fullname\": \"Peter Dinklage\",\r\n                \"imageUrl\": \"https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Peter_Dinklage_by_Gage_Skidmore.jpg/330px-Peter_Dinklage_by_Gage_Skidmore.jpg\"\r\n            },\r\n            {\r\n                \"id\": null,\r\n                \"fullname\": \"Kit Harington\",\r\n                \"imageUrl\": \"https://upload.wikimedia.org/wikipedia/commons/3/32/Kit_harrington_by_sachyn_mital_%28cropped_2%29.jpg\"\r\n            }\r\n        ],\r\n        \"contentType\": \"TV_SERIES\",\r\n        \"runtime\": 57\r\n    },\r\n    {\r\n        \"id\": null,\r\n        \"seasons\": [\r\n            {\r\n                \"id\": null,\r\n                \"seasonNo\": 1,\r\n                \"episodes\": [\r\n                    {\r\n                        \"id\": null,\r\n                        \"title\": \"Chapter One: The Vanishing of Will Byers\",\r\n                        \"imageUrl\": null,\r\n                        \"description\": \"At the U.S. Dept. of Energy an unexplained event occurs. Then when a young Dungeons and Dragons playing boy named Will disappears after a night with his friends, his mother Joyce and the town of Hawkins are plunged into darkness.\",\r\n                        \"episodeNo\": 1,\r\n                        \"releaseDate\": \"15 Jul. 2016\"\r\n                    },\r\n                    {\r\n                        \"id\": null,\r\n                        \"title\": \"Chapter Two: The Weirdo on Maple Street\",\r\n                        \"imageUrl\": null,\r\n                        \"description\": \"Mike hides the mysterious girl in his house. Joyce gets a strange phone call.\",\r\n                        \"episodeNo\": 2,\r\n                        \"releaseDate\": \"15 Jul. 2016\"\r\n                    },\r\n                    {\r\n                        \"id\": null,\r\n                        \"title\": \"Chapter Three: Holly, Jolly\",\r\n                        \"imageUrl\": null,\r\n                        \"description\": \"An increasingly concerned Nancy looks for Barb and finds out what Jonathans been up to. Joyce is convinced Will is trying to talk to her.\",\r\n                        \"episodeNo\": 3,\r\n                        \"releaseDate\": \"15 Jul. 2016\"\r\n                    },\r\n                    {\r\n                        \"id\": null,\r\n                        \"title\": \"Chapter Four: The Body\",\r\n                        \"imageUrl\": null,\r\n                        \"description\": \"Refusing to believe Will is dead, Joyce tries to connect with her son. The boys give Eleven a makeover. Jonathan and Nancy form an unlikely alliance.\",\r\n                        \"episodeNo\": 4,\r\n                        \"releaseDate\": \"15 Jul. 2016\"\r\n                    },\r\n                    {\r\n                        \"id\": null,\r\n                        \"title\": \"Chapter Five: The Flea and the Acrobat\",\r\n                        \"imageUrl\": null,\r\n                        \"description\": \"Hopper breaks into the lab to find the truth about Wills death. The boys try to locate the \\\"gate\\\" that will take them to Will.\",\r\n                        \"episodeNo\": 5,\r\n                        \"releaseDate\": \"15 Jul. 2016\"\r\n                    },\r\n                    {\r\n                        \"id\": null,\r\n                        \"title\": \"Chapter Six: The Monster\",\r\n                        \"imageUrl\": null,\r\n                        \"description\": \"Hopper and Joyce find the truth about the labs experiments. After their fight, the boys look for the missing Eleven.\",\r\n                        \"episodeNo\": 6,\r\n                        \"releaseDate\": \"15 Jul. 2016\"\r\n                    },\r\n                    {\r\n                        \"id\": null,\r\n                        \"title\": \"Chapter Seven: The Bathtub\",\r\n                        \"imageUrl\": null,\r\n                        \"description\": \"The government comes searching for Eleven. Eleven looks for Will and Barb in the Upside Down\",\r\n                        \"episodeNo\": 7,\r\n                        \"releaseDate\": \"15 Jul. 2016\"\r\n                    },\r\n                    {\r\n                        \"id\": null,\r\n                        \"title\": \"Chapter Eight: The Upside Down\",\r\n                        \"imageUrl\": null,\r\n                        \"description\": \"Joyce and Hopper are taken in for questioning. Nancy and Jonathan prepare to fight the monster and save Will.\",\r\n                        \"episodeNo\": 8,\r\n                        \"releaseDate\": \"15 Jul. 2016\"\r\n                    }\r\n                ]\r\n            }\r\n        ],\r\n        \"creators\": [\r\n            {\r\n                \"id\": null,\r\n                \"fullname\": \"Matt Duffer\",\r\n                \"imageUrl\": null\r\n            },\r\n            {\r\n                \"id\": null,\r\n                \"fullname\": \"Ross Duffer\",\r\n                \"imageUrl\": null\r\n            }\r\n        ],\r\n        \"tvSeriesStatusType\": \"ONGOING\",\r\n        \"title\": \"Stranger Things\",\r\n        \"description\": \"When a young boy disappears, his mother, a police chief and his friends must confront terrifying supernatural forces in order to get him back.\",\r\n        \"spokenLanguage\": \"English\",\r\n        \"releaseDate\": \"15 Jul 2016\",\r\n        \"imageUrl\": \"https://images2.alphacoders.com/879/879599.png\",\r\n        \"trailerUrl\": \"<iframe width=\\\"560\\\" height=\\\"315\\\" src=\\\"https://www.youtube.com/embed/b9EkMc79ZSU\\\" title=\\\"YouTube video player\\\" frameborder=\\\"0\\\" allow=\\\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\\\" allowfullscreen></iframe>\",\r\n        \"isAgeRestricted\": false,\r\n        \"genres\": [\r\n            {\r\n                \"id\": null,\r\n                \"name\": \"Drama\"\r\n            },\r\n            {\r\n                \"id\": null,\r\n                \"name\": \"Fantasy\"\r\n            },\r\n            {\r\n                \"id\": null,\r\n                \"name\": \"Horror\"\r\n            }\r\n        ],\r\n        \"actors\": [\r\n            {\r\n                \"id\": null,\r\n                \"fullname\": \"Finn Wolfhard\",\r\n                \"imageUrl\": \"https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Finn_Wolfhard_by_Gage_Skidmore_2.jpg/654px-Finn_Wolfhard_by_Gage_Skidmore_2.jpg\"\r\n            },\r\n            {\r\n                \"id\": null,\r\n                \"fullname\": \"Winona Ryder\",\r\n                \"imageUrl\": \"https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Winona_Ryder_2010_TIFF.jpg/800px-Winona_Ryder_2010_TIFF.jpg\"\r\n            }\r\n        ],\r\n        \"contentType\": \"TV_SERIES\",\r\n        \"runtime\": 51\r\n    }\r\n]",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8080/api/v1/content/tvseries/addTVSeries",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"content",
+												"tvseries",
+												"addTVSeries"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "AddTVSerie",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"id\": null,\r\n    \"seasons\": [\r\n        {\r\n            \"id\": null,\r\n            \"seasonNo\": 1,\r\n            \"episodes\": [\r\n                {\r\n                    \"id\": null,\r\n                    \"title\": \"Winter Is Coming\",\r\n                    \"imageUrl\": null,\r\n                    \"description\": \"Eddard Stark is torn between his family and an old friend when asked to serve at the side of King Robert Baratheon; Viserys plans to wed his sister to a nomadic warlord in exchange for an army.\",\r\n                    \"episodeNo\": 1,\r\n                    \"releaseDate\": \"17 Apr. 2011\"\r\n                },\r\n                {\r\n                    \"id\": null,\r\n                    \"title\": \"The Kingsroad\",\r\n                    \"imageUrl\": null,\r\n                    \"description\": \"While Bran recovers from his fall, Ned takes only his daughters to Kings Landing. Jon Snow goes with his uncle Benjen to the Wall. Tyrion joins them.\",\r\n                    \"episodeNo\": 2,\r\n                    \"releaseDate\": \"24 Apr. 2011\"\r\n                },\r\n                {\r\n                    \"id\": null,\r\n                    \"title\": \"Lord Snowg\",\r\n                    \"imageUrl\": null,\r\n                    \"description\": \"Jon begins his training with the Nights Watch; Ned confronts his past and future at Kings Landing; Daenerys finds herself at odds with Viserys.\",\r\n                    \"episodeNo\": 3,\r\n                    \"releaseDate\": \"1 May 2011\"\r\n                },\r\n                {\r\n                    \"id\": null,\r\n                    \"title\": \"Cripples, Bastards, and Broken Things\",\r\n                    \"imageUrl\": null,\r\n                    \"description\": \"Eddard investigates Jon Arryns murder. Jon befriends Samwell Tarly, a coward who has come to join the Nights Watch.\",\r\n                    \"episodeNo\": 4,\r\n                    \"releaseDate\": \"8 May 2011\"\r\n                },\r\n                {\r\n                    \"id\": null,\r\n                    \"title\": \"The Wolf and the Lion\",\r\n                    \"imageUrl\": null,\r\n                    \"description\": \"Catelyn has captured Tyrion and plans to bring him to her sister, Lysa Arryn, at the Vale, to be tried for his, supposed, crimes against Bran. Robert plans to have Daenerys killed, but Eddard refuses to be a part of it and quits.\",\r\n                    \"episodeNo\": 5,\r\n                    \"releaseDate\": \"15 May 2011\"\r\n                },\r\n                {\r\n                    \"id\": null,\r\n                    \"title\": \"A Golden Crown\",\r\n                    \"imageUrl\": null,\r\n                    \"description\": \"While recovering from his battle with Jaime, Eddard is forced to run the kingdom while Robert goes hunting. Tyrion demands a trial by combat for his freedom. Viserys is losing his patience with Drogo.\",\r\n                    \"episodeNo\": 6,\r\n                    \"releaseDate\": \"22 May 2011\"\r\n                },\r\n                {\r\n                    \"id\": null,\r\n                    \"title\": \"You Win or You Die\",\r\n                    \"imageUrl\": null,\r\n                    \"description\": \"Robert has been injured while hunting and is dying. Jon and the others finally take their vows to the Nights Watch. A man, sent by Robert, is captured for trying to poison Daenerys. Furious, Drogo vows to attack the Seven Kingdoms.\",\r\n                    \"episodeNo\": 7,\r\n                    \"releaseDate\": \"29 May 2011\"\r\n                },\r\n                {\r\n                    \"id\": null,\r\n                    \"title\": \"The Pointy End\",\r\n                    \"imageUrl\": null,\r\n                    \"description\": \"The Lannisters press their advantage over the Starks; Robb rallies his fathers northern allies and heads south to war; The White Walkers attack the Wall; Tyrion returns to his father with some new friends.\",\r\n                    \"episodeNo\": 8,\r\n                    \"releaseDate\": \"5 Jun. 2011\"\r\n                },\r\n                {\r\n                    \"id\": null,\r\n                    \"title\": \"Baelor\",\r\n                    \"imageUrl\": null,\r\n                    \"description\": \"Robb goes to war against the Lannisters. Jon finds himself struggling on deciding if his place is with Robb or the Nights Watch. Drogo has fallen ill from a fresh battle wound. Daenerys is desperate to save him.\",\r\n                    \"episodeNo\": 9,\r\n                    \"releaseDate\": \"12 Jun. 2011\"\r\n                },\r\n                {\r\n                    \"id\": null,\r\n                    \"title\": \"Fire and Blood\",\r\n                    \"imageUrl\": null,\r\n                    \"description\": \"Robb vows to get revenge on the Lannisters. Jon must officially decide if his place is with Robb or the Nights Watch. Daenerys says her final goodbye to Drogo.\",\r\n                    \"episodeNo\": 10,\r\n                    \"releaseDate\": \"19 Jun. 2011\"\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"id\": null,\r\n            \"seasonNo\": 2,\r\n            \"episodes\": [\r\n                {\r\n                    \"id\": null,\r\n                    \"title\": \"The North Remembers\",\r\n                    \"imageUrl\": null,\r\n                    \"description\": \"Tyrion arrives at Kings Landing to take his fathers place as Hand of the King. Stannis Baratheon plans to take the Iron Throne for his own. Robb tries to decide his next move in the war. The Nights Watch arrive at the house of Craster.\",\r\n                    \"episodeNo\": 1,\r\n                    \"releaseDate\": \"1 Apr. 2012\"\r\n                },\r\n                {\r\n                    \"id\": null,\r\n                    \"title\": \"The Night Lands\",\r\n                    \"imageUrl\": null,\r\n                    \"description\": \"Arya makes friends with Gendry. Tyrion tries to take control of the Small Council. Theon arrives at his home, Pyke, in order to persuade his father into helping Robb with the war. Jon tries to investigate Crasters secret.\",\r\n                    \"episodeNo\": 2,\r\n                    \"releaseDate\": \"8 Apr. 2012\"\r\n                },\r\n                {\r\n                    \"id\": null,\r\n                    \"title\": \"What Is Dead May Never Die\",\r\n                    \"imageUrl\": null,\r\n                    \"description\": \"Tyrion tries to see who he can trust in the Small Council. Catelyn visits Renly to try and persuade him to join Robb in the war. Theon must decide if his loyalties lie with his own family or with Robb.\",\r\n                    \"episodeNo\": 3,\r\n                    \"releaseDate\": \"15 Apr. 2012\"\r\n                },\r\n                {\r\n                    \"id\": null,\r\n                    \"title\": \"Garden of Boness\",\r\n                    \"imageUrl\": null,\r\n                    \"description\": \"Lord Baelish arrives at Renlys camp just before he faces off against Stannis. Daenerys and her company are welcomed into the city of Qarth. Arya, Gendry, and Hot Pie find themselves imprisoned at Harrenhal.\",\r\n                    \"episodeNo\": 4,\r\n                    \"releaseDate\": \"22 Apr. 2012\"\r\n                },\r\n                {\r\n                    \"id\": null,\r\n                    \"title\": \"The Ghost of Harrenhal\",\r\n                    \"imageUrl\": null,\r\n                    \"description\": \"Tyrion investigates a secret weapon that King Joffrey plans to use against Stannis. Meanwhile, as a token for saving his life, Jaqen Hghar offers to kill three people that Arya chooses.\",\r\n                    \"episodeNo\": 5,\r\n                    \"releaseDate\": \"29 Apr. 2012\"\r\n                },\r\n                {\r\n                    \"id\": null,\r\n                    \"title\": \"The Old Gods and the New\",\r\n                    \"imageUrl\": null,\r\n                    \"description\": \"Theon seizes control of Winterfell. Jon captures a wildling, named Ygritte. The people of Kings Landing begin to turn against King Joffrey. Daenerys looks to buy ships to sail for the Seven Kingdoms.\",\r\n                    \"episodeNo\": 6,\r\n                    \"releaseDate\": \"6 May 2012\"\r\n                },\r\n                {\r\n                    \"id\": null,\r\n                    \"title\": \"A Man Without Honor\",\r\n                    \"imageUrl\": null,\r\n                    \"description\": \"Bran and Rickon have escaped Winterfell. Theon tries to hunt them down. Daenerys dragons have been stolen. Jon travels through the wilderness with Ygritte as his prisoner. Sansa has bled and is now ready to have Joffreys children.\",\r\n                    \"episodeNo\": 7,\r\n                    \"releaseDate\": \"13 May 2012\"\r\n                },\r\n                {\r\n                    \"id\": null,\r\n                    \"title\": \"The Prince of Winterfell\",\r\n                    \"imageUrl\": null,\r\n                    \"description\": \"Stannis is just days from Kings Landing. Tyrion prepares for his arrival. Jon and Qhorin are taken prisoner by the wildlings. Catelyn is arrested for releasing Jaime. Arya, Gendry, and Hot Pie plan to escape from Harrenhal.\",\r\n                    \"episodeNo\": 8,\r\n                    \"releaseDate\": \"20 May 2012\"\r\n                },\r\n                {\r\n                    \"id\": null,\r\n                    \"title\": \"Blackwater\",\r\n                    \"imageUrl\": null,\r\n                    \"description\": \"Stannis Baratheons fleet and army arrive at Kings Landing and the battle for the city begins. Cersei plans for her and her childrens future.\",\r\n                    \"episodeNo\": 9,\r\n                    \"releaseDate\": \"27 May 2012\"\r\n                },\r\n                {\r\n                    \"id\": null,\r\n                    \"title\": \"Valar Morghulis\",\r\n                    \"imageUrl\": null,\r\n                    \"description\": \"Joffrey puts Sansa aside for Margaery Tyrell. Robb marries Talisa Maegyr. Jon prepares to meet Mance Rayder. Arya says farewell to Jaqen Hghar. Daenerys tries to rescue her dragons.\",\r\n                    \"episodeNo\": 10,\r\n                    \"releaseDate\": \"3 Jun. 2012\"\r\n                }\r\n            ]\r\n        }\r\n    ],\r\n    \"creators\": [\r\n        {\r\n            \"id\": null,\r\n            \"fullname\": \"David Benioff\",\r\n            \"imageUrl\": null\r\n        },\r\n        {\r\n            \"id\": null,\r\n            \"fullname\": \"D.B. Weiss\",\r\n            \"imageUrl\": null\r\n        }\r\n    ],\r\n    \"tvSeriesStatusType\": \"COMPLETED\",\r\n    \"title\": \"Game of Thrones\",\r\n    \"description\": \"Nine noble families fight for control over the lands of Westeros, while an ancient enemy returns after being dormant for millennia.\",\r\n    \"spokenLanguage\": \"English\",\r\n    \"releaseDate\": \"17 Apr 2011\",\r\n    \"imageUrl\": \"https://images.alphacoders.com/478/478372.jpg\",\r\n    \"trailerUrl\": \"<iframe width=\\\"560\\\" height=\\\"315\\\" src=\\\"https://www.youtube.com/embed/KPLWWIOCOOQ\\\" title=\\\"YouTube video player\\\" frameborder=\\\"0\\\" allow=\\\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\\\" allowfullscreen></iframe>\",\r\n    \"isAgeRestricted\": true,\r\n    \"genres\": [\r\n        {\r\n            \"id\": null,\r\n            \"name\": \"Action\"\r\n        },\r\n        {\r\n            \"id\": null,\r\n            \"name\": \"Adventure\"\r\n        },\r\n        {\r\n            \"id\": null,\r\n            \"name\": \"Drama\"\r\n        }\r\n    ],\r\n    \"actors\": [\r\n        {\r\n            \"id\": null,\r\n            \"fullname\": \"Emilia Clarke\",\r\n            \"imageUrl\": \"https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Emilia_Clarke_Dior_Rose_des_Vents.jpg/900px-Emilia_Clarke_Dior_Rose_des_Vents.jpg\"\r\n        },\r\n        {\r\n            \"id\": null,\r\n            \"fullname\": \"Peter Dinklage\",\r\n            \"imageUrl\": \"https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Peter_Dinklage_by_Gage_Skidmore.jpg/330px-Peter_Dinklage_by_Gage_Skidmore.jpg\"\r\n        },\r\n        {\r\n            \"id\": null,\r\n            \"fullname\": \"Kit Harington\",\r\n            \"imageUrl\": \"https://upload.wikimedia.org/wikipedia/commons/3/32/Kit_harrington_by_sachyn_mital_%28cropped_2%29.jpg\"\r\n        }\r\n    ],\r\n    \"contentType\": \"TV_SERIES\",\r\n    \"runtime\": 57\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8080/api/v1/content/tvseries/addTVSerie",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"content",
+												"tvseries",
+												"addTVSerie"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "DELETE",
+							"item": [
+								{
+									"name": "DeleteTVSeriesById",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8080/api/v1/content/tvseries/deleteTVSeriesById/4",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"content",
+												"tvseries",
+												"deleteTVSeriesById",
+												"4"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "DeleteTVSeriesByIds",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8080/api/v1/content/tvseries/deleteTVSeriesByIds/5,6",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"content",
+												"tvseries",
+												"deleteTVSeriesByIds",
+												"5,6"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "UPDATE",
+							"item": [
+								{
+									"name": "UpdateTVSeriesById",
+									"request": {
+										"method": "PATCH",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"id\": null,\r\n    \"seasons\": [\r\n        {\r\n            \"id\": null,\r\n            \"seasonNo\": 1,\r\n            \"episodes\": [\r\n                {\r\n                    \"id\": null,\r\n                    \"title\": \"Winter Is Coming\",\r\n                    \"imageUrl\": null,\r\n                    \"description\": \"Eddard Stark is torn between his family and an old friend when asked to serve at the side of King Robert Baratheon; Viserys plans to wed his sister to a nomadic warlord in exchange for an army.\",\r\n                    \"episodeNo\": 1,\r\n                    \"releaseDate\": \"17 Apr. 2011\"\r\n                },\r\n                {\r\n                    \"id\": null,\r\n                    \"title\": \"The Kingsroad\",\r\n                    \"imageUrl\": null,\r\n                    \"description\": \"While Bran recovers from his fall, Ned takes only his daughters to Kings Landing. Jon Snow goes with his uncle Benjen to the Wall. Tyrion joins them.\",\r\n                    \"episodeNo\": 2,\r\n                    \"releaseDate\": \"24 Apr. 2011\"\r\n                },\r\n                {\r\n                    \"id\": null,\r\n                    \"title\": \"Lord Snowg\",\r\n                    \"imageUrl\": null,\r\n                    \"description\": \"Jon begins his training with the Nights Watch; Ned confronts his past and future at Kings Landing; Daenerys finds herself at odds with Viserys.\",\r\n                    \"episodeNo\": 3,\r\n                    \"releaseDate\": \"1 May 2011\"\r\n                },\r\n                {\r\n                    \"id\": null,\r\n                    \"title\": \"Cripples, Bastards, and Broken Things\",\r\n                    \"imageUrl\": null,\r\n                    \"description\": \"Eddard investigates Jon Arryns murder. Jon befriends Samwell Tarly, a coward who has come to join the Nights Watch.\",\r\n                    \"episodeNo\": 4,\r\n                    \"releaseDate\": \"8 May 2011\"\r\n                },\r\n                {\r\n                    \"id\": null,\r\n                    \"title\": \"The Wolf and the Lion\",\r\n                    \"imageUrl\": null,\r\n                    \"description\": \"Catelyn has captured Tyrion and plans to bring him to her sister, Lysa Arryn, at the Vale, to be tried for his, supposed, crimes against Bran. Robert plans to have Daenerys killed, but Eddard refuses to be a part of it and quits.\",\r\n                    \"episodeNo\": 5,\r\n                    \"releaseDate\": \"15 May 2011\"\r\n                },\r\n                {\r\n                    \"id\": null,\r\n                    \"title\": \"A Golden Crown\",\r\n                    \"imageUrl\": null,\r\n                    \"description\": \"While recovering from his battle with Jaime, Eddard is forced to run the kingdom while Robert goes hunting. Tyrion demands a trial by combat for his freedom. Viserys is losing his patience with Drogo.\",\r\n                    \"episodeNo\": 6,\r\n                    \"releaseDate\": \"22 May 2011\"\r\n                },\r\n                {\r\n                    \"id\": null,\r\n                    \"title\": \"You Win or You Die\",\r\n                    \"imageUrl\": null,\r\n                    \"description\": \"Robert has been injured while hunting and is dying. Jon and the others finally take their vows to the Nights Watch. A man, sent by Robert, is captured for trying to poison Daenerys. Furious, Drogo vows to attack the Seven Kingdoms.\",\r\n                    \"episodeNo\": 7,\r\n                    \"releaseDate\": \"29 May 2011\"\r\n                },\r\n                {\r\n                    \"id\": null,\r\n                    \"title\": \"The Pointy End\",\r\n                    \"imageUrl\": null,\r\n                    \"description\": \"The Lannisters press their advantage over the Starks; Robb rallies his fathers northern allies and heads south to war; The White Walkers attack the Wall; Tyrion returns to his father with some new friends.\",\r\n                    \"episodeNo\": 8,\r\n                    \"releaseDate\": \"5 Jun. 2011\"\r\n                },\r\n                {\r\n                    \"id\": null,\r\n                    \"title\": \"Baelor\",\r\n                    \"imageUrl\": null,\r\n                    \"description\": \"Robb goes to war against the Lannisters. Jon finds himself struggling on deciding if his place is with Robb or the Nights Watch. Drogo has fallen ill from a fresh battle wound. Daenerys is desperate to save him.\",\r\n                    \"episodeNo\": 9,\r\n                    \"releaseDate\": \"12 Jun. 2011\"\r\n                },\r\n                {\r\n                    \"id\": null,\r\n                    \"title\": \"Fire and Blood\",\r\n                    \"imageUrl\": null,\r\n                    \"description\": \"Robb vows to get revenge on the Lannisters. Jon must officially decide if his place is with Robb or the Nights Watch. Daenerys says her final goodbye to Drogo.\",\r\n                    \"episodeNo\": 10,\r\n                    \"releaseDate\": \"19 Jun. 2011\"\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"id\": null,\r\n            \"seasonNo\": 2,\r\n            \"episodes\": [\r\n                {\r\n                    \"id\": null,\r\n                    \"title\": \"The North Remembers\",\r\n                    \"imageUrl\": null,\r\n                    \"description\": \"Tyrion arrives at Kings Landing to take his fathers place as Hand of the King. Stannis Baratheon plans to take the Iron Throne for his own. Robb tries to decide his next move in the war. The Nights Watch arrive at the house of Craster.\",\r\n                    \"episodeNo\": 1,\r\n                    \"releaseDate\": \"1 Apr. 2012\"\r\n                },\r\n                {\r\n                    \"id\": null,\r\n                    \"title\": \"The Night Lands\",\r\n                    \"imageUrl\": null,\r\n                    \"description\": \"Arya makes friends with Gendry. Tyrion tries to take control of the Small Council. Theon arrives at his home, Pyke, in order to persuade his father into helping Robb with the war. Jon tries to investigate Crasters secret.\",\r\n                    \"episodeNo\": 2,\r\n                    \"releaseDate\": \"8 Apr. 2012\"\r\n                },\r\n                {\r\n                    \"id\": null,\r\n                    \"title\": \"What Is Dead May Never Die\",\r\n                    \"imageUrl\": null,\r\n                    \"description\": \"Tyrion tries to see who he can trust in the Small Council. Catelyn visits Renly to try and persuade him to join Robb in the war. Theon must decide if his loyalties lie with his own family or with Robb.\",\r\n                    \"episodeNo\": 3,\r\n                    \"releaseDate\": \"15 Apr. 2012\"\r\n                },\r\n                {\r\n                    \"id\": null,\r\n                    \"title\": \"Garden of Boness\",\r\n                    \"imageUrl\": null,\r\n                    \"description\": \"Lord Baelish arrives at Renlys camp just before he faces off against Stannis. Daenerys and her company are welcomed into the city of Qarth. Arya, Gendry, and Hot Pie find themselves imprisoned at Harrenhal.\",\r\n                    \"episodeNo\": 4,\r\n                    \"releaseDate\": \"22 Apr. 2012\"\r\n                },\r\n                {\r\n                    \"id\": null,\r\n                    \"title\": \"The Ghost of Harrenhal\",\r\n                    \"imageUrl\": null,\r\n                    \"description\": \"Tyrion investigates a secret weapon that King Joffrey plans to use against Stannis. Meanwhile, as a token for saving his life, Jaqen Hghar offers to kill three people that Arya chooses.\",\r\n                    \"episodeNo\": 5,\r\n                    \"releaseDate\": \"29 Apr. 2012\"\r\n                },\r\n                {\r\n                    \"id\": null,\r\n                    \"title\": \"The Old Gods and the New\",\r\n                    \"imageUrl\": null,\r\n                    \"description\": \"Theon seizes control of Winterfell. Jon captures a wildling, named Ygritte. The people of Kings Landing begin to turn against King Joffrey. Daenerys looks to buy ships to sail for the Seven Kingdoms.\",\r\n                    \"episodeNo\": 6,\r\n                    \"releaseDate\": \"6 May 2012\"\r\n                },\r\n                {\r\n                    \"id\": null,\r\n                    \"title\": \"A Man Without Honor\",\r\n                    \"imageUrl\": null,\r\n                    \"description\": \"Bran and Rickon have escaped Winterfell. Theon tries to hunt them down. Daenerys dragons have been stolen. Jon travels through the wilderness with Ygritte as his prisoner. Sansa has bled and is now ready to have Joffreys children.\",\r\n                    \"episodeNo\": 7,\r\n                    \"releaseDate\": \"13 May 2012\"\r\n                },\r\n                {\r\n                    \"id\": null,\r\n                    \"title\": \"The Prince of Winterfell\",\r\n                    \"imageUrl\": null,\r\n                    \"description\": \"Stannis is just days from Kings Landing. Tyrion prepares for his arrival. Jon and Qhorin are taken prisoner by the wildlings. Catelyn is arrested for releasing Jaime. Arya, Gendry, and Hot Pie plan to escape from Harrenhal.\",\r\n                    \"episodeNo\": 8,\r\n                    \"releaseDate\": \"20 May 2012\"\r\n                },\r\n                {\r\n                    \"id\": null,\r\n                    \"title\": \"Blackwater\",\r\n                    \"imageUrl\": null,\r\n                    \"description\": \"Stannis Baratheons fleet and army arrive at Kings Landing and the battle for the city begins. Cersei plans for her and her childrens future.\",\r\n                    \"episodeNo\": 9,\r\n                    \"releaseDate\": \"27 May 2012\"\r\n                },\r\n                {\r\n                    \"id\": null,\r\n                    \"title\": \"Valar Morghulis\",\r\n                    \"imageUrl\": null,\r\n                    \"description\": \"Joffrey puts Sansa aside for Margaery Tyrell. Robb marries Talisa Maegyr. Jon prepares to meet Mance Rayder. Arya says farewell to Jaqen Hghar. Daenerys tries to rescue her dragons.\",\r\n                    \"episodeNo\": 10,\r\n                    \"releaseDate\": \"3 Jun. 2012\"\r\n                }\r\n            ]\r\n        }\r\n    ],\r\n    \"creators\": [\r\n        {\r\n            \"id\": null,\r\n            \"fullname\": \"David Benioff\",\r\n            \"imageUrl\": null\r\n        },\r\n        {\r\n            \"id\": null,\r\n            \"fullname\": \"D.B. Weiss\",\r\n            \"imageUrl\": null\r\n        }\r\n    ],\r\n    \"tvSeriesStatusType\": \"COMPLETED\",\r\n    \"title\": \"Update Test of Thrones\",\r\n    \"description\": \"Nine noble families fight for control over the lands of Westeros, while an ancient enemy returns after being dormant for millennia.\",\r\n    \"spokenLanguage\": \"English\",\r\n    \"releaseDate\": \"17 Apr 2011\",\r\n    \"imageUrl\": \"https://images.alphacoders.com/478/478372.jpg\",\r\n    \"trailerUrl\": \"<iframe width=\\\"560\\\" height=\\\"315\\\" src=\\\"https://www.youtube.com/embed/KPLWWIOCOOQ\\\" title=\\\"YouTube video player\\\" frameborder=\\\"0\\\" allow=\\\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\\\" allowfullscreen></iframe>\",\r\n    \"isAgeRestricted\": true,\r\n    \"genres\": [\r\n        {\r\n            \"id\": null,\r\n            \"name\": \"Action\"\r\n        },\r\n        {\r\n            \"id\": null,\r\n            \"name\": \"Adventure\"\r\n        },\r\n        {\r\n            \"id\": null,\r\n            \"name\": \"Drama\"\r\n        }\r\n    ],\r\n    \"actors\": [\r\n        {\r\n            \"id\": null,\r\n            \"fullname\": \"Emilia Clarke\",\r\n            \"imageUrl\": \"https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Emilia_Clarke_Dior_Rose_des_Vents.jpg/900px-Emilia_Clarke_Dior_Rose_des_Vents.jpg\"\r\n        },\r\n        {\r\n            \"id\": null,\r\n            \"fullname\": \"Peter Dinklage\",\r\n            \"imageUrl\": \"https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Peter_Dinklage_by_Gage_Skidmore.jpg/330px-Peter_Dinklage_by_Gage_Skidmore.jpg\"\r\n        },\r\n        {\r\n            \"id\": null,\r\n            \"fullname\": \"Kit Harington\",\r\n            \"imageUrl\": \"https://upload.wikimedia.org/wikipedia/commons/3/32/Kit_harrington_by_sachyn_mital_%28cropped_2%29.jpg\"\r\n        }\r\n    ],\r\n    \"contentType\": \"TV_SERIES\",\r\n    \"runtime\": 57\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8080/api/v1/content/tvseries/updateTVSeriesById/6",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"content",
+												"tvseries",
+												"updateTVSeriesById",
+												"6"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "READ",
+							"item": [
+								{
+									"name": "FindAllTVSeries",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8080/api/v1/content/tvseries",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"content",
+												"tvseries"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "FindTVSeriesById",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8080/api/v1/content/tvseries/4",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"content",
+												"tvseries",
+												"4"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Genre",
+					"item": [
+						{
+							"name": "CREATE",
+							"item": [
+								{
+									"name": "AddGenreByContentId",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"id\": null,\r\n    \"name\": \"te\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8080/api/v1/content/genre/addGenreByContentId/1",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"content",
+												"genre",
+												"addGenreByContentId",
+												"1"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "AddGenresByContentId",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "[\r\n    {\r\n        \"id\": null,\r\n        \"name\": \"orf\"\r\n    },\r\n    {\r\n        \"id\": null,\r\n        \"name\": \"test\"\r\n    }\r\n]",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8080/api/v1/content/genre/addGenresByContentId/1",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"content",
+												"genre",
+												"addGenresByContentId",
+												"1"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "DELETE",
+							"item": [
+								{
+									"name": "DeleteGenreById",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8080/api/v1/content/genre/deleteGenreById/1",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"content",
+												"genre",
+												"deleteGenreById",
+												"1"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "DeleteGenresByIds",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8080/api/v1/content/genre/deleteGenresByIds/2,3",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"content",
+												"genre",
+												"deleteGenresByIds",
+												"2,3"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "UPDATE",
+							"item": [
+								{
+									"name": "UpdateGenreById",
+									"request": {
+										"method": "PATCH",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"id\": null,\r\n    \"name\": \"Test\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8080/api/v1/content/genre/updateGenreById/1",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"content",
+												"genre",
+												"updateGenreById",
+												"1"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "READ",
+							"item": [
+								{
+									"name": "FindAllGenresByContentId",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8080/api/v1/content/genre/findAllGenresByContentId/1",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"content",
+												"genre",
+												"findAllGenresByContentId",
+												"1"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "FindGenreById",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8080/api/v1/content/genre/5",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"content",
+												"genre",
+												"5"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "FindAllGenres",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8080/api/v1/content/genre",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"content",
+												"genre"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Actor",
+					"item": [
+						{
+							"name": "CREATE",
+							"item": [
+								{
+									"name": "AddActorByContentId",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"id\": null,\r\n    \"fullname\": \"Orf Craig\",\r\n    \"imageUrl\": null\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8080/api/v1/content/actor/addActorByContentId/1",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"content",
+												"actor",
+												"addActorByContentId",
+												"1"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "AddActorsByContentId",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "[\r\n    {\r\n        \"id\": null,\r\n        \"fullname\": \"Orf Craig\"\r\n    },\r\n    {\r\n        \"id\": null,\r\n        \"fullname\": \"Maria Craig\"\r\n    }\r\n]",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8080/api/v1/content/actor/addActorsByContentId/1",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"content",
+												"actor",
+												"addActorsByContentId",
+												"1"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "DELETE",
+							"item": [
+								{
+									"name": "DeleteActorsByIds",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8080/api/v1/content/actor/deleteActorsByIds/2,3",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"content",
+												"actor",
+												"deleteActorsByIds",
+												"2,3"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "DeleteActorById",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8080/api/v1/content/actor/deleteActorById/1",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"content",
+												"actor",
+												"deleteActorById",
+												"1"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "UPDATE",
+							"item": [
+								{
+									"name": "UpdateActorById",
+									"request": {
+										"method": "PATCH",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"id\": null,\r\n    \"fullname\": \"Emilia Test\",\r\n    \"imageUrl\": \"https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Emilia_Clarke_Dior_Rose_des_Vents.jpg/900px-Emilia_Clarke_Dior_Rose_des_Vents.jpg\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8080/api/v1/content/actor/updateActorById/4",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"content",
+												"actor",
+												"updateActorById",
+												"4"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "READ",
+							"item": [
+								{
+									"name": "FindAllActorsByContentId",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8080/api/v1/content/actor/findAllActorsByContentId/1",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"content",
+												"actor",
+												"findAllActorsByContentId",
+												"1"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "FindActorById",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8080/api/v1/content/actor/16",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"content",
+												"actor",
+												"16"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "FindAllActors",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8080/api/v1/content/actor",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"content",
+												"actor"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Writer",
+					"item": [
+						{
+							"name": "CREATE",
+							"item": [
+								{
+									"name": "AddWriterByMovieId",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"id\": null,\r\n    \"fullname\": \"Alexandros\",\r\n    \"imageUrl\": null\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8080/api/v1/content/movie/writer/addWriterByMovieId/1",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"content",
+												"movie",
+												"writer",
+												"addWriterByMovieId",
+												"1"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "AddWritersByMovieId",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "[\r\n    {\r\n        \"id\": null,\r\n        \"fullname\": \"Orf\",\r\n        \"imageUrl\": null\r\n    },\r\n    {\r\n        \"id\": null,\r\n        \"fullname\": \"Jason\",\r\n        \"imageUrl\": null\r\n    }\r\n]",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8080/api/v1/content/movie/writer/addWritersByMovieId/1",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"content",
+												"movie",
+												"writer",
+												"addWritersByMovieId",
+												"1"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "DELETE",
+							"item": [
+								{
+									"name": "DeleteWriterById",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8080/api/v1/content/movie/writer/deleteWriterById/1",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"content",
+												"movie",
+												"writer",
+												"deleteWriterById",
+												"1"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "DeleteWritersByIds",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8080/api/v1/content/movie/writer/deleteWritersByIds/2,3",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"content",
+												"movie",
+												"writer",
+												"deleteWritersByIds",
+												"2,3"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "UPDATE",
+							"item": [
+								{
+									"name": "UpdateWriterById",
+									"request": {
+										"method": "PATCH",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": " {\r\n    \"id\": null,\r\n    \"fullname\": \"Rian Test Writer\",\r\n    \"imageUrl\": null\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8080/api/v1/content/movie/writer/updateWriterById/4",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"content",
+												"movie",
+												"writer",
+												"updateWriterById",
+												"4"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "READ",
+							"item": [
+								{
+									"name": "FindAllWritersByMovieId",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8080/api/v1/content/movie/writer/findAllWritersByMovieId/1",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"content",
+												"movie",
+												"writer",
+												"findAllWritersByMovieId",
+												"1"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "FindWriterById",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8080/api/v1/content/movie/writer/1",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"content",
+												"movie",
+												"writer",
+												"1"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "FindAllWriters",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8080/api/v1/content/movie/writer",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"content",
+												"movie",
+												"writer"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Director",
+					"item": [
+						{
+							"name": "CREATE",
+							"item": [
+								{
+									"name": "AddDirectorByMovieId",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"id\": null,\r\n    \"fullname\": \"test movie\",\r\n    \"imageUrl\": null\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8080/api/v1/content/movie/director/addDirectorByMovieId/1",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"content",
+												"movie",
+												"director",
+												"addDirectorByMovieId",
+												"1"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "AddDirectorsByMovieId",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "[\r\n    {\r\n        \"id\": null,\r\n        \"fullname\": \"test directors movie\",\r\n        \"imageUrl\": null\r\n    },\r\n    {\r\n        \"id\": null,\r\n        \"fullname\": \"running out of names test directors movie\",\r\n        \"imageUrl\": null\r\n    }\r\n]",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8080/api/v1/content/movie/director/addDirectorsByMovieId/1",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"content",
+												"movie",
+												"director",
+												"addDirectorsByMovieId",
+												"1"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "DELETE",
+							"item": [
+								{
+									"name": "DeleteDirectorById",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8080/api/v1/content/movie/director/deleteDirectorById/3",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"content",
+												"movie",
+												"director",
+												"deleteDirectorById",
+												"3"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "DeleteDirectorsById",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8080/api/v1/content/movie/director/deleteDirectorsByIds/1,2",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"content",
+												"movie",
+												"director",
+												"deleteDirectorsByIds",
+												"1,2"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "UPDATE",
+							"item": [
+								{
+									"name": "UpdateDirectorById",
+									"request": {
+										"method": "PATCH",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"id\": null,\r\n    \"fullname\": \"Rian Test\",\r\n    \"imageUrl\": null\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8080/api/v1/content/movie/director/updateDirectorById/1",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"content",
+												"movie",
+												"director",
+												"updateDirectorById",
+												"1"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "READ",
+							"item": [
+								{
+									"name": "FindAllDirectorsByContentId",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8080/api/v1/content/movie/director/findAllDirectorsByMovieId/1",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"content",
+												"movie",
+												"director",
+												"findAllDirectorsByMovieId",
+												"1"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "FindAllDirectors",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8080/api/v1/content/movie/director",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"content",
+												"movie",
+												"director"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "FindDirectorById",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8080/api/v1/content/movie/director/1",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"content",
+												"movie",
+												"director",
+												"1"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Creator",
+					"item": [
+						{
+							"name": "CREATE",
+							"item": [
+								{
+									"name": "AddCreatorByTVSeriesId",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"id\": null,\r\n    \"fullname\": \"test\",\r\n    \"imageUrl\": null\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8080/api/v1/content/tvseries/creator/addCreatorByTVSeriesId/4",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"content",
+												"tvseries",
+												"creator",
+												"addCreatorByTVSeriesId",
+												"4"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "AddCreatorsByTVSeriesId",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "[\r\n    {\r\n        \"id\": null,\r\n        \"fullname\": \"test\",\r\n        \"imageUrl\": null\r\n    },\r\n    {\r\n        \"id\": null,\r\n        \"fullname\": \"test\",\r\n        \"imageUrl\": null\r\n    }\r\n]",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8080/api/v1/content/tvseries/creator/addCreatorsByTVSeriesId/4",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"content",
+												"tvseries",
+												"creator",
+												"addCreatorsByTVSeriesId",
+												"4"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "DELETE",
+							"item": [
+								{
+									"name": "DeleteCreatorsByIds",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8080/api/v1/content/tvseries/creator/deleteCreatorsByIds/2,3",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"content",
+												"tvseries",
+												"creator",
+												"deleteCreatorsByIds",
+												"2,3"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "DeleteCreatorById",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8080/api/v1/content/tvseries/creator/deleteCreatorById/1",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"content",
+												"tvseries",
+												"creator",
+												"deleteCreatorById",
+												"1"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "UPDATE",
+							"item": [
+								{
+									"name": "UpdateCreatorById",
+									"request": {
+										"method": "PATCH",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"id\": null,\r\n    \"fullname\": \"John pap Benioff\",\r\n    \"imageUrl\": null\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8080/api/v1/content/tvseries/creator/updateCreatorById/6",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"content",
+												"tvseries",
+												"creator",
+												"updateCreatorById",
+												"6"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "READ",
+							"item": [
+								{
+									"name": "FindAllCreators",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8080/api/v1/content/tvseries/creator",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"content",
+												"tvseries",
+												"creator"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "FindCreatorById",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8080/api/v1/content/tvseries/creator/1",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"content",
+												"tvseries",
+												"creator",
+												"1"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "FindAllCreatorsByContentId",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8080/api/v1/content/tvseries/creator/findAllCreatorsByTVSeriesId/4",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"content",
+												"tvseries",
+												"creator",
+												"findAllCreatorsByTVSeriesId",
+												"4"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Season",
+					"item": [
+						{
+							"name": "CREATE",
+							"item": [
+								{
+									"name": "AddSeasonByTVSeriesId",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"id\": null,\r\n    \"seasonNo\": 3,\r\n    \"episodes\": [\r\n        {\r\n            \"id\": null,\r\n            \"title\": \"Winter Is Coming\",\r\n            \"imageUrl\": null,\r\n            \"description\": \"Eddard Stark is torn between his family and an old friend when asked to serve at the side of King Robert Baratheon; Viserys plans to wed his sister to a nomadic warlord in exchange for an army.\",\r\n            \"episodeNo\": 1,\r\n            \"releaseDate\": \"17 Apr. 2011\"\r\n        },\r\n        {\r\n            \"id\": null,\r\n            \"title\": \"The Kingsroad\",\r\n            \"imageUrl\": null,\r\n            \"description\": \"While Bran recovers from his fall, Ned takes only his daughters to Kings Landing. Jon Snow goes with his uncle Benjen to the Wall. Tyrion joins them.\",\r\n            \"episodeNo\": 2,\r\n            \"releaseDate\": \"24 Apr. 2011\"\r\n        },\r\n        {\r\n            \"id\": null,\r\n            \"title\": \"Lord Snowg\",\r\n            \"imageUrl\": null,\r\n            \"description\": \"Jon begins his training with the Nights Watch; Ned confronts his past and future at Kings Landing; Daenerys finds herself at odds with Viserys.\",\r\n            \"episodeNo\": 3,\r\n            \"releaseDate\": \"1 May 2011\"\r\n        },\r\n        {\r\n            \"id\": null,\r\n            \"title\": \"Cripples, Bastards, and Broken Things\",\r\n            \"imageUrl\": null,\r\n            \"description\": \"Eddard investigates Jon Arryns murder. Jon befriends Samwell Tarly, a coward who has come to join the Nights Watch.\",\r\n            \"episodeNo\": 4,\r\n            \"releaseDate\": \"8 May 2011\"\r\n        },\r\n        {\r\n            \"id\": null,\r\n            \"title\": \"The Wolf and the Lion\",\r\n            \"imageUrl\": null,\r\n            \"description\": \"Catelyn has captured Tyrion and plans to bring him to her sister, Lysa Arryn, at the Vale, to be tried for his, supposed, crimes against Bran. Robert plans to have Daenerys killed, but Eddard refuses to be a part of it and quits.\",\r\n            \"episodeNo\": 5,\r\n            \"releaseDate\": \"15 May 2011\"\r\n        },\r\n        {\r\n            \"id\": null,\r\n            \"title\": \"A Golden Crown\",\r\n            \"imageUrl\": null,\r\n            \"description\": \"While recovering from his battle with Jaime, Eddard is forced to run the kingdom while Robert goes hunting. Tyrion demands a trial by combat for his freedom. Viserys is losing his patience with Drogo.\",\r\n            \"episodeNo\": 6,\r\n            \"releaseDate\": \"22 May 2011\"\r\n        },\r\n        {\r\n            \"id\": null,\r\n            \"title\": \"You Win or You Die\",\r\n            \"imageUrl\": null,\r\n            \"description\": \"Robert has been injured while hunting and is dying. Jon and the others finally take their vows to the Nights Watch. A man, sent by Robert, is captured for trying to poison Daenerys. Furious, Drogo vows to attack the Seven Kingdoms.\",\r\n            \"episodeNo\": 7,\r\n            \"releaseDate\": \"29 May 2011\"\r\n        },\r\n        {\r\n            \"id\": null,\r\n            \"title\": \"The Pointy End\",\r\n            \"imageUrl\": null,\r\n            \"description\": \"The Lannisters press their advantage over the Starks; Robb rallies his fathers northern allies and heads south to war; The White Walkers attack the Wall; Tyrion returns to his father with some new friends.\",\r\n            \"episodeNo\": 8,\r\n            \"releaseDate\": \"5 Jun. 2011\"\r\n        },\r\n        {\r\n            \"id\": null,\r\n            \"title\": \"Baelor\",\r\n            \"imageUrl\": null,\r\n            \"description\": \"Robb goes to war against the Lannisters. Jon finds himself struggling on deciding if his place is with Robb or the Nights Watch. Drogo has fallen ill from a fresh battle wound. Daenerys is desperate to save him.\",\r\n            \"episodeNo\": 9,\r\n            \"releaseDate\": \"12 Jun. 2011\"\r\n        },\r\n        {\r\n            \"id\": null,\r\n            \"title\": \"Fire and Blood\",\r\n            \"imageUrl\": null,\r\n            \"description\": \"Robb vows to get revenge on the Lannisters. Jon must officially decide if his place is with Robb or the Nights Watch. Daenerys says her final goodbye to Drogo.\",\r\n            \"episodeNo\": 10,\r\n            \"releaseDate\": \"19 Jun. 2011\"\r\n        }\r\n    ]\r\n\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8080/api/v1/content/tvseries/season/addSeasonByTVSeriesId/4",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"content",
+												"tvseries",
+												"season",
+												"addSeasonByTVSeriesId",
+												"4"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "AddSeasonsByTVSeriesId",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "[\r\n   {\r\n        \"id\": null,\r\n        \"seasonNo\": 4,\r\n        \"episodes\": [\r\n            {\r\n                \"id\": null,\r\n                \"title\": \"Winter Is Coming\",\r\n                \"imageUrl\": null,\r\n                \"description\": \"Eddard Stark is torn between his family and an old friend when asked to serve at the side of King Robert Baratheon; Viserys plans to wed his sister to a nomadic warlord in exchange for an army.\",\r\n                \"episodeNo\": 1,\r\n                \"releaseDate\": \"17 Apr. 2011\"\r\n            },\r\n            {\r\n                \"id\": null,\r\n                \"title\": \"The Kingsroad\",\r\n                \"imageUrl\": null,\r\n                \"description\": \"While Bran recovers from his fall, Ned takes only his daughters to Kings Landing. Jon Snow goes with his uncle Benjen to the Wall. Tyrion joins them.\",\r\n                \"episodeNo\": 2,\r\n                \"releaseDate\": \"24 Apr. 2011\"\r\n            },\r\n            {\r\n                \"id\": null,\r\n                \"title\": \"Lord Snowg\",\r\n                \"imageUrl\": null,\r\n                \"description\": \"Jon begins his training with the Nights Watch; Ned confronts his past and future at Kings Landing; Daenerys finds herself at odds with Viserys.\",\r\n                \"episodeNo\": 3,\r\n                \"releaseDate\": \"1 May 2011\"\r\n            },\r\n            {\r\n                \"id\": null,\r\n                \"title\": \"Cripples, Bastards, and Broken Things\",\r\n                \"imageUrl\": null,\r\n                \"description\": \"Eddard investigates Jon Arryns murder. Jon befriends Samwell Tarly, a coward who has come to join the Nights Watch.\",\r\n                \"episodeNo\": 4,\r\n                \"releaseDate\": \"8 May 2011\"\r\n            },\r\n            {\r\n                \"id\": null,\r\n                \"title\": \"The Wolf and the Lion\",\r\n                \"imageUrl\": null,\r\n                \"description\": \"Catelyn has captured Tyrion and plans to bring him to her sister, Lysa Arryn, at the Vale, to be tried for his, supposed, crimes against Bran. Robert plans to have Daenerys killed, but Eddard refuses to be a part of it and quits.\",\r\n                \"episodeNo\": 5,\r\n                \"releaseDate\": \"15 May 2011\"\r\n            },\r\n            {\r\n                \"id\": null,\r\n                \"title\": \"A Golden Crown\",\r\n                \"imageUrl\": null,\r\n                \"description\": \"While recovering from his battle with Jaime, Eddard is forced to run the kingdom while Robert goes hunting. Tyrion demands a trial by combat for his freedom. Viserys is losing his patience with Drogo.\",\r\n                \"episodeNo\": 6,\r\n                \"releaseDate\": \"22 May 2011\"\r\n            },\r\n            {\r\n                \"id\": null,\r\n                \"title\": \"You Win or You Die\",\r\n                \"imageUrl\": null,\r\n                \"description\": \"Robert has been injured while hunting and is dying. Jon and the others finally take their vows to the Nights Watch. A man, sent by Robert, is captured for trying to poison Daenerys. Furious, Drogo vows to attack the Seven Kingdoms.\",\r\n                \"episodeNo\": 7,\r\n                \"releaseDate\": \"29 May 2011\"\r\n            },\r\n            {\r\n                \"id\": null,\r\n                \"title\": \"The Pointy End\",\r\n                \"imageUrl\": null,\r\n                \"description\": \"The Lannisters press their advantage over the Starks; Robb rallies his fathers northern allies and heads south to war; The White Walkers attack the Wall; Tyrion returns to his father with some new friends.\",\r\n                \"episodeNo\": 8,\r\n                \"releaseDate\": \"5 Jun. 2011\"\r\n            },\r\n            {\r\n                \"id\": null,\r\n                \"title\": \"Baelor\",\r\n                \"imageUrl\": null,\r\n                \"description\": \"Robb goes to war against the Lannisters. Jon finds himself struggling on deciding if his place is with Robb or the Nights Watch. Drogo has fallen ill from a fresh battle wound. Daenerys is desperate to save him.\",\r\n                \"episodeNo\": 9,\r\n                \"releaseDate\": \"12 Jun. 2011\"\r\n            },\r\n            {\r\n                \"id\": null,\r\n                \"title\": \"Fire and Blood\",\r\n                \"imageUrl\": null,\r\n                \"description\": \"Robb vows to get revenge on the Lannisters. Jon must officially decide if his place is with Robb or the Nights Watch. Daenerys says her final goodbye to Drogo.\",\r\n                \"episodeNo\": 10,\r\n                \"releaseDate\": \"19 Jun. 2011\"\r\n            }\r\n        ]\r\n\r\n    },\r\n    {\r\n        \"id\": null,\r\n        \"seasonNo\": 3,\r\n        \"episodes\": [\r\n            {\r\n                \"id\": null,\r\n                \"title\": \"Winter Is Coming\",\r\n                \"imageUrl\": null,\r\n                \"description\": \"Eddard Stark is torn between his family and an old friend when asked to serve at the side of King Robert Baratheon; Viserys plans to wed his sister to a nomadic warlord in exchange for an army.\",\r\n                \"episodeNo\": 1,\r\n                \"releaseDate\": \"17 Apr. 2011\"\r\n            },\r\n            {\r\n                \"id\": null,\r\n                \"title\": \"The Kingsroad\",\r\n                \"imageUrl\": null,\r\n                \"description\": \"While Bran recovers from his fall, Ned takes only his daughters to Kings Landing. Jon Snow goes with his uncle Benjen to the Wall. Tyrion joins them.\",\r\n                \"episodeNo\": 2,\r\n                \"releaseDate\": \"24 Apr. 2011\"\r\n            },\r\n            {\r\n                \"id\": null,\r\n                \"title\": \"Lord Snowg\",\r\n                \"imageUrl\": null,\r\n                \"description\": \"Jon begins his training with the Nights Watch; Ned confronts his past and future at Kings Landing; Daenerys finds herself at odds with Viserys.\",\r\n                \"episodeNo\": 3,\r\n                \"releaseDate\": \"1 May 2011\"\r\n            },\r\n            {\r\n                \"id\": null,\r\n                \"title\": \"Cripples, Bastards, and Broken Things\",\r\n                \"imageUrl\": null,\r\n                \"description\": \"Eddard investigates Jon Arryns murder. Jon befriends Samwell Tarly, a coward who has come to join the Nights Watch.\",\r\n                \"episodeNo\": 4,\r\n                \"releaseDate\": \"8 May 2011\"\r\n            },\r\n            {\r\n                \"id\": null,\r\n                \"title\": \"The Wolf and the Lion\",\r\n                \"imageUrl\": null,\r\n                \"description\": \"Catelyn has captured Tyrion and plans to bring him to her sister, Lysa Arryn, at the Vale, to be tried for his, supposed, crimes against Bran. Robert plans to have Daenerys killed, but Eddard refuses to be a part of it and quits.\",\r\n                \"episodeNo\": 5,\r\n                \"releaseDate\": \"15 May 2011\"\r\n            },\r\n            {\r\n                \"id\": null,\r\n                \"title\": \"A Golden Crown\",\r\n                \"imageUrl\": null,\r\n                \"description\": \"While recovering from his battle with Jaime, Eddard is forced to run the kingdom while Robert goes hunting. Tyrion demands a trial by combat for his freedom. Viserys is losing his patience with Drogo.\",\r\n                \"episodeNo\": 6,\r\n                \"releaseDate\": \"22 May 2011\"\r\n            },\r\n            {\r\n                \"id\": null,\r\n                \"title\": \"You Win or You Die\",\r\n                \"imageUrl\": null,\r\n                \"description\": \"Robert has been injured while hunting and is dying. Jon and the others finally take their vows to the Nights Watch. A man, sent by Robert, is captured for trying to poison Daenerys. Furious, Drogo vows to attack the Seven Kingdoms.\",\r\n                \"episodeNo\": 7,\r\n                \"releaseDate\": \"29 May 2011\"\r\n            },\r\n            {\r\n                \"id\": null,\r\n                \"title\": \"The Pointy End\",\r\n                \"imageUrl\": null,\r\n                \"description\": \"The Lannisters press their advantage over the Starks; Robb rallies his fathers northern allies and heads south to war; The White Walkers attack the Wall; Tyrion returns to his father with some new friends.\",\r\n                \"episodeNo\": 8,\r\n                \"releaseDate\": \"5 Jun. 2011\"\r\n            },\r\n            {\r\n                \"id\": null,\r\n                \"title\": \"Baelor\",\r\n                \"imageUrl\": null,\r\n                \"description\": \"Robb goes to war against the Lannisters. Jon finds himself struggling on deciding if his place is with Robb or the Nights Watch. Drogo has fallen ill from a fresh battle wound. Daenerys is desperate to save him.\",\r\n                \"episodeNo\": 9,\r\n                \"releaseDate\": \"12 Jun. 2011\"\r\n            },\r\n            {\r\n                \"id\": null,\r\n                \"title\": \"Fire and Blood\",\r\n                \"imageUrl\": null,\r\n                \"description\": \"Robb vows to get revenge on the Lannisters. Jon must officially decide if his place is with Robb or the Nights Watch. Daenerys says her final goodbye to Drogo.\",\r\n                \"episodeNo\": 10,\r\n                \"releaseDate\": \"19 Jun. 2011\"\r\n            }\r\n        ]\r\n    }\r\n]",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8080/api/v1/content/tvseries/season/addSeasonsByTVSeriesId/4",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"content",
+												"tvseries",
+												"season",
+												"addSeasonsByTVSeriesId",
+												"4"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "DELETE",
+							"item": [
+								{
+									"name": "DeleteSeasonById",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8080/api/v1/content/tvseries/season/deleteSeasonById/1",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"content",
+												"tvseries",
+												"season",
+												"deleteSeasonById",
+												"1"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "DeleteSeasonsByIds",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8080/api/v1/content/tvseries/season/deleteSeasonsByIds/2,3",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"content",
+												"tvseries",
+												"season",
+												"deleteSeasonsByIds",
+												"2,3"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "UPDATE",
+							"item": [
+								{
+									"name": "UpdateSeasonById",
+									"request": {
+										"method": "PATCH",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"id\": null,\r\n    \"seasonNo\": 5,\r\n    \"episodes\": [\r\n        {\r\n            \"id\": null,\r\n            \"title\": \"fddfs Is Coming\",\r\n            \"imageUrl\": null,\r\n            \"description\": \"E Stark is torn between his family and an old friend when asked to serve at the side of King Robert Baratheon; Viserys plans to wed his sister to a nomadic warlord in exchange for an army.\",\r\n            \"episodeNo\": 1,\r\n            \"releaseDate\": \"17 Apr. 2011\"\r\n        },\r\n        {\r\n            \"id\": null,\r\n            \"title\": \"The Kingsroad\",\r\n            \"imageUrl\": null,\r\n            \"description\": \"While Bran recovers from his fall, Ned takes only his daughters to Kings Landing. Jon Snow goes with his uncle Benjen to the Wall. Tyrion joins them.\",\r\n            \"episodeNo\": 2,\r\n            \"releaseDate\": \"24 Apr. 2011\"\r\n        },\r\n        {\r\n            \"id\": null,\r\n            \"title\": \"Lord Snowg\",\r\n            \"imageUrl\": null,\r\n            \"description\": \"Jon begins his training with the Nights Watch; Ned confronts his past and future at Kings Landing; Daenerys finds herself at odds with Viserys.\",\r\n            \"episodeNo\": 3,\r\n            \"releaseDate\": \"1 May 2011\"\r\n        },\r\n        {\r\n            \"id\": null,\r\n            \"title\": \"Cripples, Bastards, and Broken Things\",\r\n            \"imageUrl\": null,\r\n            \"description\": \"Eddard investigates Jon Arryns murder. Jon befriends Samwell Tarly, a coward who has come to join the Nights Watch.\",\r\n            \"episodeNo\": 4,\r\n            \"releaseDate\": \"8 May 2011\"\r\n        },\r\n        {\r\n            \"id\": null,\r\n            \"title\": \"The Wolf and the Lion\",\r\n            \"imageUrl\": null,\r\n            \"description\": \"Catelyn has captured Tyrion and plans to bring him to her sister, Lysa Arryn, at the Vale, to be tried for his, supposed, crimes against Bran. Robert plans to have Daenerys killed, but Eddard refuses to be a part of it and quits.\",\r\n            \"episodeNo\": 5,\r\n            \"releaseDate\": \"15 May 2011\"\r\n        },\r\n        {\r\n            \"id\": null,\r\n            \"title\": \"A Golden Crown\",\r\n            \"imageUrl\": null,\r\n            \"description\": \"While recovering from his battle with Jaime, Eddard is forced to run the kingdom while Robert goes hunting. Tyrion demands a trial by combat for his freedom. Viserys is losing his patience with Drogo.\",\r\n            \"episodeNo\": 6,\r\n            \"releaseDate\": \"22 May 2011\"\r\n        },\r\n        {\r\n            \"id\": null,\r\n            \"title\": \"You Win or You Die\",\r\n            \"imageUrl\": null,\r\n            \"description\": \"Robert has been injured while hunting and is dying. Jon and the others finally take their vows to the Nights Watch. A man, sent by Robert, is captured for trying to poison Daenerys. Furious, Drogo vows to attack the Seven Kingdoms.\",\r\n            \"episodeNo\": 7,\r\n            \"releaseDate\": \"29 May 2011\"\r\n        },\r\n        {\r\n            \"id\": null,\r\n            \"title\": \"The Pointy End\",\r\n            \"imageUrl\": null,\r\n            \"description\": \"The Lannisters press their advantage over the Starks; Robb rallies his fathers northern allies and heads south to war; The White Walkers attack the Wall; Tyrion returns to his father with some new friends.\",\r\n            \"episodeNo\": 8,\r\n            \"releaseDate\": \"5 Jun. 2011\"\r\n        },\r\n        {\r\n            \"id\": null,\r\n            \"title\": \"Baelor\",\r\n            \"imageUrl\": null,\r\n            \"description\": \"Robb goes to war against the Lannisters. Jon finds himself struggling on deciding if his place is with Robb or the Nights Watch. Drogo has fallen ill from a fresh battle wound. Daenerys is desperate to save him.\",\r\n            \"episodeNo\": 9,\r\n            \"releaseDate\": \"12 Jun. 2011\"\r\n        },\r\n        {\r\n            \"id\": null,\r\n            \"title\": \"Fire and Blood\",\r\n            \"imageUrl\": null,\r\n            \"description\": \"Robb vows to get revenge on the Lannisters. Jon must officially decide if his place is with Robb or the Nights Watch. Daenerys says her final goodbye to Drogo.\",\r\n            \"episodeNo\": 10,\r\n            \"releaseDate\": \"19 Jun. 2011\"\r\n        }\r\n    ]\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8080/api/v1/content/tvseries/season/updateSeasonById/4",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"content",
+												"tvseries",
+												"season",
+												"updateSeasonById",
+												"4"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "READ",
+							"item": [
+								{
+									"name": "FindAllSeasonsByTVSeriesId",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8080/api/v1/content/tvseries/season/findAllSeasonsByTVSeriesId/4",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"content",
+												"tvseries",
+												"season",
+												"findAllSeasonsByTVSeriesId",
+												"4"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "FindAllSeasons",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8080/api/v1/content/tvseries/season",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"content",
+												"tvseries",
+												"season"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "FindSeasonById",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8080/api/v1/content/tvseries/season/5",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"content",
+												"tvseries",
+												"season",
+												"5"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Episode",
+					"item": [
+						{
+							"name": "CREATE",
+							"item": [
+								{
+									"name": "AddEpisodesBySeasonId",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "[\r\n    {\r\n        \"id\": null,\r\n        \"title\": \"Winter Is Coming\",\r\n        \"imageUrl\": null,\r\n        \"description\": \"Eddard Stark is torn between his family and an old friend when asked to serve at the side of King Robert Baratheon; Viserys plans to wed his sister to a nomadic warlord in exchange for an army.\",\r\n        \"episodeNo\": 15,\r\n        \"releaseDate\": \"17 Apr. 2011\"\r\n    },\r\n    {\r\n        \"id\": null,\r\n        \"title\": \"The Kingsroad\",\r\n        \"imageUrl\": null,\r\n        \"description\": \"While Bran recovers from his fall, Ned takes only his daughters to Kings Landing. Jon Snow goes with his uncle Benjen to the Wall. Tyrion joins them.\",\r\n        \"episodeNo\": 18,\r\n        \"releaseDate\": \"24 Apr. 2011\"\r\n    }\r\n]",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8080/api/v1/content/tvseries/season/episode/addEpisodesBySeasonId/1",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"content",
+												"tvseries",
+												"season",
+												"episode",
+												"addEpisodesBySeasonId",
+												"1"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "AddEpisodeBySeasonId",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"id\": null,\r\n    \"title\": \"Winter Is Coming\",\r\n    \"imageUrl\": null,\r\n    \"description\": \"Eddard Stark is torn between his family and an old friend when asked to serve at the side of King Robert Baratheon; Viserys plans to wed his sister to a nomadic warlord in exchange for an army.\",\r\n    \"episodeNo\": 25,\r\n    \"releaseDate\": \"17 Apr. 2011\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8080/api/v1/content/tvseries/season/episode/addEpisodeBySeasonId/1",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"content",
+												"tvseries",
+												"season",
+												"episode",
+												"addEpisodeBySeasonId",
+												"1"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "DELETE",
+							"item": [
+								{
+									"name": "DeleteEpisodeById",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8080/api/v1/content/tvseries/season/episode/deleteEpisodeById/1",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"content",
+												"tvseries",
+												"season",
+												"episode",
+												"deleteEpisodeById",
+												"1"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "DeleteEpisodesByIds",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8080/api/v1/content/tvseries/season/episode/deleteEpisodesByIds/2,3",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"content",
+												"tvseries",
+												"season",
+												"episode",
+												"deleteEpisodesByIds",
+												"2,3"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "UPDATE",
+							"item": [
+								{
+									"name": "UpdateEpisodeById",
+									"request": {
+										"method": "PATCH",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"id\": null,\r\n    \"title\": \"testtest Is Coming\",\r\n    \"imageUrl\": null,\r\n    \"description\": \"E Stark is torn between his family and an old friend when asked to serve at the side of King Robert Baratheon; Viserys plans to wed his sister to a nomadic warlord in exchange for an army.\",\r\n    \"episodeNo\": 1,\r\n    \"releaseDate\": \"17 Apr. 2011\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8080/api/v1/content/tvseries/season/episode/updateEpisodeById/4",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"content",
+												"tvseries",
+												"season",
+												"episode",
+												"updateEpisodeById",
+												"4"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "READ",
+							"item": [
+								{
+									"name": "FindAllEpisodes",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8080/api/v1/content/tvseries/season/episode",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"content",
+												"tvseries",
+												"season",
+												"episode"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "FindEpisodeById",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8080/api/v1/content/tvseries/season/episode/5",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"content",
+												"tvseries",
+												"season",
+												"episode",
+												"5"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "FindAllEpisodesByTVSeriesId",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8080/api/v1/content/tvseries/season/episode/findAllEpisodesByTVSeriesId/4",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"content",
+												"tvseries",
+												"season",
+												"episode",
+												"findAllEpisodesByTVSeriesId",
+												"4"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "FindAllEpisodesByTitle",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8080/api/v1/content/tvseries/season/episode/findAllEpisodesByTitle?search=f",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"content",
+												"tvseries",
+												"season",
+												"episode",
+												"findAllEpisodesByTitle"
+											],
+											"query": [
+												{
+													"key": "search",
+													"value": "f"
+												}
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Rating",
+			"item": [
+				{
+					"name": "CREATE",
+					"item": [
+						{
+							"name": "AddRatings",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "[\r\n    {\r\n        \"rating\": 8,\r\n        \"profile\": {\r\n            \"id\": 2\r\n        },\r\n        \"content\": {\r\n            \"id\": 1\r\n        }\r\n    },\r\n    {\r\n        \"rating\": 6.2,\r\n        \"profile\": {\r\n            \"id\": 2\r\n        },\r\n        \"content\": {\r\n            \"id\": 4\r\n        }\r\n    }\r\n]",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/v1/rating/addRatings",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"rating",
+										"addRatings"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "AddRating",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"rating\": 8,\r\n    \"profile\": {\r\n        \"id\": 2\r\n    },\r\n    \"content\": {\r\n        \"id\": 1\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/v1/rating/addRating",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"rating",
+										"addRating"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "DELETE",
+					"item": [
+						{
+							"name": "DeleteRatingById",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"profile_id\": 2,\r\n    \"content_id\": 1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/v1/rating/deleteRatingById/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"rating",
+										"deleteRatingById",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DeleteRatingsByIds",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"profile_id\": 2,\r\n    \"content_id\": 1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/v1/rating/deleteRatingsByIds/1,2",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"rating",
+										"deleteRatingsByIds",
+										"1,2"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "UPDATE",
+					"item": [
+						{
+							"name": "UpdateRatingById",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"rating\": 5.0,\r\n    \"profile\": {\r\n        \"id\": 1\r\n    },\r\n    \"content\": {\r\n        \"id\": 1\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/v1/rating/updateRatingById/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"rating",
+										"updateRatingById",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "READ",
+					"item": [
+						{
+							"name": "FindAllRatings",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/v1/rating",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"rating"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "FindRatingById",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/v1/rating/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"rating",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "WatchList",
+			"item": [
+				{
+					"name": "WatchListEpisode",
+					"item": [
+						{
+							"name": "CREATE",
+							"item": [
+								{
+									"name": "AddWatchListEpisode",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"profile\": {\r\n        \"id\": 1\r\n    },\r\n    \"content\": {\r\n        \"id\": 4\r\n    },\r\n    \"episode\": {\r\n        \"id\": 1\r\n    },\r\n    \"timeWatchedInMinutes\" : 20\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8080/api/v1/watchlist/watchListEpisode/addWatchListEpisode",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"watchlist",
+												"watchListEpisode",
+												"addWatchListEpisode"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "AddWatchListEpisodes",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "[\r\n    {\r\n        \"profile\": {\r\n            \"id\": 5\r\n        },\r\n            \"content\": {\r\n            \"id\": 4\r\n        },\r\n        \"episode\": {\r\n            \"id\": 3\r\n        },\r\n        \"timeWatchedInMinutes\" : 45\r\n    },\r\n    {\r\n        \"profile\": {\r\n            \"id\": 4\r\n        },\r\n        \"content\": {\r\n            \"id\": 4\r\n        },\r\n         \"episode\": {\r\n            \"id\": 5\r\n        },\r\n        \"timeWatchedInMinutes\" : 35\r\n    }\r\n]",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8080/api/v1/watchlist/watchListEpisode/addWatchListEpisodes",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"watchlist",
+												"watchListEpisode",
+												"addWatchListEpisodes"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "READ",
+							"item": [
+								{
+									"name": "FindAllWatchEpisodes",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8080/api/v1/watchlist/watchListEpisode",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"watchlist",
+												"watchListEpisode"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "FindWatchEpisodeById",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8080/api/v1/watchlist/watchListEpisode/3",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"watchlist",
+												"watchListEpisode",
+												"3"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Delete",
+							"item": [
+								{
+									"name": "DeleteWatchListEpisodeById",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8080/api/v1/watchlist/watchListEpisode/deleteWatchListEpisodeById/3",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"watchlist",
+												"watchListEpisode",
+												"deleteWatchListEpisodeById",
+												"3"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "DeleteWatchListEpisodeByIds",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8080/api/v1/watchlist/watchListEpisode/deleteWatchListEpisodesByIds/3,4",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"watchlist",
+												"watchListEpisode",
+												"deleteWatchListEpisodesByIds",
+												"3,4"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Update",
+							"item": [
+								{
+									"name": "UpdateWatchListEpisodeById",
+									"request": {
+										"method": "PATCH",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"profile\": {\r\n        \"id\": 4\r\n    },\r\n    \"content\": {\r\n        \"id\": 4\r\n    },\r\n    \"episode\": {\r\n        \"id\": 3\r\n    },\r\n    \"timeWatchedInMinutes\" : 20\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8080/api/v1/watchlist/watchListEpisode/updateWatchListEpisodeById/4",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"watchlist",
+												"watchListEpisode",
+												"updateWatchListEpisodeById",
+												"4"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "WatchListMovie",
+					"item": [
+						{
+							"name": "CREATE",
+							"item": [
+								{
+									"name": "AddWatchListMovie",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"profile\": {\r\n        \"id\": 1\r\n    },\r\n    \"content\": {\r\n        \"id\": 3\r\n    },\r\n    \"movie\": {\r\n        \"id\": 3\r\n    },\r\n    \"timeWatchedInMinutes\" : 20\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8080/api/v1/watchlist/watchListMovie/addWatchListMovie",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"watchlist",
+												"watchListMovie",
+												"addWatchListMovie"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "AddWatchListMovies",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "[\r\n    {\r\n        \"profile\": {\r\n            \"id\": 5\r\n        },\r\n            \"content\": {\r\n            \"id\": 3\r\n        },\r\n        \"movie\": {\r\n            \"id\": 3\r\n        },\r\n        \"timeWatchedInMinutes\" : 50\r\n    },\r\n    {\r\n        \"profile\": {\r\n            \"id\": 4\r\n        },\r\n        \"content\": {\r\n            \"id\": 2\r\n        },\r\n         \"movie\": {\r\n            \"id\": 2\r\n        },\r\n        \"timeWatchedInMinutes\" : 35\r\n    }\r\n]",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8080/api/v1/watchlist/watchListMovie/addWatchListMovies",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"watchlist",
+												"watchListMovie",
+												"addWatchListMovies"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "READ",
+							"item": [
+								{
+									"name": "FindAllWatchMovies",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8080/api/v1/watchlist/watchListMovie",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"watchlist",
+												"watchListMovie"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "FindWatchMovieById",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8080/api/v1/watchlist/watchListMovie/1",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"watchlist",
+												"watchListMovie",
+												"1"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Delete",
+							"item": [
+								{
+									"name": "DeleteWatchListMovieById",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8080/api/v1/watchlist/watchListMovie/deleteWatchListMovieById/1",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"watchlist",
+												"watchListMovie",
+												"deleteWatchListMovieById",
+												"1"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "DeleteWatchListMovieByIds",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8080/api/v1/watchlist/watchListMovie/deleteWatchListMoviesByIds/1,2",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"watchlist",
+												"watchListMovie",
+												"deleteWatchListMoviesByIds",
+												"1,2"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Update",
+							"item": [
+								{
+									"name": "UpdateWatchListMovieById",
+									"request": {
+										"method": "PATCH",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"profile\": {\r\n        \"id\": 1\r\n    },\r\n    \"movie\": {\r\n        \"id\": 1\r\n    },\r\n    \"timeWatchedInMinutes\" : 20\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8080/api/v1/watchlist/watchListMovie/updateWatchListMovieById/1",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"watchlist",
+												"watchListMovie",
+												"updateWatchListMovieById",
+												"1"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Reports",
+			"item": [
+				{
+					"name": "FindTop10HighestRatedContent",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/report/findTop10HighestRatedContent",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"report",
+								"findTop10HighestRatedContent"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FindTop5MostPopularGenres",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/report/findTop5MostPopularGenres",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"report",
+								"findTop5MostPopularGenres"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FindTop10MostViewedContents",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/report/findTop10MostViewedContents",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"report",
+								"findTop10MostViewedContents"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FindViewingHoursByAccountId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/report/findViewingHoursByAccountId/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"report",
+								"findViewingHoursByAccountId",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FindAllViewingHistory",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/report/findAllViewingHistory",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"report",
+								"findAllViewingHistory"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
